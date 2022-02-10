@@ -466,8 +466,8 @@ TrueSurvive.OnPlayerDeath = function(eventStatus, pid)
     end
 end
 
-TrueSurvive.CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
-    if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+TrueSurvive.CleanCellObject = function(pid, cellDescription, uniqueIndex, forEveryone)
+	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
 	end
 end
