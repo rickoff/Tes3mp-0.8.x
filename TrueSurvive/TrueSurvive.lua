@@ -395,9 +395,9 @@ end
 -- ================
 -- OBJECT ACTIVATED
 -- ================
-TrueSurvive.OnHungerObject = function(pid, cellDescription)
+TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local countObject = LoadedCells[cellDescription].data.objectData[ObjectIndex].count	
+		local countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count	
 		local objectCount = countObject or 1
 		local totalCount = 60 * objectCount
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_hunger", false)
@@ -412,9 +412,9 @@ TrueSurvive.OnHungerObject = function(pid, cellDescription)
 	end	
 end
 
-TrueSurvive.OnDrinkObject = function(pid, count)
+TrueSurvive.OnDrinkObject = function(pid, cellDescription, uniqueIndex)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local countObject = LoadedCells[cellDescription].data.objectData[ObjectIndex].count	
+		local countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count	
 		local objectCount = countObject or 1
 		local totalCount = 60 * objectCount	
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_thirsth", false)
