@@ -32,12 +32,15 @@ Menus["survive hunger"] = {
 				{ 
 					menuHelper.effects.runGlobalFunction("TrueSurvive", "OnHungerObject", 
 					{
-                        menuHelper.variables.currentPid()
+                        menuHelper.variables.currentPid(),
+						menuHelper.variables.currentPlayerDataVariable("targetCellDescription")
                     }),
-                    menuHelper.effects.runGlobalFunction("logicHandler", "DeleteObjectForEveryone",
+                    menuHelper.effects.runGlobalFunction("TrueSurvive", "CleanCellObject",
                     {
+						menuHelper.variables.currentPid(),
                         menuHelper.variables.currentPlayerDataVariable("targetCellDescription"),
-                        menuHelper.variables.currentPlayerDataVariable("targetUniqueIndex")
+                        menuHelper.variables.currentPlayerDataVariable("targetUniqueIndex"),
+						true
                     }),
 					menuHelper.effects.runGlobalFunction("TrueSurvive", "PlaySound", 
 					{
@@ -72,52 +75,20 @@ Menus["survive drink"] = {
                 { 
                     menuHelper.effects.runGlobalFunction("TrueSurvive", "OnDrinkObject", 
                     {
-                        menuHelper.variables.currentPid()
+                        menuHelper.variables.currentPid(),
+						menuHelper.variables.currentPlayerDataVariable("targetCellDescription")
                     }),
-                    menuHelper.effects.runGlobalFunction("logicHandler", "DeleteObjectForEveryone",
+                    menuHelper.effects.runGlobalFunction("TrueSurvive", "CleanCellObject",
                     {
+						menuHelper.variables.currentPid(),
                         menuHelper.variables.currentPlayerDataVariable("targetCellDescription"),
-                        menuHelper.variables.currentPlayerDataVariable("targetUniqueIndex")
+                        menuHelper.variables.currentPlayerDataVariable("targetUniqueIndex"),
+						true
                     }),
 					menuHelper.effects.runGlobalFunction("TrueSurvive", "PlaySound", 
 					{
                         menuHelper.variables.currentPid(), "drink"
                     }),											
-                })
-            }
-        },            
-        { caption = "no",
-            destinations = {
-                menuHelper.destinations.setDefault(nil,
-                { 
-                    menuHelper.effects.runGlobalFunction("logicHandler", "ActivateObjectForPlayer",
-                    {
-                        menuHelper.variables.currentPid(), menuHelper.variables.currentPlayerDataVariable("targetCellDescription"),
-                        menuHelper.variables.currentPlayerDataVariable("targetUniqueIndex")
-                    })
-                })
-            }
-        }
-    }
-}
-
-Menus["survive drink active"] = {
-    text = color.Gold .. "Do you want\n" .. color.LightGreen ..
-    "drink\n" .. color.Gold .. "this ?\n" ..
-        color.White .. "...",
-    buttons = {                        
-        { caption = "yes",
-            destinations = {
-                menuHelper.destinations.setDefault(nil,
-                { 
-                    menuHelper.effects.runGlobalFunction("TrueSurvive", "OnDrinkObject", 
-                    {
-                        menuHelper.variables.currentPid()
-                    }),
-					menuHelper.effects.runGlobalFunction("TrueSurvive", "PlaySound", 
-					{
-                        menuHelper.variables.currentPid(), "drink"
-                    }),										
                 })
             }
         },            
