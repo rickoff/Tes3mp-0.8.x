@@ -78,6 +78,161 @@ local function CleanCellObject(cellDescription, uniqueIndex, pid, forEveryone)
 	tes3mp.SendObjectDelete(forEveryone)
 	LoadedCells[cellDescription]:QuicksaveToDrive()
 end
+
+-----------------
+--SPELLS RECORD--
+-----------------
+TrueSurvive.OnServerInit = function(eventStatus)
+	local recordTable
+	local recordStoreSpells = RecordStores["spell"]
+	
+	recordTable = {
+	  name = "Maximum attack",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 117,
+		  attribute = -1,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = 1,
+		  magnitudeMax = 100,
+		  magnitudeMin = 100
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_attack"] = recordTable
+
+	recordTable = {
+	  name = "Digestion",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 75,
+		  attribute = -1,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = 0,
+		  magnitudeMax = 1,
+		  magnitudeMin = 1
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_digestion"] = recordTable
+
+	recordTable = {
+	  name = "Hydrate",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 76,
+		  attribute = -1,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = 1,
+		  magnitudeMax = 1,
+		  magnitudeMin = 1
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_hydrated"] = recordTable
+
+	recordTable = {
+	  name = "Rests",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 77,
+		  attribute = -1,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = 1,
+		  magnitudeMax = 1,
+		  magnitudeMin = 1
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_rests"] = recordTable
+	
+	recordTable = {
+	  name = "Thirsty",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 17,
+		  attribute = 1,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = -1,
+		  magnitudeMax = 200,
+		  magnitudeMin = 200
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_thirsth"] = recordTable
+
+	recordTable = {
+	  name = "Hungry",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 17,
+		  attribute = 5,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = -1,
+		  magnitudeMax = 200,
+		  magnitudeMin = 200
+		},{
+		  id = 17,
+		  attribute = 2,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = -1,
+		  magnitudeMax = 200,
+		  magnitudeMin = 200
+		},{
+		  id = 17,
+		  attribute = 3,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = -1,
+		  magnitudeMax = 200,
+		  magnitudeMin = 200
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_hunger"] = recordTable
+
+	recordTable = {
+	  name = "Tired",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 17,
+		  attribute = 4,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = -1,
+		  magnitudeMax = 200,
+		  magnitudeMin = 200
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_fatigue"] = recordTable
+
+    recordStoreSpells:Save()
+	recordTable = nil
+end
 -- ==================
 -- CHECK TIMER PLAYER
 -- ==================
@@ -321,6 +476,7 @@ customEventHooks.registerHandler("OnPlayerItemUse", TrueSurvive.OnPlayerEvent)
 customEventHooks.registerHandler("OnPlayerCellChange", TrueSurvive.OnPlayerEvent)
 customEventHooks.registerHandler("OnPlayerDeath", TrueSurvive.OnPlayerDeath)
 customEventHooks.registerHandler("OnPlayerAuthentified", TrueSurvive.OnPlayerAuthentified)
+customEventHooks.registerHandler("OnServerInit", TrueSurvive.OnServerInit)
 customCommandHooks.registerCommand("survive", TrueSurvive.MainMenu)
 
 return TrueSurvive
