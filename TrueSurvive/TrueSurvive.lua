@@ -66,7 +66,7 @@ local function CheckCustomVariable(pid)
 	return customVariable
 end
 
-local function CleanCellObject(cellDescription, uniqueIndex, pid, forEveryone)
+local function CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
     tes3mp.ClearObjectList()
     tes3mp.SetObjectListPid(pid)
     tes3mp.SetObjectListCell(cellDescription)					
@@ -364,27 +364,23 @@ TrueSurvive.OnActivatedObject = function(eventStatus, pid, cellDescription, obje
 		if ObjectIndex ~= nil and ObjectRefid ~= nil then
 			Players[pid].data.targetRefId = ObjectRefid
 			Players[pid].data.targetUniqueIndex = ObjectIndex
-			Players[pid].data.targetCellDescription = cellDescription		
-			local Sleep = true
-			local Hunger = true
-			local Thirsth = true
+			Players[pid].data.targetCellDescription = cellDescription
 			
-			if DrinkingData[string.lower(ObjectRefid)] and Thirsth == true then	-- drink
-				local countObject = LoadedCells[cellDescription].data.objectData[ObjectIndex].count
-				TrueSurvive.OnDrinkObject(pid, countObject)
-				CleanCellObject(cellDescription, ObjectIndex, pid, true)
+			if DiningData[string.lower(ObjectRefid)] then
+				Players[pid].currentCustomMenu = "survive hunger"
+				menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)					
 				return customEventHooks.makeEventStatus(false, false) 
-			end	
+			end				
 			
-			if DiningData[string.lower(ObjectRefid)] and Hunger == true then	-- eat
-				local countObject = LoadedCells[cellDescription].data.objectData[ObjectIndex].count			
-				TrueSurvive.OnHungerObject(pid, countObject)	
-				CleanCellObject(cellDescription, ObjectIndex, pid, true)				
+			if DrinkingData[string.lower(ObjectRefid)] then
+				Players[pid].currentCustomMenu = "survive drink"
+				menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
 				return customEventHooks.makeEventStatus(false, false) 
 			end		
 			
-			if SleepingData[string.lower(ObjectRefid)] and Sleep == true then -- sleep	
-				TrueSurvive.OnSleepObject(pid)
+			if SleepingData[string.lower(ObjectRefid)]then
+				Players[pid].currentCustomMenu = "survive sleep"
+				menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
 				return customEventHooks.makeEventStatus(false, false) 
 			end			
 		end
@@ -399,9 +395,10 @@ end
 -- ================
 -- OBJECT ACTIVATED
 -- ================
-TrueSurvive.OnHungerObject = function(pid, count)
+TrueSurvive.OnHungerObject = function(pid, cellDescription)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local objectCount = count or 1
+		local countObject = LoadedCells[cellDescription].data.objectData[ObjectIndex].count	
+		local objectCount = countObject or 1
 		local totalCount = 60 * objectCount
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_hunger", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_digestion", false)
@@ -417,7 +414,8 @@ end
 
 TrueSurvive.OnDrinkObject = function(pid, count)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local objectCount = count or 1
+		local countObject = LoadedCells[cellDescription].data.objectData[ObjectIndex].count	
+		local objectCount = countObject or 1
 		local totalCount = 60 * objectCount	
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_thirsth", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_hydrated", false)
