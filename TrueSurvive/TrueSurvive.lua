@@ -63,13 +63,13 @@ local function CheckCustomVariable(pid)
 		customVariable = Players[pid].data.customVariables.TrueSurvive
 	else
 		if customVariable.HungerTimeMax ~= config.eatTime then
-			customVariable.HungerTimeMax == config.eatTime
+			customVariable.HungerTimeMax = config.eatTime
 		end
 		if customVariable.ThirsthTimeMax ~= config.drinkTime then
-			customVariable.ThirsthTimeMax == config.drinkTime
+			customVariable.ThirsthTimeMax = config.drinkTime
 		end
 		if customVariable.SleepTimeMax ~= config.sleepTime then
-			customVariable.SleepTimeMax == config.sleepTime
+			customVariable.SleepTimeMax = config.sleepTime
 		end		
 	end
 	return customVariable
