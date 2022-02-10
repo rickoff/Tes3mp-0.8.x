@@ -466,6 +466,12 @@ TrueSurvive.OnPlayerDeath = function(eventStatus, pid)
     end
 end
 
+TrueSurvive.CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
+    if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+		CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
+	end
+end
+
 customEventHooks.registerValidator("OnObjectActivate", TrueSurvive.OnActivatedObject)
 customEventHooks.registerHandler("OnObjectActivate", TrueSurvive.OnPlayerEvent)
 customEventHooks.registerHandler("OnPlayerEquipment", TrueSurvive.OnPlayerEvent)
