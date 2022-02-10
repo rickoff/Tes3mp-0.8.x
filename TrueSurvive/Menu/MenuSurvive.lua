@@ -33,7 +33,8 @@ Menus["survive hunger"] = {
 					menuHelper.effects.runGlobalFunction("TrueSurvive", "OnHungerObject", 
 					{
                         menuHelper.variables.currentPid(),
-						menuHelper.variables.currentPlayerDataVariable("targetCellDescription")
+						menuHelper.variables.currentPlayerDataVariable("targetCellDescription"),
+						menuHelper.variables.currentPlayerDataVariable("targetUniqueIndex")
                     }),
                     menuHelper.effects.runGlobalFunction("TrueSurvive", "CleanCellObject",
                     {
@@ -76,7 +77,8 @@ Menus["survive drink"] = {
                     menuHelper.effects.runGlobalFunction("TrueSurvive", "OnDrinkObject", 
                     {
                         menuHelper.variables.currentPid(),
-						menuHelper.variables.currentPlayerDataVariable("targetCellDescription")
+						menuHelper.variables.currentPlayerDataVariable("targetCellDescription"),
+						menuHelper.variables.currentPlayerDataVariable("targetUniqueIndex")
                     }),
                     menuHelper.effects.runGlobalFunction("TrueSurvive", "CleanCellObject",
                     {
