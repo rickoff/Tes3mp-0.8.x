@@ -22,7 +22,7 @@ Edits to config.lua
 add in config.menuHelperFiles, "MenuSurvive"
 ---------------------------
 ]]
-local list_survive_eatdrinksleep = {"true_survive_rests", "true_survive_hydrated", "true_survive_digestion", "true_survive_attack", "true_survive_fatigue", "true_survive_hunger", "true_survive_thirsth"}
+local list_survive_eatdrinksleep = {"true_survive_rests", "true_survive_hydrated", "true_survive_digestion", "true_survive_fatigue", "true_survive_hunger", "true_survive_thirsth"}
 
 local SurviveMessage = {}
 SurviveMessage.Fatigue = color.White.."You're "..color.Red.."tired !"..color.White.." you should "..color.Green.."sleep !"
@@ -94,24 +94,6 @@ end
 TrueSurvive.OnServerInit = function(eventStatus)
 	local recordTable
 	local recordStoreSpells = RecordStores["spell"]
-	
-	recordTable = {
-	  name = "Maximum attack",
-	  subtype = 1,
-	  cost = 1,
-	  flags = 0,
-	  effects = {{
-		  id = 117,
-		  attribute = -1,
-		  skill = -1,
-		  rangeType = 0,
-		  area = 0,
-		  duration = 1,
-		  magnitudeMax = 100,
-		  magnitudeMin = 100
-		}}
-	}
-	recordStoreSpells.data.permanentRecords["true_survive_attack"] = recordTable
 
 	recordTable = {
 	  name = "Digestion",
@@ -351,10 +333,6 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 			logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_hydrated", false)
 		end	
 
-	end
-	
-	if not tableSpellPlayer["true_survive_attack"] then	
-		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_attack", false)
 	end
 	
 	Players[pid]:QuicksaveToDrive()
