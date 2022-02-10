@@ -37,6 +37,8 @@ config.timerMessage = 10
 config.sleepTime = 1200 
 config.eatTime = 600 
 config.drinkTime = 600
+config.eatRange = 60
+config.drinkRange = 60
 
 local NpcData = jsonInterface.load("custom/TrueSurvive/NpcAgressive.json")
 local DrinkingData = jsonInterface.load("custom/TrueSurvive/DataBaseAlch.json")
@@ -386,7 +388,7 @@ TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count	
 		local objectCount = countObject or 1
-		local totalCount = 60 * objectCount
+		local totalCount = config.eatRange * objectCount
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_hunger", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_digestion", false)
 		if os.time() - (Players[pid].data.customVariables.TrueSurvive.HungerWorld + totalCount) <= 0 then 
@@ -403,7 +405,7 @@ TrueSurvive.OnDrinkObject = function(pid, cellDescription, uniqueIndex)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count	
 		local objectCount = countObject or 1
-		local totalCount = 60 * objectCount	
+		local totalCount = config.drinkRange * objectCount	
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_thirsth", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_hydrated", false)
 		if os.time() - (Players[pid].data.customVariables.TrueSurvive.ThirstWorld + totalCount) <= 0 then 
