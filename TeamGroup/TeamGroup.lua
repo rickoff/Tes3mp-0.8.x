@@ -3,7 +3,7 @@ TeamGroup
 tes3mp 0.8.0
 ---------------------------
 DESCRIPTION :
-Créer un groupe inviter des joueurs ce teleporter
+Create a group, invite players, teleport to members, group message
 ---------------------------
 INSTALLATION:
 Save the file as TeamGroup.lua inside your server/scripts/custom folder.
