@@ -14,3 +14,5 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 - TrueSurvive : Drink, Eat, Sleep
 
 - DecorateScript : Move objects dynamically in space
+
+- TeamGroup : Create a group, invite players, teleport to members, group message
