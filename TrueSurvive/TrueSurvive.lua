@@ -33,7 +33,6 @@ SurviveMessage.Eat = color.White.."You "..color.Yellow.."eat ."
 SurviveMessage.Drink = color.White.."You "..color.Cyan.."drink ."
 
 local config = {}
-config.timerMessage = 10
 config.sleepTime = 1200 
 config.eatTime = 600 
 config.drinkTime = 600
