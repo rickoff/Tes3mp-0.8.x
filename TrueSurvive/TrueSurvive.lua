@@ -24,6 +24,9 @@ add in config.menuHelperFiles, "MenuSurvive"
 INSTRUCTION:
 the consumption of the ingredients by the inventory will give the normal effects of the basic game, to eat, drink or sleep you must activate the objects placed.
 timers are not taken into account for staff players, change config.staff to false to undo this.
+change config.sleepTime;config.eatTime;config.drinkTime to increase the countdown before the needs.
+change config.eatRange;config.drinkRange to increase the gain to each ingredient consumed.
+the number is in seconds, the script is based on the world clock
 ---------------------------
 ]]
 local list_survive_eatdrinksleep = {"true_survive_rests", "true_survive_hydrated", "true_survive_digestion", "true_survive_fatigue", "true_survive_hunger", "true_survive_thirsth"}
