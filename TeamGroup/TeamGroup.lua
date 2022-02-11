@@ -7,9 +7,11 @@ Create a group, invite players, teleport to members, group message
 ---------------------------
 INSTALLATION:
 Save the file as TeamGroup.lua inside your server/scripts/custom folder.
-
+Save the file as MenuGroup.lua inside your server/scripts/menu folder.
 Edits to customScripts.lua
-TeamGroup = require("custom.TeamGroup")
+add : TeamGroup = require("custom.TeamGroup")
+Edits to config.lua
+add in config.menuHelperFiles : "MenuGroup"
 ---------------------------
 COMMAND:
 /group for open main menu
