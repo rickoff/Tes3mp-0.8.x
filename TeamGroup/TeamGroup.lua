@@ -372,58 +372,27 @@ TeamGroup.RegisterGroup = function(pid, invitePid)
 	end			
 end
 
-TeamGroup.EcarlateBonus = function(pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local Count = 0
-		local CellPlayer = tes3mp.GetCell(pid)
-		if tableHelper.containsValue(playerGroup, Players[pid].name, true) then		
-			for x, y in pairs(playerGroup) do	
-				if tableHelper.containsValue(playerGroup[x].members, Players[pid].name, true) then		
-					for name, value in pairs(playerGroup[x].members) do
-						local targetPid = logicHandler.GetPlayerByName(playerGroup[x].members[name]).pid
-						if targetPid then
-							local CellTarget = tes3mp.GetCell(targetPid)
-							if CellTarget then
-								if CellPlayer == CellTarget then
-									Count = (Count -1) + 2
-								end
-							end
-						end
-					end	
-				end
-			end	
-			return Count
-		else
-			return Count
-		end
-	end
-end
-
--- GENERAL
 TeamGroup.OnGUIAction = function(pid, idGui, data)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then  
-		if idGui == config.MainGUI then -- Main
-			if tonumber(data) == 0 then -- ListeMembres/Teleportation
+		if idGui == config.MainGUI then 
+			if tonumber(data) == 0 then 
 				TeamGroup.CheckGroup(pid)
 				return true
-			elseif tonumber(data) == 1 then -- Supprimer/Quitter
+			elseif tonumber(data) == 1 then
 				TeamGroup.ExitGroup(pid)
 				return TeamGroup.showMainGUI(pid)	
-			elseif tonumber(data) == 2 then -- Inviter
+			elseif tonumber(data) == 2 then 
 				TeamGroup.CheckPlayer(pid)
 				return true
-			elseif tonumber(data) == 3 then -- Expulser
+			elseif tonumber(data) == 3 then
 				TeamGroup.CheckPlayerExit(pid)
 				return true	
-			elseif tonumber(data) == 4 then -- Message
+			elseif tonumber(data) == 4 then
 				TeamGroup.InputMessage(pid)
 				return true				
-			elseif tonumber(data) == 5 then -- retour
-				Players[pid].currentCustomMenu = "menu player"
-				menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)
+			elseif tonumber(data) == 5 then
 				return true
-			elseif tonumber(data) == 6 then -- fermer
-				--Do nothing
+			elseif tonumber(data) == 6 then
 				return true			
 			end
 		elseif idGui == config.listGUI then -- Liste
