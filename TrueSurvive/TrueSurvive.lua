@@ -434,6 +434,12 @@ TrueSurvive.OnSleepObject = function(pid)
 	end
 end
 
+TrueSurvive.OnSleepObjectVanilla = function(pid)
+	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then		
+		logicHandler.RunConsoleCommandOnPlayer(pid, "ShowRestMenu", false)
+	end
+end
+
 TrueSurvive.PlaySound = function(pid, sound)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		logicHandler.RunConsoleCommandOnPlayer(pid, "playsound "..'"'..sound..'"')
