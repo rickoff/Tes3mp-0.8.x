@@ -21,6 +21,10 @@ TrueSurvive = require("custom.TrueSurvive")
 Edits to config.lua
 add in config.menuHelperFiles, "MenuSurvive"
 ---------------------------
+INSTRUCTION:
+the consumption of the ingredients by the inventory will give the normal effects of the basic game, to eat, drink or sleep you must activate the objects placed.
+timers are not taken into account for staff players, change config.staff to false to undo this.
+---------------------------
 ]]
 local list_survive_eatdrinksleep = {"true_survive_rests", "true_survive_hydrated", "true_survive_digestion", "true_survive_fatigue", "true_survive_hunger", "true_survive_thirsth"}
 
@@ -38,6 +42,7 @@ config.eatTime = 600
 config.drinkTime = 600
 config.eatRange = 60
 config.drinkRange = 60
+config.staff = true
 
 local NpcData = jsonInterface.load("custom/TrueSurvive/NpcAgressive.json")
 local DrinkingData = jsonInterface.load("custom/TrueSurvive/DataBaseAlch.json")
@@ -246,7 +251,11 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		tableSpellPlayer[spellId] = true
 	end
 	
-	if not Players[pid]:IsServerStaff() then
+	if config.staff == true and Players[pid]:IsServerStaff() then
+		customVariable.SleepTime = 0
+		customVariable.HungerTime = 0
+		customVariable.ThirsthTime = 0
+	else
 		customVariable.HungerTime = TimeWorld - customVariable.HungerWorld
 		customVariable.ThirsthTime = TimeWorld - customVariable.ThirstWorld
 		customVariable.SleepTime = TimeWorld - customVariable.SleepWorld
@@ -262,10 +271,6 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		if customVariable.SleepTime > customVariable.SleepTimeMax then
 			customVariable.SleepTime = customVariable.SleepTimeMax		
 		end
-	else
-		customVariable.SleepTime = 0
-		customVariable.HungerTime = 0
-		customVariable.ThirsthTime = 0
 	end
 	
 	if customVariable.SleepTime >= customVariable.SleepTimeMax then
