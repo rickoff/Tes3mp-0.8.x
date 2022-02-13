@@ -251,7 +251,7 @@ TeamGroup.showChoiceExit = function(pid, loc)
 				if tableHelper.containsValue(playerGroup[x].name, GetName(pid), true) then
 					if tableHelper.containsValue(playerGroup[x].members, GetName(pid), true) then
 						for name, value in pairs(playerGroup[x].members) do	
-							if playerGroup[x].members[name] == Players[targetPid].name then
+							if playerGroup[x].members[name] == GetName(targetPid) then
 								removeAlliedInGroup(targetPid)							
 								playerGroup[x].members[name] = nil
 								tes3mp.SendMessage(pid, trad.ExpulseMembers, false)
@@ -259,7 +259,7 @@ TeamGroup.showChoiceExit = function(pid, loc)
 							end
 						end	
 						for r, s in pairs(playerGroup[x].name) do
-							if playerGroup[x].name[r] == Players[targetPid].name then
+							if playerGroup[x].name[r] == GetName(targetPid) then
 								removeAlliedGroupDeleted(pid)
 								playerGroup[x] = nil
 								tes3mp.SendMessage(pid, trad.DeleteGroup, false)
