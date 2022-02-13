@@ -539,7 +539,7 @@ TeamGroup.OnPlayerJournal = function(pid)
 end
 
 customEventHooks.registerHandler("OnPlayerJournal", function(eventStatus, pid)
-	if config.shareJournal = false then
+	if config.shareJournal == false then
 		TeamGroup.OnPlayerJournal(pid)
 	end
 end)
