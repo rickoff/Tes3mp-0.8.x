@@ -95,7 +95,7 @@ local function addAlliedInGroup(pid)
 	local GroupList = getListMemberGroup(pid)
 	for _, playerName in pairs(GroupList) do
 		local targetPid = logicHandler.GetPlayerByName(playerName).pid
-		if Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
+		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
 			for _, targetName in pairs(GroupList) do		
 				if not tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then
 					if playerName ~= targetName then			
