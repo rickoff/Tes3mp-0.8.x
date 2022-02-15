@@ -15,4 +15,4 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 
 - DecorateScript : Move objects dynamically in space
 
-- TeamGroup : Create a group, invite players, teleport to members, group message
+- TeamGroup : Create a group, invite players, teleport to members, group message, sync journal, allied
