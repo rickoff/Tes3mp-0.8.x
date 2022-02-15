@@ -31,9 +31,9 @@ local function GetName(pid)
 end
 
 local function CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
-    tes3mp.ClearObjectList()
-    tes3mp.SetObjectListPid(pid)
-    tes3mp.SetObjectListCell(cellDescription)					
+	tes3mp.ClearObjectList()
+	tes3mp.SetObjectListPid(pid)
+	tes3mp.SetObjectListCell(cellDescription)					
 	LoadedCells[cellDescription]:DeleteObjectData(uniqueIndex)
 	local splitIndex = uniqueIndex:split("-")
 	tes3mp.SetObjectRefNum(splitIndex[1])
