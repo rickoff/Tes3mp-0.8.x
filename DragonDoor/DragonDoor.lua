@@ -124,8 +124,7 @@ DragonDoor.OnPlayerCellChange = function(eventStatus, pid)
 				logicHandler.SetCellAuthority(LoadedCells[cellId].authority, cellId)
 				for x, y in pairs(creaTab.player[PlayerName]) do	
 					local creatureRefId = creaTab.player[PlayerName][x]
-					local objectData = {refId = creatureRefId, count = 1, charge = -1, enchantmentCharge = -1, soul = ""}
-					local creatureIndex = logicHandler.CreateObjectAtLocation(cellId, position, objectData, "spawn")
+					local creatureIndex = logicHandler.CreateObjectAtLocation(cellId, position, dataTableBuilder.BuildObjectData(creatureRefId), "spawn")
 					logicHandler.SetAIForActor(LoadedCells[cellId], creatureIndex, "2", pid)
 				end
 				local cell = LoadedCells[cellTab.player[PlayerName].cell]
