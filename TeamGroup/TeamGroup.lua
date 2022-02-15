@@ -493,23 +493,10 @@ TeamGroup.ActiveMenu = function(pid)
 	end
 end
 
-TeamGroup.OnPlayerJournal = function(pid)
+TeamGroup.OnPlayerJournal = function(pid, playerPacket)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then 
-		for i = 0, tes3mp.GetJournalChangesSize(pid) - 1 do
-			local journalItem = {
-				type = tes3mp.GetJournalItemType(pid, i),
-				index = tes3mp.GetJournalItemIndex(pid, i),
-				quest = tes3mp.GetJournalItemQuest(pid, i),
-				timestamp = {
-					daysPassed = WorldInstance.data.time.daysPassed,
-					month = WorldInstance.data.time.month,
-					day = WorldInstance.data.time.day
-				}
-			}
-			if journalItem.type == enumerations.journal.ENTRY then
-				journalItem.actorRefId = tes3mp.GetJournalItemActorRefId(pid, i)
-			end	
-			local playerName = Players[pid].name
+		for _, journalItem in ipairs(playerPacket.journal) do
+			local playerName = GetName(pid)
 			if tableHelper.containsValue(playerGroup, playerName, true) then		
 				for x, y in pairs(playerGroup) do	
 					if tableHelper.containsValue(playerGroup[x].members, playerName, true) then						
@@ -518,14 +505,14 @@ TeamGroup.OnPlayerJournal = function(pid)
 								local targetPid = logicHandler.GetPlayerByName(playerGroup[x].members[name]).pid
 								if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
 									local checkQuest = false
-									for key, slot in pairs(Players[targetPid].data.journal) do
-										if slot.quest == journalItem.quest and slot.index == journalItem.index then
+									local targetPlayerPacket = packetReader.GetPlayerPacketTables(targetPid, "PlayerJournal")
+									for _, targetJournalItem in ipairs(targetPlayerPacket.journal) do
+										if journalItem.quest == targetJournalItem.quest and journalItem.index == targetJournalItem.index then
 											checkQuest = true
 										end
 									end
 									if checkQuest == false then
-										table.insert(Players[targetPid].data.journal, journalItem)
-										Players[targetPid]:QuicksaveToDrive()
+										Players[targetPid]:SaveDataByPacketType("PlayerJournal", playerPacket)
 										Players[targetPid]:LoadJournal()
 									end
 								end
@@ -538,11 +525,12 @@ TeamGroup.OnPlayerJournal = function(pid)
 	end
 end
 
-customEventHooks.registerHandler("OnPlayerJournal", function(eventStatus, pid)
+customEventHooks.registerHandler("OnPlayerJournal", function(eventStatus, pid, playerPacket)
 	if config.shareJournal == false then
-		TeamGroup.OnPlayerJournal(pid)
+		TeamGroup.OnPlayerJournal(pid, playerPacket)
 	end
 end)
+
 customEventHooks.registerValidator("OnPlayerDisconnect", function(eventStatus, pid)
 	TeamGroup.ExitGroup(pid)
 end)	
