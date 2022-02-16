@@ -82,9 +82,8 @@ end
 
 local function getListPlayer(pid) 
 	local options = {}  
-	local playerName = GetName(pid)
 	for pid, player in pairs(Players) do
-		if player ~= nil and player:IsLoggedIn() and not player:IsServerStaff() then
+		if player ~= nil and player:IsLoggedIn() then
 			table.insert(options, GetName(pid))  
 		end
 	end
@@ -200,39 +199,12 @@ TeamGroup.CheckPlayerExit = function(pid)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local playerName = GetName(pid)
 		local options = getListMemberGroup(pid)
-		local list = trad.Return
-		local listItemChanged = false
-		local listItem = ""
-		
-		for i, z in pairs(options) do
-			for x, y in pairs(Players) do
-				if y:IsLoggedIn() then
-					if Players[x].name == options[i] then
-						listItem = Players[x].name
-						listItemChanged = true
-						break
-					else
-						listItemChanged = false
-					end
-				end
-			end 
-			
-			if listItemChanged == true then
-				list = list .. listItem
-			end
-			
-			if listItemChanged == false then
-				list= list .. "\n"
-			end
-			
-			if not(i == #options) then
-				list = list .. "\n"
-			end
-		end
-		
-		listItemChanged = false
+		local listItem = trad.Return	
+		for _, name in pairs(options) do
+			listItem = listItem..name.."\n"
+		end		
 		playerExitInvite[playerName] = {opt = options}
-		tes3mp.ListBox(pid, cfg.listPlayerExitGUI, color.CornflowerBlue..trad.SelectExit..color.Default, list)
+		tes3mp.ListBox(pid, cfg.listPlayerExitGUI, color.CornflowerBlue..trad.SelectExit..color.Default, listItem)
 	end
 end
  
@@ -298,39 +270,12 @@ TeamGroup.CheckPlayer = function(pid)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local playerName = GetName(pid)
 		local options = getListPlayer(pid)
-		local list = trad.Return
-		local listItemChanged = false
-		local listItem = ""
-		
-		for i, z in pairs(options) do
-			for x, y in pairs(Players) do
-				if y:IsLoggedIn() then
-					if Players[x].name == options[i] then
-						listItem = Players[x].name
-						listItemChanged = true
-						break
-					else
-						listItemChanged = false
-					end
-				end
-			end 
-			
-			if listItemChanged == true then
-				list = list .. listItem
-			end
-			
-			if listItemChanged == false then
-				list= list .. "\n"
-			end
-			
-			if not(i == #options) then
-				list = list .. "\n"
-			end
+		local listItem = trad.Return	
+		for _, name in pairs(options) do
+			listItem = listItem..name.."\n"
 		end
-		
-		listItemChanged = false
 		playerListInvite[playerName] = {opt = options}
-		tes3mp.ListBox(pid, cfg.listPlayerGUI, color.CornflowerBlue..trad.InvitePlayer..color.Default, list)
+		tes3mp.ListBox(pid, cfg.listPlayerGUI, color.CornflowerBlue..trad.InvitePlayer..color.Default, listItem)
 	end
 end
  
@@ -355,37 +300,10 @@ TeamGroup.CheckGroup = function(pid)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local playerName = GetName(pid)
 		local options = getListMemberGroup(pid)
-		local list = trad.Return
-		local listItemChanged = false
-		local listItem = ""
-		
-		for i, z in pairs(options) do
-			for x, y in pairs(Players) do
-				if y:IsLoggedIn() then
-					if Players[x].name == options[i] then
-						listItem = Players[x].name
-						listItemChanged = true
-						break
-					else
-						listItemChanged = false
-					end
-				end
-			end 
-			
-			if listItemChanged == true then
-				list = list .. listItem
-			end
-			
-			if listItemChanged == false then
-				list= list .. "\n"
-			end
-			
-			if not(i == #options) then
-				list = list .. "\n"
-			end
-		end
-		
-		listItemChanged = false
+		local listItem = trad.Return	
+		for _, name in pairs(options) do
+			listItem = listItem..name.."\n"
+		end	
 		playerListOptions[playerName] = {opt = options}
 		tes3mp.ListBox(pid, cfg.listGUI, color.CornflowerBlue..trad.SelectWarp..color.Default, list)
 	end
