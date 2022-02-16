@@ -305,7 +305,7 @@ TeamGroup.CheckGroup = function(pid)
 			listItem = listItem..name.."\n"
 		end	
 		playerListOptions[playerName] = {opt = options}
-		tes3mp.ListBox(pid, cfg.listGUI, color.CornflowerBlue..trad.SelectWarp..color.Default, list)
+		tes3mp.ListBox(pid, cfg.listGUI, color.CornflowerBlue..trad.SelectWarp..color.Default, listItem)
 	end
 end
 
