@@ -402,6 +402,13 @@ TeamGroup.OnGUIAction = function(pid, idGui, data)
 	end
 end
 
+TeamGroup.ActiveMenu = function(pid)
+	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then 
+		Players[pid].currentCustomMenu = "reponse player"--Invite Menu
+		menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
+	end
+end
+
 TeamGroup.OnPlayerJournal = function(pid, playerPacket)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local playerName = GetName(pid)	
