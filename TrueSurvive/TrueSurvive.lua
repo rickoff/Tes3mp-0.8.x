@@ -393,9 +393,11 @@ end
 -- ================
 TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count	
-		local objectCount = countObject or 1
-		local totalCount = config.eatRange * objectCount
+		local countObject = 1
+		if LoadedCells[cellDescription].data.objectData[uniqueIndex] and LoadedCells[cellDescription].data.objectData[uniqueIndex].count then
+			countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count
+		end
+		local totalCount = config.eatRange * countObject
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_hunger", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_digestion", false)
 		if os.time() - (Players[pid].data.customVariables.TrueSurvive.HungerWorld + totalCount) <= 0 then 
@@ -410,9 +412,11 @@ end
 
 TrueSurvive.OnDrinkObject = function(pid, cellDescription, uniqueIndex)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count	
-		local objectCount = countObject or 1
-		local totalCount = config.drinkRange * objectCount	
+		local countObject = 1
+		if LoadedCells[cellDescription].data.objectData[uniqueIndex] and LoadedCells[cellDescription].data.objectData[uniqueIndex].count then
+			countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count
+		end
+		local totalCount = config.drinkRange * countObject	
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_thirsth", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_hydrated", false)
 		if os.time() - (Players[pid].data.customVariables.TrueSurvive.ThirstWorld + totalCount) <= 0 then 
