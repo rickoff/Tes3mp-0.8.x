@@ -35,7 +35,9 @@ end
 local function GetIndexItemRefId(pid, refId)
 	for key, slot in pairs(Players[pid].data.inventory) do
 		if slot.refId and string.lower(slot.refId) == string.lower(refId) then
-			if Players[pid].data.equipment[16] and Players[pid].data.equipment[16].refId == refId and Players[pid].data.equipment[16].charge == slot.charge then
+			if Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT] and
+			Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == refId and 
+			Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].charge == slot.charge then
 				return key
 			end
 		end
