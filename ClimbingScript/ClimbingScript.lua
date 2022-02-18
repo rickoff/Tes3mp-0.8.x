@@ -162,7 +162,7 @@ ClimbingScript.OnServerInit = function(eventStatus)
 	}
 	recordStoreWeapons.data.permanentRecords["climbing_tool"] = recordTable	
 	
-    recordStoreWeapons:Save()	
+	recordStoreWeapons:Save()	
 	recordTable = nil	
 	
 	-----------------
@@ -188,7 +188,7 @@ ClimbingScript.OnServerInit = function(eventStatus)
 	}
 	recordStoreSpells.data.permanentRecords["climbing_spell"] = recordTable
 
-    recordStoreSpells:Save()
+	recordStoreSpells:Save()
 	recordTable = nil	
 end
 
