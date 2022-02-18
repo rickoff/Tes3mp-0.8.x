@@ -207,23 +207,35 @@ ClimbingScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects
 		if StaticData[string.lower(ObjectRefid)] then
 			if tes3mp.GetDrawState(pid) == 1 and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == "climbing_tool" then
 				local fatigueCurrent = tes3mp.GetFatigueCurrent(pid)
-				if cfg.Momentum == true and fatigueCurrent >= 25 then
+				if cfg.Momentum == true and fatigueCurrent >= 10 then
 					local rotZ = tes3mp.GetRotZ(pid)
 					local impulseX = math.cos(rotZ) * 5
 					local impulseY = math.sin(rotZ) * 5
 					tes3mp.SetMomentum(pid, impulseX, impulseY, 500)
-					tes3mp.SendMomentum(pid)					
+					tes3mp.SendMomentum(pid)
+					tes3mp.SetFatigueCurrent(pid, tes3mp.GetFatigueCurrent(pid) - 10)
+					tes3mp.SendStatsDynamic(pid)
+					Players[pid].data.stats.fatigueCurrent = tes3mp.GetFatigueCurrent(pid) - 10
+					Players[pid]:QuicksaveToDrive()
 				else
-					if Players[pid].data.timerClimb and fatigueCurrent >= 25 then
+					if Players[pid].data.timerClimb and fatigueCurrent >= 10 then
 						tes3mp.StopTimer(Players[pid].data.timerClimb)
 						Players[pid].data.timerClimb = nil
-						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.6), "i", pid)
+						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.8), "i", pid)
 						tes3mp.StartTimer(Players[pid].data.timerClimb)	
-						logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)						
-					elseif not Players[pid].data.timerClimb and fatigueCurrent >= 25 then
-						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.6), "i", pid)
+						logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)	
+						tes3mp.SetFatigueCurrent(pid, tes3mp.GetFatigueCurrent(pid) - 10)
+						tes3mp.SendStatsDynamic(pid)
+						Players[pid].data.stats.fatigueCurrent = tes3mp.GetFatigueCurrent(pid) - 10
+						Players[pid]:QuicksaveToDrive()						
+					elseif not Players[pid].data.timerClimb and fatigueCurrent >= 10 then
+						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.8), "i", pid)
 						tes3mp.StartTimer(Players[pid].data.timerClimb)	
 						logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)
+						tes3mp.SetFatigueCurrent(pid, tes3mp.GetFatigueCurrent(pid) - 10)
+						tes3mp.SendStatsDynamic(pid)
+						Players[pid].data.stats.fatigueCurrent = tes3mp.GetFatigueCurrent(pid) - 10
+						Players[pid]:QuicksaveToDrive()						
 					end
 				
 				end
