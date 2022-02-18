@@ -217,11 +217,11 @@ ClimbingScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects
 					if Players[pid].data.timerClimb and fatigueCurrent >= 25 then
 						tes3mp.StopTimer(Players[pid].data.timerClimb)
 						Players[pid].data.timerClimb = nil
-						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
+						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.6), "i", pid)
 						tes3mp.StartTimer(Players[pid].data.timerClimb)	
 						logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)						
-					else
-						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
+					elseif not Players[pid].data.timerClimb and fatigueCurrent >= 25 then
+						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.6), "i", pid)
 						tes3mp.StartTimer(Players[pid].data.timerClimb)	
 						logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)
 					end
