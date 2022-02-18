@@ -37,7 +37,9 @@ end
 local function GetIndexItemRefId(pid, refId)
 	for key, slot in pairs(Players[pid].data.inventory) do
 		if slot.refId and string.lower(slot.refId) == string.lower(refId) then
-			if Players[pid].data.equipment[16] and Players[pid].data.equipment[16].refId == refId and Players[pid].data.equipment[16].charge == slot.charge then
+			if Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT]
+			and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == refId
+			and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].charge == slot.charge then
 				return key
 			end
 		end
@@ -77,16 +79,18 @@ local function DeleteObjectInventory(pid, refId, count)
 	if Players[pid].data.inventory[indexLoc].count then
 		if Players[pid].data.inventory[indexLoc].count - total <= 0 then
 			Players[pid].data.inventory[indexLoc] = nil
-			if Players[pid].data.equipment[16] and Players[pid].data.equipment[16].refId == refId then
-				Players[pid].data.equipment[16] = nil
+			if Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT] 
+			and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == refId then
+				Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT] = nil
 			end
 		else
 			Players[pid].data.inventory[indexLoc].count = Players[pid].data.inventory[indexLoc].count - total
 		end
 	else
 		Players[pid].data.inventory[indexLoc] = nil	
-		if Players[pid].data.equipment[16] and Players[pid].data.equipment[16].refId == refId then
-			Players[pid].data.equipment[16] = nil
+		if Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT] 
+		and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == refId then
+			Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT] = nil
 		end		
 	end
 	Players[pid]:LoadItemChanges({itemref}, enumerations.inventory.REMOVE)
@@ -116,7 +120,7 @@ local function DamageChargeObject(pid, refId)
 
 	Players[pid]:LoadInventory()
 	
-	Players[pid].data.equipment[16] = {refId = refId, count = count, charge = (charge - 1), enchantmentCharge = -1}
+	Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT] = {refId = refId, count = count, charge = (charge - 1), enchantmentCharge = -1}
 	Players[pid]:LoadEquipment()
 	Players[pid]:QuicksaveToDrive()
 end
@@ -158,7 +162,7 @@ ClimbingScript.OnServerInit = function(eventStatus)
 	}
 	recordStoreWeapons.data.permanentRecords["climbing_tool"] = recordTable	
 	
-	recordStoreWeapons:Save()	
+    recordStoreWeapons:Save()	
 	recordTable = nil	
 	
 	-----------------
@@ -184,7 +188,7 @@ ClimbingScript.OnServerInit = function(eventStatus)
 	}
 	recordStoreSpells.data.permanentRecords["climbing_spell"] = recordTable
 
-	recordStoreSpells:Save()
+    recordStoreSpells:Save()
 	recordTable = nil	
 end
 
@@ -198,27 +202,27 @@ ClimbingScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects
 		end	
 		if ObjectIndex == nil or ObjectRefid == nil then return end	
 		
-		local itemEquipment = {}
 		local drawState = tes3mp.GetDrawState(pid)
 		
-		for x, y in pairs(Players[pid].data.equipment) do
-			itemEquipment[Players[pid].data.equipment[x].refId] = true
-		end	
-		
 		if StaticData[string.lower(ObjectRefid)] then
-			if tes3mp.GetDrawState(pid) == 1 and itemEquipment["climbing_tool"] then
-				if cfg.Momentum == true then
+			if tes3mp.GetDrawState(pid) == 1 and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == "climbing_tool" then
+				local fatigueCurrent = tes3mp.GetFatigueCurrent(pid)
+				if cfg.Momentum == true and fatigueCurrent >= 10 then
 					local rotZ = tes3mp.GetRotZ(pid)
 					local impulseX = math.cos(rotZ) * 5
 					local impulseY = math.sin(rotZ) * 5
 					tes3mp.SetMomentum(pid, impulseX, impulseY, 500)
 					tes3mp.SendMomentum(pid)
+					tes3mp.SetFatigueCurrent(pid, Players[pid].data.stats.fatigueCurrent - 10)
+					tes3mp.SendStatsDynamic(pid)					
 				else
-					if Players[pid].data.timerClimb then
+					if Players[pid].data.timerClimb and fatigueCurrent >= 10 then
 						tes3mp.StopTimer(Players[pid].data.timerClimb)
 						Players[pid].data.timerClimb = nil
 						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
-						tes3mp.StartTimer(Players[pid].data.timerClimb)						
+						tes3mp.StartTimer(Players[pid].data.timerClimb)	
+						tes3mp.SetFatigueCurrent(pid, Players[pid].data.stats.fatigueCurrent - 10)
+						tes3mp.SendStatsDynamic(pid)						
 					else
 						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
 						tes3mp.StartTimer(Players[pid].data.timerClimb)	
