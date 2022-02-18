@@ -32,7 +32,7 @@ function StopClimb(pid)
 	Players[pid].data.timerClimb = nil
 end
 
-function GetIndexItemRefId(pid, refId)
+local function GetIndexItemRefId(pid, refId)
 	for key, slot in pairs(Players[pid].data.inventory) do
 		if slot.refId and string.lower(slot.refId) == string.lower(refId) then
 			if Players[pid].data.equipment[16] and Players[pid].data.equipment[16].refId == refId and Players[pid].data.equipment[16].charge == slot.charge then
@@ -43,7 +43,7 @@ function GetIndexItemRefId(pid, refId)
 	return false
 end
 
-function GetPlayerGold(pid)
+local function GetPlayerGold(pid)
 	local goldLoc = inventoryHelper.getItemIndex(Players[pid].data.inventory, "gold_001", -1)	
 	if goldLoc then
 		return Players[pid].data.inventory[goldLoc].count
@@ -52,7 +52,7 @@ function GetPlayerGold(pid)
 	end
 end
 
-function RemoveGold(pid, amount)
+local function RemoveGold(pid, amount)
 	local goldLoc = inventoryHelper.getItemIndex(Players[pid].data.inventory, "gold_001", -1)	
 	Players[pid].data.inventory[goldLoc].count = Players[pid].data.inventory[goldLoc].count - amount
 	if Players[pid].data.inventory[goldLoc].count == 0 then
@@ -63,7 +63,7 @@ function RemoveGold(pid, amount)
 	Players[pid]:LoadItemChanges({itemref}, enumerations.inventory.REMOVE)			
 end
 
-DeleteObjectInventory = function(pid, refId, count)				
+local function DeleteObjectInventory(pid, refId, count)				
 	local indexLoc = GetIndexItemRefId(pid, refId)
 	local total
 	if count then
@@ -137,7 +137,7 @@ ClimbingScript.OnServerInit = function(eventStatus)
 		recordStoreActivator.data.permanentRecords[string.lower(refId)] = recordTable	
 	end
 	
-    recordStoreActivator:Save()	
+	recordStoreActivator:Save()	
 	recordTable = nil	
 
 	------------------
@@ -174,7 +174,7 @@ ClimbingScript.OnServerInit = function(eventStatus)
 	}
 	recordStoreWeapons.data.permanentRecords["climbing_tool"] = recordTable	
 	
-    recordStoreWeapons:Save()	
+	recordStoreWeapons:Save()	
 	recordTable = nil	
 	
 	-----------------
@@ -200,7 +200,7 @@ ClimbingScript.OnServerInit = function(eventStatus)
 	}
 	recordStoreSpells.data.permanentRecords["climbing_spell"] = recordTable
 
-    recordStoreSpells:Save()
+	recordStoreSpells:Save()
 	recordTable = nil	
 end
 
