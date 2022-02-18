@@ -207,22 +207,18 @@ ClimbingScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects
 		if StaticData[string.lower(ObjectRefid)] then
 			if tes3mp.GetDrawState(pid) == 1 and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == "climbing_tool" then
 				local fatigueCurrent = tes3mp.GetFatigueCurrent(pid)
-				if cfg.Momentum == true and fatigueCurrent >= 10 then
+				if cfg.Momentum == true and fatigueCurrent >= 25 then
 					local rotZ = tes3mp.GetRotZ(pid)
 					local impulseX = math.cos(rotZ) * 5
 					local impulseY = math.sin(rotZ) * 5
 					tes3mp.SetMomentum(pid, impulseX, impulseY, 500)
-					tes3mp.SendMomentum(pid)
-					tes3mp.SetFatigueCurrent(pid, Players[pid].data.stats.fatigueCurrent - 10)
-					tes3mp.SendStatsDynamic(pid)					
+					tes3mp.SendMomentum(pid)					
 				else
-					if Players[pid].data.timerClimb and fatigueCurrent >= 10 then
+					if Players[pid].data.timerClimb and fatigueCurrent >= 25 then
 						tes3mp.StopTimer(Players[pid].data.timerClimb)
 						Players[pid].data.timerClimb = nil
 						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
-						tes3mp.StartTimer(Players[pid].data.timerClimb)	
-						tes3mp.SetFatigueCurrent(pid, Players[pid].data.stats.fatigueCurrent - 10)
-						tes3mp.SendStatsDynamic(pid)						
+						tes3mp.StartTimer(Players[pid].data.timerClimb)					
 					else
 						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
 						tes3mp.StartTimer(Players[pid].data.timerClimb)	
