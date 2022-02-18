@@ -14,6 +14,7 @@ ClimbingScript = require("custom.ClimbingScript")
 CONFIGURATION :
 cfg.PriceTools = 250 (determines the price in gold for the purchase of the climbing tool)
 cfg.Charge = 100 (determines the total resistance of the tool)
+cfg.Momentum = false (determines method for climbing between levitation or momentum)
 ---------------------------
 UTILIZATION :
 /climp to buy a tool
@@ -24,6 +25,7 @@ local StaticData = jsonInterface.load("custom/ClimbingScript/StaticData.json")
 local cfg = {}
 cfg.PriceTools = 250
 cfg.Charge = 100
+cfg.Momentum = false
 
 local ClimbingScript = {}
 
@@ -35,9 +37,7 @@ end
 local function GetIndexItemRefId(pid, refId)
 	for key, slot in pairs(Players[pid].data.inventory) do
 		if slot.refId and string.lower(slot.refId) == string.lower(refId) then
-			if Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT] and
-			Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == refId and 
-			Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].charge == slot.charge then
+			if Players[pid].data.equipment[16] and Players[pid].data.equipment[16].refId == refId and Players[pid].data.equipment[16].charge == slot.charge then
 				return key
 			end
 		end
@@ -123,25 +123,7 @@ end
 
 ClimbingScript.OnServerInit = function(eventStatus)
 	local recordTable
-	--------------------
-	--ACTIVATOR RECORD--
-	--------------------	
-	local recordStoreActivator = RecordStores["activator"]
 	
-	for refId, record in pairs(StaticData) do
-		recordTable = {
-			name = record.name,
-			model = record.model,
-		    icon = "",
-		    value = 0,
-		    weight = 1			
-		}	
-		recordStoreActivator.data.permanentRecords[string.lower(refId)] = recordTable	
-	end
-	
-	recordStoreActivator:Save()	
-	recordTable = nil	
-
 	------------------
 	--WEAPONS RECORD--
 	------------------
@@ -206,22 +188,6 @@ ClimbingScript.OnServerInit = function(eventStatus)
 	recordTable = nil	
 end
 
-ClimbingScript.OnObjectActivate = function(eventStatus, pid, cellDescription, objects)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then	
-		local ObjectRefid
-		local ObjectIndex	
-		for _, object in pairs(objects) do
-			ObjectRefid = object.refId
-			ObjectIndex = object.uniqueIndex
-		end	
-		if ObjectIndex == nil or ObjectRefid == nil then return end	
-
-		if StaticData[string.lower(ObjectRefid)] then
-			return customEventHooks.makeEventStatus(false, false) 
-		end
-	end
-end
-
 ClimbingScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then	
 		local ObjectRefid
@@ -241,16 +207,25 @@ ClimbingScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects
 		
 		if StaticData[string.lower(ObjectRefid)] then
 			if tes3mp.GetDrawState(pid) == 1 and itemEquipment["climbing_tool"] then
-				if Players[pid].data.timerClimb then
-					tes3mp.StopTimer(Players[pid].data.timerClimb)
-					Players[pid].data.timerClimb = nil
-					Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
-					tes3mp.StartTimer(Players[pid].data.timerClimb)						
+				if cfg.Momentum == true then
+					local rotZ = tes3mp.GetRotZ(pid)
+					local impulseX = math.cos(rotZ) * 5
+					local impulseY = math.sin(rotZ) * 5
+					tes3mp.SetMomentum(pid, impulseX, impulseY, 500)
+					tes3mp.SendMomentum(pid)
 				else
-					Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
-					tes3mp.StartTimer(Players[pid].data.timerClimb)	
+					if Players[pid].data.timerClimb then
+						tes3mp.StopTimer(Players[pid].data.timerClimb)
+						Players[pid].data.timerClimb = nil
+						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
+						tes3mp.StartTimer(Players[pid].data.timerClimb)						
+					else
+						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(1), "i", pid)
+						tes3mp.StartTimer(Players[pid].data.timerClimb)	
+					end
+				
+					logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)
 				end
-				logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)
 				ClimbingScript.PlaySound(pid, "heavy armor hit")
 				DamageChargeObject(pid, "climbing_tool")			
 			end
@@ -281,7 +256,6 @@ ClimbingScript.PlaySound = function(pid, sound)
 	end
 end
 
-customEventHooks.registerValidator("OnObjectActivate", ClimbingScript.OnObjectActivate)
 customEventHooks.registerHandler("OnServerInit", ClimbingScript.OnServerInit)
 customEventHooks.registerHandler("OnObjectHit", ClimbingScript.OnObjectHit)
 customCommandHooks.registerCommand("climb", ClimbingScript.BuyTools)
