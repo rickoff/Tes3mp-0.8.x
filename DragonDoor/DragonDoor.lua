@@ -14,17 +14,14 @@ Save the file as CreaData.json inside your server/data/custom/DragonDoor folder.
 Edits to customScripts.lua
 DragonDoor = require("custom.DragonDoor")
 ]]
-local DoorData = jsonInterface.load("custom/DragonDoor/DoorData.json")
-local NpcData = jsonInterface.load("custom/DragonDoor/NpcData.json")
-local CreaData = jsonInterface.load("custom/DragonDoor/CreaData.json")
+local DoorData = MainData.ReturnDataJson("DoorData")
+local NpcData = MainData.ReturnDataJson("NpcData")
+local CreaData = MainData.ReturnDataJson("CreaData")
 
 local cfg = {}
 cfg.rad = 1000
 
-local doorTab = { player = {} }
-local creaTab = { player = {} }
-local indexTab = { player = {} }
-local cellTab = { player = {} }
+local DragonDoorTab = { player = {} }
 
 local function GetName(pid)
 	return string.lower(Players[pid].accountName)
@@ -45,14 +42,11 @@ end
 
 local DragonDoor = {}
 
-DragonDoor.OnPlayerWarp = function(pid)--place this function in your script to prevent enemies from chasing him
+DragonDoor.OnPlayerWarp = function(pid)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local PlayerName = GetName(pid)	
-		if doorTab.player[PlayerName] then
-			doorTab.player[PlayerName] = nil
-			cellTab.player[PlayerName] = nil
-			creaTab.player[PlayerName] = nil
-			indexTab.player[PlayerName] = nil
+		if DragonDoorTab.player[PlayerName] then
+			DragonDoorTab.player[PlayerName] = nil
 		end
 	end
 end
@@ -60,11 +54,8 @@ end
 DragonDoor.OnPlayerDeath = function(eventStatus, pid)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local PlayerName = GetName(pid)	
-		if doorTab.player[PlayerName] then
-			doorTab.player[PlayerName] = nil
-			cellTab.player[PlayerName] = nil
-			creaTab.player[PlayerName] = nil
-			indexTab.player[PlayerName] = nil
+		if DragonDoorTab.player[PlayerName] then
+			DragonDoorTab.player[PlayerName] = nil
 		end
 	end
 end
@@ -78,31 +69,29 @@ DragonDoor.OnObjectActivate = function(eventStatus, pid, cellDescription, object
 		end	
 		if ObjectRefid == nil then return end		
 		if DoorData[string.lower(ObjectRefid)] then	
-			local PlayerName = GetName(pid)			
-			doorTab.player[PlayerName] = {object = ObjectRefid} 
-			cellTab.player[PlayerName] = {cell = cellDescription} 
-			creaTab.player[PlayerName] = {}
-			indexTab.player[PlayerName] = {}
+			local PlayerName = GetName(pid)
+			DragonDoorTab.player[PlayerName] = {object = ObjectRefid, creature = {}, index = {}}
 			LoadedCells[cellDescription]:SaveActorPositions()
 			local cell = LoadedCells[cellDescription]		
 			for _, uniqueIndex in pairs(cell.data.packets.actorList) do
 				if count == 3 then break end
-				if cell.data.objectData[uniqueIndex] then
-					if cell.data.objectData[uniqueIndex].refId and cell.data.objectData[uniqueIndex].location then
-						local creatureRefId = cell.data.objectData[uniqueIndex].refId
-						if NpcData[string.lower(creatureRefId)] or CreaData[string.lower(creatureRefId)] then
-							if not tableHelper.containsValue(cell.data.packets.death, uniqueIndex, true) and not tableHelper.containsValue(indexTab.player, uniqueIndex, true) then	
-								local playerPosX = tes3mp.GetPosX(pid)
-								local playerPosY = tes3mp.GetPosY(pid)								
-								local creaturePosX = cell.data.objectData[uniqueIndex].location.posX
-								local creaturePosY = cell.data.objectData[uniqueIndex].location.posY							
-								local distance = math.sqrt((playerPosX - creaturePosX) * (playerPosX - creaturePosX) + (playerPosY - creaturePosY) * (playerPosY - creaturePosY)) 									
-								if distance < cfg.rad then
-									table.insert(creaTab.player[PlayerName], creatureRefId)
-									table.insert(indexTab.player[PlayerName], uniqueIndex)	
-									count = count + 1
-								end	
-							end
+				if cell.data.objectData[uniqueIndex] 
+				and cell.data.objectData[uniqueIndex].refId 
+				and cell.data.objectData[uniqueIndex].location then
+					local creatureRefId = cell.data.objectData[uniqueIndex].refId
+					if NpcData[string.lower(creatureRefId)] or CreaData[string.lower(creatureRefId)] then
+						if not tableHelper.containsValue(cell.data.packets.death, uniqueIndex, true) 
+						and not tableHelper.containsValue(DragonDoorTab.player[PlayerName].index, uniqueIndex, true) then	
+							local playerPosX = tes3mp.GetPosX(pid)
+							local playerPosY = tes3mp.GetPosY(pid)								
+							local creaturePosX = cell.data.objectData[uniqueIndex].location.posX
+							local creaturePosY = cell.data.objectData[uniqueIndex].location.posY							
+							local distance = math.sqrt((playerPosX - creaturePosX) * (playerPosX - creaturePosX) + (playerPosY - creaturePosY) * (playerPosY - creaturePosY)) 									
+							if distance < cfg.rad then
+								table.insert(DragonDoorTab.player[PlayerName].creature, creatureRefId)
+								table.insert(DragonDoorTab.player[PlayerName].index, uniqueIndex)	
+								count = count + 1
+							end	
 						end
 					end
 				end
@@ -111,41 +100,40 @@ DragonDoor.OnObjectActivate = function(eventStatus, pid, cellDescription, object
 	end
 end
 
-DragonDoor.OnPlayerCellChange = function(eventStatus, pid)
+DragonDoor.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local PlayerName = GetName(pid)		
-		if creaTab.player[PlayerName] ~= nil and doorTab.player[PlayerName] ~= nil and cellTab.player[PlayerName].cell ~= nil and tes3mp.GetCell(pid) ~= nil and doorTab.player[PlayerName].object ~= nil then
-			if tes3mp.GetCell(pid) ~= cellTab.player[PlayerName].cell then	
+		local PlayerName = GetName(pid)
+		local cellDescription = playerPacket.location.cell
+		if DragonDoorTab.player[PlayerName] 
+		and DragonDoorTab.player[PlayerName].object ~= nil 
+		and DragonDoorTab.player[PlayerName].creature ~= nil 
+		and DragonDoorTab.player[PlayerName].index ~= nil then
+			if cellDescription ~= previousCellDescription then	
 				local playerPosX = tes3mp.GetPosX(pid)
 				local playerPosY = tes3mp.GetPosY(pid)
 				local playerPosZ = tes3mp.GetPosZ(pid)	
 				local position = { posX = playerPosX, posY = playerPosY, posZ = playerPosZ, rotX = 0, rotY = 0, rotZ = 0 }
-				local cellId = tes3mp.GetCell(pid)
-				logicHandler.SetCellAuthority(LoadedCells[cellId].authority, cellId)
-				for x, y in pairs(creaTab.player[PlayerName]) do	
-					local creatureRefId = creaTab.player[PlayerName][x]
-					local creatureIndex = logicHandler.CreateObjectAtLocation(cellId, position, dataTableBuilder.BuildObjectData(creatureRefId), "spawn")
-					logicHandler.SetAIForActor(LoadedCells[cellId], creatureIndex, "2", pid)
+				logicHandler.SetCellAuthority(LoadedCells[cellDescription].authority, cellDescription)
+				for _, refId in ipairs(DragonDoorTab.player[PlayerName].creature) do	
+					local creatureIndex = logicHandler.CreateObjectAtLocation(cellDescription, position, dataTableBuilder.BuildObjectData(refId), "spawn")
+					logicHandler.SetAIForActor(LoadedCells[cellDescription], creatureIndex, "2", pid)
 				end
-				local cell = LoadedCells[cellTab.player[PlayerName].cell]
+				local cell = LoadedCells[previousCellDescription]
 				local useTemporaryLoad = false	
 				if cell == nil then
-					logicHandler.LoadCell(cellTab.player[PlayerName].cell)
+					logicHandler.LoadCell(previousCellDescription)
 					useTemporaryLoad = true
-					cell = LoadedCells[cellTab.player[PlayerName].cell]
+					cell = LoadedCells[previousCellDescription]
 				end
-				for _, uniqueIndex in pairs(indexTab.player[PlayerName]) do
-					CleanCellObject(pid, cellTab.player[PlayerName].cell, uniqueIndex, true)
+				for _, uniqueIndex in ipairs(DragonDoorTab.player[PlayerName].index) do
+					CleanCellObject(pid, previousCellDescription, uniqueIndex, true)
 				end							
 				if useTemporaryLoad == true then
-					logicHandler.UnloadCell(cellTab.player[PlayerName].cell)
+					logicHandler.UnloadCell(previousCellDescription)
 				end
 			end
 		end
-		doorTab.player[PlayerName] = nil
-		cellTab.player[PlayerName] = nil
-		creaTab.player[PlayerName] = nil
-		indexTab.player[PlayerName] = nil	
+		DragonDoorTab.player[PlayerName] = nil
 	end
 end
 
