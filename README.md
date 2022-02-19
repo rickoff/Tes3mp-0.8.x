@@ -17,4 +17,6 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 
 - TeamGroup : Create a group, invite players, teleport to members, group message, sync journal, allied
 
+- MultiMark : Possibility of depositing several marks using basic spells Mark and Recall
+
 - ClimbingScript : Hit an element of the scenery with the tool to engage the climbing mode
