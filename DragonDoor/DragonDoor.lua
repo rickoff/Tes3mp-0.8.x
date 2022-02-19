@@ -14,9 +14,9 @@ Save the file as CreaData.json inside your server/data/custom/DragonDoor folder.
 Edits to customScripts.lua
 DragonDoor = require("custom.DragonDoor")
 ]]
-local DoorData = MainData.ReturnDataJson("DoorData")
-local NpcData = MainData.ReturnDataJson("NpcData")
-local CreaData = MainData.ReturnDataJson("CreaData")
+local DoorData = jsonInterface.load("custom/DragonDoor/DoorData.json")
+local NpcData = jsonInterface.load("custom/DragonDoor/NpcData.json")
+local CreaData = jsonInterface.load("custom/DragonDoor/CreaData.json")
 
 local cfg = {}
 cfg.rad = 1000
