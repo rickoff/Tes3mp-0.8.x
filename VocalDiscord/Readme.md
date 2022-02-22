@@ -15,7 +15,15 @@
 * Save the file as userdiscord.lua inside your server/data/custom/VocalDiscord folder.
 * Save the file as playerLocations.lua inside your server/data/custom/VocalDiscord folder.
 * Edits to customScripts.lua : VocalDiscord = require("custom.VocalDiscord")
-* Edit the config.lua file in server/lib/luadiscord
+* Edit the config.lua file in server/lib/luadiscord :
+	- config.botToken = "your token bot"
+	- config.pathCustom = "your patch data custom server"
+	- config.vocalRole = "your id role voice"
+	- config.channelAcc = "your id channel base"
+	- config.vocalCat = "your id categorie for channel create"
+	- config.RoleEveryone = "your id role everyone"
+	- config.channelSafe = {"your name channel vocal", "your name channel vocal", "your name channel vocal"...}
+	- config.serverId = "your id server"
 * Execute start.bat located in server/lib/luadiscord (for windows) or command linux "luvit BotVocal.lua"
 * Connect to any voice channel of your discord with a nickname corresponding to your character name
 	(the modification of the nickname is not taken into account if you are already connected to the voice channel, then disconnect/reconnect to the channel for the consideration)
