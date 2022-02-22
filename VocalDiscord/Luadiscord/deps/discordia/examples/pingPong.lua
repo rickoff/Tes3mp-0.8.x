@@ -17,7 +17,7 @@ client:on("messageCreate", function(message)
 
 end)
 
-client:run("Bot NDQ3NDMxNzU5ODQwMTQ5NTE1.XwgW8w.BKvFc6W-M0GiZKZp0HWOgG8SrJQ") -- replace BOT_TOKEN with your bot token
+client:run("Bot xxxxxxxxxxxxxxxxxxxxx") -- replace BOT_TOKEN with your bot token
 
 client:on("reactionAdd", function(message)--TALENTS
 
