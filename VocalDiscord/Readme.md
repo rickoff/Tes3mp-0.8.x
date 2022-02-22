@@ -12,8 +12,8 @@
 * INSTALLATION:
 * Save luadiscord folder in server/lib
 * Save the file as VocalDiscord.lua inside your server/scripts/custom folder.
-* Save the file as userdiscord.lua inside your server/data/custom/VocalDiscord folder.
-* Save the file as playerLocations.lua inside your server/data/custom/VocalDiscord folder.
+* Save the file as userdiscord.json inside your server/data/custom/VocalDiscord folder.
+* Save the file as playerLocations.json inside your server/data/custom/VocalDiscord folder.
 * Edits to customScripts.lua : VocalDiscord = require("custom.VocalDiscord")
 * Edit the config.lua file in server/lib/luadiscord :
 	- config.botToken = "your token bot"
