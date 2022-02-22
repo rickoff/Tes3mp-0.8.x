@@ -16,10 +16,10 @@
 * Save the file as playerLocations.lua inside your server/data/custom/VocalDiscord folder.
 * Edits to customScripts.lua : VocalDiscord = require("custom.VocalDiscord")
 * Edit the config.lua file in server/lib/luadiscord
+* Execute start.bat located in server/lib/luadiscord (for windows) or command linux "luvit BotVocal.lua"
 * Connect to any voice channel of your discord with a nickname corresponding to your character name
 	(the modification of the nickname is not taken into account if you are already connected to the voice channel, then disconnect/reconnect to the channel for the consideration)
 * Use /vocal in chat ig for active instancied vocal
-* Execute start.bat located in server/lib/luadiscord (for windows) or command linux "luvit BotVocal.lua"
 * Start your server
 ---------------------------
 - USE :
