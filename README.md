@@ -20,3 +20,5 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 - MultiMark : Possibility of depositing several marks using basic spells Mark and Recall
 
 - ClimbingScript : Hit an element of the scenery with the tool to engage the climbing mode
+
+- VocalDiscord : Vocal instantiated on discord according to the position of the player in the game
