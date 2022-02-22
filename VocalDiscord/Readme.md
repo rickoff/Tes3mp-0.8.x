@@ -20,7 +20,7 @@
 	- config.pathCustom = "your patch data custom server"
 	- config.vocalRole = "your id role voice"
 	- config.channelAcc = "your id channel base"
-	- config.vocalCat = "your id categorie for channel create"
+	- config.vocalCat = "your id categorie for created channels"
 	- config.RoleEveryone = "your id role everyone"
 	- config.channelSafe = {"your name channel vocal", "your name channel vocal", "your name channel vocal"...}
 	- config.serverId = "your id server"
