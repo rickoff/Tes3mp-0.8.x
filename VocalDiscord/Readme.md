@@ -10,7 +10,7 @@
 * Your Discord name/nickname must match your character name
 * ---------------------------
 * INSTALLATION:
-* Save luadiscord in server/lib
+* Save luadiscord folder in server/lib
 * Save the file as VocalDiscord.lua inside your server/scripts/custom folder.
 * Save the file as userdiscord.lua inside your server/data/custom/VocalDiscord folder.
 * Save the file as playerLocations.lua inside your server/data/custom/VocalDiscord folder.
