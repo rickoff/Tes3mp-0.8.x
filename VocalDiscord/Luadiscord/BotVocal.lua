@@ -1,18 +1,3 @@
---[[
-BotDiscord
----------------------------
-INSTALLATION:
---change to your patchCustom data server in config file
---change to your voice role id discord in config file
---change to your voice channel hall id discord in config file
---change to your categorie channel id discord in config file
---change to your role everyone members id discord in config file
---change to your channel voice name for not delete this in config file
---change to your id server in config file
---change to your id server in config file
----------------------------
-]]
-
 local discordia = require("discordia")
 local jsonInterface = require('jsonInterface')
 local tableHelper = require('tableHelper')
@@ -27,7 +12,9 @@ local vocalCat = config.vocalCat
 local RoleEveryone = config.RoleEveryone 
 local channelSafe = config.channelSafe
 local guild 
-
+local LocationFile
+local LocationFileCheck
+local tempTable = {}
 
 function GetName(name)
 	if name then
@@ -55,9 +42,6 @@ function GetRole(member)
 	end
 end
 
-local LocationFile
-local FileMessage
-
 function CheckJsonChange()
 	LocationFileCheck = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")
 	
@@ -68,8 +52,6 @@ function CheckJsonChange()
 		CheckJsonChange()
 	end
 end
-
-local tempTable = {}
 
 function CheckChannel()
 
