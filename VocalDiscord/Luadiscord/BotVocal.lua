@@ -13,17 +13,18 @@ local RoleEveryone = config.RoleEveryone
 local channelSafe = config.channelSafe
 local guild 
 local LocationFile
-local LocationFileCheck
 local tempTable = {}
 
-function GetName(name)
+local BotDiscord = {}
+
+local function GetName(name)
 	if name then
 		local name = string.lower(name)
 		return name
 	end
 end
 
-function GetRole(member)
+local function GetRole(member)
 	local LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")
 	local RoleIg
 
@@ -42,18 +43,18 @@ function GetRole(member)
 	end
 end
 
-function CheckJsonChange()
-	LocationFileCheck = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")
+local function CheckJsonChange()
+	local LocationFileCheck = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")
 	
 	if LocationFile ~= LocationFileCheck then
-		CheckChannel()
+		BotDiscord.CheckChannel()
 	else
 		timer.sleep(1000)
 		CheckJsonChange()
 	end
 end
 
-function CheckChannel()
+BotDiscord.CheckChannel = function()
 
 	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")
 	
