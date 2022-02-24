@@ -44,7 +44,7 @@ local function GetRole(member)
 end
 
 local function CheckJsonChange()
-	local LocationFileCheck = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")
+	local LocationFileCheck = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
 	
 	if LocationFile ~= LocationFileCheck then
 		BotDiscord.CheckChannel()
@@ -56,7 +56,7 @@ end
 
 BotDiscord.CheckChannel = function()
 
-	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")
+	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
 	
 	tempTable = {}	
 	local tableChannel = guild.voiceChannels	
@@ -123,7 +123,7 @@ client:on("ready", function() --EVENT START
 	guild = client:getGuild(config.serverId) 
 	client:setGame("Instancied Vocal")
 	timer.sleep(1000)
-	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")	
+	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")	
 	CheckJsonChange()
 end)
 
@@ -132,7 +132,7 @@ client:on("shardResumed", function() --EVENT RESUMED
 	guild = client:getGuild(config.serverId) 
 	client:setGame("Instancied Vocal")
 	timer.sleep(1000)
-	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")	
+	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")	
 	CheckJsonChange()	
 end)
 
