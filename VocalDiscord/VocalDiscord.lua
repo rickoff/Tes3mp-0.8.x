@@ -104,7 +104,7 @@ end
 VocalDiscord.Vocalon = function(pid)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() and Players[pid]:HasAccount() then
 		if Players[pid].data.customVariables.VocalDiscord.vocal == nil then
-			Players[pid].data.customVariables.VocalDiscord.vocal = 0
+			Players[pid].data.customVariables.VocalDiscord.vocal = 1
 			tes3mp.MessageBox(pid, -1, color.Gold.."Vocal enable !")				
 		elseif Players[pid].data.customVariables.VocalDiscord.vocal == 0 then
 			Players[pid].data.customVariables.VocalDiscord.vocal = 1
