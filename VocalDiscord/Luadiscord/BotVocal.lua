@@ -25,7 +25,7 @@ local function GetName(name)
 end
 
 local function GetRole(member)
-	local LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerlocations.json")
+	local LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
 	local RoleIg
 
 	for index, data in pairs(LocationFile.players) do
