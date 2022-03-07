@@ -14,6 +14,7 @@ local channelSafe = config.channelSafe
 local guild 
 local LocationFile
 local tempTable = {}
+local startCheck = false
 
 local BotDiscord = {}
 
@@ -46,7 +47,9 @@ end
 local function CheckJsonChange()
 	local LocationFileCheck = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
 	
-	if LocationFile ~= LocationFileCheck then
+	if LocationFile ~= LocationFileCheck and startCheck == false then
+		startCheck = true
+		LocationFile = LocationFileCheck
 		BotDiscord.CheckChannel()
 	else
 		timer.sleep(1000)
@@ -54,17 +57,13 @@ local function CheckJsonChange()
 	end
 end
 
-BotDiscord.CheckChannel = function()
-
-	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
-	
+BotDiscord.CheckChannel = function()	
 	tempTable = {}	
 	local tableChannel = guild.voiceChannels	
 	for number, channel in pairs(tableChannel) do
-		table.insert(tempTable, channel.name)
+		tempTable[channel.name] = true
 	end		
 	if guild ~= nil and tableChannel ~= nil and tempTable ~= nil then
-
 		for number, channel in pairs(tableChannel) do
 			local ChannelName = channel.name
 			local tableMembers = channel.connectedMembers
@@ -78,16 +77,16 @@ BotDiscord.CheckChannel = function()
 							if JsonName == MemberName then
 								local Cell = LocationFile.players[index].cell
 								if ChannelName ~= Cell then					
-									if not tableHelper.containsValue(tempTable, Cell, true) then
+									if not tempTable[Cell] then
 										local NewChannel = guild:createVoiceChannel(Cell)
 										NewChannel:setCategory(vocalCat)
 										local Rrole = guild:getRole(RoleEveryone)
 										local Perm = NewChannel:getPermissionOverwriteFor(Rrole)
 										Perm:denyPermissions(0x00100000)									
 										member:setVoiceChannel(NewChannel)
-										table.insert(tempTable, Cell)
-										break
+										tempTable[Cell] = true
 										print("CHANNEL CREATE")
+										break
 									else
 										local NextChannel
 										for number, channel in pairs(tableChannel) do
@@ -96,8 +95,8 @@ BotDiscord.CheckChannel = function()
 											end
 										end
 										member:setVoiceChannel(NextChannel)
-										break
 										print("PLAYER MOVED")
+										break
 									end
 								end
 							end
@@ -108,12 +107,13 @@ BotDiscord.CheckChannel = function()
 			if not tableHelper.containsValue(channelSafe, ChannelName, true) then
 				if not tableHelper.containsValue(LocationFile, ChannelName, true) then
 					channel:delete()
-					break
 					print("CHANNEL DELETED")
+					break
 				end
 			end
 		end
 	end
+	startCheck = false
 	timer.sleep(1000)
 	CheckJsonChange()
 end
