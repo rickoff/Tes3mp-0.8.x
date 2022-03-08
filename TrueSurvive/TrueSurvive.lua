@@ -10,7 +10,6 @@ INSTALLATION:
 
 Save the file as TrueSurvive.lua inside your server/scripts/custom folder.
 Save the file as MenuSurvive.lua inside your server/scripts/menu folder.
-Save the file as NpcAgressive.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseAlch.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseIngr.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseBed.json inside your server/data/custom/TrueSurvive folder.
@@ -29,8 +28,6 @@ change config.eatRange;config.drinkRange to increase the gain to each ingredient
 the number is in seconds, the script is based on the world clock
 ---------------------------
 ]]
-local list_survive_eatdrinksleep = {"true_survive_rests", "true_survive_hydrated", "true_survive_digestion", "true_survive_fatigue", "true_survive_hunger", "true_survive_thirsth"}
-
 local SurviveMessage = {}
 SurviveMessage.Fatigue = color.White.."You're "..color.Red.."tired !"..color.White.." you should "..color.Green.."sleep !"
 SurviveMessage.Hunger = color.White.."You are "..color.Red.."hungry !"..color.White.." you should "..color.Yellow.."eat !"
@@ -47,7 +44,6 @@ config.eatRange = 60
 config.drinkRange = 60
 config.staff = true
 
-local NpcData = jsonInterface.load("custom/TrueSurvive/NpcAgressive.json")
 local DrinkingData = jsonInterface.load("custom/TrueSurvive/DataBaseAlch.json")
 local DiningData = jsonInterface.load("custom/TrueSurvive/DataBaseIngr.json")
 local SleepingData = jsonInterface.load("custom/TrueSurvive/DataBaseBed.json")
@@ -85,9 +81,9 @@ local function CheckCustomVariable(pid)
 end
 
 local function CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
-    tes3mp.ClearObjectList()
-    tes3mp.SetObjectListPid(pid)
-    tes3mp.SetObjectListCell(cellDescription)					
+	tes3mp.ClearObjectList()
+	tes3mp.SetObjectListPid(pid)
+	tes3mp.SetObjectListCell(cellDescription)					
 	LoadedCells[cellDescription]:DeleteObjectData(uniqueIndex)
 	local splitIndex = uniqueIndex:split("-")
 	tes3mp.SetObjectRefNum(splitIndex[1])
