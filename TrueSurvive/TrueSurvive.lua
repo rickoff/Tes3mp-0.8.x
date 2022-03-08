@@ -25,6 +25,7 @@ the consumption of the ingredients by the inventory will give the normal effects
 timers are not taken into account for staff players, change config.staff to false to undo this.
 change config.sleepTime;config.eatTime;config.drinkTime to increase the countdown before the needs.
 change config.eatRange;config.drinkRange to increase the gain to each ingredient consumed.
+change config.debuffSleep;config.debuffEat;config.debuffDrink to modify the value of the penalty
 the number is in seconds, the script is based on the world clock
 ---------------------------
 ]]
@@ -42,6 +43,9 @@ config.eatTime = 600
 config.drinkTime = 600
 config.eatRange = 60
 config.drinkRange = 60
+config.debuffSleep = 200
+config.debuffEat = 200
+config.debuffDrink = 200
 config.staff = true
 
 local DrinkingData = jsonInterface.load("custom/TrueSurvive/DataBaseAlch.json")
@@ -166,8 +170,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = 200,
-		  magnitudeMin = 200
+		  magnitudeMax = config.debuffDrink,
+		  magnitudeMin = config.debuffDrink
 		}}
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_thirsth"] = recordTable
@@ -184,8 +188,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = 200,
-		  magnitudeMin = 200
+		  magnitudeMax = config.debuffEat,
+		  magnitudeMin = config.debuffEat
 		},{
 		  id = 17,
 		  attribute = 2,
@@ -193,8 +197,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = 200,
-		  magnitudeMin = 200
+		  magnitudeMax = config.debuffEat,
+		  magnitudeMin = config.debuffEat
 		},{
 		  id = 17,
 		  attribute = 3,
@@ -202,8 +206,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = 200,
-		  magnitudeMin = 200
+		  magnitudeMax = config.debuffEat,
+		  magnitudeMin = config.debuffEat
 		}}
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_hunger"] = recordTable
@@ -220,8 +224,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = 200,
-		  magnitudeMin = 200
+		  magnitudeMax = config.debuffSleep,
+		  magnitudeMin = config.debuffSleep
 		}}
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_fatigue"] = recordTable
