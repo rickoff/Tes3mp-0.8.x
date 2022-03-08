@@ -113,7 +113,7 @@ DragonDoor.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previou
 				local playerPosY = tes3mp.GetPosY(pid)
 				local playerPosZ = tes3mp.GetPosZ(pid)	
 				local position = { posX = playerPosX, posY = playerPosY, posZ = playerPosZ, rotX = 0, rotY = 0, rotZ = 0 }
-				logicHandler.SetCellAuthority(LoadedCells[cellDescription].authority, cellDescription)
+				logicHandler.SetCellAuthority(pid, cellDescription)
 				for _, refId in ipairs(DragonDoorTab.player[PlayerName].creature) do	
 					local creatureIndex = logicHandler.CreateObjectAtLocation(cellDescription, position, dataTableBuilder.BuildObjectData(refId), "spawn")
 					logicHandler.SetAIForActor(LoadedCells[cellDescription], creatureIndex, "2", pid)
