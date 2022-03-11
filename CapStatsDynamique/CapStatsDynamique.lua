@@ -38,14 +38,14 @@ local function StartCheck(pid)
 	local AgilityMod = playerPacketAttribute.attributes["Agility"].modifier
 	local EnduranceMod = playerPacketAttribute.attributes["Endurance"].modifier
 
-	local Race = Players[pid].data.character.race
+	local Race = string.lower(Players[pid].data.character.race)
 	local RacialMod = 0
-	if Race == "Breton" then
+	if Race == "breton" then
 		RacialMod = 0.5
-	elseif Race == "High Elf" then
+	elseif Race == "high elf" then
 		RacialMod = 1.5 		
 	end
-	local BirthSign = Players[pid].data.character.birthsign
+	local BirthSign = string.lower(Players[pid].data.character.birthsign)
 	local BirthSignMod = 0
 	if BirthSign == "fay" then
 		BirthSignMod = 0.5
@@ -156,14 +156,14 @@ CapStatsDynamic.OnPlayerAuthentified = function(eventStatus, pid)
 		local AgilityMod = playerPacketAttribute.attributes["Agility"].modifier
 		local EnduranceMod = playerPacketAttribute.attributes["Endurance"].modifier
 
-		local Race = Players[pid].data.character.race
+		local Race = string.lower(Players[pid].data.character.race)
 		local RacialMod = 0
-		if Race == "Breton" then
+		if Race == "breton" then
 			RacialMod = 0.5
-		elseif Race == "High Elf" then
+		elseif Race == "high elf" then
 			RacialMod = 1.5 		
 		end
-		local BirthSign = Players[pid].data.character.birthsign
+		local BirthSign = string.lower(Players[pid].data.character.birthsign)
 		local BirthSignMod = 0
 		if BirthSign == "fay" then
 			BirthSignMod = 0.5
