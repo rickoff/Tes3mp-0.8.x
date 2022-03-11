@@ -22,3 +22,5 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 - ClimbingScript : Hit an element of the scenery with the tool to engage the climbing mode
 
 - VocalDiscord : Vocal instantiated on discord according to the cell of the player in the game
+
+- CapStatsDynamique : Allows you to set a limit for dynamic statistics
