@@ -14,46 +14,64 @@ Save the file as DataBaseAlch.json inside your server/data/custom/TrueSurvive fo
 Save the file as DataBaseIngr.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseBed.json inside your server/data/custom/TrueSurvive folder.
 
-Edits to customScripts.lua
+Edits to customScripts.lua add
 TrueSurvive = require("custom.TrueSurvive")
 
-Edits to config.lua
-add in config.menuHelperFiles, "MenuSurvive"
+Edits to config.lua in config.menuHelperFiles
+"MenuSurvive"
 ---------------------------
 INSTRUCTION:
 the consumption of the ingredients by the inventory will give the normal effects of the basic game, to eat, drink or sleep you must activate the objects placed.
 timers are not taken into account for staff players, change config.staff to false to undo this.
-change config.sleepTime;config.eatTime;config.drinkTime to increase the countdown before the needs.
+change config.sleepTime;config.eatTime;config.drinkTime;config.rainMax;config.coldMax to increase the countdown before the needs.
 change config.eatRange;config.drinkRange to increase the gain to each ingredient consumed.
-change config.debuffSleep;config.debuffEat;config.debuffDrink to modify the value of the penalty
+change config.debuffSleep;config.debuffEat;config.debuffDrink;config.debuffWet;config.debuffFrozen to modify the value of the penalty
+change the text in SurviveMessage to translate it or modify it according to your wishes
 the number is in seconds, the script is based on the world clock
 ---------------------------
 ]]
-local SurviveMessage = {}
-SurviveMessage.Fatigue = color.White.."You're "..color.Red.."tired !"..color.White.." you should "..color.Green.."sleep !"
-SurviveMessage.Hunger = color.White.."You are "..color.Red.."hungry !"..color.White.." you should "..color.Yellow.."eat !"
-SurviveMessage.Thirsth = color.White.."You are "..color.Red.."thirsty !"..color.White.." you should "..color.Cyan.."drink !"
-SurviveMessage.Sleep = color.White.."You "..color.Green.."rest ."
-SurviveMessage.Eat = color.White.."You "..color.Yellow.."eat ."
-SurviveMessage.Drink = color.White.."You "..color.Cyan.."drink ."
 
+------------
+-- CONFIG --
+------------
 local config = {}
 config.sleepTime = 1200 
 config.eatTime = 600 
 config.drinkTime = 600
 config.eatRange = 60
 config.drinkRange = 60
+config.rainMax = 1000
+config.coldMax = 1000
 config.debuffSleep = 200
 config.debuffEat = 200
 config.debuffDrink = 200
+config.debuffWet = 200
+config.debuffFrozen = 200
 config.staff = true
 
+-------------
+-- MESSAGE --
+-------------
+local SurviveMessage = {}
+SurviveMessage.Fatigue = color.White.."You're "..color.Red.."tired !"..color.White.." you should "..color.Green.."sleep !"
+SurviveMessage.Hunger = color.White.."You are "..color.Red.."hungry !"..color.White.." you should "..color.Yellow.."eat !"
+SurviveMessage.Thirsth = color.White.."You are "..color.Red.."thirsty !"..color.White.." you should "..color.Cyan.."drink !"
+SurviveMessage.Wet = color.White.."You are "..color.Red.."wet !"..color.White.." you should "..color.Brown.."to dry off !"
+SurviveMessage.Freeze = color.White.."You are "..color.Red.."frozen !"..color.White.." you should "..color.Orange.."warm up !"
+SurviveMessage.Sleep = color.White.."You "..color.Green.."rest ."
+SurviveMessage.Eat = color.White.."You "..color.Yellow.."eat ."
+SurviveMessage.Drink = color.White.."You "..color.Cyan.."drink ."
+
+---------------
+-- JSON-DATA --
+---------------
 local DrinkingData = jsonInterface.load("custom/TrueSurvive/DataBaseAlch.json")
 local DiningData = jsonInterface.load("custom/TrueSurvive/DataBaseIngr.json")
 local SleepingData = jsonInterface.load("custom/TrueSurvive/DataBaseBed.json")
 
-local TrueSurvive = {}
-
+--------------
+-- FUNCTION --
+--------------
 local function CheckCustomVariable(pid)
 	local TimeWorld = os.time()
 	local customVariable = Players[pid].data.customVariables.TrueSurvive	
@@ -67,7 +85,11 @@ local function CheckCustomVariable(pid)
 			HungerTimeMax = config.eatTime,
 			ThirsthTime = 0,
 			ThirstWorld = TimeWorld,
-			ThirsthTimeMax = config.drinkTime
+			ThirsthTimeMax = config.drinkTime,
+			Rain = 0,
+			RainMax = config.rainMax,
+			Cold = 0,
+			ColdMax = config.coldMax
 		}
 		customVariable = Players[pid].data.customVariables.TrueSurvive
 	else
@@ -79,6 +101,20 @@ local function CheckCustomVariable(pid)
 		end
 		if customVariable.SleepTimeMax ~= config.sleepTime then
 			customVariable.SleepTimeMax = config.sleepTime
+		end
+		if not customVariable.Rain then
+			customVariable.Rain = 0
+			customVariable.RainMax = config.rainMax
+		end
+		if not customVariable.Cold then
+			customVariable.Cold = 0
+			customVariable.ColdMax = config.coldMax
+		end			
+		if customVariable.RainMax ~= config.rainMax then
+			customVariable.RainMax = config.rainMax
+		end			
+		if customVariable.ColdMax ~= config.coldMax then
+			customVariable.ColdMax = config.coldMax
 		end		
 	end
 	return customVariable
@@ -97,9 +133,11 @@ local function CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
 	LoadedCells[cellDescription]:QuicksaveToDrive()
 end
 
------------------
---SPELLS RECORD--
------------------
+------------
+-- METHOD --
+------------
+local TrueSurvive = {}
+
 TrueSurvive.OnServerInit = function(eventStatus)
 	local recordTable
 	local recordStoreSpells = RecordStores["spell"]
@@ -230,12 +268,45 @@ TrueSurvive.OnServerInit = function(eventStatus)
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_fatigue"] = recordTable
 
-    recordStoreSpells:Save()
+	recordTable = {
+	  name = "Wet",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 17,
+		  attribute = 4,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = -1,
+		  magnitudeMax = config.debuffWet,
+		  magnitudeMin = config.debuffWet
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_wet"] = recordTable
+	
+	recordTable = {
+	  name = "Frozen",
+	  subtype = 1,
+	  cost = 1,
+	  flags = 0,
+	  effects = {{
+		  id = 17,
+		  attribute = 1,
+		  skill = -1,
+		  rangeType = 0,
+		  area = 0,
+		  duration = -1,
+		  magnitudeMax = config.debuffFrozen,
+		  magnitudeMin = config.debuffFrozen
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["true_survive_freeze"] = recordTable
+	
+	recordStoreSpells:Save()
 	recordTable = nil
 end
--- ==================
--- CHECK TIMER PLAYER
--- ==================
 
 TrueSurvive.OnPlayerAuthentified = function(eventStatus, pid)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
@@ -248,6 +319,8 @@ end
 
 TrueSurvive.OnCheckTimePlayers = function(pid)
 	local TimeWorld = os.time()
+	tes3mp.ReadReceivedWorldstate()
+	local regionName = string.lower(tes3mp.GetWeatherRegion())
 	local customVariable = CheckCustomVariable(pid)	
 	local tableSpellPlayer = {}
 	for slot, spellId in pairs(Players[pid].data.spellbook) do
@@ -258,11 +331,33 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		customVariable.SleepTime = 0
 		customVariable.HungerTime = 0
 		customVariable.ThirsthTime = 0
-	else
+		customVariable.Rain = 0
+		customVariable.Cold = 0	
+	else		
 		customVariable.HungerTime = TimeWorld - customVariable.HungerWorld
 		customVariable.ThirsthTime = TimeWorld - customVariable.ThirstWorld
 		customVariable.SleepTime = TimeWorld - customVariable.SleepWorld
-
+		
+		if tes3mp.IsInExterior(pid) == true then 
+			if WorldInstance.storedRegions[regionName] and WorldInstance.storedRegions[regionName].currentWeather then
+				if WorldInstance.storedRegions[regionName].currentWeather == enumerations.weather.RAIN then	
+					customVariable.Rain = customVariable.Rain + 5
+				elseif WorldInstance.storedRegions[regionName].currentWeather == enumerations.weather.THUNDER then	
+					customVariable.Rain = customVariable.Rain + 10	
+				elseif WorldInstance.storedRegions[regionName].currentWeather == enumerations.weather.SNOW then	
+					customVariable.Rain = customVariable.Cold + 5	
+				elseif WorldInstance.storedRegions[regionName].currentWeather == enumerations.weather.BLIZZARD then
+					customVariable.Rain = customVariable.Cold + 10			
+				elseif WorldInstance.storedRegions[regionName].currentWeather == enumerations.weather.CLEAR then	
+					customVariable.Rain = customVariable.Rain - 5
+					customVariable.Cold = customVariable.Cold - 5				
+				end
+			end
+		else
+			customVariable.Rain = customVariable.Rain - 5
+			customVariable.Cold = customVariable.Cold - 5		
+		end
+		
 		if customVariable.HungerTime > customVariable.HungerTimeMax then
 			customVariable.HungerTime = customVariable.HungerTimeMax		
 		end
@@ -343,12 +438,32 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		end	
 
 	end
+
+	if customVariable.Rain >= customVariable.RainMax then		
+		if not tableSpellPlayer["true_survive_wet"] then									
+			tes3mp.MessageBox(pid, -1, trad.Wet)
+			logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_wet", false)					
+		end	
+	else
+		if tableSpellPlayer["true_survive_wet"] then
+			logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_wet", false)	
+		end
+	end
+
+	if customVariable.Cold >= customVariable.ColdMax then		
+		if not tableSpellPlayer["true_survive_freeze"] then									
+			tes3mp.MessageBox(pid, -1, trad.Freeze)
+			logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_freeze", false)					
+		end	
+	else
+		if tableSpellPlayer["true_survive_freeze"] then
+			logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_freeze", false)	
+		end
+	end
 	
 	Players[pid]:QuicksaveToDrive()
 end
--- =====================
--- OBJECT ACTIVATED MENU
--- =====================
+
 TrueSurvive.OnActivatedObject = function(eventStatus, pid, cellDescription, objects)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local ObjectIndex
@@ -388,9 +503,7 @@ TrueSurvive.OnPlayerEvent = function(eventStatus, pid)
 		TrueSurvive.OnCheckTimePlayers(pid)
 	end
 end
--- ================
--- OBJECT ACTIVATED
--- ================
+
 TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
 		local countObject = 1
@@ -478,6 +591,9 @@ TrueSurvive.CleanCellObject = function(pid, cellDescription, uniqueIndex, forEve
 	end
 end
 
+-----------
+-- EVENT --
+-----------
 customEventHooks.registerValidator("OnObjectActivate", TrueSurvive.OnActivatedObject)
 customEventHooks.registerHandler("OnObjectActivate", TrueSurvive.OnPlayerEvent)
 customEventHooks.registerHandler("OnPlayerEquipment", TrueSurvive.OnPlayerEvent)
