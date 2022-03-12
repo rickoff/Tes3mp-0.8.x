@@ -33,7 +33,7 @@ end
 
 PreventDamage.OnObjectHit = function(eventStatus, pid, cellDescription, objects, targetPlayers)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then	
-        for targetPid, targetPlayer in pairs(targetPlayers) do
+		for targetPid, targetPlayer in pairs(targetPlayers) do
 			if Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then			
 				local targetPlayerName = GetName(targetPid)
 				if DisablePvp.player[targetPlayerName] and targetPlayer.hittingPid and targetPlayer.hit.success then
