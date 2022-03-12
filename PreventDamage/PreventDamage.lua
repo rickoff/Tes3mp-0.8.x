@@ -6,6 +6,9 @@ INSTALLATION:
 Save the file as PreventDamage.lua inside your server/scripts/custom folder.
 Edits to customScripts.lua add : PreventDamage = require("custom.PreventDamage")
 ---------------------------
+DESCRIPTION:
+Enter /pvp to enable or disable damage prevention from other players
+---------------------------
 ]]
 local function GetName(pid)
 	return string.lower(Players[pid].accountName)
