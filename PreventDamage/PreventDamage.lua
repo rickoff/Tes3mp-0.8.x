@@ -8,7 +8,11 @@ Edits to customScripts.lua add : PreventDamage = require("custom.PreventDamage")
 ---------------------------
 DESCRIPTION:
 Enter /pvp to enable or disable damage prevention from other players
+Only works for melee attacks
 ---------------------------
+PROBLEMS:
+the first hit is not well taken into account and the calculation is not always done correctly but in any case prevents death.
+spell damage and damage over time are not supported.
 ]]
 local function GetName(pid)
 	return string.lower(Players[pid].accountName)
@@ -37,11 +41,12 @@ PreventDamage.OnObjectHit = function(eventStatus, pid, cellDescription, objects,
 			if Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then			
 				local targetPlayerName = GetName(targetPid)
 				if DisablePvp.player[targetPlayerName] and targetPlayer.hittingPid and targetPlayer.hit.success then
-					local targetHealthCurrent = math.floor(tes3mp.GetHealthCurrent(targetPid))
-					local Damage = math.floor(targetPlayer.hit.damage)
+					local targetHealthCurrent = tes3mp.GetHealthCurrent(targetPid)
+					local Damage = targetPlayer.hit.damage
 					local newHealth = targetHealthCurrent + Damage
 					tes3mp.SetHealthCurrent(targetPid, newHealth)				
 					tes3mp.SendStatsDynamic(targetPid)
+					tes3mp.MessageBox(targetPlayer.hittingPid, -1, color.Red..targetPlayerName.." has pvp mode disable !")				
 				end
 			end
 		end
