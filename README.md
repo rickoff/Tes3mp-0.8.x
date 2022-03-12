@@ -24,3 +24,5 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 - VocalDiscord : Vocal instantiated on discord according to the cell of the player in the game
 
 - CapStatsDynamique : Allows you to set a limit for dynamic statistics
+
+- PreventDamage : Enter /pvp to enable or disable damage prevention from other players
