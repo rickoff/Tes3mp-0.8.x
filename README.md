@@ -26,3 +26,5 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 - CapStatsDynamique : Allows you to set a limit for dynamic statistics
 
 - PreventDamage : Enter /pvp to enable or disable damage prevention from other players
+
+- CreateCustomRecord : modify the basic objects of the game Morrowind, Bloodmoon, Tribunal at your convenience simply
