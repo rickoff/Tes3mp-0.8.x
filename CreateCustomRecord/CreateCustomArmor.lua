@@ -26,6 +26,7 @@ CreateCustomArmor.OnServerInit = function(eventStatus)
 	for refId, record in pairs(DataArmor) do	
 		recordTable = {
 			baseId = record.baseId,
+			id = record.baseId,			
 			name = record.name,
 			subtype = record.subtype,
 			model = record.model,
