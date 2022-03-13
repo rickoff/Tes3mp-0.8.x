@@ -9,7 +9,7 @@ Edits to customScripts.lua add : CreateCustomPotion = require("custom.CreateCust
 ---------------------------
 INSTRUCTIONS:
 to modify a value of an potion such as value, modify the target in the file DataPotion.json
-data edit effects are not yet supported by tes3mp 0.8
+data edit in effects DataPotion.json are not yet supported by tes3mp 0.8
 ]]
 
 ---------------
@@ -24,7 +24,7 @@ local CreateCustomPotion = {}
 
 CreateCustomPotion.OnServerInit = function(eventStatus)
 	local recordTable	
-	local recordStoreActivator = RecordStores["potion"]
+	local recordStorePotion = RecordStores["potion"]
 
 	for refId, slot in pairs(DataPotion) do
 		recordTable = {
@@ -51,9 +51,9 @@ CreateCustomPotion.OnServerInit = function(eventStatus)
 			tableEnchant.magnitudeMin = data.magnitudeMin
 			table.insert(recordTable.effects, tableEnchant)
 		end		
-		recordStoreActivator.data.permanentRecords[string.lower(refId)] = recordTable	
+		recordStorePotion.data.permanentRecords[string.lower(refId)] = recordTable	
 	end
-	recordStoreActivator:Save()	
+	recordStorePotion:Save()	
 	recordTable = nil	
 end	
 
