@@ -9,6 +9,7 @@ Edits to customScripts.lua add : CreateCustomPotion = require("custom.CreateCust
 ---------------------------
 INSTRUCTIONS:
 to modify a value of an potion such as value, modify the target in the file DataPotion.json
+data edit effects are not yet supported by tes3mp 0.8
 ]]
 
 ---------------
@@ -35,9 +36,21 @@ CreateCustomPotion.OnServerInit = function(eventStatus)
 		  script = slot.script,
 		  weight = slot.weight,
 		  value = slot.value,
-		  autoCalc = slot.autoCalc
+		  autoCalc = slot.autoCalc,
+		  effects = {}
 		}
-		
+		for x, data in pairs(slot.effects) do
+			local tableEnchant = {}
+			tableEnchant.id = data.id
+			tableEnchant.attribute = data.attribute
+			tableEnchant.skill = data.skill
+			tableEnchant.rangeType = data.rangeType
+			tableEnchant.area = data.area
+			tableEnchant.duration = data.duration
+			tableEnchant.magnitudeMax = data.magnitudeMax
+			tableEnchant.magnitudeMin = data.magnitudeMin
+			table.insert(recordTable.effects, tableEnchant)
+		end		
 		recordStoreActivator.data.permanentRecords[string.lower(refId)] = recordTable	
 	end
 	recordStoreActivator:Save()	
