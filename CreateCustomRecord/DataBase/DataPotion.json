@@ -1,0 +1,2642 @@
+{
+  "p_fortify_endurance_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_endurance_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Endurance",
+    "autoCalc":0
+  },
+  "p_restore_speed_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_speed_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Speed",
+    "autoCalc":0
+  },
+  "p_shock_resistance_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_shock_resistance_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Shock Resistance",
+    "autoCalc":0
+  },
+  "p_magicka_resistance_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_magicka_resistance_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Magicka Resistance",
+    "autoCalc":0
+  },
+  "p_light_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_light_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Light",
+    "autoCalc":0
+  },
+  "p_swift_swim_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_swift_swim_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Swift Swim",
+    "autoCalc":0
+  },
+  "p_burden_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_burden_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Burden",
+    "autoCalc":0
+  },
+  "p_fortify_health_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_health_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Health Potion",
+    "autoCalc":0
+  },
+  "p_poison_resistance_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_poison_resistance_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Poison Resistance",
+    "autoCalc":0
+  },
+  "p_magicka_resistance_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_magicka_resistance_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Magicka Resistance",
+    "autoCalc":0
+  },
+  "p_magicka_resistance_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_magicka_resistance_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Magicka Resistance",
+    "autoCalc":0
+  },
+  "p_levitation_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_levitation_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Rising Force Potion",
+    "autoCalc":0
+  },
+  "p_fortify_agility_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_agility_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Fortify Agility",
+    "autoCalc":0
+  },
+  "p_restore_fatigue_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_fatigue_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Fatigue",
+    "autoCalc":0
+  },
+  "p_jump_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_jump_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Jump",
+    "autoCalc":0
+  },
+  "p_fortify_magicka_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_magicka_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Magicka",
+    "autoCalc":0
+  },
+  "p_jump_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_jump_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Jump",
+    "autoCalc":0
+  },
+  "p_lightning shield_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_lightning shield_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Lightning Shield",
+    "autoCalc":0
+  },
+  "p_restore_speed_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_speed_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Speed",
+    "autoCalc":0
+  },
+  "p_chameleon_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_chameleon_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Shadow",
+    "autoCalc":0
+  },
+  "p_fortify_fatigue_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_fatigue_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Fatigue",
+    "autoCalc":0
+  },
+  "p_restore_personality_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_personality_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Personality",
+    "autoCalc":0
+  },
+  "p_chameleon_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_chameleon_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Shadow",
+    "autoCalc":0
+  },
+  "p_swift_swim_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_swift_swim_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Swift Swim",
+    "autoCalc":0
+  },
+  "p_restore_personality_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_personality_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Personality",
+    "autoCalc":0
+  },
+  "p_restore_health_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_health_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Health",
+    "autoCalc":0
+  },
+  "p_detect_enchantment_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_detect_enchantment_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Detect Enchantments",
+    "autoCalc":0
+  },
+  "p_drain_personality_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain_personality_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled Potion of Swift Swim",
+    "autoCalc":0
+  },
+  "p_detect_creatures_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_detect_creatures_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Detect Creatures",
+    "autoCalc":0
+  },
+  "p_night-eye_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_night-eye_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Night-Eye",
+    "autoCalc":0
+  },
+  "p_fortify_fatigue_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_fatigue_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Fatigue",
+    "autoCalc":0
+  },
+  "p_restore_magicka_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_magicka_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Magicka",
+    "autoCalc":0
+  },
+  "p_swift_swim_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_swift_swim_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Swift Swim",
+    "autoCalc":0
+  },
+  "potion_nord_mead":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_BeerBarrel.dds",
+    "baseId":"potion_nord_mead",
+    "value":80,
+    "model":"m\\BeerBarrel.NIF",
+    "name":"Nord Mead",
+    "autoCalc":0
+  },
+  "p_fire_resistance_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fire_resistance_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fire Resistance",
+    "autoCalc":0
+  },
+  "p_restore_magicka_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_magicka_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Magicka",
+    "autoCalc":0
+  },
+  "p_paralyze_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_paralyze_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Paralyze",
+    "autoCalc":0
+  },
+  "p_disease_resistance_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_disease_resistance_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Disease Resistance",
+    "autoCalc":0
+  },
+  "p_quarrablood_unique":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_quarrablood_UNIQUE",
+    "value":5000,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Blood of the Quarra Masters",
+    "autoCalc":0
+  },
+  "p_fortify_strength_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_strength_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Strength",
+    "autoCalc":0
+  },
+  "p_paralyze_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_paralyze_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Paralyze",
+    "autoCalc":0
+  },
+  "p_restore_willpower_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_willpower_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Willpower",
+    "autoCalc":0
+  },
+  "p_fortify_strength_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_strength_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Strength",
+    "autoCalc":0
+  },
+  "p_restore_luck_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_luck_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Restore Luck",
+    "autoCalc":0
+  },
+  "p_fortify_agility_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_agility_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Agility",
+    "autoCalc":0
+  },
+  "p_levitation_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_levitation_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Rising Force Potion",
+    "autoCalc":0
+  },
+  "p_cure_poison_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_cure_poison_s",
+    "value":20,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Cure Poison",
+    "autoCalc":0
+  },
+  "p_frost_resistance_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_frost_resistance_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Frost Resistance",
+    "autoCalc":0
+  },
+  "p_fortify_personality_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_personality_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Fortify Personality",
+    "autoCalc":0
+  },
+  "p_spell_absorption_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_spell_absorption_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Spell Absorption",
+    "autoCalc":0
+  },
+  "p_frost_shield_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_frost_shield_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Frost Shield",
+    "autoCalc":0
+  },
+  "p_restore_magicka_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_magicka_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Magicka Potion",
+    "autoCalc":0
+  },
+  "p_poison_resistance_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_poison_resistance_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Poison Resistance",
+    "autoCalc":0
+  },
+  "p_fortify_willpower_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_willpower_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Willpower",
+    "autoCalc":0
+  },
+  "p_drain_agility_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain_agility_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled SlowFall Potion",
+    "autoCalc":0
+  },
+  "p_jump_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_jump_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Jump",
+    "autoCalc":0
+  },
+  "potion_comberry_brandy_01":{
+    "script":"",
+    "weight":5,
+    "icon":"n\\Tx_Comberry_brandy_01.tga",
+    "baseId":"potion_comberry_brandy_01",
+    "value":30,
+    "model":"n\\Potion_Comberry_brandy_01.NIF",
+    "name":"Greef",
+    "autoCalc":0
+  },
+  "p_reflection_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_reflection_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Reflection",
+    "autoCalc":0
+  },
+  "p_restore_speed_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_speed_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Speed",
+    "autoCalc":0
+  },
+  "p_fortify_luck_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_luck_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Luck Potion",
+    "autoCalc":0
+  },
+  "p_silence_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_silence_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Silence",
+    "autoCalc":0
+  },
+  "p_spell_absorption_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_spell_absorption_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Spell Absorption",
+    "autoCalc":0
+  },
+  "p_frost_shield_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_frost_shield_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Frost Shield",
+    "autoCalc":0
+  },
+  "p_fortify_intelligence_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_intelligence_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Intelligence",
+    "autoCalc":0
+  },
+  "p_fortify_willpower_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_willpower_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Fortify Willpower",
+    "autoCalc":0
+  },
+  "p_fortify_magicka_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_magicka_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Magicka Potion",
+    "autoCalc":0
+  },
+  "p_paralyze_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_paralyze_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Paralyze",
+    "autoCalc":0
+  },
+  "p_restore_willpower_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_willpower_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Willpower",
+    "autoCalc":0
+  },
+  "p_fortify_strength_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_strength_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Strength",
+    "autoCalc":0
+  },
+  "p_fortify_speed_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_speed_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Speed",
+    "autoCalc":0
+  },
+  "p_fortify_personality_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_personality_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Personality",
+    "autoCalc":0
+  },
+  "p_restore_intelligence_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_intelligence_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Intelligence",
+    "autoCalc":0
+  },
+  "p_fortify_luck_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_luck_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Fortify Luck",
+    "autoCalc":0
+  },
+  "p_reflection_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_reflection_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Reflection",
+    "autoCalc":0
+  },
+  "p_sinyaramen_unique":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_sinyaramen_UNIQUE",
+    "value":1502,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Sinyaramen's Potion",
+    "autoCalc":0
+  },
+  "p_poison_resistance_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_poison_resistance_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Poison Resistance",
+    "autoCalc":0
+  },
+  "potion_ancient_brandy":{
+    "script":"",
+    "weight":0.5,
+    "icon":"n\\Tx_cyro_whiskey_01.tga",
+    "baseId":"potion_ancient_brandy",
+    "value":1500,
+    "model":"n\\Potion_Cyro_whiskey_01.NIF",
+    "name":"Ancient Dagoth Brandy",
+    "autoCalc":0
+  },
+  "p_night-eye_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_night-eye_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Night-Eye",
+    "autoCalc":0
+  },
+  "p_invisibility_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_invisibility_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Invisibility",
+    "autoCalc":0
+  },
+  "p_fortify_health_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_health_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Health Potion",
+    "autoCalc":0
+  },
+  "p_fortify_speed_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_speed_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Fortify Speed",
+    "autoCalc":0
+  },
+  "p_reflection_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_reflection_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Reflection",
+    "autoCalc":0
+  },
+  "p_imperfect_elixir":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_fabricant_elixir.dds",
+    "baseId":"p_Imperfect_Elixir",
+    "value":661,
+    "model":"m\\Misc_Fabricant_Elixir.NIF",
+    "name":"Elixir of the Imperfect",
+    "autoCalc":1
+  },
+  "p_fortify_magicka_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_magicka_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Magicka",
+    "autoCalc":0
+  },
+  "p_burden_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_burden_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Burden",
+    "autoCalc":0
+  },
+  "p_restore_agility_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_agility_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Agility",
+    "autoCalc":0
+  },
+  "p_fire_shield_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fire_shield_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Fire Shield",
+    "autoCalc":0
+  },
+  "p_fire_shield_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fire_shield_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Fire Shield",
+    "autoCalc":0
+  },
+  "p_restore_fatigue_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_fatigue_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Fatigue",
+    "autoCalc":0
+  },
+  "p_light_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_light_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Light",
+    "autoCalc":0
+  },
+  "p_dwemer_lubricant00":{
+    "script":"",
+    "weight":2,
+    "icon":"n\\Tx_cyro_whiskey_01.tga",
+    "baseId":"p_dwemer_lubricant00",
+    "value":200,
+    "model":"n\\Potion_Cyro_whiskey_01.NIF",
+    "name":"Spoiled Dwemer Oil",
+    "autoCalc":0
+  },
+  "p_restore_personality_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_personality_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Personality",
+    "autoCalc":0
+  },
+  "p_restore_agility_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_agility_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Agility",
+    "autoCalc":0
+  },
+  "p_reflection_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_reflection_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Reflection",
+    "autoCalc":0
+  },
+  "p_burden_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_burden_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Burden",
+    "autoCalc":0
+  },
+  "p_water_breathing_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_water_breathing_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Water Breathing",
+    "autoCalc":0
+  },
+  "p_shock_resistance_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_shock_resistance_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Shock Resistance",
+    "autoCalc":0
+  },
+  "p_burden_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_burden_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.NIF",
+    "name":"Standard Potion of Burden",
+    "autoCalc":0
+  },
+  "p_fortify_intelligence_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_intelligence_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Fortify Intelligence",
+    "autoCalc":0
+  },
+  "p_poison_resistance_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_poison_resistance_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Poison Resistance",
+    "autoCalc":0
+  },
+  "p_restore_endurance_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_endurance_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Endurance",
+    "autoCalc":0
+  },
+  "p_night-eye_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_night-eye_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Night-Eye",
+    "autoCalc":0
+  },
+  "p_dispel_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_dispel_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Dispel",
+    "autoCalc":0
+  },
+  "p_fire_resistance_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fire_resistance_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Fire Resistance",
+    "autoCalc":0
+  },
+  "p_drain_intelligence_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain_intelligence_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled Potion of Swift Swim",
+    "autoCalc":0
+  },
+  "p_restore_strength_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_strength_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Strength",
+    "autoCalc":0
+  },
+  "p_invisibility_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_invisibility_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Invisibility",
+    "autoCalc":0
+  },
+  "p_restore_intelligence_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_intelligence_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Intelligence",
+    "autoCalc":0
+  },
+  "p_feather_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_feather_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Feather",
+    "autoCalc":0
+  },
+  "p_restore_luck_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_luck_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Luck",
+    "autoCalc":0
+  },
+  "p_fortify_speed_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_speed_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Fortify Speed",
+    "autoCalc":0
+  },
+  "p_fortify_strength_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_strength_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Strength",
+    "autoCalc":0
+  },
+  "p_feather_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_feather_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Feather",
+    "autoCalc":0
+  },
+  "p_frost_shield_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_frost_shield_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Frost Shield",
+    "autoCalc":0
+  },
+  "p_fortify_health_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_health_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Fortify Health",
+    "autoCalc":0
+  },
+  "p_fortify_fatigue_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_fatigue_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Fortify Fatigue",
+    "autoCalc":0
+  },
+  "p_restore_endurance_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_endurance_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Endurance",
+    "autoCalc":0
+  },
+  "p_fire resistance_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fire resistance_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fire Resistance",
+    "autoCalc":0
+  },
+  "p_fortify_personality_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_personality_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Personality",
+    "autoCalc":0
+  },
+  "p_fortify_health_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_health_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Health",
+    "autoCalc":0
+  },
+  "p_fortify_agility_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_agility_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Agility",
+    "autoCalc":0
+  },
+  "p_spell_absorption_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_spell_absorption_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Spell Absorption",
+    "autoCalc":0
+  },
+  "p_fortify_health_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_health_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Health",
+    "autoCalc":0
+  },
+  "hulking_fabricant_elixir":{
+    "script":"",
+    "weight":5,
+    "icon":"m\\Tx_fabricant_elixir.dds",
+    "baseId":"hulking_fabricant_elixir",
+    "value":100,
+    "model":"m\\Misc_Fabricant_Elixir.NIF",
+    "name":"Hulking Fabricant Elixir",
+    "autoCalc":0
+  },
+  "p_restore_speed_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_speed_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Speed",
+    "autoCalc":0
+  },
+  "p_cure_common_unique":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_cure_common_unique",
+    "value":100,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Trebonius' Potion of Curing",
+    "autoCalc":0
+  },
+  "potion_cyro_whiskey_01":{
+    "script":"",
+    "weight":1,
+    "icon":"n\\Tx_cyro_whiskey_01.tga",
+    "baseId":"Potion_Cyro_Whiskey_01",
+    "value":100,
+    "model":"n\\Potion_Cyro_whiskey_01.NIF",
+    "name":"Flin",
+    "autoCalc":0
+  },
+  "p_restore_luck_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_luck_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Luck",
+    "autoCalc":0
+  },
+  "p_restore_endurance_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_endurance_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Endurance",
+    "autoCalc":0
+  },
+  "p_restore_health_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_health_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Health",
+    "autoCalc":0
+  },
+  "p_swift_swim_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_swift_swim_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Swift Swim",
+    "autoCalc":0
+  },
+  "p_restore_agility_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_agility_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Agility",
+    "autoCalc":0
+  },
+  "p_fire_resistance_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fire_resistance_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fire Resistance",
+    "autoCalc":0
+  },
+  "p_drain_strength_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain_strength_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled Cure Disease Potion",
+    "autoCalc":0
+  },
+  "p_lightning shield_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_lightning shield_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Lightning Shield",
+    "autoCalc":0
+  },
+  "p_restore_strength_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_strength_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Strength",
+    "autoCalc":0
+  },
+  "p_cure_common_s":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_cure_common_s",
+    "value":20,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Cure Common Disease",
+    "autoCalc":0
+  },
+  "p_poison_resistance_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_poison_resistance_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Poison Resistance",
+    "autoCalc":0
+  },
+  "p_fortify_magicka_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_magicka_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Magicka",
+    "autoCalc":0
+  },
+  "p_chameleon_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_chameleon_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Shadow",
+    "autoCalc":0
+  },
+  "p_fire_shield_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fire_shield_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Fire Shield",
+    "autoCalc":0
+  },
+  "p_restore_strength_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_strength_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Strength",
+    "autoCalc":0
+  },
+  "p_restore_fatigue_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_fatigue_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Fatigue",
+    "autoCalc":0
+  },
+  "p_restore_magicka_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_magicka_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Magicka",
+    "autoCalc":0
+  },
+  "p_restore_willpower_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_willpower_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Willpower",
+    "autoCalc":0
+  },
+  "p_restore_health_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_health_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Health Potion",
+    "autoCalc":0
+  },
+  "p_frost_resistance_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_frost_resistance_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Frost Resistance",
+    "autoCalc":0
+  },
+  "p_restore_strength_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_strength_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Strength",
+    "autoCalc":0
+  },
+  "p_fortify_intelligence_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_intelligence_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Intelligence",
+    "autoCalc":0
+  },
+  "potion_local_brew_01":{
+    "script":"",
+    "weight":5,
+    "icon":"n\\Tx_local_brew_01.tga",
+    "baseId":"Potion_Local_Brew_01",
+    "value":10,
+    "model":"n\\Potion_Local_brew_01.NIF",
+    "name":"Mazte",
+    "autoCalc":0
+  },
+  "p_heroism_s":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_heroism_s",
+    "value":1456,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Potion of Heroism",
+    "autoCalc":0
+  },
+  "p_restore_intelligence_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_intelligence_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Intelligence",
+    "autoCalc":0
+  },
+  "p_restore_fatigue_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_fatigue_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Fatigue",
+    "autoCalc":0
+  },
+  "p_restore_agility_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_agility_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Agility",
+    "autoCalc":0
+  },
+  "p_restore_willpower_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_restore_willpower_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Restore Willpower",
+    "autoCalc":0
+  },
+  "p_magicka_resistance_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_magicka_resistance_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Magicka Resistance",
+    "autoCalc":0
+  },
+  "p_detect_key_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_detect_key_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Detect Key",
+    "autoCalc":0
+  },
+  "p_silence_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_silence_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Silence",
+    "autoCalc":0
+  },
+  "p_chameleon_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_chameleon_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Shadow",
+    "autoCalc":0
+  },
+  "p_burden_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_burden_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Burden",
+    "autoCalc":0
+  },
+  "p_silence_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_silence_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Silence",
+    "autoCalc":0
+  },
+  "p_water_walking_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_water_walking_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Water Walking",
+    "autoCalc":0
+  },
+  "p_drain_magicka_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain_magicka_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled Cure Poison Potion",
+    "autoCalc":0
+  },
+  "p_silence_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_silence_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Silence",
+    "autoCalc":0
+  },
+  "p_frost_resistance_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_frost_resistance_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Frost Resistance",
+    "autoCalc":0
+  },
+  "p_jump_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_jump_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Jump",
+    "autoCalc":0
+  },
+  "p_feather_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_feather_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Feather",
+    "autoCalc":0
+  },
+  "p_fortify_luck_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_luck_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Fortify Luck",
+    "autoCalc":0
+  },
+  "p_chameleon_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_chameleon_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Shadow",
+    "autoCalc":0
+  },
+  "p_paralyze_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_paralyze_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Paralyze",
+    "autoCalc":0
+  },
+  "p_fortify_personality_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_personality_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Personality",
+    "autoCalc":0
+  },
+  "p_fortify_willpower_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_willpower_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Willpower",
+    "autoCalc":0
+  },
+  "p_fortify_intelligence_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_intelligence_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Intelligence",
+    "autoCalc":0
+  },
+  "p_paralyze_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_paralyze_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Paralyze",
+    "autoCalc":0
+  },
+  "verminous_fabricant_elixir":{
+    "script":"",
+    "weight":5,
+    "icon":"m\\Tx_fabricant_elixir.dds",
+    "baseId":"verminous_fabricant_elixir",
+    "value":100,
+    "model":"m\\Misc_Fabricant_Elixir.NIF",
+    "name":"Verminous Fabricant Elixir",
+    "autoCalc":0
+  },
+  "potion_comberry_wine_01":{
+    "script":"",
+    "weight":3,
+    "icon":"n\\Tx_Comberry_wine_01.tga",
+    "baseId":"potion_comberry_wine_01",
+    "value":10,
+    "model":"n\\Potion_Comberry_wine_01.NIF",
+    "name":"Shein",
+    "autoCalc":0
+  },
+  "p_invisibility_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_invisibility_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Invisibility",
+    "autoCalc":0
+  },
+  "p_fortify_willpower_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_willpower_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Willpower",
+    "autoCalc":0
+  },
+  "p_fortify_speed_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_speed_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Fortify Speed",
+    "autoCalc":0
+  },
+  "pyroil_tar_unique":{
+    "script":"",
+    "weight":1,
+    "icon":"n\\Tx_cyro_brandy_01.tga",
+    "baseId":"pyroil_tar_unique",
+    "value":100,
+    "model":"n\\Potion_Cyro_brandy_01.NIF",
+    "name":"Pyroil Tar",
+    "autoCalc":0
+  },
+  "p_fortify_endurance_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_endurance_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Endurance",
+    "autoCalc":0
+  },
+  "p_lovepotion_unique":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_lovepotion_unique",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Love Potion",
+    "autoCalc":0
+  },
+  "p_restore_luck_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_luck_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Luck",
+    "autoCalc":0
+  },
+  "p_fortify_fatigue_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_fatigue_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Fatigue Potion",
+    "autoCalc":0
+  },
+  "p_cure_blight_s":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_cure_blight_s",
+    "value":30,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Cure Blight Disease",
+    "autoCalc":0
+  },
+  "p_magicka_resistance_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_magicka_resistance_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Magicka Resistance",
+    "autoCalc":0
+  },
+  "p_fortify_agility_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_agility_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Agility Potion",
+    "autoCalc":0
+  },
+  "p_levitation_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_levitation_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Rising Force Potion",
+    "autoCalc":0
+  },
+  "p_disease_resistance_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_disease_resistance_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Disease Resistance",
+    "autoCalc":0
+  },
+  "p_fortify_fatigue_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_fatigue_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Fatigue",
+    "autoCalc":0
+  },
+  "p_light_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_light_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Potion of Light",
+    "autoCalc":0
+  },
+  "p_fortify_luck_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_luck_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Luck",
+    "autoCalc":0
+  },
+  "p_drain_luck_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain_luck_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled Cure Disease Potion",
+    "autoCalc":0
+  },
+  "p_vintagecomberrybrandy1":{
+    "script":"",
+    "weight":1,
+    "icon":"n\\Tx_Comberry_brandy_01.tga",
+    "baseId":"p_vintagecomberrybrandy1",
+    "value":500,
+    "model":"n\\Potion_Comberry_brandy_01.NIF",
+    "name":"Vintage Brandy",
+    "autoCalc":0
+  },
+  "p_lightning shield_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_lightning shield_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Lightning Shield",
+    "autoCalc":0
+  },
+  "p_levitation_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"P_Levitation_Q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Rising Force Potion",
+    "autoCalc":0
+  },
+  "p_fortify_intelligence_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_fortify_intelligence_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Fortify Intelligence",
+    "autoCalc":0
+  },
+  "p_fortify_willpower_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_willpower_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Willpower",
+    "autoCalc":0
+  },
+  "potion_skooma_01":{
+    "script":"",
+    "weight":1,
+    "icon":"n\\Tx_skooma_01.tga",
+    "baseId":"potion_skooma_01",
+    "value":500,
+    "model":"n\\Potion_Skooma_01.NIF",
+    "name":"Skooma",
+    "autoCalc":0
+  },
+  "p_invisibility_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_invisibility_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Invisibility",
+    "autoCalc":0
+  },
+  "p_fortify_speed_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_speed_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Speed",
+    "autoCalc":0
+  },
+  "p_restore_personality_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_personality_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Personality",
+    "autoCalc":0
+  },
+  "p_almsivi_intervention_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_almsivi_intervention_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Fool's Luck",
+    "autoCalc":0
+  },
+  "p_fire_shield_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fire_shield_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Fire Shield",
+    "autoCalc":0
+  },
+  "p_restore_strength_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_strength_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Strength",
+    "autoCalc":0
+  },
+  "p_recall_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_recall_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Recall",
+    "autoCalc":0
+  },
+  "p_restore_luck_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_luck_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Luck",
+    "autoCalc":0
+  },
+  "p_fortify_endurance_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_endurance_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Fortify Endurance",
+    "autoCalc":0
+  },
+  "p_restore_fatigue_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_fatigue_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Fatigue",
+    "autoCalc":0
+  },
+  "p_night-eye_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_night-eye_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Night-Eye",
+    "autoCalc":0
+  },
+  "p_fortify_magicka_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_magicka_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Fortify Magicka",
+    "autoCalc":0
+  },
+  "p_frost_resistance_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_frost_resistance_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Resist Frost Potion",
+    "autoCalc":0
+  },
+  "p_fortify_personality_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_personality_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Personality",
+    "autoCalc":0
+  },
+  "p_fire_shield_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fire_shield_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Potion of Fire Shield",
+    "autoCalc":0
+  },
+  "p_shock_resistance_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_shock_resistance_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Shock Resistance",
+    "autoCalc":0
+  },
+  "p_restore_endurance_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_endurance_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Endurance",
+    "autoCalc":0
+  },
+  "p_telekinesis_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_telekinesis_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Telekinesis",
+    "autoCalc":0
+  },
+  "p_restore_health_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_health_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Health",
+    "autoCalc":0
+  },
+  "p_disease_resistance_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_disease_resistance_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Disease Resistance",
+    "autoCalc":0
+  },
+  "p_slowfall_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_slowfall_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Slowfalling",
+    "autoCalc":0
+  },
+  "potion_cyro_brandy_01":{
+    "script":"",
+    "weight":1,
+    "icon":"n\\Tx_cyro_brandy_01.tga",
+    "baseId":"potion_cyro_brandy_01",
+    "value":100,
+    "model":"n\\Potion_Cyro_brandy_01.NIF",
+    "name":"Cyrodiilic Brandy",
+    "autoCalc":0
+  },
+  "p_night-eye_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_night-eye_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Night-Eye",
+    "autoCalc":0
+  },
+  "p_drain willpower_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain willpower_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled Cure Disease Potion",
+    "autoCalc":0
+  },
+  "p_light_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_light_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Light",
+    "autoCalc":0
+  },
+  "p_fortify_attack_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_attack_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Attack",
+    "autoCalc":0
+  },
+  "p_disease_resistance_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_disease_resistance_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Disease Resistance",
+    "autoCalc":0
+  },
+  "p_lightning shield_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_lightning shield_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Lightning Shield",
+    "autoCalc":0
+  },
+  "potion_local_liquor_01":{
+    "script":"",
+    "weight":3,
+    "icon":"n\\Tx_local_liquor_01.tga",
+    "baseId":"potion_local_liquor_01",
+    "value":30,
+    "model":"n\\Potion_Local_liquor_01.NIF",
+    "name":"Sujamma",
+    "autoCalc":0
+  },
+  "p_lightning shield_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_lightning shield_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Lightning Shield",
+    "autoCalc":0
+  },
+  "p_restore_endurance_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_endurance_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Endurance",
+    "autoCalc":0
+  },
+  "p_restore_speed_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_speed_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Speed",
+    "autoCalc":0
+  },
+  "potion_t_bug_musk_01":{
+    "script":"",
+    "weight":1.5,
+    "icon":"n\\Tx_T_bug_musk_01.tga",
+    "baseId":"potion_t_bug_musk_01",
+    "value":100,
+    "model":"n\\Potion_T_bug_musk_01.NIF",
+    "name":"Telvanni Bug Musk",
+    "autoCalc":0
+  },
+  "p_light_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_light_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Light",
+    "autoCalc":0
+  },
+  "p_fortify_agility_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_fortify_agility_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Fortify Agility",
+    "autoCalc":0
+  },
+  "p_restore_intelligence_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_intelligence_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Intelligence",
+    "autoCalc":0
+  },
+  "p_drain_speed_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain_speed_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled Cure Poison Potion",
+    "autoCalc":0
+  },
+  "p_fortify_endurance_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_fortify_endurance_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Fortify Endurance",
+    "autoCalc":0
+  },
+  "p_disease_resistance_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_disease_resistance_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Disease Resistance",
+    "autoCalc":0
+  },
+  "p_shock_resistance_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_shock_resistance_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Shock Resistance",
+    "autoCalc":0
+  },
+  "p_restore_agility_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_restore_agility_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Restore Agility",
+    "autoCalc":0
+  },
+  "p_drain_endurance_q":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_drain_endurance_q",
+    "value":10,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Spoiled SlowFall Potion",
+    "autoCalc":0
+  },
+  "p_restore_health_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_health_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Health",
+    "autoCalc":0
+  },
+  "p_fire_resistance_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fire_resistance_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fire Resistance",
+    "autoCalc":0
+  },
+  "p_restore_intelligence_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_intelligence_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Intelligence",
+    "autoCalc":0
+  },
+  "p_frost_shield_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_frost_shield_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Frost Shield",
+    "autoCalc":0
+  },
+  "p_feather_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_feather_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Feather",
+    "autoCalc":0
+  },
+  "p_reflection_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_reflection_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Reflection",
+    "autoCalc":0
+  },
+  "p_shock_resistance_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_shock_resistance_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Shock Resistance",
+    "autoCalc":0
+  },
+  "p_fortify_endurance_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_endurance_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Fortify Endurance",
+    "autoCalc":0
+  },
+  "p_restore_personality_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_restore_personality_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.nif",
+    "name":"Standard Restore Personality",
+    "autoCalc":0
+  },
+  "p_frost_shield_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_frost_shield_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Potion of Frost Shield",
+    "autoCalc":0
+  },
+  "p_restore_willpower_b":{
+    "script":"",
+    "weight":1.5,
+    "icon":"m\\Tx_potion_bargain_01.tga",
+    "baseId":"p_restore_willpower_b",
+    "value":5,
+    "model":"m\\Misc_Potion_Bargain_01.nif",
+    "name":"Bargain Restore Willpower",
+    "autoCalc":0
+  },
+  "p_mark_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_mark_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Marking",
+    "autoCalc":0
+  },
+  "p_jump_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_jump_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Jump",
+    "autoCalc":0
+  },
+  "p_levitation_s":{
+    "script":"",
+    "weight":0.75,
+    "icon":"m\\Tx_potion_standard_01.tga",
+    "baseId":"p_levitation_s",
+    "value":35,
+    "model":"m\\Misc_Potion_Standard_01.NIF",
+    "name":"Standard Rising Force Potion",
+    "autoCalc":0
+  },
+  "p_restore_magicka_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_restore_magicka_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Restore Magicka",
+    "autoCalc":0
+  },
+  "p_silence_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_silence_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Silence",
+    "autoCalc":0
+  },
+  "p_spell_absorption_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_spell_absorption_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Spell Absorption",
+    "autoCalc":0
+  },
+  "p_fortify_luck_q":{
+    "script":"",
+    "weight":0.5,
+    "icon":"m\\Tx_potion_quality_01.tga",
+    "baseId":"p_fortify_luck_q",
+    "value":80,
+    "model":"m\\Misc_Potion_Quality_01.nif",
+    "name":"Quality Potion of Fortify Luck",
+    "autoCalc":0
+  },
+  "p_cure_paralyzation_s":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_fresh_01.tga",
+    "baseId":"p_cure_paralyzation_s",
+    "value":20,
+    "model":"m\\Misc_Potion_Fresh_01.nif",
+    "name":"Potion of Cure Paralyzation",
+    "autoCalc":0
+  },
+  "p_invisibility_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_invisibility_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Potion of Invisibility",
+    "autoCalc":0
+  },
+  "p_frost_resistance_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_frost_resistance_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Frost Resistance",
+    "autoCalc":0
+  },
+  "p_fortify_strength_c":{
+    "script":"",
+    "weight":1,
+    "icon":"m\\Tx_potion_cheap_01.tga",
+    "baseId":"p_fortify_strength_c",
+    "value":15,
+    "model":"m\\Misc_Potion_Cheap_01.nif",
+    "name":"Cheap Fortify Strength",
+    "autoCalc":0
+  },
+  "p_spell_absorption_e":{
+    "script":"",
+    "weight":0.25,
+    "icon":"m\\Tx_potion_exclusive_01.tga",
+    "baseId":"p_spell_absorption_e",
+    "value":175,
+    "model":"m\\Misc_Potion_Exclusive_01.nif",
+    "name":"Exclusive Spell Absorption",
+    "autoCalc":0
+  }
+}
