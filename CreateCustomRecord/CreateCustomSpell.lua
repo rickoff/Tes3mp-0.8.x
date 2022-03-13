@@ -34,7 +34,7 @@ CreateCustomSpell.OnServerInit = function(eventStatus)
 		  flags = slot.flags,
 		  effects = {}
 		}
-		for x, data in pairs(slot.enchant) do
+		for x, data in pairs(slot.effects) do
 			local tableEnchant = {}
 			tableEnchant.id = data.id
 			tableEnchant.attribute = data.attribute
