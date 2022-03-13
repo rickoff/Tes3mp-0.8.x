@@ -11,7 +11,7 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 
 - DragonDoor : creatures and hostile npc follow players through doors
 
-- TrueSurvive : Drink, Eat, Sleep
+- TrueSurvive : Drink, Eat, Sleep, Wet and Frozen depending on the weather
 
 - DecorateScript : Move objects dynamically in space
 
