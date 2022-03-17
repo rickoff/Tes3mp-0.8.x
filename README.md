@@ -27,4 +27,4 @@ Rickoff Discord : https://discord.gg/KgqkCGD
 
 - PreventDamage : Enter /pvp to enable or disable damage prevention from other players
 
-- CreateCustomRecord : Modify records Morrowind, Bloodmoon, Tribunal at your convenience(Weapons, Armors, Spells, Activators, Potions, Apparatus, Bodyparts, Books)
+- CreateCustomRecord : Modify records Morrowind, Bloodmoon, Tribunal at your convenience(Weapons, Armors, Spells, Activators, Potions, Apparatus, Bodyparts, Books, Clothings)
