@@ -8,7 +8,7 @@ Save the file as DataClothing.json inside your server/data/custom/DataBase folde
 Edits to customScripts.lua add : CreateCustomClothing = require("custom.CreateCustomClothing")
 ---------------------------
 INSTRUCTIONS:
-to modify a value of an book such as name, modify the target in the file DataClothing.json
+to modify a value of an cloth such as name, modify the target in the file DataClothing.json
 ]]
 
 ---------------
