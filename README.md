@@ -7,13 +7,15 @@ Tes3mp Discord : https://discord.gg/rUH8Zus
 
 OpenMw Discord : https://discord.gg/KHmdcfY
 
-Rickoff Discord : https://discord.gg/KgqkCGD
+Rickoff Discord : https://discord.gg/PxZwczN
 
 - DragonDoor : creatures and hostile npc follow players through doors
 
 - TrueSurvive : Drink, Eat, Sleep, Wet and Frozen depending on the weather
 
 - DecorateScript : Move objects dynamically in space
+
+- CustomBook : Create personalized books and scrolls
 
 - TeamGroup : Create a group, invite players, teleport to members, group message, sync journal, allied
 
