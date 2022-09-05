@@ -1,24 +1,29 @@
 --[[
-Version: 0.4 for 0.8 rewrite by Rickoff original script by Jakob
-Install:
-Put this file in server/scripts/custom/
-Put [ require("custom.CustomBook") ] in customScripts.lua
-	
-Commands:
-    /book: Help menu
-    /book title <text>: Set the Name of the book
-    /book addtext <text>: Add text to the book
-    /book settext <text>: Set the text in the book (will remove all previus text)
-    /book listsyles: lists all the styles
-    /book setstyle: sets the style the book is going to use
-    /book done: Creates the book
-    /book clear: Deletes the book
-	/booking: gui menu
-Good to know:
-    You can use "/book done" several times as long at you dont use "/book clear" to make several copies of your book
+CustomBook
+tes3mp 0.8.0
+Version 0.4
+Rewrite by Rickoff original script by Jakob
+---------------------------
+DESCRIPTION :
+/book: Help menu
+/book title <text>: Set the Name of the book
+/book addtext <text>: Add text to the book
+/book settext <text>: Set the text in the book (will remove all previus text)
+/book listsyles: lists all the styles
+/book setstyle: sets the style the book is going to use
+/book done: Creates the book
+/book clear: Deletes the book
+/booking: gui menu
+You can use "/book done" several times as long at you dont use "/book clear" to make several copies of your book
+---------------------------
+INSTALLATION:
+Save the file as CustomBook.lua inside your server/scripts/custom folder.
+Edits to customScripts.lua
+CustomBook = require("custom.CustomBook")
+---------------------------
 ]]
+
 local config = {}
- 
 config.MainGUI = 999363
 config.EditTitleGUI = 999364
 config.EditTextGUI = 99965
@@ -111,9 +116,7 @@ function CustomBook.startBook(name)
 end
 
 function CustomBook.createBook(pid)
-    --print("create book start")
     local name = Players[pid].name:lower()
-    --Checks if players have the required Item(s)
 	if inventoryHelper.containsItem(Players[pid].data.inventory,"sc_paper plain") then
 		inventoryHelper.removeItem(Players[pid].data.inventory,"sc_paper plain",1)
         msg(pid, color.Green .. trad.wrote)
@@ -124,7 +127,6 @@ function CustomBook.createBook(pid)
         msg(pid, color.Red .. trad.needPaper)
 		return
 	end
-
     local model = CustomBook.bookStyles[CustomBook.currentBooks[name].type].model
     local icon = CustomBook.bookStyles[CustomBook.currentBooks[name].type].icon
     local scroll = CustomBook.bookStyles[CustomBook.currentBooks[name].type].scroll
@@ -135,11 +137,9 @@ function CustomBook.createBook(pid)
     book["model"] = model
     book["text"] = CustomBook.currentBooks[name].text
     book["value"] = 1
-    book["scrollState"] = scroll --false --true
+    book["scrollState"] = scroll
     book["name"] = CustomBook.nameSymbol .. CustomBook.currentBooks[name].title .. CustomBook.nameSymbol
-
     for id,n in pairs(RecordStores["book"].data.generatedRecords) do
-        --print(tostring(id), tostring(n), n.name, n.text)
         if n.name == book["name"] and n.text == book["text"] then
             msg(pid, trad.copyBook)
             inventoryHelper.addItem(Players[pid].data.inventory, id, 1)
@@ -150,7 +150,6 @@ function CustomBook.createBook(pid)
             return
         end
     end
-
     local bookId = CustomBook.nuCreateBookRecord(pid, book)
     Players[pid]:AddLinkToRecord("book", bookId)
     inventoryHelper.addItem(Players[pid].data.inventory, bookId, 1)
@@ -178,11 +177,6 @@ function CustomBook.nuCreateBookRecord(pid, recordTable)
     return id
 end
 
--- ===========
---  MAIN MENU
--- ===========
--------------------------
-
 function CustomBook.onMainGui(pid)
     CustomBook.showMainGUI(pid)
 end
@@ -207,8 +201,7 @@ function CustomBook.showStylePrompt(pid)
     return tes3mp.InputDialog(pid, config.StyleGUI, trad.selectStyle, "")
 end
 
-function CustomBook.OnGUIAction(pid, idGui, data)
-   
+function CustomBook.OnGUIAction(pid, idGui, data)   
     if idGui == config.MainGUI then -- Main
         if tonumber(data) == 0 then --Titre
             CustomBook.showEditTitlePrompt(pid)
@@ -239,12 +232,10 @@ function CustomBook.OnGUIAction(pid, idGui, data)
 			menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)
             return true
         elseif tonumber(data) == 8 then -- fermer
-			--Do nothing
             return true			
         end
     elseif idGui == config.EditTitleGUI then
         if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing Selected
-            --Do nothing
             return true
         else
 			message = ("/book title " .. data)
@@ -253,7 +244,6 @@ function CustomBook.OnGUIAction(pid, idGui, data)
         end       
     elseif idGui == config.EditTextGUI then
         if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing Selected
-            --Do nothing
             return true
         else
 			message = ("/book addtext " .. data)
@@ -262,7 +252,6 @@ function CustomBook.OnGUIAction(pid, idGui, data)
         end       
     elseif idGui == config.ClearTextGUI then
         if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing Selected
-            --Do nothing
             return true
         else
 			message = ("/book settext " .. data)
@@ -271,7 +260,6 @@ function CustomBook.OnGUIAction(pid, idGui, data)
         end
     elseif idGui == config.StyleGUI then
         if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing Selected
-            --Do nothing
             return true
         else
 			message = ("/book setstyle " .. tonumber(data))
