@@ -62,7 +62,7 @@ local function ListMark(pid)
  
 		for x, slot in pairs(Players[pid].data.customVariables.markLocation) do	
 			if slot == options[i] then
-				listItem = slot.cell.." : "..math.floor(slot.posX).." ; "..math.floor(slot.posY).." ; "..math.floor(slot.posZ)
+				listItem = string.sub(slot.cell, 1, 25).." : "..math.floor(slot.posX).." ; "..math.floor(slot.posY).." ; "..math.floor(slot.posZ)
 				listItemChanged = true
 				break
 			else
