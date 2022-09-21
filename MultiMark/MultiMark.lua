@@ -1,7 +1,7 @@
 --[[
 MultiMark
 tes3mp 0.8.0
-script version 0.4
+script version 0.5
 ---------------------------
 DESCRIPTION :
 multi mark location with /mark and /recall command
@@ -9,14 +9,13 @@ OR USE DIRECTLY SPELL MARK AND RECALL
 ---------------------------
 INSTALLATION:
 Save the file as MultiMark.lua inside your server/scripts/custom folder.
-
 Edits to customScripts.lua add :
 MultiMark = require("custom.MultiMark")
 ---------------------------
-CONFIG :
+cfg :
 Change trad in your language for your server
-Change config MaxMark for config limite mark
-Change config GUI numbers for a unique numbers 
+Change cfg MaxMark for config limite mark
+Change cfg GUI numbers for a unique numbers 
 ]]
 
 ---------------------------
@@ -30,12 +29,14 @@ trad.ChoiceMark = color.Yellow.."Select an option"
 trad.ChoiceMarkOpt = "Recall;Remove"
 trad.AddNewMark = "New mark at\n"
 
-local config = {}
-config.MarkId = "mark"
-config.RecallId = "recall"
-config.MaxMark = 5
-config.MainGUI = 23101989
-config.ChoiceGUI = 23101990
+local cfg = {}
+cfg.MarkId = "mark"
+cfg.RecallId = "recall"
+cfg.MaxMark = 5
+cfg.costMark = 18
+cfg.costRecall = 18
+cfg.MainGUI = 21092022
+cfg.ChoiceGUI = 21092023
 
 local playerIndex = {}
 
@@ -48,7 +49,7 @@ end
 
 local function SelectChoice(pid, index)
 	playerIndex[GetName(pid)] = index
-	tes3mp.CustomMessageBox(pid, config.ChoiceGUI, trad.ChoiceMark, trad.ChoiceMarkOpt)	
+	tes3mp.CustomMessageBox(pid, cfg.ChoiceGUI, trad.ChoiceMark, trad.ChoiceMarkOpt)	
 end
 
 local function ListMark(pid)
@@ -83,7 +84,7 @@ local function ListMark(pid)
     end
 	
 	listItemChanged = false
-	tes3mp.ListBox(pid, config.MainGUI, trad.SelectMark..color.Default, list)	
+	tes3mp.ListBox(pid, cfg.MainGUI, trad.SelectMark..color.Default, list)	
 end
 
 local function CountMark(pid)
@@ -95,7 +96,7 @@ local function CountMark(pid)
 end
 
 local function AddMark(pid)
-	if CountMark(pid) < config.MaxMark then
+	if CountMark(pid) < cfg.MaxMark then
 		local tablePos = {}
 		tablePos.cell = tes3mp.GetCell(pid)
 		tablePos.posX = tes3mp.GetPosX(pid)
@@ -107,7 +108,7 @@ local function AddMark(pid)
 		tes3mp.MessageBox(pid, -1, trad.AddNewMark..color.Green..tablePos.cell.."\n"..color.White..math.floor(tablePos.posX).." ; "..math.floor(tablePos.posY).." ; "..math.floor(tablePos.posZ))
 		Players[pid]:QuicksaveToDrive()
 	else
-		tes3mp.MessageBox(pid, -1, trad.LimiteMark..color.Green..config.MaxMark)
+		tes3mp.MessageBox(pid, -1, trad.LimiteMark..color.Green..cfg.MaxMark)
 	end
 end
 
@@ -138,16 +139,60 @@ end
 ---------------------------
 local MultiMark = {}
 
-MultiMark.OnPlayerSpellsActive = function(eventStatus, pid)
+MultiMark.OnServerInit = function(eventStatus)
+
+	local recordStoreSpells = RecordStores["spell"]
+	local recordTable
+	
+	recordTable = {
+	  name = "Mark",
+	  subtype = 0,
+	  cost = cfg.costMark,
+	  flags = 1,
+	  effects = {{
+        attribute = -1,
+        area = 0,
+        duration = 0,
+        id = 61,
+        rangeType = 0,
+        skill = -1,
+        magnitudeMax = 0,
+        magnitudeMin = 0
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["mark"] = recordTable
+
+	recordTable = {
+	  name = "Recall",
+	  subtype = 0,
+	  cost = cfg.costRecall,
+	  flags = 1,
+	  effects = {{
+        attribute = -1,
+        area = 0,
+        duration = 0,
+        id = 61,
+        rangeType = 0,
+        skill = -1,
+        magnitudeMax = 0,
+        magnitudeMin = 0
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["recall"] = recordTable
+	
+	recordStoreSpells:Save()
+end
+
+MultiMark.OnPlayerSpellsActiveHandler = function(eventStatus, pid, playerPacket)
 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		for spellIndex = 0, tes3mp.GetSpellsActiveChangesSize(pid) - 1 do
-			local spellId = tes3mp.GetSpellsActiveId(pid, spellIndex)    
-			if spellId == config.MarkId then
+		local action = playerPacket.action
+		for spellId, spellInstances in pairs(playerPacket.spellsActive) do  
+			if spellId == cfg.MarkId and action == enumerations.spellbook.ADD then
 				AddMark(pid)
-				return customEventHooks.makeEventStatus(false, false)
-			elseif spellId == config.RecallId then
+				break
+			elseif spellId == cfg.RecallId and action == enumerations.spellbook.ADD then
 				ListMark(pid)
-				return customEventHooks.makeEventStatus(false, false)
+				break
 			end			
 		end
 	end
@@ -167,20 +212,20 @@ end
 
 MultiMark.OnGUIAction = function(pid, idGui, data)
  	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then  
-		if idGui == config.MainGUI then -- Main
+		if idGui == cfg.MainGUI then -- Main
 			if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing
 				return true
 			else   
 				SelectChoice(pid, tonumber(data)) --Select
 				return true
 			end
-		elseif idGui == config.ChoiceGUI then -- Choice
+		elseif idGui == cfg.ChoiceGUI then -- Choice
 			if tonumber(data) == 0 then --Recall
 				RecallPlayer(pid)
 				return true
 			elseif tonumber(data) == 1 then --Remove
 				RemoveMark(pid)
-				return true		
+				return ListMark(pid)		
 			end
 		end
 		
@@ -196,12 +241,13 @@ MultiMark.OnPlayerAuthentified = function(eventStatus, pid)
 	end
 end
 
-customEventHooks.registerValidator("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActive) --WAIT NEXT VERSION
+customEventHooks.registerHandler("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActiveHandler)
 customCommandHooks.registerCommand("mark", MultiMark.CommandAddMark)
 customCommandHooks.registerCommand("recall", MultiMark.CommandRecallMark)
 customEventHooks.registerHandler("OnPlayerAuthentified", MultiMark.OnPlayerAuthentified)
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
 	if MultiMark.OnGUIAction(pid, idGui, data) then return end	
 end)
+customEventHooks.registerHandler("OnServerInit", MultiMark.OnServerInit)
 
 return MultiMark
