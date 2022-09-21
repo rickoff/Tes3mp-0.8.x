@@ -8,7 +8,7 @@ Save the file as DataNpc.json inside your server/data/custom/DataBase folder.
 Edits to customScripts.lua add : CreateCustomNpc = require("custom.CreateCustomNpc")
 ---------------------------
 INSTRUCTIONS:
-to modify a value of an npc such as name, modify the target in the file DataCreature.json
+to modify a value of an npc such as name, modify the target in the file DataNpc.json
 only the values contained in recordTable can be modified
 ]]
 
