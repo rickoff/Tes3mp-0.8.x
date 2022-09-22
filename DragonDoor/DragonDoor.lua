@@ -1,6 +1,6 @@
 --[[
 DragonDoor
-tes3mp 0.8.0
+tes3mp 0.8.1
 ---------------------------
 DESCRIPTION :
 creatures and base hostile npc follow players through doors
@@ -10,7 +10,6 @@ Save the file as DragonDoor.lua inside your server/scripts/custom folder.
 Save the file as DoorData.json inside your server/data/custom/DragonDoor folder.
 Save the file as NpcData.json inside your server/data/custom/DragonDoor folder.
 Save the file as CreaData.json inside your server/data/custom/DragonDoor folder.
-
 Edits to customScripts.lua
 DragonDoor = require("custom.DragonDoor")
 ]]
@@ -22,6 +21,11 @@ local cfg = {}
 cfg.rad = 1000
 
 local DragonDoorTab = { player = {} }
+
+local listRejectedSpell = {}
+listRejectedSpell["recall"] = true
+listRejectedSpell["divine intervention"] = true
+listRejectedSpell["almsivi intervention"] = true
 
 local function GetName(pid)
 	return string.lower(Players[pid].accountName)
@@ -43,7 +47,7 @@ end
 local DragonDoor = {}
 
 DragonDoor.OnPlayerWarp = function(pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		local PlayerName = GetName(pid)	
 		if DragonDoorTab.player[PlayerName] then
 			DragonDoorTab.player[PlayerName] = nil
@@ -52,7 +56,7 @@ DragonDoor.OnPlayerWarp = function(pid)
 end
 
 DragonDoor.OnPlayerDeath = function(eventStatus, pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		local PlayerName = GetName(pid)	
 		if DragonDoorTab.player[PlayerName] then
 			DragonDoorTab.player[PlayerName] = nil
@@ -61,7 +65,7 @@ DragonDoor.OnPlayerDeath = function(eventStatus, pid)
 end
 
 DragonDoor.OnObjectActivate = function(eventStatus, pid, cellDescription, objects)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then	
+	if Players[pid] and Players[pid]:IsLoggedIn() then	
 		local ObjectRefid
 		local count = 0			
 		for _, object in pairs(objects) do
@@ -101,7 +105,7 @@ DragonDoor.OnObjectActivate = function(eventStatus, pid, cellDescription, object
 end
 
 DragonDoor.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		local PlayerName = GetName(pid)
 		local cellDescription = playerPacket.location.cell
 		if DragonDoorTab.player[PlayerName] 
@@ -137,6 +141,21 @@ DragonDoor.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previou
 	end
 end
 
+DragonDoor.OnPlayerSpellsActive = function(eventStatus, pid, playerPacket)
+	if Players[pid] and Players[pid]:IsLoggedIn() then
+		local action = playerPacket.action	
+		for spellId, spellInstances in pairs(playerPacket.spellsActive) do
+			if action == enumerations.spellbook.ADD then
+				if listRejectedSpell[string.lower(spellId)] then
+					DragonDoor.OnPlayerWarp(pid)
+					break
+				end	
+			end
+		end
+	end
+end
+
+customEventHooks.registerValidator("OnPlayerSpellsActive", DragonDoor.OnPlayerSpellsActive)
 customEventHooks.registerValidator("OnPlayerDeath", DragonDoor.OnPlayerDeath)
 customEventHooks.registerHandler("OnObjectActivate", DragonDoor.OnObjectActivate)
 customEventHooks.registerHandler("OnPlayerCellChange", DragonDoor.OnPlayerCellChange)
