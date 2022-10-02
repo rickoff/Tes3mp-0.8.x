@@ -256,7 +256,7 @@ local function onEnterPrompt(pid, data)
 				else
 					tes3mp.MessageBox(pid, -1, trad.nooption)		
 				end		
-			elseif mode == "retour" then
+			elseif mode == "close" then
 				object.location.posY = object.location.posY		
 				return
 			end
