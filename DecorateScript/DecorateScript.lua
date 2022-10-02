@@ -18,7 +18,7 @@ tableHelper.insertValueIfMissing(self.data.packets.scale, uniqueIndex)
 ------------
 -- CONFIG --
 ------------
-local config = {
+local cfg = {
 	MainId = 31360,
 	PromptId = 31361
 }
@@ -179,7 +179,7 @@ local function showPromptGUI(pid)
 
 	local message = "[" .. playerCurrentMode[GetName(pid)] .. trad.prompt
 	
-	tes3mp.InputDialog(pid, config.PromptId, message, "")
+	tes3mp.InputDialog(pid, cfg.PromptId, message, "")
 	
 end
 
@@ -201,7 +201,6 @@ local function onEnterPrompt(pid, data)
 			return false
 			
 		else
-			
 			if object.scale == nil then object.scale = 1 end	
 			
 			local scaling = object.scale 
@@ -315,7 +314,7 @@ DecorateScript.OnGUIAction = function(pid, idGui, data)
 	
 		local pname = GetName(pid)
 		
-		if idGui == config.MainId then
+		if idGui == cfg.MainId then
 			if tonumber(data) == 0 then --Move North
 				playerCurrentMode[pname] = trad.movn
 				showPromptGUI(pid)
@@ -382,7 +381,7 @@ DecorateScript.OnGUIAction = function(pid, idGui, data)
 			elseif tonumber(data) == 15 then --Close	
 				return true
 			end
-		elseif idGui == config.PromptId then
+		elseif idGui == cfg.PromptId then
 			if data ~= nil and data ~= "" and tonumber(data) then
 				onEnterPrompt(pid, data)
 			end
@@ -546,7 +545,7 @@ DecorateScript.showMainGUI = function(pid)
 				currentItem = object.refId .. " (" .. selected .. ")"
 			end		
 			local message = trad.opt1 .. currentItem
-			tes3mp.CustomMessageBox(pid, config.MainId, message, trad.opt2)
+			tes3mp.CustomMessageBox(pid, cfg.MainId, message, trad.opt2)
 			
 		end
 		
