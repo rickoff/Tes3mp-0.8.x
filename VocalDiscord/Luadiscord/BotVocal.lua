@@ -11,10 +11,10 @@ local channelAcc = config.channelAcc
 local vocalCat = config.vocalCat  
 local RoleEveryone = config.RoleEveryone 
 local channelSafe = config.channelSafe
+
 local guild 
+local tableChannel
 local LocationFile
-local tempTable = {}
-local startCheck = false
 
 local BotDiscord = {}
 
