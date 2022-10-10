@@ -17,7 +17,7 @@ Save the file as DataBaseBed.json inside your server/data/custom/TrueSurvive fol
 Edits to customScripts.lua add :
 TrueSurvive = require("custom.TrueSurvive")
 
-Edits to cfg.lua, add in cfg.menuHelperFiles :
+Edits to config.lua, add in config.menuHelperFiles :
 "MenuSurvive"
 ---------------------------
 INSTRUCTION:
