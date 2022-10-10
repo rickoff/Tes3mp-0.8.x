@@ -22,7 +22,11 @@
 	- config.channelAcc = "your id channel base"
 	- config.vocalCat = "your id categorie for created channels"
 	- config.RoleEveryone = "your id role everyone"
-	- config.channelSafe = {"your name channel vocal", "your name channel vocal", "your name channel vocal"...}
+	- config.channelSafe = {
+		your name channel vocal = true,
+		your name channel vocal = true,
+		your name channel vocal = true
+	}
 	- config.serverId = "your id server"
 * Execute start.bat located in server/lib/luadiscord (for windows) or command linux "luvit BotVocal.lua"
 * Connect to any voice channel of your discord with a nickname corresponding to your character name
