@@ -26,15 +26,14 @@ local function GetName(name)
 end
 
 local function GetRole(member)
-	local LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
+	
 	local RoleIg
-
-	for index, data in pairs(LocationFile.players) do
-		if tableHelper.containsValue(data, string.lower(member.name), true) then	
-			RoleIg = LocationFile.players[index].vocal
-		end
+	
+	local PlayerName = GetName(member.name)
+	
+	if LocationFile[PlayerName] then	
+		RoleIg = LocationFile[PlayerName].vocal
 	end
-	local tableRole = member.roles
 	
 	if member:hasRole(vocalRole) == false and RoleIg == 1 then
 		member:addRole(vocalRole)
@@ -42,83 +41,149 @@ local function GetRole(member)
 		member:removeRole(vocalRole)
 		member:setVoiceChannel(channelAcc)
 	end
+	
+end
+
+local function CheckDeletedChannel()	
+	
+	for number, channel in pairs(tableChannel) do	
+		
+		if not channelSafe[channel.name] and not tableHelper.containsValue(LocationFile, channel.name, true) then	
+			
+			channel:delete()
+			print("CHANNEL DELETE : "..channel.name)	
+			
+		end			
+	end
+	
 end
 
 local function CheckJsonChange()
-	local LocationFileCheck = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
 	
-	if LocationFile ~= LocationFileCheck and startCheck == false then
-		startCheck = true
+	if LocationFile.Timestamp ~= LocationFileCheck.Timestamp then
+	
 		LocationFile = LocationFileCheck
-		BotDiscord.CheckChannel()
-	else
-		timer.sleep(1000)
-		CheckJsonChange()
-	end
-end
+		
+		for PlayerName, PlayerData in pairs(LocationFile) do
+		
+			if type(PlayerData) == "number" then
+			
+			else
+				BotDiscord.CheckChannel(PlayerName, PlayerData)
+			end
 
-BotDiscord.CheckChannel = function()	
-	tempTable = {}	
-	local tableChannel = guild.voiceChannels	
-	for number, channel in pairs(tableChannel) do
-		tempTable[channel.name] = true
-	end		
-	if guild ~= nil and tableChannel ~= nil and tempTable ~= nil then
-		for number, channel in pairs(tableChannel) do
-			local ChannelName = channel.name
-			local tableMembers = channel.connectedMembers
-			if tableMembers ~= nil then
-				for number, member in pairs(tableMembers) do
-					local MemberName = GetName(member.name)
-					GetRole(member)
-					if member:hasRole(vocalRole) == true and tableHelper.containsValue(LocationFile, string.lower(member.name), true) then
-						for index, data in pairs(LocationFile.players) do
-							local JsonName = GetName(LocationFile.players[index].name)
-							if JsonName == MemberName then
-								local Cell = LocationFile.players[index].cell
-								if ChannelName ~= Cell then					
-									if not tempTable[Cell] then
-										local NewChannel = guild:createVoiceChannel(Cell)
-										NewChannel:setCategory(vocalCat)
-										local Rrole = guild:getRole(RoleEveryone)
-										local Perm = NewChannel:getPermissionOverwriteFor(Rrole)
-										Perm:denyPermissions(0x00100000)									
-										member:setVoiceChannel(NewChannel)
-										tempTable[Cell] = true
-										print("CHANNEL CREATE")
-										break
-									else
-										local NextChannel
-										for number, channel in pairs(tableChannel) do
-											if channel.name == Cell then
-												NextChannel = channel
-											end
-										end
-										member:setVoiceChannel(NextChannel)
-										print("PLAYER MOVED")
-										break
-									end
-								end
-							end
-						end
-					end
-				end
-			end
-			if not tableHelper.containsValue(channelSafe, ChannelName, true) then
-				if not tableHelper.containsValue(LocationFile, ChannelName, true) then
-					channel:delete()
-					print("CHANNEL DELETED")
-					break
-				end
-			end
 		end
+		
+		CheckDeletedChannel()	
+		
+		CheckJsonChange()
+		
+	else
+	
+		timer.sleep(100)
+		
+		CheckJsonChange()
+		
 	end
-	startCheck = false
-	timer.sleep(1000)
-	CheckJsonChange()
 end
 
-client:on("ready", function() --EVENT START
+local function CheckExistChannel(CellDescription)
+	
+	for number, channel in pairs(tableChannel) do
+	
+		if channel.name == CellDescription then
+	
+			return channel
+			
+		end
+	
+	end
+	
+	return false
+
+end
+
+local function CheckConnectedMember(PlayerName, CellDescription)
+	
+	for number, channel in pairs(tableChannel) do
+
+		local tableMembers = channel.connectedMembers
+		
+		for number, member in pairs(tableMembers) do
+		
+			GetRole(member)
+			
+			if string.lower(member.name) == PlayerName and channel.name ~= CellDescription then
+			
+				return member
+				
+			end
+			
+		end
+		
+	end
+	
+	return false
+
+end
+
+local function ChangePlayerChannel(Member, CellDescription, ChannelId)
+
+	if ChannelId then
+	
+		Member:setVoiceChannel(ChannelId)	
+		
+	else
+	
+		local NewChannel = guild:createVoiceChannel(CellDescription)
+
+		NewChannel:setCategory(vocalCat)
+
+		local Rrole = guild:getRole(RoleEveryone)
+
+		local Perm = NewChannel:getPermissionOverwriteFor(Rrole)
+		
+		Perm:denyPermissions(0x00100000)	
+		
+		Member:setVoiceChannel(NewChannel)
+		
+		print("CHANNEL CREATE : "..CellDescription.." FOR : "..Member.name)
+		
+	end
+	
+	print("PLAYER MOVE : "..Member.name.." IN : "..CellDescription)
+	
+end
+
+BotDiscord.CheckChannel = function(PlayerName, PlayerData)
+
+	guild = client:getGuild(config.serverId) 
+
+	tableChannel = guild.voiceChannels	
+	
+	local CellDescription = PlayerData.location.cell	
+	
+	local Channel = CheckExistChannel(CellDescription)
+	
+	local Member = CheckConnectedMember(PlayerName, CellDescription)
+	
+	if Member and Member:hasRole(vocalRole) then
+	
+		if Channel then
+
+			ChangePlayerChannel(Member, CellDescription, Channel.id)
+			
+		elseif not Channel then
+		
+			ChangePlayerChannel(Member, CellDescription, false)	
+			
+		end
+		
+	end
+	
+end
+
+client:on("ready", function()
 	print("Logged in as " .. client.user.username)
 	guild = client:getGuild(config.serverId) 
 	client:setGame("Instancied Vocal")
@@ -127,7 +192,7 @@ client:on("ready", function() --EVENT START
 	CheckJsonChange()
 end)
 
-client:on("shardResumed", function() --EVENT RESUMED
+client:on("shardResumed", function()
 	print("Logged resumed " .. client.user.username)
 	guild = client:getGuild(config.serverId) 
 	client:setGame("Instancied Vocal")
@@ -137,37 +202,56 @@ client:on("shardResumed", function() --EVENT RESUMED
 end)
 
 client:on("voiceConnect", function(member)
+
 	local MemberName = GetName(member.name)
+	
 	local DiscordFile = jsonInterface.load(pathCustom.."/VocalDiscord/userdiscord.json")
+	
 	if not DiscordFile then 
-		local tabTemp = {players = {}}
+	
+		local tabTemp = {}
+		
 		jsonInterface.quicksave(pathCustom.."/VocalDiscord/userdiscord.json", tabTemp)
+		
 		DiscordFile = jsonInterface.load(pathCustom.."/VocalDiscord/userdiscord.json")
+		
 	end
-	if not tableHelper.containsValue(DiscordFile.players, MemberName, true) then
-		table.insert(DiscordFile.players, MemberName)
+	
+	if not DiscordFile[MemberName] then
+	
+		DiscordFile[MemberName] = true
+		
 		jsonInterface.quicksave(pathCustom.."/VocalDiscord/userdiscord.json", DiscordFile)
+		
 	end
+	
 end)
 
 client:on("voiceDisconnect", function(member)
+
 	local MemberName = GetName(member.name)	
-	local Index
+	
 	local DiscordFile = jsonInterface.load(pathCustom.."/VocalDiscord/userdiscord.json")
+	
 	if not DiscordFile then 
-		local tabTemp = {players = {}}
+	
+		local tabTemp = {}
+		
 		jsonInterface.quicksave(pathCustom.."/VocalDiscord/userdiscord.json", tabTemp)
+		
 		DiscordFile = jsonInterface.load(pathCustom.."/VocalDiscord/userdiscord.json")
+		
 	end	
-	for pos, name in pairs(DiscordFile.players) do
-		if name == MemberName then
-			Index = pos
-		end
-	end
-	if Index ~= nil then
-		table.remove(DiscordFile.players, Index)	
+	
+
+	if DiscordFile[MemberName] then
+	
+		DiscordFile[MemberName] = nil
+
 		jsonInterface.quicksave(pathCustom.."/VocalDiscord/userdiscord.json", DiscordFile)
+		
 	end
+	
 end)
 
 client:run("Bot "..config.botToken)
