@@ -172,9 +172,14 @@ VocalDiscord.OnPlayerDisconnect = function(eventStatus, pid)
 
 	if Players[pid] and Players[pid]:IsLoggedIn() then
 	
-		Players[pid].data.customVariables.VocalDiscord.vocal = 0
+		if Players[pid].data.customVariables.VocalDiscord then
 		
-		SavePlayerLocation(pid, true)	
+			Players[pid].data.customVariables.VocalDiscord.vocal = 0
+			
+			SavePlayerLocation(pid, true)	
+			
+			CountPlayersOnline(true)
+		end
 		
 	end
 	
