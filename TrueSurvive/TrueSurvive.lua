@@ -1,6 +1,6 @@
 --[[
 TrueSurvive
-tes3mp 0.8.0
+tes3mp 0.8.1
 ---------------------------
 DESCRIPTION :
 Survival script
@@ -14,18 +14,18 @@ Save the file as DataBaseAlch.json inside your server/data/custom/TrueSurvive fo
 Save the file as DataBaseIngr.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseBed.json inside your server/data/custom/TrueSurvive folder.
 
-Edits to customScripts.lua add
+Edits to customScripts.lua add :
 TrueSurvive = require("custom.TrueSurvive")
 
-Edits to config.lua in config.menuHelperFiles
+Edits to cfg.lua, add in cfg.menuHelperFiles :
 "MenuSurvive"
 ---------------------------
 INSTRUCTION:
 the consumption of the ingredients by the inventory will give the normal effects of the basic game, to eat, drink or sleep you must activate the objects placed.
-timers are not taken into account for staff players, change config.staff to false to undo this.
-change config.sleepTime;config.eatTime;config.drinkTime;config.rainMax;config.coldMax to increase the countdown before the needs.
-change config.eatRange;config.drinkRange to increase the gain to each ingredient consumed.
-change config.debuffSleep;config.debuffEat;config.debuffDrink;config.debuffWet;config.debuffFrozen to modify the value of the penalty
+timers are not taken into account for staff players, change cfg.staff to false to undo this.
+change cfg.sleepTime;cfg.eatTime;cfg.drinkTime;cfg.rainMax;cfg.coldMax to increase the countdown before the needs.
+change cfg.eatRange;cfg.drinkRange to increase the gain to each ingredient consumed.
+change cfg.debuffSleep;cfg.debuffEat;cfg.debuffDrink;cfg.debuffWet;cfg.debuffFrozen to modify the value of the penalty
 change the text in SurviveMessage to translate it or modify it according to your wishes
 the number is in seconds, the script is based on the world clock
 ---------------------------
@@ -34,33 +34,35 @@ the number is in seconds, the script is based on the world clock
 ------------
 -- CONFIG --
 ------------
-local config = {}
-config.sleepTime = 1200 
-config.eatTime = 600 
-config.drinkTime = 600
-config.eatRange = 60
-config.drinkRange = 60
-config.rainMax = 1000
-config.coldMax = 1000
-config.debuffSleep = 200
-config.debuffEat = 200
-config.debuffDrink = 200
-config.debuffWet = 200
-config.debuffFrozen = 200
-config.staff = true
+local cfg = {
+	sleepTime = 1200,
+	eatTime = 600,
+	drinkTime = 600,
+	eatRange = 60,
+	drinkRange = 60,
+	rainMax = 1000,
+	coldMax = 1000,
+	debuffSleep = 200,
+	debuffEat = 200,
+	debuffDrink = 200,
+	debuffWet = 200,
+	debuffFrozen = 200,
+	staff = true
+}
 
 -------------
 -- MESSAGE --
 -------------
-local SurviveMessage = {}
-SurviveMessage.Fatigue = color.White.."You're "..color.Red.."tired !"..color.White.." you should "..color.Green.."sleep !"
-SurviveMessage.Hunger = color.White.."You are "..color.Red.."hungry !"..color.White.." you should "..color.Yellow.."eat !"
-SurviveMessage.Thirsth = color.White.."You are "..color.Red.."thirsty !"..color.White.." you should "..color.Cyan.."drink !"
-SurviveMessage.Wet = color.White.."You are "..color.Red.."wet !"..color.White.." you should "..color.Brown.."to dry off !"
-SurviveMessage.Freeze = color.White.."You are "..color.Red.."frozen !"..color.White.." you should "..color.Orange.."warm up !"
-SurviveMessage.Sleep = color.White.."You "..color.Green.."rest ."
-SurviveMessage.Eat = color.White.."You "..color.Yellow.."eat ."
-SurviveMessage.Drink = color.White.."You "..color.Cyan.."drink ."
+local SurviveMessage = {
+	Fatigue = color.White.."You're "..color.Red.."tired !"..color.White.." you should "..color.Green.."sleep !",
+	Hunger = color.White.."You are "..color.Red.."hungry !"..color.White.." you should "..color.Yellow.."eat !",
+	Thirsth = color.White.."You are "..color.Red.."thirsty !"..color.White.." you should "..color.Cyan.."drink !",
+	Wet = color.White.."You are "..color.Red.."wet !"..color.White.." you should "..color.Brown.."to dry off !",
+	Freeze = color.White.."You are "..color.Red.."frozen !"..color.White.." you should "..color.Orange.."warm up !",
+	Sleep = color.White.."You "..color.Green.."rest .",
+	Eat = color.White.."You "..color.Yellow.."eat .",
+	Drink = color.White.."You "..color.Cyan.."drink ."
+}
 
 ---------------
 -- JSON-DATA --
@@ -79,42 +81,34 @@ local function CheckCustomVariable(pid)
 		Players[pid].data.customVariables.TrueSurvive = {
 			SleepTime = 0,
 			SleepWorld = TimeWorld,
-			SleepTimeMax = config.sleepTime,
+			SleepTimeMax = cfg.sleepTime,
 			HungerTime = 0,
 			HungerWorld = TimeWorld,
-			HungerTimeMax = config.eatTime,
+			HungerTimeMax = cfg.eatTime,
 			ThirsthTime = 0,
 			ThirstWorld = TimeWorld,
-			ThirsthTimeMax = config.drinkTime,
+			ThirsthTimeMax = cfg.drinkTime,
 			Rain = 0,
-			RainMax = config.rainMax,
+			RainMax = cfg.rainMax,
 			Cold = 0,
-			ColdMax = config.coldMax
+			ColdMax = cfg.coldMax
 		}
 		customVariable = Players[pid].data.customVariables.TrueSurvive
 	else
-		if customVariable.HungerTimeMax ~= config.eatTime then
-			customVariable.HungerTimeMax = config.eatTime
+		if customVariable.HungerTimeMax ~= cfg.eatTime then
+			customVariable.HungerTimeMax = cfg.eatTime
 		end
-		if customVariable.ThirsthTimeMax ~= config.drinkTime then
-			customVariable.ThirsthTimeMax = config.drinkTime
+		if customVariable.ThirsthTimeMax ~= cfg.drinkTime then
+			customVariable.ThirsthTimeMax = cfg.drinkTime
 		end
-		if customVariable.SleepTimeMax ~= config.sleepTime then
-			customVariable.SleepTimeMax = config.sleepTime
-		end
-		if not customVariable.Rain then
-			customVariable.Rain = 0
-			customVariable.RainMax = config.rainMax
-		end
-		if not customVariable.Cold then
-			customVariable.Cold = 0
-			customVariable.ColdMax = config.coldMax
+		if customVariable.SleepTimeMax ~= cfg.sleepTime then
+			customVariable.SleepTimeMax = cfg.sleepTime
 		end			
-		if customVariable.RainMax ~= config.rainMax then
-			customVariable.RainMax = config.rainMax
+		if customVariable.RainMax ~= cfg.rainMax then
+			customVariable.RainMax = cfg.rainMax
 		end			
-		if customVariable.ColdMax ~= config.coldMax then
-			customVariable.ColdMax = config.coldMax
+		if customVariable.ColdMax ~= cfg.coldMax then
+			customVariable.ColdMax = cfg.coldMax
 		end		
 	end
 	return customVariable
@@ -208,8 +202,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = config.debuffDrink,
-		  magnitudeMin = config.debuffDrink
+		  magnitudeMax = cfg.debuffDrink,
+		  magnitudeMin = cfg.debuffDrink
 		}}
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_thirsth"] = recordTable
@@ -226,8 +220,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = config.debuffEat,
-		  magnitudeMin = config.debuffEat
+		  magnitudeMax = cfg.debuffEat,
+		  magnitudeMin = cfg.debuffEat
 		},{
 		  id = 17,
 		  attribute = 2,
@@ -235,8 +229,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = config.debuffEat,
-		  magnitudeMin = config.debuffEat
+		  magnitudeMax = cfg.debuffEat,
+		  magnitudeMin = cfg.debuffEat
 		},{
 		  id = 17,
 		  attribute = 3,
@@ -244,8 +238,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = config.debuffEat,
-		  magnitudeMin = config.debuffEat
+		  magnitudeMax = cfg.debuffEat,
+		  magnitudeMin = cfg.debuffEat
 		}}
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_hunger"] = recordTable
@@ -262,8 +256,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = config.debuffSleep,
-		  magnitudeMin = config.debuffSleep
+		  magnitudeMax = cfg.debuffSleep,
+		  magnitudeMin = cfg.debuffSleep
 		}}
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_fatigue"] = recordTable
@@ -280,8 +274,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = config.debuffWet,
-		  magnitudeMin = config.debuffWet
+		  magnitudeMax = cfg.debuffWet,
+		  magnitudeMin = cfg.debuffWet
 		}}
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_wet"] = recordTable
@@ -298,8 +292,8 @@ TrueSurvive.OnServerInit = function(eventStatus)
 		  rangeType = 0,
 		  area = 0,
 		  duration = -1,
-		  magnitudeMax = config.debuffFrozen,
-		  magnitudeMin = config.debuffFrozen
+		  magnitudeMax = cfg.debuffFrozen,
+		  magnitudeMin = cfg.debuffFrozen
 		}}
 	}
 	recordStoreSpells.data.permanentRecords["true_survive_freeze"] = recordTable
@@ -327,7 +321,7 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		tableSpellPlayer[spellId] = true
 	end
 	
-	if config.staff == true and Players[pid]:IsServerStaff() then
+	if cfg.staff == true and Players[pid]:IsServerStaff() then
 		customVariable.SleepTime = 0
 		customVariable.HungerTime = 0
 		customVariable.ThirsthTime = 0
@@ -510,7 +504,7 @@ TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
 		if LoadedCells[cellDescription].data.objectData[uniqueIndex] and LoadedCells[cellDescription].data.objectData[uniqueIndex].count then
 			countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count
 		end
-		local totalCount = config.eatRange * countObject
+		local totalCount = cfg.eatRange * countObject
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_hunger", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_digestion", false)
 		if os.time() - (Players[pid].data.customVariables.TrueSurvive.HungerWorld + totalCount) <= 0 then 
@@ -529,7 +523,7 @@ TrueSurvive.OnDrinkObject = function(pid, cellDescription, uniqueIndex)
 		if LoadedCells[cellDescription].data.objectData[uniqueIndex] and LoadedCells[cellDescription].data.objectData[uniqueIndex].count then
 			countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count
 		end
-		local totalCount = config.drinkRange * countObject	
+		local totalCount = cfg.drinkRange * countObject	
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_thirsth", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_hydrated", false)
 		if os.time() - (Players[pid].data.customVariables.TrueSurvive.ThirstWorld + totalCount) <= 0 then 
