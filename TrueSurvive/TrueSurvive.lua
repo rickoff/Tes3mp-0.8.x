@@ -9,16 +9,12 @@ Survival script
 INSTALLATION:
 
 Save the file as TrueSurvive.lua inside your server/scripts/custom folder.
-Save the file as MenuSurvive.lua inside your server/scripts/menu folder.
 Save the file as DataBaseAlch.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseIngr.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseBed.json inside your server/data/custom/TrueSurvive folder.
 
 Edits to customScripts.lua add :
 TrueSurvive = require("custom.TrueSurvive")
-
-Edits to config.lua, add in config.menuHelperFiles :
-"MenuSurvive"
 ---------------------------
 INSTRUCTION:
 the consumption of the ingredients by the inventory will give the normal effects of the basic game, to eat, drink or sleep you must activate the objects placed.
@@ -48,6 +44,15 @@ local cfg = {
 	debuffWet = 200,
 	debuffFrozen = 200,
 	staff = true
+}
+
+---------
+-- GUI --
+---------
+local refGui = {
+	drinkMenu = 10102022,
+	eatMenu = 10102023,
+	sleepMenu = 10102024
 }
 
 -------------
@@ -103,6 +108,14 @@ local function CheckCustomVariable(pid)
 		end
 		if customVariable.SleepTimeMax ~= cfg.sleepTime then
 			customVariable.SleepTimeMax = cfg.sleepTime
+		end
+		if not customVariable.Rain then
+			customVariable.Rain = 0
+			customVariable.RainMax = cfg.rainMax
+		end
+		if not customVariable.Cold then
+			customVariable.Cold = 0
+			customVariable.ColdMax = cfg.coldMax
 		end			
 		if customVariable.RainMax ~= cfg.rainMax then
 			customVariable.RainMax = cfg.rainMax
@@ -303,7 +316,7 @@ TrueSurvive.OnServerInit = function(eventStatus)
 end
 
 TrueSurvive.OnPlayerAuthentified = function(eventStatus, pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		local customVariable = CheckCustomVariable(pid)
 		customVariable.SleepWorld = os.time() - customVariable.SleepTime
 		customVariable.HungerWorld = os.time() - customVariable.HungerTime
@@ -369,21 +382,11 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		if tableSpellPlayer["true_survive_rests"] then
 			logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_rests", false)
 		end	
-		if tableSpellPlayer["true_survive_fatigue"] then		
-			if Players[pid].data.character.gender == 1 then
-				TrueSurvive.PlaySound(pid, "NOM_sleep_m")
-			elseif Players[pid].data.character.gender == 0 then
-				TrueSurvive.PlaySound(pid, "NOM_sleep_f")
-			end				
+		if tableSpellPlayer["true_survive_fatigue"] then			
 			logicHandler.RunConsoleCommandOnPlayer(pid, "FadeOut, 2", false)
 			logicHandler.RunConsoleCommandOnPlayer(pid, "Fadein, 2", false)			
 		else
 			tes3mp.MessageBox(pid, -1, SurviveMessage.Fatigue)
-			if Players[pid].data.character.gender == 1 then
-				TrueSurvive.PlaySound(pid, "NOM_sleep_m")
-			elseif Players[pid].data.character.gender == 0 then
-				TrueSurvive.PlaySound(pid, "NOM_sleep_f")
-			end
 			logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_fatigue", false)
 			logicHandler.RunConsoleCommandOnPlayer(pid, "FadeOut, 2", false)
 			logicHandler.RunConsoleCommandOnPlayer(pid, "Fadein, 2", false)			
@@ -400,12 +403,7 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		end	
 		if not tableSpellPlayer["true_survive_hunger"] then	
 			tes3mp.MessageBox(pid, -1, SurviveMessage.Hunger)					
-			logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_hunger", false)
-			if Players[pid].data.character.gender == 1 then
-				TrueSurvive.PlaySound(pid, "fv_thirst_m")
-			elseif Players[pid].data.character.gender == 0 then
-				TrueSurvive.PlaySound(pid, "fv_thirst_f")
-			end						
+			logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_hunger", false)					
 		end			
 	elseif customVariable.HungerTime >= (customVariable.HungerTimeMax / 2) and customVariable.HungerTime < customVariable.HungerTimeMax then
 		if tableSpellPlayer["true_survive_digestion"] then	
@@ -419,12 +417,7 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		end			
 		if not tableSpellPlayer["true_survive_thirsth"] then									
 			tes3mp.MessageBox(pid, -1, SurviveMessage.Thirsth)
-			logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_thirsth", false)
-			if Players[pid].data.character.gender == 1 then
-				TrueSurvive.PlaySound(pid, "fv_thirst_m")
-			elseif Players[pid].data.character.gender == 0 then
-				TrueSurvive.PlaySound(pid, "fv_thirst_f")
-			end						
+			logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_thirsth", false)					
 		end		
 	elseif customVariable.ThirsthTime >= (customVariable.ThirsthTimeMax / 2) and customVariable.ThirsthTime < customVariable.ThirsthTimeMax then
 		if tableSpellPlayer["true_survive_hydrated"] then
@@ -459,7 +452,7 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 end
 
 TrueSurvive.OnActivatedObject = function(eventStatus, pid, cellDescription, objects)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		local ObjectIndex
 		local ObjectRefid
 		for _, object in pairs(objects) do
@@ -472,20 +465,17 @@ TrueSurvive.OnActivatedObject = function(eventStatus, pid, cellDescription, obje
 			Players[pid].data.targetCellDescription = cellDescription
 			
 			if DiningData[string.lower(ObjectRefid)] then
-				Players[pid].currentCustomMenu = "survive hunger"
-				menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)					
+				TrueSurvive.ShowEatMenu(pid)		
 				return customEventHooks.makeEventStatus(false, false) 
 			end				
 			
 			if DrinkingData[string.lower(ObjectRefid)] then
-				Players[pid].currentCustomMenu = "survive drink"
-				menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
+				TrueSurvive.ShowDrinkMenu(pid)
 				return customEventHooks.makeEventStatus(false, false) 
 			end		
 			
 			if SleepingData[string.lower(ObjectRefid)]then
-				Players[pid].currentCustomMenu = "survive sleep"
-				menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
+				TrueSurvive.ShowSleepMenu(pid)
 				return customEventHooks.makeEventStatus(false, false) 
 			end			
 		end
@@ -493,13 +483,13 @@ TrueSurvive.OnActivatedObject = function(eventStatus, pid, cellDescription, obje
 end
 
 TrueSurvive.OnPlayerEvent = function(eventStatus, pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		TrueSurvive.OnCheckTimePlayers(pid)
 	end
 end
 
 TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		local countObject = 1
 		if LoadedCells[cellDescription].data.objectData[uniqueIndex] and LoadedCells[cellDescription].data.objectData[uniqueIndex].count then
 			countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count
@@ -518,7 +508,7 @@ TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
 end
 
 TrueSurvive.OnDrinkObject = function(pid, cellDescription, uniqueIndex)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		local countObject = 1
 		if LoadedCells[cellDescription].data.objectData[uniqueIndex] and LoadedCells[cellDescription].data.objectData[uniqueIndex].count then
 			countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count
@@ -537,7 +527,7 @@ TrueSurvive.OnDrinkObject = function(pid, cellDescription, uniqueIndex)
 end
 
 TrueSurvive.OnSleepObject = function(pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_fatigue", false)	
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_rests", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "FadeOut, 2", false)
@@ -549,26 +539,19 @@ TrueSurvive.OnSleepObject = function(pid)
 end
 
 TrueSurvive.OnSleepObjectVanilla = function(pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then		
+	if Players[pid] and Players[pid]:IsLoggedIn() then		
 		logicHandler.RunConsoleCommandOnPlayer(pid, "ShowRestMenu", false)
 	end
 end
 
 TrueSurvive.PlaySound = function(pid, sound)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		logicHandler.RunConsoleCommandOnPlayer(pid, "playsound "..'"'..sound..'"')
 	end
 end
 
-TrueSurvive.MainMenu = function(pid)
-    if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		Players[pid].currentCustomMenu = "survive menu"
-		menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
-	end
-end
-
 TrueSurvive.OnPlayerDeath = function(eventStatus, pid)
-    if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+    if Players[pid] and Players[pid]:IsLoggedIn() then
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_fatigue", false)	
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_thirsth", false)
 		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_hunger", false)
@@ -580,15 +563,131 @@ TrueSurvive.OnPlayerDeath = function(eventStatus, pid)
 end
 
 TrueSurvive.CleanCellObject = function(pid, cellDescription, uniqueIndex, forEveryone)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
+	if Players[pid] and Players[pid]:IsLoggedIn() then
 		CleanCellObject(pid, cellDescription, uniqueIndex, forEveryone)
 	end
 end
 
+TrueSurvive.ShowMainMenu = function(pid)
+	if Players[pid] and Players[pid]:IsLoggedIn() then		
+		local customVariables = CheckCustomVariable(pid)
+		local message = (color.Orange .. "SURVIVE MENU\n"..
+			color.Yellow .. "\nHunger : " .. color.White..
+			customVariables.HungerTime.. 
+			color.Red .. " >= "..
+			customVariables.HungerTimeMax..
+			"\n"..
+			color.Yellow .. "\nThirst : " .. color.White..
+			customVariables.ThirsthTime.. 
+			color.Red .. " >= "..
+			customVariables.ThirsthTimeMax..
+			"\n"..
+			color.Yellow .. "\nSleep : " .. color.White..
+			customVariables.SleepTime..
+			color.Red .. " >= "..
+			customVariables.SleepTimeMax..
+			"\n"..
+			color.Yellow .. "\nWet : " .. color.White..
+			customVariables.Rain..
+			color.Red .. " >= "..
+			customVariables.RainMax..
+			"\n"..
+			color.Yellow .. "\nCold : " .. color.White..
+			customVariables.Cold..
+			color.Red .. " >= "..
+			customVariables.ColdMax..
+			"\n"			
+		)
+		tes3mp.CustomMessageBox(pid, -1, message, "Close")	
+	end
+end
+
+TrueSurvive.ShowEatMenu = function(pid)
+	if Players[pid] and Players[pid]:IsLoggedIn() then		
+		local customVariables = CheckCustomVariable(pid)
+		local message = (color.Orange .. "EAT MENU\n"..
+			color.Yellow .. "\nHunger : " .. color.White..
+			customVariables.HungerTime..
+			color.Red .. " >= "..
+			customVariables.HungerTimeMax..
+			"\n"..
+			color.Gold .. "\nDo you want\n" .. color.LightGreen..
+			"eat\n" .. color.Gold .. "this food ?\n"			
+		)
+		tes3mp.CustomMessageBox(pid, refGui.eatMenu, message, "yes;no")	
+	end
+end
+
+TrueSurvive.ShowDrinkMenu = function(pid)
+	if Players[pid] and Players[pid]:IsLoggedIn() then		
+		local customVariables = CheckCustomVariable(pid)
+		local message = (color.Orange .. "DRINK MENU\n"..
+			color.Yellow .. "\nThirst : " .. color.White..
+			customVariables.ThirsthTime.. 
+			color.Red .. " >= "..
+			customVariables.ThirsthTimeMax..
+			"\n"..
+			color.Gold .. "\nDo you want\n" .. color.LightGreen..
+			"drink\n" .. color.Gold .. "this ?\n"			
+		)
+		tes3mp.CustomMessageBox(pid, refGui.drinkMenu, message, "yes;no")	
+	end
+end
+
+TrueSurvive.ShowSleepMenu = function(pid)
+	if Players[pid] and Players[pid]:IsLoggedIn() then		
+		local customVariables = CheckCustomVariable(pid)
+		local message = (color.Orange .. "SLEEP MENU\n"..
+			color.Yellow .. "\nSleep : " .. color.White..
+			customVariables.SleepTime..
+			color.Red .. " >= "..		
+			customVariables.SleepTimeMax..
+			"\n"..				
+			color.Gold .. "\nDo you want\n" .. color.LightGreen..
+			"sleep\n" .. color.Gold .. "in this bed ?\n"			
+		)
+		tes3mp.CustomMessageBox(pid, refGui.sleepMenu, message, "survival rest;normal rest")	
+	end
+end
+
+TrueSurvive.OnGUIAction = function(pid, idGui, data)
+	if Players[pid] and Players[pid]:IsLoggedIn() then   
+		if idGui == refGui.eatMenu then 
+			if tonumber(data) == 0 then
+				TrueSurvive.OnHungerObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
+				TrueSurvive.CleanCellObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
+				TrueSurvive.PlaySound(pid, "swallow")
+				return true
+			elseif tonumber(data) == 1 then
+				logicHandler.ActivateObjectForPlayer(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex) 
+				return true
+			end
+		elseif idGui == refGui.drinkMenu then
+			if tonumber(data) == 0 then
+				TrueSurvive.OnDrinkObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
+				TrueSurvive.CleanCellObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
+				TrueSurvive.PlaySound(pid, "drink")
+				return true
+			elseif tonumber(data) == 1 then
+				logicHandler.ActivateObjectForPlayer(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex) 
+				return true
+			end
+		elseif idGui == refGui.sleepMenu then
+			if tonumber(data) == 0 then
+				TrueSurvive.OnSleepObject(pid)
+				return true
+			elseif tonumber(data) == 1 then
+				TrueSurvive.OnSleepObjectVanilla(pid)
+				return true
+			end
+		end
+	end
+end
 -----------
 -- EVENT --
 -----------
 customEventHooks.registerValidator("OnObjectActivate", TrueSurvive.OnActivatedObject)
+
 customEventHooks.registerHandler("OnObjectActivate", TrueSurvive.OnPlayerEvent)
 customEventHooks.registerHandler("OnPlayerEquipment", TrueSurvive.OnPlayerEvent)
 customEventHooks.registerHandler("OnPlayerInventory", TrueSurvive.OnPlayerEvent)
@@ -597,6 +696,11 @@ customEventHooks.registerHandler("OnPlayerCellChange", TrueSurvive.OnPlayerEvent
 customEventHooks.registerHandler("OnPlayerDeath", TrueSurvive.OnPlayerDeath)
 customEventHooks.registerHandler("OnPlayerAuthentified", TrueSurvive.OnPlayerAuthentified)
 customEventHooks.registerHandler("OnServerInit", TrueSurvive.OnServerInit)
-customCommandHooks.registerCommand("survive", TrueSurvive.MainMenu)
+
+customCommandHooks.registerCommand("survive", TrueSurvive.ShowMainMenu)
+
+customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
+	if TrueSurvive.OnGUIAction(pid, idGui, data) then return end
+end)
 
 return TrueSurvive
