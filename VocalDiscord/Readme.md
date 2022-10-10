@@ -1,5 +1,5 @@
 * VocalDiscord by Rickoff
-* tes3mp 0.8.0
+* tes3mp 0.8.1
 --------------------------
 * DESCRIPTION :
 * Automatically creates, deletes and moves a player on the discord channel corresponding to the cell being explored ig
