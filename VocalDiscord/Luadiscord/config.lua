@@ -12,7 +12,13 @@ config.vocalCat = "xxxxxxxxxx"
 
 config.RoleEveryone = "xxxxxxxxxx"
 
-config.channelSafe = {"Vocal1", "Vocal2", "Vocal3", "Vocal4", "Vocal5"}
+config.channelSafe = {
+  Vocal1 = true, 
+  Vocal2  = true,
+  Vocal3 = true,
+  Vocal4 = true,
+  Vocal5 = true
+}
 
 config.serverId = "xxxxxxxxxxxxxxxxxxxxx"
 
