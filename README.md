@@ -1,4 +1,4 @@
-# Tes3mp-0.8.0
+# Tes3mp-0.8.X
 Public script for server tes3mp 0.8 by Rickoff
 
 ![alt text](https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/avatars/a4/a47831e6004ae0e72ce2e0fb55f6ce9cc1693a4c_full.jpg) 
