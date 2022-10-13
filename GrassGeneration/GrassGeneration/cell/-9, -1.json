@@ -1,0 +1,24 @@
+[{
+    "isExterior":true,
+    "objects":{
+      "55":{
+        "pos":{
+          "XRot":0,
+          "YPos":-8029.8217773438,
+          "YRot":0,
+          "ZRot":2.8831870555878,
+          "ZPos":36.497093200684,
+          "XPos":-66801.34375
+        },
+        "scale":0.96000003814697,
+        "refNum":55,
+        "refId":"vurt_reeds"
+      }
+    },
+    "flags":2,
+    "gridX":-9,
+    "region":"Bitter Coast Region",
+    "gridY":-1,
+    "name":"-9, -1",
+    "refNumCounter":1
+  }]

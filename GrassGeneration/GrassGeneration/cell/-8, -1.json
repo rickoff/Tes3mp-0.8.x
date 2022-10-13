@@ -1,0 +1,37 @@
+[{
+    "isExterior":true,
+    "objects":{
+      "44":{
+        "pos":{
+          "XRot":0,
+          "YPos":-7496.7021484375,
+          "YRot":0,
+          "ZRot":6.1831855773926,
+          "ZPos":52.173789978027,
+          "XPos":-60073.1953125
+        },
+        "scale":1.3700001239777,
+        "refNum":44,
+        "refId":"vurt_reeds"
+      },
+      "45":{
+        "pos":{
+          "XRot":0,
+          "YPos":-8174.7377929688,
+          "YRot":0,
+          "ZRot":5.7831859588623,
+          "ZPos":36.579467773438,
+          "XPos":-59658.44921875
+        },
+        "scale":1.3700001239777,
+        "refNum":45,
+        "refId":"vurt_reeds"
+      }
+    },
+    "flags":2,
+    "gridX":-8,
+    "region":"Bitter Coast Region",
+    "gridY":-1,
+    "name":"-8, -1",
+    "refNumCounter":2
+  }]
