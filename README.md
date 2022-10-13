@@ -31,4 +31,4 @@ Rickoff Discord : https://discord.gg/PxZwczN
 
 - CreateCustomRecord : Modify records Morrowind, Bloodmoon, Tribunal at your convenience(Weapons, Armors, Spells, Activators, Potions, Apparatus, Bodyparts, Books, Clothings, Containers, Creatures, Npc's)
 
-- GrassGeneration : generation of tree and creature grass according to a defined density
+- GrassGeneration : generation of grass, tree and creature according to a defined density
