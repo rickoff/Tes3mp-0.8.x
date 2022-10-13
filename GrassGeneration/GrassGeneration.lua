@@ -16,7 +16,7 @@ For your first launch activate cfg.OnServerPostInit = true
 wait about for all the elements to be created
 after that, cfg.OnServerPostInit = false
 restart your server
-Add 'GrassGeneration.OnResetGrass(cellDescription)' in your Reset Cell Script after your reset for each cell
+Add 'GrassGeneration.OnResetGrass(pid, cellDescription)' in your Reset Cell Script after your reset for each cell
 ---------------------------
 CONFIGURATION:
 cfg.OnServerPostInit = true --activate auto generation cell at start
@@ -682,7 +682,7 @@ GrassGeneration.OnPlayerCleanCommand = function(pid)
 	end
 end
 
-GrassGeneration.OnResetGrass = function(cellDescription)
+GrassGeneration.OnResetGrass = function(pid, cellDescription)
 
 	if DataCellsName[cellDescription] then
 	
