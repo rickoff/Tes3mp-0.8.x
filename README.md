@@ -32,3 +32,5 @@ Rickoff Discord : https://discord.gg/PxZwczN
 - CreateCustomRecord : Modify records Morrowind, Bloodmoon, Tribunal at your convenience(Weapons, Armors, Spells, Activators, Potions, Apparatus, Bodyparts, Books, Clothings, Containers, Creatures, Npc's)
 
 - GrassGeneration : generation of grass, tree and creature according to a defined density
+
+- TravelWorld : Fast travel by activating Stiltstrider, Boat or SignPost
