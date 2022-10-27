@@ -1,0 +1,226 @@
+{
+  "-9, 17":{
+    "scale":1,
+    "refId":"Ex_longboat02",
+    "nameDes":"Khuul",
+    "refNum":313081,
+    "pos":{
+      "XRot":0,
+      "YPos":142741.4375,
+      "YRot":0,
+      "XPos":-69305.3046875,
+      "ZPos":68.973251342773,
+      "ZRot":1.9000002145767
+    }
+  },
+  "15, 1":{
+    "scale":1,
+    "refId":"ex_longboat01",
+    "nameDes":"Tel Fyr",
+    "refNum":299446,
+    "pos":{
+      "XRot":0,
+      "YPos":15426.84765625,
+      "YRot":0,
+      "XPos":127412.515625,
+      "ZPos":80.40372467041,
+      "ZRot":3.783186674118
+    }
+  },
+  "17, 4":{
+    "scale":1,
+    "refId":"Ex_DE_ship",
+    "nameDes":"Sadrith Mora",
+    "refNum":262033,
+    "pos":{
+      "XRot":0,
+      "YPos":39694.7578125,
+      "YRot":0,
+      "XPos":141546.859375,
+      "ZPos":3.031964302063,
+      "ZRot":5.2000031471252
+    }
+  },
+  "-11, 15":{
+    "scale":1,
+    "refId":"Ex_DE_ship",
+    "nameDes":"Ald Velothi",
+    "refNum":299478,
+    "pos":{
+      "XRot":0,
+      "YPos":128577.0078125,
+      "YRot":0,
+      "XPos":-89366.203125,
+      "ZPos":-100.79699707031,
+      "ZRot":0.099483765661716
+    }
+  },
+  "-7, -5":{
+    "scale":1,
+    "refId":"ex_longboat01",
+    "nameDes":"Hla Oad",
+    "refNum":295134,
+    "pos":{
+      "XRot":0,
+      "YPos":-40024.60546875,
+      "YRot":0,
+      "XPos":-49163.796875,
+      "ZPos":97.185997009277,
+      "ZRot":5.5274577140808
+    }
+  },
+  "14, -8":{
+    "scale":1,
+    "refId":"Ex_longboat02",
+    "nameDes":"Molag Mar",
+    "refNum":481151,
+    "pos":{
+      "XRot":0,
+      "YPos":-62580.80859375,
+      "YRot":0,
+      "XPos":114793.4140625,
+      "ZPos":74.870208740234,
+      "ZRot":0
+    }
+  },
+  "4, -10":{
+    "scale":1,
+    "refId":"Ex_longboat02",
+    "nameDes":"Vivec",
+    "refNum":470736,
+    "pos":{
+      "XRot":0,
+      "YPos":-74250.4296875,
+      "YRot":0,
+      "XPos":36347.00390625,
+      "ZPos":79.335311889648,
+      "ZRot":2.6500015258789
+    }
+  },
+  "-22, 16":{
+    "scale":1,
+    "refId":"Ex_DE_ship",
+    "nameDes":"Fort Frostmoth",
+    "refNum":14697,
+    "pos":{
+      "XRot":0,
+      "YPos":136154.265625,
+      "YRot":0,
+      "XPos":-173872.4375,
+      "ZPos":169.4457244873,
+      "ZRot":4.5999994277954
+    }
+  },
+  "12, 13":{
+    "scale":1,
+    "refId":"Ex_DE_ship",
+    "nameDes":"Vos",
+    "refNum":262177,
+    "pos":{
+      "XRot":0,
+      "YPos":114649.9296875,
+      "YRot":0,
+      "XPos":101416.0546875,
+      "ZPos":-51.197574615479,
+      "ZRot":6.2495079040527
+    }
+  },
+  "2, -13":{
+    "scale":1,
+    "refId":"Ex_DE_ship",
+    "nameDes":"Ebonheart",
+    "refNum":262124,
+    "pos":{
+      "XRot":0,
+      "YPos":-103094.8984375,
+      "YRot":0,
+      "XPos":20522.125,
+      "ZPos":-102.63119506836,
+      "ZRot":1.3668158054352
+    }
+  },
+  "-2, -9":{
+    "scale":1,
+    "refId":"chargen boat",
+    "nameDes":"Seyda Neen",
+    "refNum":172850,
+    "pos":{
+      "XRot":0,
+      "YPos":-73375.8515625,
+      "YRot":0,
+      "XPos":-8292.134765625,
+      "ZPos":-22.822345733643,
+      "ZRot":0.78539830446243
+    }
+  },
+  "13, 14":{
+    "scale":1,
+    "refId":"ex_longboat01",
+    "nameDes":"Tel Mora",
+    "refNum":299448,
+    "pos":{
+      "XRot":0,
+      "YPos":116082.5859375,
+      "YRot":0,
+      "XPos":106647.453125,
+      "ZPos":72.257698059082,
+      "ZRot":0.49999997019768
+    }
+  },
+  "14, -13":{
+    "scale":1,
+    "refId":"Ex_longboat02",
+    "nameDes":"Tel Branora",
+    "refNum":470724,
+    "pos":{
+      "XRot":0,
+      "YPos":-101556.6875,
+      "YRot":0,
+      "XPos":118944.546875,
+      "ZPos":70.693954467773,
+      "ZRot":1.200000166893
+    }
+  },
+  "7, 22":{
+    "scale":1,
+    "refId":"Ex_DE_ship",
+    "nameDes":"Dagon Fel",
+    "refNum":313067,
+    "pos":{
+      "XRot":0,
+      "YPos":185039.484375,
+      "YRot":0,
+      "XPos":62791.8828125,
+      "ZPos":-78.595085144043,
+      "ZRot":5.4831857681274
+    }
+  },
+  "14, 5":{
+    "scale":1,
+    "refId":"Ex_longboat02",
+    "nameDes":"Tel Aruhn",
+    "refNum":313060,
+    "pos":{
+      "XRot":0,
+      "YPos":41273.05078125,
+      "YRot":0,
+      "XPos":122651.4921875,
+      "ZPos":81.337799072266,
+      "ZRot":6.2831845283508
+    }
+  },
+  "12, 14":{
+    "scale":1,
+    "refId":"Ex_longboat02",
+    "nameDes":"Vos",
+    "refNum":313063,
+    "pos":{
+      "XRot":0,
+      "YPos":115310.359375,
+      "YRot":0,
+      "XPos":105513.9921875,
+      "ZPos":85.770111083984,
+      "ZRot":6.1831855773926
+    }
+  }
+}

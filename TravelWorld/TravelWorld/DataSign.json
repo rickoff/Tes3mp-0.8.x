@@ -1,0 +1,3200 @@
+{
+  "10, 13":{
+    "position":{
+      "posX":89089.3515625,
+      "posZ":963.77062988281,
+      "posY":110043.46875,
+      "rotX":1.4901161193848e-08,
+      "rotY":0,
+      "rotZ":0.90000057220459
+    },
+    "destination":{
+      "384548-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "384547-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "-2, -1":{
+    "position":{
+      "posX":-10300.954101563,
+      "posZ":838.74133300781,
+      "posY":-2219.7219238281,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "468033-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "468036-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "468035-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      }
+    }
+  },
+  "-5, 2":{
+    "position":{
+      "posX":-36088.515625,
+      "posZ":1305.5384521484,
+      "posY":19941.328125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.1831870079041
+    },
+    "destination":{
+      "384663-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384657-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "384659-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384658-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "384660-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384664-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384662-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      }
+    }
+  },
+  "2, -8":{
+    "position":{
+      "posX":24573.76171875,
+      "posZ":915.23590087891,
+      "posY":-65393.90625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.10000000149012
+    },
+    "destination":{
+      "384605-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384604-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384603-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      }
+    }
+  },
+  "9, 15":{
+    "position":{
+      "posX":80005.0234375,
+      "posZ":1006.3145141602,
+      "posY":125154.59375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.6831879615784
+    },
+    "destination":{
+      "384559-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384560-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "8, -1":{
+    "position":{
+      "posX":73653.828125,
+      "posZ":743.62542724609,
+      "posY":-6739.2143554688,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":2.8827941417694
+    },
+    "destination":{
+      "394814-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "394812-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "394810-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "394806-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "394805-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "394809-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "394813-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "394811-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      }
+    }
+  },
+  "9, -3":{
+    "position":{
+      "posX":75134.234375,
+      "posZ":919.23413085938,
+      "posY":-19097.796875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.98279440402985
+    },
+    "destination":{
+      "373536-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "373541-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "373534-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "373544-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "373542-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "373535-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      }
+    }
+  },
+  "-5, 9":{
+    "position":{
+      "posX":-39212.6484375,
+      "posZ":1281.40234375,
+      "posY":76484.09375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.700000166893
+    },
+    "destination":{
+      "367401-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "367402-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "367403-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      }
+    }
+  },
+  "8, -4":{
+    "position":{
+      "posX":65704.953125,
+      "posZ":1353.3736572266,
+      "posY":-27874.291015625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.2827930450439
+    },
+    "destination":{
+      "374002-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "374003-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "373996-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "374137-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "373993-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "373994-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "374000-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "373995-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "374135-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "373997-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "374001-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "373999-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      }
+    }
+  },
+  "1, -3":{
+    "position":{
+      "posX":11260.291015625,
+      "posZ":966.720703125,
+      "posY":-22579.267578125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.5827932357788
+    },
+    "destination":{
+      "359307-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "359305-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "359306-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "359303-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "359304-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "359339-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      }
+    }
+  },
+  "-6, 6":{
+    "position":{
+      "posX":-42002.71875,
+      "posZ":2024.7038574219,
+      "posY":52847.484375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "342180-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "342182-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "342183-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "342181-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      }
+    }
+  },
+  "9, -4":{
+    "position":{
+      "posX":74098.9453125,
+      "posZ":1047.669921875,
+      "posY":-26447.759765625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.7827939987183
+    },
+    "destination":{
+      "373667-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "373670-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "373668-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "373669-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "373723-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "373671-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      }
+    }
+  },
+  "-13, 12":{
+    "position":{
+      "posX":-99035.2109375,
+      "posZ":1833.3637695313,
+      "posY":102288.84375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.4168142080307
+    },
+    "destination":{
+      "364243-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "364244-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "364242-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      }
+    }
+  },
+  "-6, -6":{
+    "position":{
+      "posX":-42074.71875,
+      "posZ":292.54306030273,
+      "posY":-48798.19140625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.1000007390976
+    },
+    "destination":{
+      "384733-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384730-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384729-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384735-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384725-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "384734-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "384732-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      }
+    }
+  },
+  "-8, 8":{
+    "position":{
+      "posX":-60778.83984375,
+      "posZ":1947.3594970703,
+      "posY":68911.140625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":2.0000059604645
+    },
+    "destination":{
+      "367593-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "367595-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367597-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367596-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      }
+    }
+  },
+  "12, 0":{
+    "position":{
+      "posX":100284.953125,
+      "posZ":665.92047119141,
+      "posY":1641.0596923828,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.3491669893265
+    },
+    "destination":{
+      "399814-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "399813-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "399820-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "399819-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "399812-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      }
+    }
+  },
+  "10, 9":{
+    "position":{
+      "posX":86103.5234375,
+      "posZ":830.72863769531,
+      "posY":76669.8984375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.5831861495972
+    },
+    "destination":{
+      "408817-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "408818-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "1, -2":{
+    "position":{
+      "posX":11408.208984375,
+      "posZ":963.14172363281,
+      "posY":-11506.607421875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":6.1827921867371
+    },
+    "destination":{
+      "367255-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367250-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "367245-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "367251-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367260-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "367258-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367254-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "367248-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367247-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "367252-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "367243-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "367262-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367257-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "367246-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "367253-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "367259-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "367244-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367261-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      }
+    }
+  },
+  "10, 3":{
+    "position":{
+      "posX":86573.984375,
+      "posZ":814.33624267578,
+      "posY":27783.619140625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.5491675138474
+    },
+    "destination":{
+      "400574-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "400580-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "400576-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "400584-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "400581-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "400582-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "400579-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "400575-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      }
+    }
+  },
+  "-5, 8":{
+    "position":{
+      "posX":-36667.8359375,
+      "posZ":1360.7175292969,
+      "posY":65657.859375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.3831877708435
+    },
+    "destination":{
+      "367449-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367453-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "367452-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "367451-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      },
+      "367454-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      }
+    }
+  },
+  "10, 11":{
+    "position":{
+      "posX":83698.3359375,
+      "posZ":885.96588134766,
+      "posY":91968.8515625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "384550-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384551-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "5, -2":{
+    "position":{
+      "posX":46937.69921875,
+      "posZ":682.8740234375,
+      "posY":-11624.787109375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.6827931404114
+    },
+    "destination":{
+      "367211-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "367212-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "367213-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "367214-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367210-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367215-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      }
+    }
+  },
+  "-10, 12":{
+    "position":{
+      "posX":-80777.5546875,
+      "posZ":1053.6909179688,
+      "posY":101360.3359375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.283188700676
+    },
+    "destination":{
+      "367644-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367643-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367645-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      }
+    }
+  },
+  "8, -6":{
+    "position":{
+      "posX":69058.0234375,
+      "posZ":846.58929443359,
+      "posY":-48291.9609375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.2827930450439
+    },
+    "destination":{
+      "376568-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "376566-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "376567-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "376576-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "376569-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "376575-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      }
+    }
+  },
+  "1, -10":{
+    "position":{
+      "posX":12944.422851563,
+      "posZ":426.97698974609,
+      "posY":-78708.9765625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.10000000149012
+    },
+    "destination":{
+      "384629-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384620-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "384633-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384627-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "384634-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "384630-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384619-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "384624-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384628-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384635-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      },
+      "384621-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      },
+      "384622-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384623-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      }
+    }
+  },
+  "-2, -9":{
+    "position":{
+      "posX":-11422.40625,
+      "posZ":244.6643371582,
+      "posY":-67149.515625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "363283-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "384647-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "363281-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "363282-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "384646-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "363698-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "363284-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      }
+    }
+  },
+  "11, 13":{
+    "position":{
+      "posX":92848.4765625,
+      "posZ":910.1240234375,
+      "posY":114047.5859375,
+      "rotX":5.9831857681274,
+      "rotY":0,
+      "rotZ":5.383186340332
+    },
+    "destination":{
+      "384455-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "384454-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384451-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384452-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "-4, 6":{
+    "position":{
+      "posX":-28714.80859375,
+      "posZ":1740.7353515625,
+      "posY":57157.6953125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.20000001788139
+    },
+    "destination":{
+      "363943-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "363941-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      },
+      "363940-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "363942-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "363939-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      }
+    }
+  },
+  "-11, 14":{
+    "position":{
+      "posX":-81045.6171875,
+      "posZ":1464.1372070313,
+      "posY":117575.15625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.5831871032715
+    },
+    "destination":{
+      "367629-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367630-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367631-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      }
+    }
+  },
+  "12, -8":{
+    "position":{
+      "posX":104118.109375,
+      "posZ":743.41851806641,
+      "posY":-60519.140625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":2.0827934741974
+    },
+    "destination":{
+      "386432-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "386433-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "392882-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "386441-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "386434-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "392884-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "386435-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "392883-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "392885-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "392880-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "386442-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      }
+    }
+  },
+  "-7, 5":{
+    "position":{
+      "posX":-56041.25,
+      "posZ":754.08282470703,
+      "posY":41715.28515625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.1831874847412
+    },
+    "destination":{
+      "384746-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "384752-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384748-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384751-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "471424-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384749-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "471420-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "471426-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "471427-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384757-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "471421-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "384747-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "471422-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "471423-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      }
+    }
+  },
+  "-2, 5":{
+    "position":{
+      "posX":-8339.046875,
+      "posZ":1965.0837402344,
+      "posY":44754.13671875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.20000001788139
+    },
+    "destination":{
+      "363262-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "363263-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "363264-0":{
+        "name":"Maar Gan",
+        "cellDescription":"-4, 12"
+      }
+    }
+  },
+  "-1, -9":{
+    "position":{
+      "posX":-1945.1086425781,
+      "posZ":956.94934082031,
+      "posY":-69914.34375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.69999998807907
+    },
+    "destination":{
+      "363598-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      },
+      "363595-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "363600-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384645-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "363594-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "384644-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "363597-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      }
+    }
+  },
+  "11, 14":{
+    "position":{
+      "posX":92099.0078125,
+      "posZ":1724.4689941406,
+      "posY":117108.3515625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.7831859588623
+    },
+    "destination":{
+      "384448-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384449-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "11, 2":{
+    "position":{
+      "posX":91172.265625,
+      "posZ":835.57757568359,
+      "posY":18387.61328125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.2491669654846
+    },
+    "destination":{
+      "400069-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "400070-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "-1, -3":{
+    "position":{
+      "posX":-8068.7065429688,
+      "posZ":1288.0235595703,
+      "posY":-16484.15625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.7831859588623
+    },
+    "destination":{
+      "468028-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "468027-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "363253-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "363734-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "468025-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "363256-0":{
+        "name":"Fort Phalène"
+      },
+      "468026-0":{
+        "name":"La Porte des Ames",
+        "cellDescription":"2, 4"
+      },
+      "363254-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "363252-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "468029-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      }
+    }
+  },
+  "-6, -2":{
+    "position":{
+      "posX":-45893.984375,
+      "posZ":429.10055541992,
+      "posY":-10715.626953125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.20000001788139
+    },
+    "destination":{
+      "384688-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384690-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "384693-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384698-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384689-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384691-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "384697-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      }
+    }
+  },
+  "-10, 13":{
+    "position":{
+      "posX":-76670.609375,
+      "posZ":847.06298828125,
+      "posY":113671.8125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.3831882476807
+    },
+    "destination":{
+      "367636-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367638-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367637-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      }
+    }
+  },
+  "-3, 6":{
+    "position":{
+      "posX":-22033.32421875,
+      "posZ":1148.5659179688,
+      "posY":53113.3359375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.90000009536743
+    },
+    "destination":{
+      "363288-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "363289-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "363290-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      }
+    }
+  },
+  "3, -9":{
+    "position":{
+      "posX":24648.638671875,
+      "posZ":892.51818847656,
+      "posY":-65547.671875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.7831854820251
+    },
+    "destination":{
+      "384601-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      },
+      "384597-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384598-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "384600-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      }
+    }
+  },
+  "-4, 5":{
+    "position":{
+      "posX":-29174.818359375,
+      "posZ":2386.4689941406,
+      "posY":41629.8671875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.3831858634949
+    },
+    "destination":{
+      "363295-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      },
+      "363296-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "363294-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "363297-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "363298-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "363293-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      }
+    }
+  },
+  "4, -1":{
+    "position":{
+      "posX":40226.0859375,
+      "posZ":1213.8425292969,
+      "posY":-2409.9426269531,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":6.0827922821045
+    },
+    "destination":{
+      "367227-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "367226-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367225-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "367222-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367223-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "367224-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      }
+    }
+  },
+  "-8, 11":{
+    "position":{
+      "posX":-61649.71875,
+      "posZ":1453.0366210938,
+      "posY":95150.90625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":2.1000037193298
+    },
+    "destination":{
+      "367579-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367580-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367588-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367586-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367584-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "367592-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "367578-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367587-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      }
+    }
+  },
+  "-4, 2":{
+    "position":{
+      "posX":-25807.1875,
+      "posZ":1298.4641113281,
+      "posY":23266.07421875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.3831858634949
+    },
+    "destination":{
+      "480216-0":{
+        "name":"Compagnie minière de Caldéra"
+      },
+      "480218-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      }
+    }
+  },
+  "3, -2":{
+    "position":{
+      "posX":29845.45703125,
+      "posZ":1022.8561401367,
+      "posY":-14464.186523438,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.6827931404114
+    },
+    "destination":{
+      "367240-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367229-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367239-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "367241-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "367237-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "367231-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "367230-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "367238-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "367236-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367233-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367234-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "367232-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      }
+    }
+  },
+  "8, 1":{
+    "position":{
+      "posX":72821.046875,
+      "posZ":894.52661132813,
+      "posY":9361.115234375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.2491645812988
+    },
+    "destination":{
+      "394792-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "394794-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "394796-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "394800-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "394795-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "394799-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "394804-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "394798-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      }
+    }
+  },
+  "1, -9":{
+    "position":{
+      "posX":10091.3125,
+      "posZ":509.96670532227,
+      "posY":-69329.34375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.10000000149012
+    },
+    "destination":{
+      "384611-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384614-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384608-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "384610-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384609-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384615-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "384617-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      }
+    }
+  },
+  "-8, 16":{
+    "position":{
+      "posX":-64308.12109375,
+      "posZ":951.19207763672,
+      "posY":131984.5625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.40000250935555
+    },
+    "destination":{
+      "367573-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367574-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367565-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367566-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367572-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367567-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      }
+    }
+  },
+  "-1, -4":{
+    "position":{
+      "posX":-282.10147094727,
+      "posZ":648.90313720703,
+      "posY":-29995.166015625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.5827922821045
+    },
+    "destination":{
+      "359677-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "323870-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "76398-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "341567-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "341564-0":{
+        "name":"La Porte des Ames",
+        "cellDescription":"2, 4"
+      },
+      "341566-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "341565-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "359678-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "341561-0":{
+        "name":"Suran",
+        "cellDescription":"6, -6"
+      },
+      "341563-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "341570-0":{
+        "name":"La Porte des Ames",
+        "cellDescription":"2, 4"
+      }
+    }
+  },
+  "-8, 7":{
+    "position":{
+      "posX":-61336.61328125,
+      "posZ":1546.5279541016,
+      "posY":65146.2265625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.0000052452087
+    },
+    "destination":{
+      "367606-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367604-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367605-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367602-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      }
+    }
+  },
+  "13, -7":{
+    "position":{
+      "posX":112660.890625,
+      "posZ":1329.7999267578,
+      "posY":-51331.43359375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.0827927589417
+    },
+    "destination":{
+      "394729-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "394722-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "394727-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "394724-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "394728-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "394725-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      }
+    }
+  },
+  "6, -3":{
+    "position":{
+      "posX":51290.3515625,
+      "posZ":1180.3913574219,
+      "posY":-18828.1640625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.0827922821045
+    },
+    "destination":{
+      "367121-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "367133-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367122-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367134-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "367118-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "367138-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "367137-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "367119-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "367136-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "367123-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "367135-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "367120-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      }
+    }
+  },
+  "8, 10":{
+    "position":{
+      "posX":69320.171875,
+      "posZ":880.67010498047,
+      "posY":87988.53125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "384582-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384581-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "-4, 3":{
+    "position":{
+      "posX":-27983.345703125,
+      "posZ":1199.3223876953,
+      "posY":30201.208984375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":6.283185005188
+    },
+    "destination":{
+      "363306-0":{
+        "name":"Ald'ruhn (route principale)"
+      },
+      "363302-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "363304-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "363301-0":{
+        "name":"Maar gan (route secondaire)"
+      },
+      "363300-0":{
+        "name":"Fort Silène (route secondaire)"
+      },
+      "363308-0":{
+        "name":"Maar gan (route principale)"
+      },
+      "363303-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "363305-0":{
+        "name":"Ald'ruhn (route secondaire)"
+      },
+      "363307-0":{
+        "name":"Fort Silène (route principale)"
+      }
+    }
+  },
+  "-2, -6":{
+    "position":{
+      "posX":-11156.26953125,
+      "posZ":246.88607788086,
+      "posY":-43951.82421875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.6831860542297
+    },
+    "destination":{
+      "323909-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "341828-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "323910-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      }
+    }
+  },
+  "-5, -6":{
+    "position":{
+      "posX":-36769.95703125,
+      "posZ":192.44139099121,
+      "posY":-45795.12109375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.399998664856
+    },
+    "destination":{
+      "384673-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384672-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384675-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384671-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      }
+    }
+  },
+  "-12, 11":{
+    "position":{
+      "posX":-91722.5078125,
+      "posZ":1043.0415039063,
+      "posY":93948.5390625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "364240-0":{
+        "name":"Sentier des guars"
+      },
+      "364233-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "364235-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364232-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "364236-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "364231-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364237-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      }
+    }
+  },
+  "-1, -7":{
+    "position":{
+      "posX":-1856.5399169922,
+      "posZ":1186.4625244141,
+      "posY":-57241.27734375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.89999997615814
+    },
+    "destination":{
+      "363259-0":{
+        "name":"Pélagiad (route principale)"
+      },
+      "6128-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "384640-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      },
+      "363258-0":{
+        "name":"Pélagiad (route secondaire)"
+      },
+      "6129-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "363568-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "341605-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "384643-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "6130-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384639-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384642-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      }
+    }
+  },
+  "-12, 13":{
+    "position":{
+      "posX":-95359.4921875,
+      "posZ":791.32379150391,
+      "posY":113016.3203125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.8000011444092
+    },
+    "destination":{
+      "364197-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "364207-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "364196-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "364202-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "364214-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "364213-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "364201-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364203-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "364212-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364198-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364208-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "364206-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      }
+    }
+  },
+  "-5, 7":{
+    "position":{
+      "posX":-32970.45703125,
+      "posZ":2183.5471191406,
+      "posY":59434.41015625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":6.08318567276
+    },
+    "destination":{
+      "363310-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "363311-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "363313-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "363312-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      },
+      "363314-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      }
+    }
+  },
+  "7, 22":{
+    "position":{
+      "posX":58953.69140625,
+      "posZ":479.37585449219,
+      "posY":181523.3125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "363244-0":{
+        "name":"Dagon Fel",
+        "cellDescription":"7, 22"
+      },
+      "262093-0":{
+        "name":"Heifnir, marchand"
+      }
+    }
+  },
+  "-6, 5":{
+    "position":{
+      "posX":-42439.37890625,
+      "posZ":1300.9967041016,
+      "posY":44019.640625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":6.1831855773926
+    },
+    "destination":{
+      "384685-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384681-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "384683-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384684-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384682-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "384680-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      }
+    }
+  },
+  "9, 11":{
+    "position":{
+      "posX":77974.453125,
+      "posZ":801.21032714844,
+      "posY":91680.5859375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.5000010728836
+    },
+    "destination":{
+      "384568-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384572-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "384569-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "384571-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "8, 5":{
+    "position":{
+      "posX":72365.1875,
+      "posZ":1328.3441162109,
+      "posY":45894.09765625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.4831876754761
+    },
+    "destination":{
+      "384587-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384583-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "384585-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "384584-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "384588-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "-12, 12":{
+    "position":{
+      "posX":-90731.2734375,
+      "posZ":1214.5559082031,
+      "posY":105900.2109375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.88318860530853
+    },
+    "destination":{
+      "364219-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364221-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "364228-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367664-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367663-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364220-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367665-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "364226-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364227-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      }
+    }
+  },
+  "-11, 14":{
+    "position":{
+	  "posX":-84118.09375,
+	  "posZ":1125.3005371094,
+	  "posY":122748.421875,
+	  "rotX":0,
+	  "rotY":0,
+	  "rotZ":0.90000092983246
+    },
+    "destination":{
+      "367657-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364190-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "364193-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367658-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "364192-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367659-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      }
+    }
+  },  
+  "-10, 14":{
+    "position":{
+	  "posX":-81045.6171875,
+	  "posZ":1464.1372070313,
+	  "posY":117575.15625,
+	  "rotX":0,
+	  "rotY":0,
+	  "rotZ":5.5831871032715
+    },
+    "destination":{
+      "367630-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367631-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367629-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      }
+    }
+  },   
+  "9, 3":{
+    "position":{
+      "posX":81808,
+      "posZ":855.70098876953,
+      "posY":28654.890625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":1.5491675138474
+    },
+    "destination":{
+      "400974-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "400981-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "400983-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "400982-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "400979-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "400975-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "400980-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "400976-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      }
+    }
+  },
+  "-4, 12":{
+    "position":{
+      "posX":-26033.658203125,
+      "posZ":1543.90234375,
+      "posY":100547.8203125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.8831844329834
+    },
+    "destination":{
+      "367330-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "367331-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      }
+    }
+  },
+  "-6, 11":{
+    "position":{
+      "posX":-41504.4921875,
+      "posZ":1179.8463134766,
+      "posY":93109.359375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":2.1831874847412
+    },
+    "destination":{
+      "367544-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      },
+      "367543-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "367542-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      }
+    }
+  },
+  "2, -13":{
+    "position":{
+      "posX":17888.986328125,
+      "posZ":294.69744873047,
+      "posY":-98585.578125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "363249-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "363251-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      },
+      "363250-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      }
+    }
+  },
+  "7, -3":{
+    "position":{
+      "posX":59461.33984375,
+      "posZ":1123.0313720703,
+      "posY":-20126.27734375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.7827920913696
+    },
+    "destination":{
+      "366726-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "366725-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "366724-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "366723-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "366722-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "366721-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      }
+    }
+  },
+  "8, 4":{
+    "position":{
+      "posX":73054.7890625,
+      "posZ":1498.6385498047,
+      "posY":37781.44140625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.1831860542297
+    },
+    "destination":{
+      "384589-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "384591-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "384594-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "384590-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "384593-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "-3, 3":{
+    "position":{
+      "posX":-24026.208984375,
+      "posZ":1429.2811279297,
+      "posY":25915.771484375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "384650-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384649-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "359684-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "359685-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "359683-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "480214-0":{
+        "name":"Compagnie minière de Caldéra"
+      },
+      "384648-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "480212-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      }
+    }
+  },
+  "11, -7":{
+    "position":{
+      "posX":91535.46875,
+      "posZ":901.30255126953,
+      "posY":-55351.3828125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.7827916145325
+    },
+    "destination":{
+      "386614-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "386607-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "386605-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "386613-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "386604-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "386606-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      }
+    }
+  },
+  "3, -7":{
+    "position":{
+      "posX":31064.095703125,
+      "posZ":918.35333251953,
+      "posY":-55621.6328125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":2.1999998092651
+    },
+    "destination":{
+      "318677-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "318676-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      }
+    }
+  },
+  "9, 5":{
+    "position":{
+      "posX":77157.1484375,
+      "posZ":961.05529785156,
+      "posY":47457.91015625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.90000092983246
+    },
+    "destination":{
+      "384578-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "384577-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "384574-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384576-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "384575-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "-6, -5":{
+    "position":{
+      "posX":-44939.23828125,
+      "posZ":567.07238769531,
+      "posY":-39843.1328125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":2.3000009059906
+    },
+    "destination":{
+      "384707-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384710-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384711-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "384709-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384719-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384717-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "384721-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "384716-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384722-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384699-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "384700-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "384720-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384706-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "384701-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      }
+    }
+  },
+  "12, 8":{
+    "position":{
+      "posX":102759.8828125,
+      "posZ":813.80139160156,
+      "posY":70729.015625,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":4.6831865310669
+    },
+    "destination":{
+      "384445-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384446-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "0, -9":{
+    "position":{
+      "posX":1865.7332763672,
+      "posZ":706.12261962891,
+      "posY":-67344.1484375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.6831860542297
+    },
+    "destination":{
+      "319118-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      },
+      "384636-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384637-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "82475-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384638-0":{
+        "name":"Coeurébène",
+        "cellDescription":"2, -13"
+      },
+      "319119-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "341492-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      }
+    }
+  },
+  "-2, 2":{
+    "position":{
+      "posX":-14259.021484375,
+      "posZ":1569.0999755859,
+      "posY":21896.693359375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "480211-0":{
+        "name":"Compagnie minière de Caldéra"
+      },
+      "363268-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "363267-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      }
+    }
+  },
+  "4, -6":{
+    "position":{
+      "posX":39714.59375,
+      "posZ":891.25183105469,
+      "posY":-43167.15234375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.20083494484425
+    },
+    "destination":{
+      "75944-0":{
+        "name":"Suran",
+        "cellDescription":"6, -6"
+      },
+      "75941-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      }
+    }
+  },
+  "-9, 14":{
+    "position":{
+      "posX":-71877.453125,
+      "posZ":812.58728027344,
+      "posY":116573.546875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0.70000272989273
+    },
+    "destination":{
+      "367613-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367612-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367614-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      }
+    }
+  },
+  "-5, 6":{
+    "position":{
+      "posX":-39334.51171875,
+      "posZ":2329.4609375,
+      "posY":53805.26953125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.9831852912903
+    },
+    "destination":{
+      "363321-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "363317-0":{
+        "name":"Fort de la Légion de Silène",
+        "cellDescription":"-1, -3"
+      },
+      "363316-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "363318-0":{
+        "name":"Maar gan",
+        "cellDescription":"-4, 12"
+      },
+      "363319-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "363320-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      }
+    }
+  },
+  "9, 13":{
+    "position":{
+      "posX":78913.921875,
+      "posZ":875.81561279297,
+      "posY":114286.9296875,
+      "rotX":5.9831857681274,
+      "rotY":0,
+      "rotZ":1.9000014066696
+    },
+    "destination":{
+      "384562-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384563-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "384565-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "384566-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      }
+    }
+  },
+  "-10, 11":{
+    "position":{
+      "posX":-78304.5625,
+      "posZ":983.56597900391,
+      "posY":90138.2578125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.383189201355
+    },
+    "destination":{
+      "367652-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      },
+      "367650-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367651-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      }
+    }
+  },
+  "-2, -3":{
+    "position":{
+      "posX":-10196.416015625,
+      "posZ":763.52191162109,
+      "posY":-18828.873046875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "323904-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "323903-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "323901-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      }
+    }
+  },
+  "-9, 9":{
+    "position":{
+      "posX":-67132.078125,
+      "posZ":1538.6922607422,
+      "posY":78783.8671875,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":2.4000055789948
+    },
+    "destination":{
+      "367626-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "367620-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      },
+      "367621-0":{
+        "name":"Ald Véloth",
+        "cellDescription":"-11, 14"
+      },
+      "367622-0":{
+        "name":"Khuul",
+        "cellDescription":"-8, 16"
+      }
+    }
+  },
+  "-2, 1":{
+    "position":{
+      "posX":-9607.4716796875,
+      "posZ":1583.3983154297,
+      "posY":8906.037109375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":0
+    },
+    "destination":{
+      "363638-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "359682-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "363271-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "363270-0":{
+        "name":"Caldéra",
+        "cellDescription":"-2, 2"
+      },
+      "359681-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "363639-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      }
+    }
+  },
+  "-3, -8":{
+    "position":{
+      "posX":-20180.3046875,
+      "posZ":1495.09765625,
+      "posY":-57921.96484375,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.0999979972839
+    },
+    "destination":{
+      "384653-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384655-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384652-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384651-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      }
+    }
+  },
+  "-7, 3":{
+    "position":{
+      "posX":-56198.18359375,
+      "posZ":359.54122924805,
+      "posY":30337.8828125,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":5.7831859588623
+    },
+    "destination":{
+      "384762-0":{
+        "name":"Hla Oad",
+        "cellDescription":"-6, -5"
+      },
+      "384763-0":{
+        "name":"Seyda Nihyn",
+        "cellDescription":"-2, -9"
+      },
+      "384761-0":{
+        "name":"Gnaar Mok",
+        "cellDescription":"-7, 3"
+      },
+      "384760-0":{
+        "name":"Ald'ruhn",
+        "cellDescription":"-3, 6"
+      },
+      "384759-0":{
+        "name":"Gnisis",
+        "cellDescription":"-10, 11"
+      }
+    }
+  },
+  "9, -1":{
+    "position":{
+      "posX":80919.078125,
+      "posZ":671.46453857422,
+      "posY":-2751.4025878906,
+      "rotX":0,
+      "rotY":0,
+      "rotZ":3.0659806728363
+    },
+    "destination":{
+      "394777-0":{
+        "name":"Molag Mar",
+        "cellDescription":"12, -8"
+      },
+      "394776-0":{
+        "name":"Mont Kand",
+        "cellDescription":"11, -5"
+      },
+      "394779-0":{
+        "name":"Balmora",
+        "cellDescription":"-2, -1"
+      },
+      "394784-0":{
+        "name":"Vos",
+        "cellDescription":"11, 14"
+      },
+      "394783-0":{
+        "name":"Mont Assarnibibi",
+        "cellDescription":"14, -4"
+      },
+      "394780-0":{
+        "name":"Pélagiad",
+        "cellDescription":"-1, -7"
+      },
+      "394785-0":{
+        "name":"Tel Vos",
+        "cellDescription":"11, 14"
+      },
+      "394781-0":{
+        "name":"Vivec",
+        "cellDescription":"1, -10"
+      }
+    }
+  }
+}

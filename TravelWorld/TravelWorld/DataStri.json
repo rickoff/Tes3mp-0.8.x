@@ -1,0 +1,128 @@
+{
+  "-11, 10":{
+    "refId":"a_siltstrider",
+	"nameDes":"Gnisis",
+    "scale":1,
+    "refNum":42326,
+    "pos":{
+      "XRot":0,
+      "YPos":89047.3984375,
+      "YRot":0,
+      "XPos":-86650.71875,
+      "ZPos":-21.700796127319,
+      "ZRot":4.7123889923096
+    }
+  },
+  "-2, -9":{
+    "refId":"a_siltstrider",
+	"nameDes":"Seyda Neen",	
+    "scale":0.89000004529953,
+    "refNum":227023,
+    "pos":{
+      "XRot":0,
+      "YPos":-70530.578125,
+      "YRot":0,
+      "XPos":-8799.990234375,
+      "ZPos":-123.53993988037,
+      "ZRot":1.8999990224838
+    }
+  },
+  "6, -6":{
+    "refId":"a_siltstrider",
+	"nameDes":"Suran",	
+    "scale":1,
+    "refNum":199111,
+    "pos":{
+      "XRot":0,
+      "YPos":-47366.52734375,
+      "YRot":0,
+      "XPos":53158.7734375,
+      "ZPos":-21.659000396729,
+      "ZRot":4.7088980674744
+    }
+  },
+  "-3, -3":{
+    "refId":"a_siltstrider",
+	"nameDes":"Balmora",	
+    "scale":1,
+    "refNum":41523,
+    "pos":{
+      "XRot":0,
+      "YPos":-18648.830078125,
+      "YRot":0,
+      "XPos":-21321.970703125,
+      "ZPos":186.84303283691,
+      "ZRot":4.83318567276
+    }
+  },
+  "-9, 16":{
+    "refId":"a_siltstrider",
+	"nameDes":"Khuul",	
+    "scale":1,
+    "refNum":470753,
+    "pos":{
+      "XRot":0,
+      "YPos":135298.859375,
+      "YRot":0,
+      "XPos":-66767.5390625,
+      "ZPos":-132.99310302734,
+      "ZRot":6.1081852912903
+    }
+  },
+  "-3, 12":{
+    "refId":"a_siltstrider",
+	"nameDes":"Maar Gan",	
+    "scale":1,
+    "refNum":262130,
+    "pos":{
+      "XRot":0,
+      "YPos":99805.1640625,
+      "YRot":0,
+      "XPos":-22318.005859375,
+      "ZPos":1651.2352294922,
+      "ZRot":4.8500008583069
+    }
+  },
+  "-3, 6":{
+    "refId":"a_siltstrider",
+	"nameDes":"Ald-ruhn",	
+    "scale":1,
+    "refNum":48753,
+    "pos":{
+      "XRot":0,
+      "YPos":54731.76171875,
+      "YRot":0,
+      "XPos":-17945.50390625,
+      "ZPos":1557.0662841797,
+      "ZRot":3.1415927410126
+    }
+  },
+  "12, -8":{
+    "refId":"a_siltstrider",
+	"nameDes":"Molag Mar",	
+    "scale":1,
+    "refNum":219404,
+    "pos":{
+      "XRot":0,
+      "YPos":-58716.53515625,
+      "YRot":0,
+      "XPos":103055.390625,
+      "ZPos":627.76556396484,
+      "ZRot":5.8831858634949
+    }
+  },
+  "3, -9":{
+    "refId":"a_siltstrider",
+	"nameDes":"Vivec",	
+    "scale":1,
+    "refNum":477483,
+    "pos":{
+      "XRot":0,
+      "YPos":-72167.265625,
+      "YRot":0,
+      "XPos":32758.533203125,
+      "ZPos":-194.22164916992,
+      "ZRot":3.3250002861023
+    }
+  }
+}
