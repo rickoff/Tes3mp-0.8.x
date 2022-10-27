@@ -173,13 +173,9 @@ TravelWorld.OnActivatedObject = function(eventStatus, pid, cellDescription, obje
 			
 				TravelWorld.ShowMainGuiStrider(pid, cellDescription)
 				
-				return customEventHooks.makeEventStatus(false, false) 
-				
 			elseif TravelBoatData[cellDescription] and string.lower(TravelBoatData[cellDescription].refId) == string.lower(ObjectRefid) then
 			
 				TravelWorld.ShowMainGuiBoat(pid, cellDescription)
-				
-				return customEventHooks.makeEventStatus(false, false) 
 
 			elseif TravelSignData[cellDescription] and TravelSignData[cellDescription].destination[ObjectIndex] then
 			
@@ -200,8 +196,6 @@ TravelWorld.OnActivatedObject = function(eventStatus, pid, cellDescription, obje
 					TravelWorld.ShowMainGuiSign(pid, cellDescription, nameDestination, cellDestination, position)
 					
 				end
-				
-				return customEventHooks.makeEventStatus(false, false) 
 				
 			end
 			
@@ -415,7 +409,7 @@ end
 ------------
 -- EVENTS --
 ------------
-customEventHooks.registerValidator("OnObjectActivate", TravelWorld.OnActivatedObject)
+customEventHooks.registerHandler("OnObjectActivate", TravelWorld.OnActivatedObject)
 
 customEventHooks.registerHandler("OnServerInit",TravelWorld.OnServerInit)
 
