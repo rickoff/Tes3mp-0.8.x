@@ -32,6 +32,7 @@ local PlayerChoice = {}
 ------------
 local cfg = {
 	OnServerInit = true,
+	PriceDivider = 1000,
 	MainGUI = 27102022,
 	MainGUIBoat = 27102023,
 	MainGUISign = 27102024
@@ -242,7 +243,7 @@ TravelWorld.ShowMainGuiStrider = function(pid, cellDescription)
 			
 			local distance = math.sqrt((playerPosX - PosX) * (playerPosX - PosX) + (playerPosY - PosY) * (playerPosY - PosY)) 
 			
-			local price = math.floor(distance/1000)
+			local price = math.floor(distance/cfg.PriceDivider)
 			
 			list = list..trad.destination..data.nameDes..trad.price..price.."\n"
 
@@ -280,7 +281,7 @@ TravelWorld.ShowMainGuiBoat = function(pid, cellDescription)
 			
 			local distance = math.sqrt((playerPosX - PosX) * (playerPosX - PosX) + (playerPosY - PosY) * (playerPosY - PosY)) 
 			
-			local price = math.floor(distance/1000)
+			local price = math.floor(distance/cfg.PriceDivider)
 			
 			list = list..trad.destination.. data.nameDes ..trad.price..price.."\n"
 			
@@ -314,7 +315,7 @@ TravelWorld.ShowMainGuiSign = function(pid, cellDescription, nameDestination, ce
 
 		local distance = math.sqrt((signPosX - destinationPosX) * (signPosX - destinationPosX) + (signPosY - destinationPosY) * (signPosY - destinationPosY)) 	
 		
-		local price = math.floor(distance/1000)
+		local price = math.floor(distance/cfg.PriceDivider)
 
 		PlayerChoice[nameP] = { 
 			cellDescription = cellDestination,
