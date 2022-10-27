@@ -121,41 +121,31 @@ TravelWorld.OnServerInit = function(eventStatus)
 		
 		recordTable = {
 		  name = trad.siltStrider,
-		  model = "r\\Siltstrider.NIF",
-		  value = 0,
-		  weight = 1
+		  model = "r\\Siltstrider.NIF"
 		}
 		recordStoreActivator.data.permanentRecords["a_siltstrider"] = recordTable	
 
 		recordTable = {
 		  name = trad.boat,
-		  model = "x\\ex_longboat01.nif",
-		  value = 0,
-		  weight = 1
+		  model = "x\\ex_longboat01.nif"
 		}
 		recordStoreActivator.data.permanentRecords["ex_longboat01"] = recordTable
 
 		recordTable = {
 		  name = trad.boat,
-		  model = "x\\Ex_longboat02.NIF",
-		  value = 0,
-		  weight = 1
+		  model = "x\\Ex_longboat02.NIF"
 		}
 		recordStoreActivator.data.permanentRecords["ex_longboat02"] = recordTable
 
 		recordTable = {
 		  name = trad.boat,
-		  model = "x\\Ex_DE_ship.NIF",
-		  value = 0,
-		  weight = 1
+		  model = "x\\Ex_DE_ship.NIF"
 		}
 		recordStoreActivator.data.permanentRecords["chargen boat"] = recordTable
 
 		recordTable = {
 		  name = trad.boat,
-		  model = "x\\ex_de_ship.nif",
-		  value = 0,
-		  weight = 1
+		  model = "x\\ex_de_ship.nif"
 		}
 		recordStoreActivator.data.permanentRecords["ex_de_ship"] = recordTable
 
