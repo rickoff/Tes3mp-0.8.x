@@ -1,19 +1,19 @@
 --[[
 CustomBook
 tes3mp 0.8.1
-Version 0.5
+Version 0.6
 Rewrite by Rickoff original script by Jakob
 ---------------------------
 DESCRIPTION :
-/book: Help menu
-/book title <text>: Set the Name of the book
-/book addtext <text>: Add text to the book
-/book settext <text>: Set the text in the book (will remove all previus text)
-/book listsyles: lists all the styles
-/book setstyle: sets the style the book is going to use
-/book done: Creates the book
-/book clear: Deletes the book
-/booking: gui menu
+/book : Help menu
+/bookmenu : Edit menu
+/book title <text> : Set the Name of the book
+/book addtext <text> : Add text to the book
+/book settext <text> : Set the text in the book (will remove all previus text)
+/book listsyles : lists all the styles
+/book setstyle : sets the style the book is going to use
+/book done : Creates the book
+/book clear : Deletes the book
 You can use "/book done" several times as long at you dont use "/book clear" to make several copies of your book
 ---------------------------
 INSTALLATION:
@@ -44,7 +44,7 @@ trad.setText = "Texte modifié"
 trad.noName = "Vous n'avez pas encore créé de livre"
 trad.optionStyle = "Type de papier"
 trad.style = "Type selectionné"
-trad.help = "Utilisation: /book <commande>\ntitle <texte>: définit le titre du livre (utilisez-le pour en créer un nouveau).\naddtext <text>: Ajouter du texte au livre.\nsettext <text>: définit le texte dans le livre (supprimera tout autre texte).\nliststyles: répertorie tous les styles.\nsetstyle <nombre>: définit le style.\ndone: imprime le document\nclear: Efface toutes les données du livre pour pouvoir en créer une nouvelle."
+trad.help = "Utilisation: /bookmenu : ouvre le menu d'édition\n/book <commande>\ntitle <texte>: définit le titre du livre (utilisez-le pour en créer un nouveau).\naddtext <text>: Ajouter du texte au livre.\nsettext <text>: définit le texte dans le livre (supprimera tout autre texte).\nliststyles: répertorie tous les styles.\nsetstyle <nombre>: définit le style.\ndone: imprime le document\nclear: Efface toutes les données du livre pour pouvoir en créer une nouvelle."
 trad.wrote = "Vous avez écrit un livre!"
 trad.needPaper = "Il vous manque le papier pour écrire un livre."
 trad.copyBook = "Vous avez une copie de votre livre!"
@@ -266,7 +266,7 @@ CustomBook.OnGUIAction = function(pid, idGui, data)
 end
 
 customCommandHooks.registerCommand("book", CustomBook.onCommand)
-customCommandHooks.registerCommand("booking", CustomBook.showMainGUI)
+customCommandHooks.registerCommand("bookmenu", CustomBook.showMainGUI)
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
 	if CustomBook.OnGUIAction(pid, idGui, data) then return end
 end)
