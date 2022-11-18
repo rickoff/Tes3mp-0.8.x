@@ -37,29 +37,29 @@ local trad = {
 local function SendPacketBag(pid, cellDescription, uniqueIndex, object)
 
 	tes3mp.ClearObjectList()
-	
+
 	tes3mp.SetObjectListPid(pid)
-	
+
 	tes3mp.SetObjectListCell(cellDescription)
 
-    local splitIndex = uniqueIndex:split("-")
-	
-    tes3mp.SetObjectRefNum(splitIndex[1])
-	
-    tes3mp.SetObjectMpNum(splitIndex[2])
-	
-    tes3mp.SetObjectRefId("bag_container")
-	
+	local splitIndex = uniqueIndex:split("-")
+
+	tes3mp.SetObjectRefNum(splitIndex[1])
+
+	tes3mp.SetObjectMpNum(splitIndex[2])
+
+	tes3mp.SetObjectRefId("bag_container")
+
 	tes3mp.SetObjectPosition(object.location.posX, object.location.posY, object.location.posZ)
-	
+
 	tes3mp.SetObjectRotation(object.location.rotX, object.location.rotY, object.location.rotZ)
-	
+
 	tes3mp.SetObjectScale(object.scale)
 
 	tes3mp.AddObject()
 
 	tes3mp.SendObjectPlace(false)
-	
+
 	tes3mp.SendObjectScale(false)			
 
 end
@@ -127,59 +127,59 @@ end
 
 local function UpdateBag(pid)
 
-    local targetEquipment = Players[pid].data.customVariables.Bag.inventory
+	local targetEquipment = Players[pid].data.customVariables.Bag.inventory
 
 	local targetCellDescription = Players[pid].data.customVariables.Bag.cellDescription
-	
+
 	local targetUniqueIndex = Players[pid].data.customVariables.Bag.uniqueIndex
-	
-    tes3mp.ClearObjectList()
-	
-    tes3mp.SetObjectListPid(pid)
-	
-    tes3mp.SetObjectListCell(targetCellDescription)
 
-    local splitIndex = targetUniqueIndex:split("-")
-	
-    tes3mp.SetObjectRefNum(splitIndex[1])
-	
-    tes3mp.SetObjectMpNum(splitIndex[2])
-	
-    tes3mp.SetObjectRefId("bag_container")
+	tes3mp.ClearObjectList()
 
-    for _, item in pairs(targetEquipment) do
+	tes3mp.SetObjectListPid(pid)
 
-        if item.refId ~= nil and item.refId ~= "" then
-		
-            local count = item.count or 1
-			
-            local charge = item.charge or -1
-			
-            local enchantmentCharge = item.enchantmentCharge or -1
-			
-            local soul = item.soul or ""
-			
-            tes3mp.SetContainerItemRefId(item.refId)
-			
-            tes3mp.SetContainerItemCount(count)
-			
-            tes3mp.SetContainerItemCharge(charge)
-			
-            tes3mp.SetContainerItemEnchantmentCharge(enchantmentCharge)
-			
-            tes3mp.SetContainerItemSoul(soul)
+	tes3mp.SetObjectListCell(targetCellDescription)
 
-            tes3mp.AddContainerItem()
-			
-        end
-		
-    end
+	local splitIndex = targetUniqueIndex:split("-")
 
-    tes3mp.AddObject()
-	
-    tes3mp.SetObjectListAction(enumerations.container.SET)
-	
-    tes3mp.SendContainer(false, false)
+	tes3mp.SetObjectRefNum(splitIndex[1])
+
+	tes3mp.SetObjectMpNum(splitIndex[2])
+
+	tes3mp.SetObjectRefId("bag_container")
+
+	for _, item in pairs(targetEquipment) do
+
+		if item.refId ~= nil and item.refId ~= "" then
+
+			local count = item.count or 1
+
+			local charge = item.charge or -1
+
+			local enchantmentCharge = item.enchantmentCharge or -1
+
+			local soul = item.soul or ""
+
+			tes3mp.SetContainerItemRefId(item.refId)
+
+			tes3mp.SetContainerItemCount(count)
+
+			tes3mp.SetContainerItemCharge(charge)
+
+			tes3mp.SetContainerItemEnchantmentCharge(enchantmentCharge)
+
+			tes3mp.SetContainerItemSoul(soul)
+
+			tes3mp.AddContainerItem()
+
+		end
+
+	end
+
+	tes3mp.AddObject()
+
+	tes3mp.SetObjectListAction(enumerations.container.SET)
+
+	tes3mp.SendContainer(false, false)
 
 end
 
