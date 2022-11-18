@@ -28,7 +28,7 @@ local cfg = {
 -- TRADUCTION --
 ----------------
 local trad = {
-	bagName = "Sac sans fond"	
+	bagName = "Bottomless Bag"	
 }
 
 --------------
