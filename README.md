@@ -34,3 +34,5 @@ Rickoff Discord : https://discord.gg/PxZwczN
 - GrassGeneration : generation of grass, tree and creature according to a defined density
 
 - TravelWorld : Fast travel by activating Stiltstrider, Boat or SignPost
+
+- BagScript : the bottomless bag script allows you to store additional items in a container directly available in the player's inventory
