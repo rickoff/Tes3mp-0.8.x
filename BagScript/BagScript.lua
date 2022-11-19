@@ -79,7 +79,9 @@ local function CloseMenu(pid)
 		tes3mp.SetPlayerAsObject(pid)
 		
 		tes3mp.AddObject()
-
+		
+		table.insert(Players[pid].consoleCommandsQueued, consoleCommand)
+	
 		tes3mp.SendConsoleCommand(false)
 		
 	end
@@ -100,6 +102,8 @@ local function AddBag(pid)
 	
 	tes3mp.AddObject()
 
+	table.insert(Players[pid].consoleCommandsQueued, consoleCommand)
+	
 	tes3mp.SendConsoleCommand(false)
 	
 end
