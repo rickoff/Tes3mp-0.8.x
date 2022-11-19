@@ -80,7 +80,7 @@ local function CloseMenu(pid)
 		
 		tes3mp.AddObject()
 		
-		table.insert(Players[pid].consoleCommandsQueued, consoleCommand)
+		table.insert(Players[pid].consoleCommandsQueued, "TM")
 	
 		tes3mp.SendConsoleCommand(false)
 		
@@ -102,7 +102,7 @@ local function AddBag(pid)
 	
 	tes3mp.AddObject()
 
-	table.insert(Players[pid].consoleCommandsQueued, consoleCommand)
+	table.insert(Players[pid].consoleCommandsQueued, "player->additem bag_book 1")
 	
 	tes3mp.SendConsoleCommand(false)
 	
