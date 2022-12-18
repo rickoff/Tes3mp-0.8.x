@@ -637,9 +637,7 @@ TeamGroup.OnGUIAction = function(pid, idGui, data)
 				
 				return true		
 				
-			elseif tonumber(data) == 5 then		
-			
-				BagScript.MainMenu(pid)
+			elseif tonumber(data) == 5 then	
 				
 				return true
 				
