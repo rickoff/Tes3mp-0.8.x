@@ -83,8 +83,6 @@ PreventMerchantEquipFix.OnActorEquipment = function(eventStatus, pid, cellDescri
 			ActorIndex = actor.uniqueIndex
 			ActorRefid = actor.refId
 		end	
-
-		print(ActorIndex)
 		
 		if NpcBarterList[ActorIndex] then
 
