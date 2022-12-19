@@ -283,7 +283,7 @@ customEventHooks.registerHandler("OnPlayerCellChange", AnimationMenu.OnPlayerCel
 
 customEventHooks.registerHandler("OnPlayerDisconnect", AnimationMenu.OnPlayerDisconnect)
 
-customEventHooks.registerValidator("OnGUIAction", AnimationMenu.OnGUIAction)
+customEventHooks.registerHandler("OnGUIAction", AnimationMenu.OnGUIAction)
 
 customCommandHooks.registerCommand("anim", AnimationMenu.ChatListener)
 
