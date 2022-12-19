@@ -36,7 +36,7 @@ local guiID = {
 
 local traduction  = {
 	title = "ANIMATION MENU",
-	option = "Priez;Allongé (sur le dos);Allongé (côté droit);Allongé (côté gauche);Assie (jambes sur le côté);Assie (jambes croisées);Assie (jambes en avant);Assie (sur une chaise);Danser;Annuler (animation)"
+	option = "Pray;Lying(on back);Lying(on right side);Lying(on left side);Sitting(with legs to the side);Sitting(with legs crossed);Sitting(with legs forward);Sitting(on a chair);Dancing;Cancel(animation)"
 }
 
 ---------------
