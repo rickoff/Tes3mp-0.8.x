@@ -40,3 +40,5 @@ Rickoff Discord : https://discord.gg/PxZwczN
 - ChessTes3mp : Play chess alone with another player or against a stupid AI
 
 - PreventMerchantEquipFix : Prevents merchants from equipping sold items
+
+- AnimationScript : add and use new animations without .esp file easily
