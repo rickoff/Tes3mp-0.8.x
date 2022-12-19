@@ -105,13 +105,17 @@ AnimationMenu.OnGUIAction = function(eventStatus, pid, idGui, data)
 			
 			local Animation = "idle"
 			
-			if tonumber(data) >= 0 and tonumber(data) < 8 then
+			if tonumber(data) >= 0 and tonumber(data) < 9 then
 			
 				table.insert(Players[pid].data.spellbook, "sittingAnim_paralyze")
 				
 				Players[pid]:LoadSpellbook()
 				
 				Model = "va_sitting.nif"
+
+				logicHandler.RunConsoleCommandOnPlayer(pid, "PCForce3rdPerson", false)
+
+				logicHandler.RunConsoleCommandOnPlayer(pid, "DisablePlayerViewSwitch", false)	
 				
 			end
 			
@@ -148,10 +152,6 @@ AnimationMenu.OnGUIAction = function(eventStatus, pid, idGui, data)
 				Animation = "idle6"			
 
 			elseif tonumber(data) == 8 then
-
-				table.insert(Players[pid].data.spellbook, "sittingAnim_paralyze")
-				
-				Players[pid]:LoadSpellbook()	
 				
 				Model = "anim_dancinggirl.nif"
 
@@ -161,7 +161,9 @@ AnimationMenu.OnGUIAction = function(eventStatus, pid, idGui, data)
 			
 				logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell sittingAnim_paralyze")
 				
-				tableHelper.removeValue(Players[pid].data.spellbook, "sittingAnim_paralyze")
+				tableHelper.removeValue(Players[pid].data.spellbook, "sittingAnim_paralyze")				
+
+				logicHandler.RunConsoleCommandOnPlayer(pid, "EnablePlayerViewSwitch", false)
 				
 				Players[pid]:LoadSpellbook()
 				
