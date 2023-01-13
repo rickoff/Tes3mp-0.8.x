@@ -365,6 +365,22 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 			customVariable.Cold = customVariable.Cold - 5		
 		end
 		
+		if customVariable.Cold > customVariable.ColdMax then
+            		customVariable.Cold = customVariable.ColdMax
+        	end
+
+        	if customVariable.Cold < 0 then
+            		customVariable.Cold = 0
+        	end
+
+        	if customVariable.Rain > customVariable.RainMax then
+            		customVariable.Rain = customVariable.RainMax
+        	end
+
+        	if customVariable.Rain < 0 then
+            		customVariable.Rain = 0
+        	end
+		
 		if customVariable.HungerTime > customVariable.HungerTimeMax then
 			customVariable.HungerTime = customVariable.HungerTimeMax		
 		end
