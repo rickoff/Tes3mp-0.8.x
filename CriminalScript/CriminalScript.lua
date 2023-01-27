@@ -45,7 +45,7 @@ local trad = {
 	jailTemp = " is in prison for a period of: ",
 	jailSec = " seconds\n",
 	jailWait = "You are in prison for a period of : ",
-	trad.jailStop = "Your jail time just ended"
+	jailStop = "Your jail time just ended"
 }
 
 ------------
