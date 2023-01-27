@@ -324,7 +324,7 @@ CriminalScript.getNewCriminalLevel = function(pid)
 		end
 		
 		if criminal == nil then
-			criminal = 0
+			criminal = -1
 		else
 			Players[pid].data.customVariables.CriminalScript.rank = criminal
 		end
