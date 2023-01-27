@@ -96,7 +96,7 @@ function EventJail(pid)
 			
 			tes3mp.MessageBox(pid, -1, trad.jailStop)
 			
-			tes3mp.SetCell(pid, CustomVar.tempLocation.cellDescription)  
+			tes3mp.SetCell(pid, CustomVar.tempLocation.cell)  
 			tes3mp.SetPos(pid, CustomVar.tempLocation.posX, CustomVar.tempLocation.posY, CustomVar.tempLocation.posZ)
 			tes3mp.SetRot(pid, 0, 0)
 			tes3mp.SendCell(pid)    
