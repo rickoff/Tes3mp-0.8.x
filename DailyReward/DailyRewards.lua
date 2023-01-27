@@ -3,6 +3,7 @@ DailyRewards
 tes3mp 0.8.1
 ---------------------------
 DESCRIPTION :
+gives daily login rewards
 ---------------------------
 INSTALLATION:
 Save the file as DailyRewards.lua inside your server/scripts/custom folder.
