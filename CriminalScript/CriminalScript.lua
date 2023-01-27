@@ -458,10 +458,9 @@ CriminalScript.OnPlayerDeath = function(eventStatus, pid)
 					CriminalScript.PunishPrison(pid, pid, timer)
 				
 					tes3mp.Resurrect(tonumber(pid), 0)
-					
-				end
 				
-				return customEventHooks.makeEventStatus(false,false)
+					return customEventHooks.makeEventStatus(false,false)					
+				end
 
 			end
 			
