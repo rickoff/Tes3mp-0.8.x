@@ -88,7 +88,7 @@ function EventJail(pid)
 	
 		if Players[pid].data.customVariables.CriminalScript.jailer == true then
 
-			local CustomVar = Players[targetPid].data.customVariables.CriminalScript
+			local CustomVar = Players[pid].data.customVariables.CriminalScript
 			
 			CustomVar.jailer = false
 			
