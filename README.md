@@ -42,3 +42,5 @@ Rickoff Discord : https://discord.gg/PxZwczN
 - PreventMerchantEquipFix : Prevents merchants from equipping sold items
 
 - AnimationScript : add and use new animations without .esp file easily
+
+- CriminalScript : script that references players following their bounty, allows to recover a bounty in pvp, sends the criminal to prison for a time
