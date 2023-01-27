@@ -60,7 +60,7 @@ local cfg = {
 		posX = 756,
 		posY = 2560,
 		posZ = -380
-	}
+	},
 	dividerTimer = 2,	
 	bountyBandit = 100,
 	bountyMurderer = 1000,
