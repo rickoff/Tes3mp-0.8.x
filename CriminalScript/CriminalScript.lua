@@ -486,6 +486,7 @@ end
 ------------
 customEventHooks.registerHandler("OnPlayerAuthentified", CriminalScript.OnPlayerAuthentified)
 customEventHooks.registerHandler("OnPlayerBounty", CriminalScript.OnPlayerBounty)
+customEventHooks.registerHandler("OnPlayerCellChange", CriminalScript.OnPlayerCellChange)
 customEventHooks.registerValidator("OnPlayerDeath", CriminalScript.OnPlayerDeath)
 customCommandHooks.registerCommand("criminal", CriminalScript.GetConnectedPlayerList)
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
