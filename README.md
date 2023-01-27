@@ -43,4 +43,6 @@ Rickoff Discord : https://discord.gg/PxZwczN
 
 - AnimationScript : add and use new animations without .esp file easily
 
+- DailyReward : gives daily login rewards
+
 - CriminalScript : script that references players following their bounty, allows to recover a bounty in pvp, sends the criminal to prison for a time
