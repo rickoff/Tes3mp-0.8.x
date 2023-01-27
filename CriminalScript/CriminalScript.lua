@@ -391,9 +391,9 @@ CriminalScript.OnPlayerDeath = function(eventStatus, pid)
 		
 			local KillerPid = playerKiller.pid
 	
-			local PlayerName = MainFunction.GetName(pid)
+			local PlayerName = GetName(pid)
 			
-			local KillerName = MainFunction.GetName(KillerPid)
+			local KillerName = GetName(KillerPid)
 			
 			local currentBounty = tes3mp.GetBounty(pid)
 			
