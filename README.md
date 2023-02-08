@@ -46,3 +46,5 @@ Rickoff Discord : https://discord.gg/PxZwczN
 - DailyReward : gives daily login rewards
 
 - CriminalScript : script that references players following their bounty, allows to recover a bounty in pvp, sends the criminal to prison for a time
+
+- MarketPlace : Hotel for item sale between players with menu, gold is sent to sellers even offline
