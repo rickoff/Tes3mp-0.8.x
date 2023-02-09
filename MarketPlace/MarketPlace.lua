@@ -371,8 +371,6 @@ local function itemAchat(pid, item)
 		local goldLoc = inventoryHelper.getItemIndex(Players[pid].data.inventory, "gold_001", -1)
 		
 		local newPrice = newItem.price
-		
-		local count = 1
 
 		if goldLoc == nil then
 		
@@ -389,12 +387,12 @@ local function itemAchat(pid, item)
 				tableHelper.cleanNils(HdvList[existingPlayer])
 				
 				Players[pid].data.inventory[goldLoc].count = Players[pid].data.inventory[goldLoc].count - newPrice
+
+				local itemref = {refId = newItem.refId, count = newItem.count, charge = -1, soul = ""}
 				
-				table.insert(Players[pid].data.inventory, {refId = newItem.refId, count = count, charge = -1, soul = ""})
+				table.insert(Players[pid].data.inventory, itemref)
 				
 				local goldprice = {refId = "gold_001", count = newPrice, charge = -1, soul = ""}
-				
-				local itemref = {refId = newItem.refId, count = count, charge = -1, soul = ""}
 				
 				Players[pid]:QuicksaveToDrive()
 				
@@ -513,7 +511,7 @@ MarketPlace.showInventoryGUI = function(pid)
 		
 		local options = getAvailablePlayerInventoryStock(pid)
 		
-		local list = "* Retour *\n"
+		local list = trad.Return
 		
 		for i = 1, #options do
 			
