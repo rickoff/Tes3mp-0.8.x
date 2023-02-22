@@ -4,7 +4,7 @@ tes3mp 0.8.1
 ---------------------------
 INSTALLATION:
 Save the file as CreateCustomEnch.lua inside your server/scripts/custom folder.
-Save the file as DataSpell.json inside your server/data/custom/DataBase folder.
+Save the file as DataEnch.json inside your server/data/custom/DataBase folder.
 Edits to customScripts.lua add : CreateCustomEnch = require("custom.CreateCustomEnch")
 ---------------------------
 INSTRUCTIONS:
