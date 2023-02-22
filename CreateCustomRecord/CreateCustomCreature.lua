@@ -1,6 +1,6 @@
 --[[
 CreateCustomCreature
-tes3mp 0.8.0
+tes3mp 0.8.1
 ---------------------------
 INSTALLATION:
 Save the file as CreateCustomCreature.lua inside your server/scripts/custom folder.
@@ -31,22 +31,22 @@ CreateCustomCreature.OnServerInit = function(eventStatus)
 		  id = slot.baseId,
 		  name = slot.name,
 		  model = slot.model,		  
-		  scale = slot.scale,		
+		  --scale = slot.scale,		
 		  script = slot.script,	
-		  bloodType = slot.bloodType,
+		  --bloodType = slot.bloodType,
 		  level = slot.level,
 		  subtype = slot.subtype,	
-		  soulValue = slot.soulValue,
-		  health = slot.health,
+		  --soulValue = slot.soulValue,
+		  --health = slot.health,
 		  magicka = slot.magicka,
 		  fatigue = slot.fatigue,
-		  damageChop = {min = slot.damageChop.min, max = slot.damageChop.max},
-		  damageSlash = {min = slot.damageSlash.min, max = slot.damageSlash.max},
-		  damageThrust = {min = slot.damageThrust.min, max = slot.damageThrust.max},	
+		  --damageChop = {min = slot.damageChop.min, max = slot.damageChop.max},
+		  --damageSlash = {min = slot.damageSlash.min, max = slot.damageSlash.max},
+		  --damageThrust = {min = slot.damageThrust.min, max = slot.damageThrust.max},	
 		  aiFight = slot.aiFight,
-		  aiFlee = slot.aiFlee,
-		  aiAlarm = slot.aiAlarm,
-		  aiServices = slot.aiServices,
+		  --aiFlee = slot.aiFlee,
+		  --aiAlarm = slot.aiAlarm,
+		  --aiServices = slot.aiServices,
 		  flags = slot.flags		  
 		}	
 		recordStoreCreature.data.permanentRecords[string.lower(refId)] = recordTable	
