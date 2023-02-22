@@ -1,6 +1,6 @@
 --[[
 CreateCustomNpc
-tes3mp 0.8.0
+tes3mp 0.8.1
 ---------------------------
 INSTALLATION:
 Save the file as CreateCustomNpc.lua inside your server/scripts/custom folder.
@@ -28,7 +28,7 @@ CreateCustomNpc.OnServerInit = function(eventStatus)
 
 	for refId, slot in pairs(DataNpc) do
 		recordTable = {
-		  baseId = slot.baseId,
+		  baseId = slot.baseId,	  
 		  inventoryBaseId = slot.inventoryBaseId,
 		  name = slot.name,
 		  gender = slot.gender,		
@@ -37,18 +37,28 @@ CreateCustomNpc.OnServerInit = function(eventStatus)
 		  head = slot.head,
 		  class = slot.class,	
 		  level = slot.level,
-		  health = slot.health,
-		  magicka = slot.magicka,
-		  fatigue = slot.fatigue,
-		  aiFight = slot.aiFight,
-		  aiFlee = slot.aiFlee,
-		  aiAlarm = slot.aiAlarm,
-		  aiServices = slot.aiServices,
-		  autoCalc = slot.autoCalc,
 		  faction = slot.faction,
-		  script = slot.script,
-		  items = slot.items
+		  script = slot.script,		  
+		  autoCalc = slot.autoCalc,
+		  --aiFlee = slot.aiFlee,
+		  --aiAlarm = slot.aiAlarm,
+		  --aiServices = slot.aiServices,
+		  --items = slot.items
 		}	
+		if slot.aiFight ~= "" then
+			recordTableaiFight = slot.aiFight
+		end
+		
+		if slot.autoCalc == 0 then
+			recordTable.health = slot.health
+			recordTable.magicka = slot.magicka
+			recordTable.fatigue = slot.fatigue
+		end
+		
+		if slot.model ~= "" then
+			recordTable.model = slot.model
+		end
+		
 		recordStoreNpc.data.permanentRecords[string.lower(refId)] = recordTable	
 	end
 	recordStoreNpc:Save()	
@@ -61,3 +71,4 @@ end
 customEventHooks.registerHandler("OnServerInit", CreateCustomNpc.OnServerInit)
 
 return CreateCustomNpc
+
