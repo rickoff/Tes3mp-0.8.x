@@ -6,6 +6,7 @@ DESCRIPTION :
 select the teleport point of the temple of your choice for Almisivi Intervention and the fort of your choice for Divine Intervention
 ---------------------------
 INSTALLATION:
+Save the file as InterventionPos.json inside your server/data/custom folder.
 Save the file as InterventionPlus.lua inside your server/scripts/custom folder.
 Edits to customScripts.lua add :
 InterventionPlus = require("custom.InterventionPlus")
@@ -15,7 +16,7 @@ Change trad in your language for your server
 Change cfg GUI numbers for a unique numbers 
 ]]
 
-local DataPos = jsonInterface.load("custom/InterventionPlus/InterventionPos.json")
+local DataPos = jsonInterface.load("custom/InterventionPos.json")
 
 ---------------------------
 --------CONFIGURATION------
