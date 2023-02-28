@@ -1,0 +1,158 @@
+{
+  "Divi":[{
+      "cellDescription":"-1, -3",
+	  "name":"Moonmoth Legion Fort",
+      "location":{
+        "posX":-5074.86328125,
+        "posZ":1072.6174316406,
+        "posY":-18578.275390625,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":3.1415927410126
+      }
+    },{
+      "cellDescription":"18, 3",
+	  "name":"Wolverine Hall",	  
+      "location":{
+        "posX":148881.65625,
+        "posZ":1495.1932373047,
+        "posY":28453.791015625,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":0
+      }
+    },{
+      "cellDescription":"-22, 17",
+	  "name":"Fort Frostmoth",		  
+      "location":{
+        "posX":-174583.6875,
+        "posZ":1173.7985839844,
+        "posY":143874.71875,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":0
+      }
+    },{
+      "cellDescription":"1, -13",
+	  "name":"Ebonheart",			  
+      "location":{
+        "posX":8703.0556640625,
+        "posZ":1383.6378173828,
+        "posY":-100601.9609375,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":0
+      }
+    },{
+      "cellDescription":"0, -7",
+	  "name":"Pelagiad",	  
+      "location":{
+        "posX":5738.0615234375,
+        "posZ":1794.7164306641,
+        "posY":-56058.80078125,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":1.5707963705063
+      }
+    },{
+      "cellDescription":"Mournhold, Royal Palace: Courtyard",
+	  "name":"Mournhold, Royal Palace",	  
+      "location":{
+        "posX":-879.81060791016,
+        "posZ":3819.1613769531,
+        "posY":-8.4870548248291,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":0
+      }
+    },{
+      "cellDescription":"-2, 5",
+	  "name":"Buckmoth Legion Fort",	  
+      "location":{
+        "posX":-13359.74609375,
+        "posZ":2615.0239257813,
+        "posY":43071.1953125,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":1.5707963705063
+      }
+    },{
+      "cellDescription":"-10, 11",
+	  "name":"Gnisis",		  
+      "location":{
+        "posX":-80346.640625,
+        "posZ":1159.3560791016,
+        "posY":90558.0234375,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":1.5707963705063
+      }
+    }],
+  "Almi":[{
+      "cellDescription":"4, -13",
+	  "name":"Vivec, Temple",			  
+      "location":{
+        "posX":32878.625,
+        "posZ":1167.5727539063,
+        "posY":-99092.96875,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":0
+      }
+    },{
+      "cellDescription":"-3, -2",
+	  "name":"Balmora, Temple",	  
+      "location":{
+        "posX":-22130.60546875,
+        "posZ":889.57275390625,
+        "posY":-8582.7890625,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":0
+      }
+    },{
+      "cellDescription":"13, -8",
+	  "name":"Molag Mar",		  
+      "location":{
+        "posX":110666.0390625,
+        "posZ":2177.7863769531,
+        "posY":-61664.9375,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":0
+      }
+    },{
+      "cellDescription":"-2, 6",
+	  "name":"Ald'ruhn",		  
+      "location":{
+        "posX":-8583.349609375,
+        "posZ":2881.5727539063,
+        "posY":55240.57421875,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":1.5707963705063
+      }
+    },{
+      "cellDescription":"-11, 11",
+	  "name":"Gnisis",	  
+      "location":{
+        "posX":-86657.125,
+        "posZ":1129.5727539063,
+        "posY":93694.2734375,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":1.5707963705063
+      }
+    },{
+      "cellDescription":"Mournhold, Temple Courtyard",
+	  "name":"Mournhold, Temple",	  
+      "location":{
+        "posX":-28.546756744385,
+        "posZ":550.63226318359,
+        "posY":-1880.4875488281,
+        "rotX":0,
+        "rotY":0,
+        "rotZ":0
+      }
+    }]
+}
