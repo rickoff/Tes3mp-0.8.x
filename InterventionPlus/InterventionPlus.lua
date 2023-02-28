@@ -29,7 +29,7 @@ local trad = {
 }
 
 local cfg = {
-	OnServerInit = false,
+	OnServerInit = true,
 	AlmisiviId = "almsivi intervention",
 	DivineId = "divine intervention",
 	costAlmi = 8,
@@ -183,15 +183,7 @@ InterventionPlus.OnGUIAction = function(pid, idGui, data)
 	end
 end
 
-InterventionPlus.OnPlayerAuthentified = function(eventStatus, pid)
-	if not Players[pid].data.customVariables.markLocation then
-		Players[pid].data.customVariables.markLocation = {}
-		Players[pid]:QuicksaveToDrive()
-	end
-end
-
 customEventHooks.registerValidator("OnPlayerSpellsActive", InterventionPlus.OnPlayerSpellsActiveValidator)
-customEventHooks.registerHandler("OnPlayerAuthentified", InterventionPlus.OnPlayerAuthentified)
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
 	if InterventionPlus.OnGUIAction(pid, idGui, data) then return end	
 end)
