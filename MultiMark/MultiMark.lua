@@ -1,11 +1,10 @@
 --[[
 MultiMark
-tes3mp 0.8.0
-script version 0.5
+tes3mp 0.8.1
+script version 0.6
 ---------------------------
 DESCRIPTION :
-multi mark location with /mark and /recall command
-OR USE DIRECTLY SPELL MARK AND RECALL
+USE DIRECTLY SPELL MARK AND RECALL
 ---------------------------
 INSTALLATION:
 Save the file as MultiMark.lua inside your server/scripts/custom folder.
@@ -184,66 +183,46 @@ MultiMark.OnServerInit = function(eventStatus)
 end
 
 MultiMark.OnPlayerSpellsActiveHandler = function(eventStatus, pid, playerPacket)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		local action = playerPacket.action
-		for spellId, spellInstances in pairs(playerPacket.spellsActive) do  
-			if spellId == cfg.MarkId and action == enumerations.spellbook.ADD then
-				AddMark(pid)
-				break
-			elseif spellId == cfg.RecallId and action == enumerations.spellbook.ADD then
-				ListMark(pid)
-				break
-			end			
-		end
-	end
-end
-
-MultiMark.CommandAddMark = function(pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		AddMark(pid)
-	end
-end
-
-MultiMark.CommandRecallMark = function(pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		ListMark(pid)
+	local action = playerPacket.action
+	for spellId, spellInstances in pairs(playerPacket.spellsActive) do  
+		if spellId == cfg.MarkId and action == enumerations.spellbook.ADD then
+			AddMark(pid)
+			break
+		elseif spellId == cfg.RecallId and action == enumerations.spellbook.ADD then
+			ListMark(pid)
+			break
+		end			
 	end
 end
 
 MultiMark.OnGUIAction = function(pid, idGui, data)
- 	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then  
-		if idGui == cfg.MainGUI then -- Main
-			if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing
-				return true
-			else   
-				SelectChoice(pid, tonumber(data)) --Select
-				return true
-			end
-		elseif idGui == cfg.ChoiceGUI then -- Choice
-			if tonumber(data) == 0 then --Recall
-				RecallPlayer(pid)
-				return true
-			elseif tonumber(data) == 1 then --Remove
-				RemoveMark(pid)
-				return ListMark(pid)		
-			end
+	if idGui == cfg.MainGUI then -- Main
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing
+			return true
+		else   
+			SelectChoice(pid, tonumber(data)) --Select
+			return true
 		end
-		
+	elseif idGui == cfg.ChoiceGUI then -- Choice
+		if tonumber(data) == 0 then --Recall
+			RecallPlayer(pid)
+			return true
+		elseif tonumber(data) == 1 then --Remove
+			RemoveMark(pid)
+			return ListMark(pid)		
+		end
 	end
 end
 
 MultiMark.OnPlayerAuthentified = function(eventStatus, pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		if not Players[pid].data.customVariables.markLocation then
-			Players[pid].data.customVariables.markLocation = {}
-			Players[pid]:QuicksaveToDrive()
-		end
+
+	if not Players[pid].data.customVariables.markLocation then
+		Players[pid].data.customVariables.markLocation = {}
+		Players[pid]:QuicksaveToDrive()
 	end
 end
 
 customEventHooks.registerHandler("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActiveHandler)
-customCommandHooks.registerCommand("mark", MultiMark.CommandAddMark)
-customCommandHooks.registerCommand("recall", MultiMark.CommandRecallMark)
 customEventHooks.registerHandler("OnPlayerAuthentified", MultiMark.OnPlayerAuthentified)
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
 	if MultiMark.OnGUIAction(pid, idGui, data) then return end	
