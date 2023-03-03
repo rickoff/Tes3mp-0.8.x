@@ -19,12 +19,17 @@ local MultiProject = {}
 MultiProject.OnRecordDynamicValidator = function(eventStatus, pid, recordArray, storeType)
 	for _, record in ipairs(recordArray) do
 		if storeType == "weapon" then
-			if string.find(record.baseId, "arrow") or string.find(record.baseId, "bolt") or string.find(record.baseId, "throwing") then		
+			if string.find(record.baseId, "arrow") or string.find(record.baseId, "bolt") or string.find(record.baseId, "throwing") then			
 				local newQuantity = math.floor(record.enchantmentCharge * cfg.projectEchantMulti)				
 				local itemIndex = inventoryHelper.getItemIndex(Players[pid].data.inventory, record.baseId)				
-				local itemCount = Players[pid].data.inventory[itemIndex].count or 1			
-				if newQuantity > itemCount then newQuantity = itemCount end			
-				record.quantity = newQuantity			
+				local itemData = Players[pid].data.inventory[itemIndex]				
+				local itemCount = itemData.count or 0				
+				if newQuantity > itemCount then newQuantity = itemCount end
+				local item = { refId = itemData.refId, count = newQuantity, charge = -1, enchantmentCharge = -1, soul = "" }
+				inventoryHelper.removeExactItem(Players[pid].data.inventory, itemData.refId, newQuantity, -1, -1, "")				
+				Players[pid]:LoadItemChanges(item, enumerations.inventory.REMOVE)				
+				Players[pid]: QuicksaveToDrive()				
+				record.quantity = newQuantity				
 			end						
 		end
 	end
