@@ -28,7 +28,7 @@ MultiProject.OnRecordDynamicValidator = function(eventStatus, pid, recordArray, 
 				local item = { refId = itemData.refId, count = newQuantity, charge = -1, enchantmentCharge = -1, soul = "" }
 				inventoryHelper.removeExactItem(Players[pid].data.inventory, itemData.refId, newQuantity, -1, -1, "")				
 				Players[pid]:LoadItemChanges(item, enumerations.inventory.REMOVE)				
-				Players[pid]: QuicksaveToDrive()				
+				Players[pid]:QuicksaveToDrive()				
 				record.quantity = newQuantity				
 			end						
 		end
