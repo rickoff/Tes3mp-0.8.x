@@ -48,3 +48,5 @@ Rickoff Discord : https://discord.gg/PxZwczN
 - CriminalScript : script that references players following their bounty, allows to recover a bounty in pvp, sends the criminal to prison for a time
 
 - MarketPlace : Hotel for item sale between players with menu, gold is sent to sellers even offline
+
+- MultiProject : Multiple enchantment of arrows, bolts and throwing weapons
