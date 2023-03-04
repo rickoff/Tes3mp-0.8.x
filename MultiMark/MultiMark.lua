@@ -26,11 +26,7 @@ trad.ChoiceMarkOpt = "Recall;Remove"
 trad.AddNewMark = "New mark at\n"
 
 local cfg = {}
-cfg.MarkId = "mark"
-cfg.RecallId = "recall"
 cfg.MaxMark = 5
-cfg.costMark = 18
-cfg.costRecall = 18
 cfg.MainGUI = 21092022
 cfg.ChoiceGUI = 21092023
 
