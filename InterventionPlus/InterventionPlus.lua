@@ -29,11 +29,6 @@ local trad = {
 }
 
 local cfg = {
-	OnServerInit = true,
-	AlmisiviId = "almsivi intervention",
-	DivineId = "divine intervention",
-	costAlmi = 8,
-	costDivi = 8,
 	MainGUI = 28022023,
 	ChoiceGUI = 28022024
 }
@@ -41,9 +36,7 @@ local cfg = {
 local playerChoice = {}
 
 local posTab = {}
----------------------------
---------FUNCTION-----------
----------------------------
+
 local function GetName(pid)
 	return string.lower(Players[pid].accountName)
 end
@@ -54,23 +47,15 @@ local function SelectChoice(pid, index)
 end
 
 local function ListPos(pid, type)
-
-    local list = trad.BackList 
-	
-	local options = DataPos[type]
-	
-    for i = 1, #options do
-	
-		list = list..options[i].name.." : "..math.floor(options[i].location.posX).." ; "..math.floor(options[i].location.posY).." ; "..math.floor(options[i].location.posZ)
-		
+    local list = trad.BackList 	
+	local options = DataPos[type]	
+    for i = 1, #options do	
+		list = list..options[i].name.." : "..math.floor(options[i].location.posX).." ; "..math.floor(options[i].location.posY).." ; "..math.floor(options[i].location.posZ)	
         if not(i == #options) then
             list = list .. "\n"
-        end
-		
-    end
-	
-	posTab[GetName(pid)] = options
-	
+        end		
+    end	
+	posTab[GetName(pid)] = options	
 	tes3mp.ListBox(pid, cfg.MainGUI, trad.SelectPos..color.Default, list)	
 end
 
@@ -91,102 +76,41 @@ local function RecallPlayer(pid)
 	playerChoice[GetName(pid)] = nil
 end
 
----------------------------
---------EVENTS-------------
----------------------------
 local InterventionPlus = {}
 
-InterventionPlus.OnServerInit = function(eventStatus)
-
-	if cfg.OnServerInit then
-		local recordStoreSpells = RecordStores["spell"]
-		local recordTable
-		
-		recordTable = {
-		  name = "Almsivi Intervention",
-		  subtype = 0,
-		  cost = cfg.costAlmi,
-		  flags = 1,
-		  effects = {{
-			attribute = -1,
-			area = 0,
-			duration = 0,
-			id = 63,
-			rangeType = 0,
-			skill = -1,
-			magnitudeMax = 0,
-			magnitudeMin = 0
-			}}
-		}
-		recordStoreSpells.data.permanentRecords["almsivi intervention"] = recordTable
-
-		recordTable = {
-		  name = "Divine Intervention",
-		  subtype = 0,
-		  cost = cfg.costDivi,
-		  flags = 1,
-		  effects = {{
-			attribute = -1,
-			area = 0,
-			duration = 0,
-			id = 62,
-			rangeType = 0,
-			skill = -1,
-			magnitudeMax = 0,
-			magnitudeMin = 0
-			}}
-		}
-		recordStoreSpells.data.permanentRecords["divine intervention"] = recordTable
-		
-		recordStoreSpells:Save()
-	end
-end
-
 InterventionPlus.OnPlayerSpellsActiveValidator = function(eventStatus, pid, playerPacket)
-
-	local action = playerPacket.action
-	
-	for spellId, spellInstances in pairs(playerPacket.spellsActive) do  
-	
-		if spellId == cfg.AlmisiviId and action == enumerations.spellbook.ADD then
-			
-			ListPos(pid, "Almi")
-			
-			return customEventHooks.makeEventStatus(false, false)
-			
-		elseif spellId == cfg.DivineId and action == enumerations.spellbook.ADD then
-		
-			ListPos(pid, "Divi")
-			
-			return customEventHooks.makeEventStatus(false, false)
-			
-		end	
-		
-	end
+	for spellId, spellInstances in pairs(playerPacket.spellsActive) do	
+		for _, spellInstance in ipairs(spellInstances) do	
+			for _, effect in ipairs(spellInstance.effects) do		
+				if effect.id == enumerations.effects.ALMSIVI_INTERVENTION then
+					effect.magnitude = 0
+					ListPos(pid, "Almi")
+					break
+				elseif effect.id == enumerations.effects.DIVINE_INTERVENTION then
+					effect.magnitude = 0			
+					ListPos(pid, "Divi")
+					break
+				end
+			end	
+		end
+	end	
 end
 
-InterventionPlus.OnGUIAction = function(pid, idGui, data) 
-	if idGui == cfg.MainGUI then -- Main
-		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing
-			return true
+InterventionPlus.OnGUIAction = function(eventStatus, pid, idGui, data)
+	if idGui == cfg.MainGUI then
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else   
-			SelectChoice(pid, tonumber(data)) --Select
-			return true
+			SelectChoice(pid, tonumber(data))
 		end
-	elseif idGui == cfg.ChoiceGUI then -- Choice
-		if tonumber(data) == 0 then --Recall
+	elseif idGui == cfg.ChoiceGUI then
+		if tonumber(data) == 0 then
 			RecallPlayer(pid)
-			return true
-		elseif tonumber(data) == 1 then --Cancel
-			return true	
 		end
 	end
 end
 
 customEventHooks.registerValidator("OnPlayerSpellsActive", InterventionPlus.OnPlayerSpellsActiveValidator)
-customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
-	if InterventionPlus.OnGUIAction(pid, idGui, data) then return end	
-end)
+customEventHooks.registerHandler("OnGUIAction", InterventionPlus.OnGUIAction)
 customEventHooks.registerHandler("OnServerInit", InterventionPlus.OnServerInit)
 
 return InterventionPlus
