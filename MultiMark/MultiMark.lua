@@ -1,7 +1,7 @@
 --[[
 MultiMark
 tes3mp 0.8.1
-script version 0.6
+script version 0.7
 ---------------------------
 DESCRIPTION :
 USE DIRECTLY SPELL MARK AND RECALL
@@ -17,9 +17,6 @@ Change cfg MaxMark for config limite mark
 Change cfg GUI numbers for a unique numbers 
 ]]
 
----------------------------
---------CONFIGURATION------
----------------------------
 local trad = {}
 trad.BackList = "* Back *\n"
 trad.LimiteMark = color.Red.."The number of mark is limited to : "
@@ -39,9 +36,6 @@ cfg.ChoiceGUI = 21092023
 
 local playerIndex = {}
 
----------------------------
---------FUNCTION-----------
----------------------------
 local function GetName(pid)
 	return string.lower(Players[pid].accountName)
 end
@@ -53,36 +47,13 @@ end
 
 local function ListMark(pid)
     local options = Players[pid].data.customVariables.markLocation
-    local list = trad.BackList 
-    local listItemChanged = false
-    local listItem = ""
-	
+    local list = trad.BackList	
     for i = 1, #options do
- 
-		for x, slot in pairs(Players[pid].data.customVariables.markLocation) do	
-			if slot == options[i] then
-				listItem = string.sub(slot.cell, 1, 25).." : "..math.floor(slot.posX).." ; "..math.floor(slot.posY).." ; "..math.floor(slot.posZ)
-				listItemChanged = true
-				break
-			else
-				listItemChanged = false
-			end
-		end
-		
-		if listItemChanged == true then
-			list = list .. listItem
-		end
-		
-		if listItemChanged == false then
-			list= list .. "\n"
-		end
-		
+		list = list..string.sub(options[i].cell, 1, 25).." : "..math.floor(options[i].posX).." ; "..math.floor(options[i].posY).." ; "..math.floor(options[i].posZ)		
         if not(i == #options) then
             list = list .. "\n"
         end
     end
-	
-	listItemChanged = false
 	tes3mp.ListBox(pid, cfg.MainGUI, trad.SelectMark..color.Default, list)	
 end
 
@@ -133,81 +104,36 @@ local function RecallPlayer(pid)
 	tes3mp.SendPos(pid)		
 end
 
----------------------------
---------EVENTS-------------
----------------------------
 local MultiMark = {}
 
-MultiMark.OnServerInit = function(eventStatus)
-
-	local recordStoreSpells = RecordStores["spell"]
-	local recordTable
-	
-	recordTable = {
-	  name = "Mark",
-	  subtype = 0,
-	  cost = cfg.costMark,
-	  flags = 1,
-	  effects = {{
-        attribute = -1,
-        area = 0,
-        duration = 0,
-        id = 61,
-        rangeType = 0,
-        skill = -1,
-        magnitudeMax = 0,
-        magnitudeMin = 0
-		}}
-	}
-	recordStoreSpells.data.permanentRecords["mark"] = recordTable
-
-	recordTable = {
-	  name = "Recall",
-	  subtype = 0,
-	  cost = cfg.costRecall,
-	  flags = 1,
-	  effects = {{
-        attribute = -1,
-        area = 0,
-        duration = 0,
-        id = 61,
-        rangeType = 0,
-        skill = -1,
-        magnitudeMax = 0,
-        magnitudeMin = 0
-		}}
-	}
-	recordStoreSpells.data.permanentRecords["recall"] = recordTable
-	
-	recordStoreSpells:Save()
-end
-
-MultiMark.OnPlayerSpellsActiveHandler = function(eventStatus, pid, playerPacket)
-	local action = playerPacket.action
-	for spellId, spellInstances in pairs(playerPacket.spellsActive) do  
-		if spellId == cfg.MarkId and action == enumerations.spellbook.ADD then
-			AddMark(pid)
-			break
-		elseif spellId == cfg.RecallId and action == enumerations.spellbook.ADD then
-			ListMark(pid)
-			break
-		end			
+MultiMark.OnPlayerSpellsActiveValidator = function(eventStatus, pid, playerPacket)
+	for spellId, spellInstances in pairs(playerPacket.spellsActive) do	
+		for _, spellInstance in ipairs(spellInstances) do	
+			for _, effect in ipairs(spellInstance.effects) do		
+				if effect.id == enumerations.effects.MARK then
+					effect.magnitude = 0
+					AddMark(pid)
+					break
+				elseif effect.id == enumerations.effects.RECALL then
+					effect.magnitude = 0			
+					ListMark(pid)
+					break
+				end
+			end	
+		end
 	end
 end
 
-MultiMark.OnGUIAction = function(pid, idGui, data)
-	if idGui == cfg.MainGUI then -- Main
+MultiMark.OnGUIAction = function(eventStatus, pid, idGui, data)
+	if idGui == cfg.MainGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing
-			return true
 		else   
-			SelectChoice(pid, tonumber(data)) --Select
-			return true
+			SelectChoice(pid, tonumber(data))
 		end
-	elseif idGui == cfg.ChoiceGUI then -- Choice
-		if tonumber(data) == 0 then --Recall
+	elseif idGui == cfg.ChoiceGUI then
+		if tonumber(data) == 0 then
 			RecallPlayer(pid)
-			return true
-		elseif tonumber(data) == 1 then --Remove
+		elseif tonumber(data) == 1 then
 			RemoveMark(pid)
 			return ListMark(pid)		
 		end
@@ -215,18 +141,14 @@ MultiMark.OnGUIAction = function(pid, idGui, data)
 end
 
 MultiMark.OnPlayerAuthentified = function(eventStatus, pid)
-
 	if not Players[pid].data.customVariables.markLocation then
 		Players[pid].data.customVariables.markLocation = {}
 		Players[pid]:QuicksaveToDrive()
 	end
 end
 
-customEventHooks.registerHandler("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActiveHandler)
+customEventHooks.registerValidator("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActiveValidator)
 customEventHooks.registerHandler("OnPlayerAuthentified", MultiMark.OnPlayerAuthentified)
-customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
-	if MultiMark.OnGUIAction(pid, idGui, data) then return end	
-end)
-customEventHooks.registerHandler("OnServerInit", MultiMark.OnServerInit)
+customEventHooks.registerHandler("OnGUIAction", MultiMark.OnGUIAction)
 
 return MultiMark
