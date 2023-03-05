@@ -1,6 +1,6 @@
 --[[
 ClimbingScript
-tes3mp 0.8.0
+tes3mp 0.8.1
 ---------------------------
 DESCRIPTION :
 Climb using the tools on almost any surface
@@ -116,9 +116,7 @@ local function DamageChargeObject(pid, refId)
 	
 	local itemRef = {refId = refId, count = count, charge = charge - 1, enchantmentCharge = -1, soul = ""}		
 	table.insert(Players[pid].data.inventory, itemRef)
-	Players[pid]:LoadItemChanges({itemRef}, enumerations.inventory.ADD)	
-
-	Players[pid]:LoadInventory()
+	Players[pid]:LoadItemChanges({itemRef}, enumerations.inventory.ADD)
 	
 	Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT] = {refId = refId, count = count, charge = (charge - 1), enchantmentCharge = -1}
 	Players[pid]:LoadEquipment()
@@ -192,75 +190,69 @@ ClimbingScript.OnServerInit = function(eventStatus)
 	recordTable = nil	
 end
 
-ClimbingScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then	
-		local ObjectRefid
-		local ObjectIndex	
-		for _, object in pairs(objects) do
-			ObjectRefid = object.refId
-			ObjectIndex = object.uniqueIndex
-		end	
-		if ObjectIndex == nil or ObjectRefid == nil then return end	
-		
-		local drawState = tes3mp.GetDrawState(pid)
-		
-		if StaticData[string.lower(ObjectRefid)] then
-			if tes3mp.GetDrawState(pid) == 1 and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == "climbing_tool" then
-				local fatigueCurrent = tes3mp.GetFatigueCurrent(pid)
-				if cfg.Momentum == true and fatigueCurrent >= 10 then
-					local rotZ = tes3mp.GetRotZ(pid)
-					local impulseX = math.cos(rotZ) * 5
-					local impulseY = math.sin(rotZ) * 5
-					tes3mp.SetMomentum(pid, impulseX, impulseY, 500)
-					tes3mp.SendMomentum(pid)
+ClimbingScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects)	
+	local ObjectRefid
+	local ObjectIndex	
+	for _, object in pairs(objects) do
+		ObjectRefid = object.refId
+		ObjectIndex = object.uniqueIndex
+	end	
+	if ObjectIndex == nil or ObjectRefid == nil then return end	
+
+	local drawState = tes3mp.GetDrawState(pid)
+
+	if StaticData[string.lower(ObjectRefid)] then
+		if tes3mp.GetDrawState(pid) == 1 and Players[pid].data.equipment[enumerations.equipment.CARRIED_RIGHT].refId == "climbing_tool" then
+			local fatigueCurrent = tes3mp.GetFatigueCurrent(pid)
+			if cfg.Momentum == true and fatigueCurrent >= 10 then
+				local rotZ = tes3mp.GetRotZ(pid)
+				local impulseX = math.cos(rotZ) * 5
+				local impulseY = math.sin(rotZ) * 5
+				tes3mp.SetMomentum(pid, impulseX, impulseY, 500)
+				tes3mp.SendMomentum(pid)
+				tes3mp.SetFatigueCurrent(pid, fatigueCurrent - 10)
+				tes3mp.SendStatsDynamic(pid)
+			else
+				if Players[pid].data.timerClimb and fatigueCurrent >= 10 then
+					tes3mp.StopTimer(Players[pid].data.timerClimb)
+					Players[pid].data.timerClimb = nil
+					Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.8), "i", pid)
+					tes3mp.StartTimer(Players[pid].data.timerClimb)	
+					logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)	
 					tes3mp.SetFatigueCurrent(pid, fatigueCurrent - 10)
-					tes3mp.SendStatsDynamic(pid)
-				else
-					if Players[pid].data.timerClimb and fatigueCurrent >= 10 then
-						tes3mp.StopTimer(Players[pid].data.timerClimb)
-						Players[pid].data.timerClimb = nil
-						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.8), "i", pid)
-						tes3mp.StartTimer(Players[pid].data.timerClimb)	
-						logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)	
-						tes3mp.SetFatigueCurrent(pid, fatigueCurrent - 10)
-						tes3mp.SendStatsDynamic(pid)					
-					elseif not Players[pid].data.timerClimb and fatigueCurrent >= 10 then
-						Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.8), "i", pid)
-						tes3mp.StartTimer(Players[pid].data.timerClimb)	
-						logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)
-						tes3mp.SetFatigueCurrent(pid, fatigueCurrent - 10)
-						tes3mp.SendStatsDynamic(pid)					
-					end
-				
+					tes3mp.SendStatsDynamic(pid)					
+				elseif not Players[pid].data.timerClimb and fatigueCurrent >= 10 then
+					Players[pid].data.timerClimb = tes3mp.CreateTimerEx("StopClimb", time.seconds(0.8), "i", pid)
+					tes3mp.StartTimer(Players[pid].data.timerClimb)	
+					logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell climbing_spell", false)
+					tes3mp.SetFatigueCurrent(pid, fatigueCurrent - 10)
+					tes3mp.SendStatsDynamic(pid)					
 				end
-				ClimbingScript.PlaySound(pid, "heavy armor hit")
-				DamageChargeObject(pid, "climbing_tool")			
+
 			end
-		end		
-	end
+			ClimbingScript.PlaySound(pid, "heavy armor hit")
+			DamageChargeObject(pid, "climbing_tool")			
+		end
+	end		
 end
 
 ClimbingScript.BuyTools = function(pid)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then	
-		if GetPlayerGold(pid) >= cfg.PriceTools then
-			RemoveGold(pid, cfg.PriceTools)	
-			local itemref = {refId = "climbing_tool", count = 1, charge = -1, enchantmentCharge = -1, soul = ""}
-			table.insert(Players[pid].data.inventory, itemref)			
-			Players[pid]:LoadItemChanges({itemref}, enumerations.inventory.ADD)
-			local message = (color.Default.."You are buy : climbing tool.")	
-			tes3mp.MessageBox(pid, -1, message)	
-			Players[pid]:QuicksaveToDrive()			
-		else
-			local message = (color.Default.."You can't afford to buy : climbing tool.\nPrice : "..cfg.PriceTools..".\nInventory Gold : "..GetPlayerGold(pid))	
-			tes3mp.MessageBox(pid, -1, message)	
-		end
+	if GetPlayerGold(pid) >= cfg.PriceTools then
+		RemoveGold(pid, cfg.PriceTools)	
+		local itemref = {refId = "climbing_tool", count = 1, charge = -1, enchantmentCharge = -1, soul = ""}
+		table.insert(Players[pid].data.inventory, itemref)			
+		Players[pid]:LoadItemChanges({itemref}, enumerations.inventory.ADD)
+		local message = (color.Default.."You are buy : climbing tool.")	
+		tes3mp.MessageBox(pid, -1, message)	
+		Players[pid]:QuicksaveToDrive()			
+	else
+		local message = (color.Default.."You can't afford to buy : climbing tool.\nPrice : "..cfg.PriceTools..".\nInventory Gold : "..GetPlayerGold(pid))	
+		tes3mp.MessageBox(pid, -1, message)	
 	end
 end
 
 ClimbingScript.PlaySound = function(pid, sound)
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-		logicHandler.RunConsoleCommandOnPlayer(pid, "playsound "..'"'..sound..'"')
-	end
+	logicHandler.RunConsoleCommandOnPlayer(pid, "playsound "..'"'..sound..'"')
 end
 
 customEventHooks.registerHandler("OnServerInit", ClimbingScript.OnServerInit)
