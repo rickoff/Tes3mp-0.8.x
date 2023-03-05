@@ -37,8 +37,6 @@ Rickoff Discord : https://discord.gg/PxZwczN
 
 - BagScript : the bottomless bag script allows you to store additional items in a container directly available in the player's inventory
 
-- ChessTes3mp : Play chess alone with another player or against a stupid AI
-
 - PreventMerchantEquipFix : Prevents merchants from equipping sold items
 
 - AnimationScript : add and use new animations without .esp file easily
