@@ -302,32 +302,27 @@ BagScript.OnServerInit = function(eventStatus)
 end
 
 BagScript.OnPlayerAuthentified = function(eventStatus, pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
 	
-		if Players[pid].data.customVariables.Bag == nil then
-		
-			Players[pid].data.customVariables.Bag = {
-				inventory = {},
-				cellDescription = "",
-				uniqueIndex = 0
-			}
-			
-		end
+	if Players[pid].data.customVariables.Bag == nil then
 
-		if not tableHelper.containsValue(Players[pid].data.inventory, "bag_book", true) then
-			AddBag(pid)
-		end
-		
-		Players[pid].data.quickKeys[cfg.quickKey] = {
-			keyType = 0,
-			itemId = "bag_book"
+		Players[pid].data.customVariables.Bag = {
+			inventory = {},
+			cellDescription = "",
+			uniqueIndex = 0
 		}
-		
-		Players[pid]:LoadQuickKeys()
-		
+
 	end
-	
+
+	if not tableHelper.containsValue(Players[pid].data.inventory, "bag_book", true) then
+		AddBag(pid)
+	end
+
+	Players[pid].data.quickKeys[cfg.quickKey] = {
+		keyType = 0,
+		itemId = "bag_book"
+	}
+
+	Players[pid]:LoadQuickKeys()	
 end
 
 BagScript.OnPlayerDisconnect = function(eventStatus, pid)
@@ -340,184 +335,153 @@ BagScript.OnPlayerDisconnect = function(eventStatus, pid)
 	
 end
 
-BagScript.OnPlayerItemUse = function(eventStatus, pid, refId)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then	
+BagScript.OnPlayerItemUse = function(eventStatus, pid, refId)	
 		
-		if string.lower(refId) == "bag_book" then	
+	if string.lower(refId) == "bag_book" then	
 
-			DeleteBag(pid)
-			
-			local cellDescription = tes3mp.GetCell(pid)
-			
-			local location = { posX = tes3mp.GetPosX(pid), posY = tes3mp.GetPosY(pid), posZ = -99999, rotX = 0, rotY = 0, rotZ = 0 }
-			
-			local uniqueIndex = CreateBag(cellDescription, location, "bag_container")
+		DeleteBag(pid)
 
-			Players[pid].data.customVariables.Bag.cellDescription = cellDescription
-			
-			Players[pid].data.customVariables.Bag.uniqueIndex = uniqueIndex
+		local cellDescription = tes3mp.GetCell(pid)
 
-			SendPacketBag(pid, cellDescription, uniqueIndex, LoadedCells[cellDescription].data.objectData[uniqueIndex])
+		local location = { posX = tes3mp.GetPosX(pid), posY = tes3mp.GetPosY(pid), posZ = -99999, rotX = 0, rotY = 0, rotZ = 0 }
 
-			if Players[pid].data.customVariables.Bag.inventory ~= nil then
-			
-				LoadedCells[cellDescription].data.objectData[uniqueIndex].inventory = Players[pid].data.customVariables.Bag.inventory
-			
-				UpdateBag(pid)
-				
-			end
-			
-			CloseMenu(pid)
+		local uniqueIndex = CreateBag(cellDescription, location, "bag_container")
 
-			ActivateBag(pid, cellDescription, uniqueIndex)
-		
-			return customEventHooks.makeEventStatus(false,false) 
+		Players[pid].data.customVariables.Bag.cellDescription = cellDescription
+
+		Players[pid].data.customVariables.Bag.uniqueIndex = uniqueIndex
+
+		SendPacketBag(pid, cellDescription, uniqueIndex, LoadedCells[cellDescription].data.objectData[uniqueIndex])
+
+		if Players[pid].data.customVariables.Bag.inventory ~= nil then
+
+			LoadedCells[cellDescription].data.objectData[uniqueIndex].inventory = Players[pid].data.customVariables.Bag.inventory
+
+			UpdateBag(pid)
+
 		end
-		
+
+		CloseMenu(pid)
+
+		ActivateBag(pid, cellDescription, uniqueIndex)
+
+		return customEventHooks.makeEventStatus(false,false) 
 	end
 end	
 
-BagScript.OnContainerHandler = function(eventStatus, pid, cellDescription, objects)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then	
+BagScript.OnContainerHandler = function(eventStatus, pid, cellDescription, objects)	
 	
-		local ObjectIndex
-		
-		local ObjectRefid
-		
-		for _, object in pairs(objects) do
-		
-			ObjectIndex = object.uniqueIndex
-			
-			ObjectRefid = object.refId
-			
-		end	
-		
-		if ObjectIndex ~= nil and ObjectRefid ~= nil then
-	
-			if ObjectIndex == Players[pid].data.customVariables.Bag.uniqueIndex then
-				
-				local containerSubAction = tes3mp.GetObjectListContainerSubAction()	
+	local ObjectIndex
 
-				if containerSubAction == enumerations.containerSub.TAKE_ALL then
-				
-					DeleteBag(pid)
-					
-				end
+	local ObjectRefid
+
+	for _, object in pairs(objects) do
+
+		ObjectIndex = object.uniqueIndex
+
+		ObjectRefid = object.refId
+
+	end	
+
+	if ObjectIndex ~= nil and ObjectRefid ~= nil then
+
+		if ObjectIndex == Players[pid].data.customVariables.Bag.uniqueIndex then
+
+			local containerSubAction = tes3mp.GetObjectListContainerSubAction()	
+
+			if containerSubAction == enumerations.containerSub.TAKE_ALL then
+
+				DeleteBag(pid)
 
 			end
-			
 		end
-		
-    end
-	
+	end	
 end
 
-BagScript.OnContainerValidator = function(eventStatus, pid, cellDescription, objects)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then	
+BagScript.OnContainerValidator = function(eventStatus, pid, cellDescription, objects)	
 	
-		local ObjectIndex
-		
-		local ObjectRefid
-		
-		for _, object in pairs(objects) do
-		
-			ObjectIndex = object.uniqueIndex
-			
-			ObjectRefid = object.refId
-			
-		end	
-		
-		if ObjectIndex ~= nil and ObjectRefid ~= nil then
-	
-			for containerIndex = 0, tes3mp.GetObjectListSize() - 1 do
+	local ObjectIndex
 
-				for itemIndex = 0, tes3mp.GetContainerChangesSize(containerIndex) - 1 do
-				
-					local ObjectRefid = tes3mp.GetContainerItemRefId(containerIndex, itemIndex)
-					
-					if ObjectRefid and ObjectRefid == "bag_book" then
-					
-						return customEventHooks.makeEventStatus(false, false)	
-						
-					end
-					
+	local ObjectRefid
+
+	for _, object in pairs(objects) do
+
+		ObjectIndex = object.uniqueIndex
+
+		ObjectRefid = object.refId
+
+	end	
+
+	if ObjectIndex ~= nil and ObjectRefid ~= nil then
+
+		for containerIndex = 0, tes3mp.GetObjectListSize() - 1 do
+
+			for itemIndex = 0, tes3mp.GetContainerChangesSize(containerIndex) - 1 do
+
+				local ObjectRefid = tes3mp.GetContainerItemRefId(containerIndex, itemIndex)
+
+				if ObjectRefid and ObjectRefid == "bag_book" then
+
+					return customEventHooks.makeEventStatus(false, false)	
+
 				end
-				
 			end
-			
 		end
-		
-    end
-	
+	end	
 end
 
 BagScript.OnPlayerInventory = function(eventStatus, pid, playerPacket)
+	
+	local action = tes3mp.GetInventoryChangesAction(pid)
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local action = tes3mp.GetInventoryChangesAction(pid)
-		
-		local itemChangesCount = tes3mp.GetInventoryChangesSize(pid)
-		
-		if action == enumerations.inventory.REMOVE then
-		
-			for index = 0, itemChangesCount - 1 do
-			
-				local ObjectRefid = tes3mp.GetInventoryItemRefId(pid, index)
-				
-				if ObjectRefid and ObjectRefid == "bag_book" then	
-				
-					local item = {
-						refId = ObjectRefid,
-						count = tes3mp.GetInventoryItemCount(pid, index),
-						charge = tes3mp.GetInventoryItemCharge(pid, index),
-						enchantmentCharge = tes3mp.GetInventoryItemEnchantmentCharge(pid, index),
-						soul = tes3mp.GetInventoryItemSoul(pid, index)
-					}	
-					
-					Players[pid]:LoadItemChanges({item}, enumerations.inventory.ADD)
-					
-					return customEventHooks.makeEventStatus(false, false)	
-					
-				end
-				
-			end	
-		end
-		
+	local itemChangesCount = tes3mp.GetInventoryChangesSize(pid)
+
+	if action == enumerations.inventory.REMOVE then
+
+		for index = 0, itemChangesCount - 1 do
+
+			local ObjectRefid = tes3mp.GetInventoryItemRefId(pid, index)
+
+			if ObjectRefid and ObjectRefid == "bag_book" then	
+
+				local item = {
+					refId = ObjectRefid,
+					count = tes3mp.GetInventoryItemCount(pid, index),
+					charge = tes3mp.GetInventoryItemCharge(pid, index),
+					enchantmentCharge = tes3mp.GetInventoryItemEnchantmentCharge(pid, index),
+					soul = tes3mp.GetInventoryItemSoul(pid, index)
+				}	
+
+				Players[pid]:LoadItemChanges({item}, enumerations.inventory.ADD)
+
+				return customEventHooks.makeEventStatus(false, false)	
+
+			end
+		end	
 	end
-	
 end
 
 BagScript.OnObjectPlace = function(eventStatus, pid, cellDescription, objects)
+		
+	local ObjectIndex
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-		
-		local ObjectIndex
-		
-		local ObjectRefid
-		
-		for _, object in pairs(objects) do
-		
-			ObjectIndex = object.uniqueIndex
-			
-			ObjectRefid = object.refId
-		end	
-		
-		if ObjectIndex ~= nil and ObjectRefid ~= nil then
-		
-			if ObjectRefid == "bag_book" then
-			
-				return customEventHooks.makeEventStatus(false, false)
-				
-			end
-			
+	local ObjectRefid
+
+	for _, object in pairs(objects) do
+
+		ObjectIndex = object.uniqueIndex
+
+		ObjectRefid = object.refId
+	end	
+
+	if ObjectIndex ~= nil and ObjectRefid ~= nil then
+
+		if ObjectRefid == "bag_book" then
+
+			return customEventHooks.makeEventStatus(false, false)
+
 		end
-		
 	end
-	
 end
 ------------
 -- EVENTS --
