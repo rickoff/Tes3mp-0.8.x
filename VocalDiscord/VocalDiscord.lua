@@ -56,35 +56,31 @@ local function GetName(pid)
 	return string.lower(Players[pid].accountName)
 end
 
-local function SavePlayerLocation(pid, disconnect)
+local function SavePlayerLocation(pid, disconnect)	
 	
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local PlayerName = GetName(pid)
-		
-		if not disconnect then
-		
-			playerLocations[PlayerName] = {
-				location = Players[pid].data.location,
-				name = Players[pid].accountName,
-				level = Players[pid].data.stats.level,
-				vocal = Players[pid].data.customVariables.VocalDiscord.vocal	
-			}
-			
-		else
-		
-			playerLocations[PlayerName] = {
-				location = "disconnected",
-				name = Players[pid].accountName,
-				level = Players[pid].data.stats.level,
-				vocal = Players[pid].data.customVariables.VocalDiscord.vocal	
-			}
-			
-		end
-		
-		playerLocations.Timestamp = os.time()
-		
+	local PlayerName = GetName(pid)
+
+	if not disconnect then
+
+		playerLocations[PlayerName] = {
+			location = Players[pid].data.location,
+			name = Players[pid].accountName,
+			level = Players[pid].data.stats.level,
+			vocal = Players[pid].data.customVariables.VocalDiscord.vocal	
+		}
+
+	else
+
+		playerLocations[PlayerName] = {
+			location = "disconnected",
+			name = Players[pid].accountName,
+			level = Players[pid].data.stats.level,
+			vocal = Players[pid].data.customVariables.VocalDiscord.vocal	
+		}
+
 	end
+
+	playerLocations.Timestamp = os.time()
 	
 	jsonInterface.save("custom/VocalDiscord/playerLocations.json", playerLocations)		
 
@@ -116,50 +112,42 @@ end
 -------------
 local VocalDiscord = {}
 
-VocalDiscord.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() and Players[pid]:HasAccount() then	
+VocalDiscord.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription)	
 	
-		if cfg.kickPlayer == true and not Players[pid]:IsServerStaff() then
-		
-			local PlayerName = GetName(pid)
-			
-			local playerdiscordTable = jsonInterface.load("custom/VocalDiscord/userdiscord.json")
-			
-			if playerdiscordTable and not playerdiscordTable[PlayerName] then
-				
-				local TimerVocal = tes3mp.CreateTimer("StartKick", time.seconds(cfg.timerstartvocal), "i", pid)	
-		
-				tes3mp.StartTimer(TimerVocal)
-				
-				tes3mp.MessageBox(pid, 0, color.Red.."Warning !"..color.Default.."\n\nyou must connect to the voice channel to continue playing otherwise you will be disconnected in 1 minute !")	
-				
-			end
+	if cfg.kickPlayer == true and not Players[pid]:IsServerStaff() then
+
+		local PlayerName = GetName(pid)
+
+		local playerdiscordTable = jsonInterface.load("custom/VocalDiscord/userdiscord.json")
+
+		if playerdiscordTable and not playerdiscordTable[PlayerName] then
+
+			local TimerVocal = tes3mp.CreateTimer("StartKick", time.seconds(cfg.timerstartvocal), "i", pid)	
+
+			tes3mp.StartTimer(TimerVocal)
+
+			tes3mp.MessageBox(pid, 0, color.Red.."Warning !"..color.Default.."\n\nyou must connect to the voice channel to continue playing otherwise you will be disconnected in 1 minute !")	
 
 		end
-		
-		SavePlayerLocation(pid, false)
-		
+
 	end
+
+	SavePlayerLocation(pid, false)
 	
 end
 
 VocalDiscord.OnPlayerAuthentified = function(eventStatus, pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
 	
-		if not Players[pid].data.customVariables.VocalDiscord then
-		
-			Players[pid].data.customVariables.VocalDiscord = {}	
-			
-			Players[pid].data.customVariables.VocalDiscord.vocal = 0
-			
-		else
-		
-			Players[pid].data.customVariables.VocalDiscord.vocal = 0
-			
-		end
-		
+	if not Players[pid].data.customVariables.VocalDiscord then
+
+		Players[pid].data.customVariables.VocalDiscord = {}	
+
+		Players[pid].data.customVariables.VocalDiscord.vocal = 0
+
+	else
+
+		Players[pid].data.customVariables.VocalDiscord.vocal = 0
+
 	end
 	
 	Players[pid]:QuicksaveToDrive()
@@ -169,50 +157,40 @@ VocalDiscord.OnPlayerAuthentified = function(eventStatus, pid)
 end
 
 VocalDiscord.OnPlayerDisconnect = function(eventStatus, pid)
+	
+	if Players[pid].data.customVariables.VocalDiscord then
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		if Players[pid].data.customVariables.VocalDiscord then
-		
-			Players[pid].data.customVariables.VocalDiscord.vocal = 0
-			
-			SavePlayerLocation(pid, true)	
-			
-			CountPlayersOnline(true)
-		end
-		
-	end
-	
+		Players[pid].data.customVariables.VocalDiscord.vocal = 0
+
+		SavePlayerLocation(pid, true)	
+
+		CountPlayersOnline(true)
+	end	
 end
 
 VocalDiscord.Vocalon = function(pid)
+	
+	if Players[pid].data.customVariables.VocalDiscord.vocal == nil then
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		if Players[pid].data.customVariables.VocalDiscord.vocal == nil then
-		
-			Players[pid].data.customVariables.VocalDiscord.vocal = 0
-			
-			tes3mp.MessageBox(pid, -1, color.Gold.."Vocal enable !")	
-			
-		elseif Players[pid].data.customVariables.VocalDiscord.vocal == 0 then
-		
-			Players[pid].data.customVariables.VocalDiscord.vocal = 1
-			
-			tes3mp.MessageBox(pid, -1, color.Gold.."Vocal enable !")	
-			
-		elseif Players[pid].data.customVariables.VocalDiscord.vocal == 1 then	
-		
-			Players[pid].data.customVariables.VocalDiscord.vocal = 0
-			
-			tes3mp.MessageBox(pid, -1, color.Gold.."Vocal disable !")
-			
-		end
-		
-		SavePlayerLocation(pid, false)	
-		
+		Players[pid].data.customVariables.VocalDiscord.vocal = 0
+
+		tes3mp.MessageBox(pid, -1, color.Gold.."Vocal enable !")	
+
+	elseif Players[pid].data.customVariables.VocalDiscord.vocal == 0 then
+
+		Players[pid].data.customVariables.VocalDiscord.vocal = 1
+
+		tes3mp.MessageBox(pid, -1, color.Gold.."Vocal enable !")	
+
+	elseif Players[pid].data.customVariables.VocalDiscord.vocal == 1 then	
+
+		Players[pid].data.customVariables.VocalDiscord.vocal = 0
+
+		tes3mp.MessageBox(pid, -1, color.Gold.."Vocal disable !")
+
 	end
-	
+
+	SavePlayerLocation(pid, false)	
 end
 ------------
 -- EVENTS --
