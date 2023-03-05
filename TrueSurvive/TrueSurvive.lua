@@ -638,7 +638,7 @@ TrueSurvive.ShowSleepMenu = function(pid)
 	tes3mp.CustomMessageBox(pid, refGui.sleepMenu, message, "survival rest;normal rest")
 end
 
-TrueSurvive.OnGUIAction = function(pid, idGui, data)
+TrueSurvive.OnGUIAction = function(eventStatus, pid, idGui, data)
 	if idGui == refGui.eatMenu then 
 		if tonumber(data) == 0 then
 			TrueSurvive.OnHungerObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
