@@ -316,18 +316,17 @@ TeamGroup.CheckGroup = function(pid)
 end
 
 TeamGroup.showChoiceList = function(pid, loc)	
-		local choice = playerListOptions[GetName(pid)].opt[loc]		
-		local targetPid		
-		if choice and choice ~= "" then		
-			targetPid = logicHandler.GetPlayerByName(choice).pid			
-		end		
-		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then		
-			playerListOptions[GetName(pid)].choice = choice			
-			local targetCell = tes3mp.GetCell(targetPid)			
-			if targetCell then			
-				logicHandler.TeleportToPlayer(pid, pid, targetPid)				
-			end			
-		end		
+	local choice = playerListOptions[GetName(pid)].opt[loc]		
+	local targetPid		
+	if choice and choice ~= "" then		
+		targetPid = logicHandler.GetPlayerByName(choice).pid			
+	end		
+	if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then		
+		playerListOptions[GetName(pid)].choice = choice			
+		local targetCell = tes3mp.GetCell(targetPid)			
+		if targetCell then			
+			logicHandler.TeleportToPlayer(pid, pid, targetPid)				
+		end			
 	end	
 end
 
@@ -348,7 +347,6 @@ TeamGroup.RegisterGroup = function(pid, invitePid)
 end
 
 TeamGroup.OnGUIAction = function(eventStatus, pid, idGui, data)
-	
 	if idGui == cfg.MainGUI then 		
 		if tonumber(data) == 0 then 			
 			TeamGroup.CheckGroup(pid)				
