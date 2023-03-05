@@ -80,135 +80,74 @@ local function GetName(pid)
 end
 
 local function getGroupData(pid)
-
-	local group = {}
-	
-	local playerName = GetName(pid)	
-	
-	if playerGroup[playerName] then	
-		
+	local group = {}	
+	local playerName = GetName(pid)		
+	if playerGroup[playerName] then			
 		group = playerGroup[playerName]
-
-	else	
-	
-		for groupName, members in pairs(playerGroup) do
-		
-			if members[playerName] then
-			
-				group = playerGroup[groupName]
-				
-				break
-				
-			end
-			
-		end
-		
-	end
-	
+	else		
+		for groupName, members in pairs(playerGroup) do		
+			if members[playerName] then			
+				group = playerGroup[groupName]				
+				break				
+			end			
+		end		
+	end	
 	return group
-
 end
 
 local function getListMemberGroup(pid)
-
-	local options = {}
-	
+	local options = {}	
 	local playerName = GetName(pid)	
-
 	local playerGroup = getGroupData(pid)
-
-	for memberName, name in pairs(playerGroup) do
-	
-		if memberName then	
-		
-			table.insert(options, memberName)  
-			
-		end
-		
+	for memberName, name in pairs(playerGroup) do	
+		if memberName then			
+			table.insert(options, memberName)  			
+		end		
 	end	
-
-	return options
-	
+	return options	
 end
 
 local function getListPlayer(pid) 
-
-	local options = {}  
-	
-	local playerName = GetName(pid)
-	
-	for pid, player in pairs(Players) do
-	
-		if Players[pid] and Players[pid]:IsLoggedIn() then
-		
-			table.insert(options, GetName(pid)) 
-			
-		end
-		
-	end
-	
-	return options
-	
+	local options = {}  	
+	local playerName = GetName(pid)	
+	for pid, player in pairs(Players) do	
+		if Players[pid] and Players[pid]:IsLoggedIn() then		
+			table.insert(options, GetName(pid)) 			
+		end		
+	end	
+	return options	
 end
 
 local function addAlliedInGroup(pid)
-
-	local GroupList = getListMemberGroup(pid)
-	
-	for _, playerName in ipairs(GroupList) do
-	
-		local targetPid = logicHandler.GetPlayerByName(playerName).pid
-		
-		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
-		
-			for _, targetName in ipairs(GroupList) do	
-			
-				if not tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then
-				
-					if playerName ~= targetName then	
-					
-						table.insert(Players[targetPid].data.alliedPlayers, targetName)
-						
-					end
-					
-				end
-				
-			end
-			
-			Players[targetPid]:QuicksaveToDrive()
-			
-			Players[targetPid]:LoadAllies()	
-			
-		end
-		
-	end
-	
+	local GroupList = getListMemberGroup(pid)	
+	for _, playerName in ipairs(GroupList) do	
+		local targetPid = logicHandler.GetPlayerByName(playerName).pid		
+		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then		
+			for _, targetName in ipairs(GroupList) do			
+				if not tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then				
+					if playerName ~= targetName then						
+						table.insert(Players[targetPid].data.alliedPlayers, targetName)						
+					end					
+				end				
+			end			
+			Players[targetPid]:QuicksaveToDrive()			
+			Players[targetPid]:LoadAllies()				
+		end		
+	end	
 end
 
 local function removeAlliedInGroup(pid)
-
-	local targetName = GetName(pid)
-	
-	local GroupList = getListMemberGroup(pid)
-	
-	for _, playerName in pairs(GroupList) do
-	
-		local targetPid = logicHandler.GetPlayerByName(playerName).pid
-		
-		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then	
-		
-			if tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then
-			
-				if playerName ~= targetName then		
-				
-					tableHelper.removeValue(Players[targetPid].data.alliedPlayers, targetName)
-					
-					tableHelper.cleanNils(Players[targetPid].data.alliedPlayers)
-					
-					Players[targetPid]:QuicksaveToDrive()
-					
-					Players[targetPid]:LoadAllies()		
-					
+	local targetName = GetName(pid)	
+	local GroupList = getListMemberGroup(pid)	
+	for _, playerName in pairs(GroupList) do	
+		local targetPid = logicHandler.GetPlayerByName(playerName).pid		
+		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then			
+			if tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then			
+				if playerName ~= targetName then						
+					tableHelper.removeValue(Players[targetPid].data.alliedPlayers, targetName)					
+					tableHelper.cleanNils(Players[targetPid].data.alliedPlayers)					
+					Players[targetPid]:QuicksaveToDrive()					
+					Players[targetPid]:LoadAllies()						
 				end
 			end		
 		end
@@ -216,35 +155,20 @@ local function removeAlliedInGroup(pid)
 end
 
 local function removeAlliedGroupDeleted(pid)
-
-	local GroupList = getListMemberGroup(pid)
-	
-	for _, playerName in pairs(GroupList) do
-	
-		local targetPid = logicHandler.GetPlayerByName(playerName).pid
-		
-		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
-		
-			for _, targetName in pairs(GroupList) do	
-			
-				if not tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then
-				
-					if playerName ~= targetName then	
-					
-						tableHelper.removeValue(Players[targetPid].data.alliedPlayers, targetName)
-						
-						tableHelper.cleanNils(Players[targetPid].data.alliedPlayers)
-						
-					end
-					
-				end
-				
-			end
-			
-			Players[targetPid]:QuicksaveToDrive()
-			
-			Players[targetPid]:LoadAllies()	
-			
+	local GroupList = getListMemberGroup(pid)	
+	for _, playerName in pairs(GroupList) do	
+		local targetPid = logicHandler.GetPlayerByName(playerName).pid		
+		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then		
+			for _, targetName in pairs(GroupList) do				
+				if not tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then				
+					if playerName ~= targetName then					
+						tableHelper.removeValue(Players[targetPid].data.alliedPlayers, targetName)						
+						tableHelper.cleanNils(Players[targetPid].data.alliedPlayers)						
+					end					
+				end				
+			end			
+			Players[targetPid]:QuicksaveToDrive()			
+			Players[targetPid]:LoadAllies()				
 		end
 	end
 end
@@ -255,554 +179,267 @@ end
 local TeamGroup = {}
 
 TeamGroup.ShowMainGUI = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then	
-	
-		local message = trad.MainGui
-		
-		tes3mp.CustomMessageBox(pid, cfg.MainGUI, message, trad.MainGuiBox)
-		
-	end
-	
+	tes3mp.CustomMessageBox(pid, cfg.MainGUI, trad.MainGui, trad.MainGuiBox)	
 end
 
-TeamGroup.CreateGroup = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local playerName = GetName(pid)
-		
-		playerGroup[playerName] = {}
-		playerGroup[playerName][playerName] = true
-
-		tes3mp.SendMessage(pid, trad.CreateGroupCreate, false)
-		
-	end
-	
+TeamGroup.CreateGroup = function(pid)	
+	local playerName = GetName(pid)
+	playerGroup[playerName] = {}
+	playerGroup[playerName][playerName] = true
+	tes3mp.SendMessage(pid, trad.CreateGroupCreate, false)
 end
 
-TeamGroup.InputMessage = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		return tes3mp.InputDialog(pid, cfg.MessageInput, trad.InputMsg, "")
-		
-	end
-	
+TeamGroup.InputMessage = function(pid)	
+	return tes3mp.InputDialog(pid, cfg.MessageInput, trad.InputMsg, "")	
 end
 
-TeamGroup.onChoiceMessage = function(pid, loc)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-	    local playerName = GetName(pid)
-
-		local playerGroup = getGroupData(pid)
-	
-		for memberName, bool in pairs(playerGroup) do
-	
-			if memberName then	
-			
-				local targetPid = logicHandler.GetPlayerByName(memberName).pid
-				
-				if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
-				
-					tes3mp.SendMessage(targetPid, "["..playerName.."] : "..color.Green..trad.Group..color.Pink..loc..color.Default.."\n",false)
-					
-				end
-				
-			end
-			
-		end	
-		
+TeamGroup.onChoiceMessage = function(pid, loc)	
+	local playerName = GetName(pid)
+	local playerGroup = getGroupData(pid)	
+	for memberName, bool in pairs(playerGroup) do	
+		if memberName then			
+			local targetPid = logicHandler.GetPlayerByName(memberName).pid				
+			if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then				
+				tes3mp.SendMessage(targetPid, "["..playerName.."] : "..color.Green..trad.Group..color.Pink..loc..color.Default.."\n",false)					
+			end				
+		end			
 	end	
-	
 end	
 
-TeamGroup.CheckPlayerExit = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local playerName = GetName(pid)
-		
-		local options = getListMemberGroup(pid)
-		
-		local listItem = trad.Return
-		
-		for _, name in pairs(options) do
-		
-			listItem = listItem..name.."\n"
-			
-		end		
-		
-		playerExitInvite[playerName] = {opt = options}
-		
-		tes3mp.ListBox(pid, cfg.listPlayerExitGUI, color.CornflowerBlue..trad.SelectExit..color.Default, listItem)
-		
-	end
-	
+TeamGroup.CheckPlayerExit = function(pid)	
+	local playerName = GetName(pid)
+	local options = getListMemberGroup(pid)
+	local listItem = trad.Return
+	for _, name in pairs(options) do
+		listItem = listItem..name.."\n"
+	end		
+	playerExitInvite[playerName] = {opt = options}
+	tes3mp.ListBox(pid, cfg.listPlayerExitGUI, color.CornflowerBlue..trad.SelectExit..color.Default, listItem)
 end
  
-TeamGroup.showChoiceExit = function(pid, loc)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local playerName = GetName(pid)
-		
-		local choice = playerExitInvite[playerName].opt[loc]
-		
-		local targetPid		
-		
-		if choice ~= nil and choice ~= "" then
-		
-			targetPid = logicHandler.GetPlayerByName(choice).pid
-			
-		end
-		
-		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then	
-		
-			if GetName(targetPid) == playerName then
-			
-				return false
-				
-			end
-			
-			playerExitInvite[playerName].choice = choice
-			
-			Players[pid].data.targetPid = targetPid
-			
-			Players[targetPid].data.targetPid = pid
-			
-			if playerGroup[playerName] then
-				
-				local targetName = GetName(targetPid)
-				
-				if playerGroup[playerName][targetName] then
-				
-					removeAlliedInGroup(targetPid)
-					
-					playerGroup[playerName][targetName] = nil
-					
-					tes3mp.SendMessage(pid, trad.ExpulseMembers, false)
-					
-					tes3mp.SendMessage(targetPid, trad.ExpulseYou, false)
-					
-				end
-	
-			end
-			
-		end
-		
+TeamGroup.showChoiceExit = function(pid, loc)	
+	local playerName = GetName(pid)
+	local choice = playerExitInvite[playerName].opt[loc]
+	local targetPid		
+	if choice ~= nil and choice ~= "" then
+		targetPid = logicHandler.GetPlayerByName(choice).pid
 	end
-	
-end
-
-TeamGroup.ExitGroup = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local playerName = GetName(pid)	
-
+	if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then	
+		if GetName(targetPid) == playerName then
+			return false
+		end
+		playerExitInvite[playerName].choice = choice
+		Players[pid].data.targetPid = targetPid
+		Players[targetPid].data.targetPid = pid
 		if playerGroup[playerName] then
-		
-			removeAlliedGroupDeleted(pid)
-			
-			playerGroup[playerName] = nil
-			
-			tes3mp.SendMessage(pid, trad.DeleteGroup, false) 
-			
-		else
-
-			for groupName, name in pairs(playerGroup) do
-			
-				if playerGroup[groupName][playerName] then	
-				
-					removeAlliedInGroup(pid)
-					
-					playerGroup[groupName][playerName] = nil
-					
-					tes3mp.SendMessage(pid, trad.ExitGroup, false)
-				
-					break
-					
-				end	
-				
-			end	
-			
+			local targetName = GetName(targetPid)
+			if playerGroup[playerName][targetName] then
+				removeAlliedInGroup(targetPid)
+				playerGroup[playerName][targetName] = nil
+				tes3mp.SendMessage(pid, trad.ExpulseMembers, false)
+				tes3mp.SendMessage(targetPid, trad.ExpulseYou, false)
+			end
 		end
-		
 	end
-	
 end
 
-TeamGroup.CheckPlayer = function(pid)
+TeamGroup.ExitGroup = function(pid)	
+	local playerName = GetName(pid)	
+	if playerGroup[playerName] then
+		removeAlliedGroupDeleted(pid)
+		playerGroup[playerName] = nil
+		tes3mp.SendMessage(pid, trad.DeleteGroup, false) 
+	else
+		for groupName, name in pairs(playerGroup) do
+			if playerGroup[groupName][playerName] then	
+				removeAlliedInGroup(pid)
+				playerGroup[groupName][playerName] = nil
+				tes3mp.SendMessage(pid, trad.ExitGroup, false)
+				break
+			end	
+		end	
+	end	
+end
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local playerName = GetName(pid)
-		
-		local options = getListPlayer(pid)
-		
-		local listItem = trad.Return	
-		
-		for _, name in pairs(options) do
-		
-			listItem = listItem..name.."\n"
-			
-		end
-		
-		playerListInvite[playerName] = {opt = options}
-		
-		tes3mp.ListBox(pid, cfg.listPlayerGUI, color.CornflowerBlue..trad.InvitePlayer..color.Default, listItem)
-		
+TeamGroup.CheckPlayer = function(pid)	
+	local playerName = GetName(pid)
+	local options = getListPlayer(pid)
+	local listItem = trad.Return	
+	for _, name in pairs(options) do
+		listItem = listItem..name.."\n"
 	end
-	
+	playerListInvite[playerName] = {opt = options}
+	tes3mp.ListBox(pid, cfg.listPlayerGUI, color.CornflowerBlue..trad.InvitePlayer..color.Default, listItem)
 end
  
 TeamGroup.showChoiceInvite = function(pid, loc)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-
-		local playerName = GetName(pid)
-		
-		local choice = playerListInvite[playerName].opt[loc]
-		
-		local targetPid		
-		
-		if choice ~= nil and choice ~= "" then
-		
-			targetPid = logicHandler.GetPlayerByName(choice).pid
-			
-		end
-		
-		if targetPid then
-		
-			TeamGroup.InviteMessage(pid, targetPid)
-			
-		end
-		
-	end
-	
+	local playerName = GetName(pid)		
+	local choice = playerListInvite[playerName].opt[loc]		
+	local targetPid				
+	if choice ~= nil and choice ~= "" then		
+		targetPid = logicHandler.GetPlayerByName(choice).pid			
+	end		
+	if targetPid then		
+		TeamGroup.InviteMessage(pid, targetPid)			
+	end	
 end
 
 TeamGroup.InviteMessage = function(pid, targetPid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
-
-		Players[pid].data.targetPid = targetPid
-		
-		Players[targetPid].data.targetPid = pid
-		
-		local targetName = GetName(targetPid)
-		
+	if Players[pid] and Players[pid]:IsLoggedIn()
+	and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
+		Players[pid].data.targetPid = targetPid		
+		Players[targetPid].data.targetPid = pid		
+		local targetName = GetName(targetPid)		
 		local message = trad.Invitation1..targetName..trad.Invitation2
-
-		tes3mp.CustomMessageBox(pid, cfg.MessageInvitation, message, trad.Choice)	
-		
-	end
-	
+		tes3mp.CustomMessageBox(pid, cfg.MessageInvitation, message, trad.Choice)		
+	end	
 end
 
 TeamGroup.ReponseMessage = function(pid, targetPid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
-		
-		local targetName = GetName(targetPid)
-		
+	if Players[pid] and Players[pid]:IsLoggedIn()
+	and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then		
+		local targetName = GetName(targetPid)		
 		local message = trad.Reponse..targetName.." ?"
-
-		tes3mp.CustomMessageBox(pid, cfg.MessageReponse, message, trad.Choice)
-	
-	end
-	
+		tes3mp.CustomMessageBox(pid, cfg.MessageReponse, message, trad.Choice)	
+	end	
 end
 
-TeamGroup.CheckGroup = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local playerName = GetName(pid)
-		
-		local options = getListMemberGroup(pid)
-		
-		local listItem = trad.Return	
-		
-		for _, name in pairs(options) do
-		
-			listItem = listItem..name.."\n"
-			
-		end	
-		
-		playerListOptions[playerName] = {opt = options}
-		
-		tes3mp.ListBox(pid, cfg.listGUI, color.CornflowerBlue..trad.SelectWarp..color.Default, listItem)
-		
-	end
-	
+TeamGroup.CheckGroup = function(pid)	
+	local playerName = GetName(pid)
+	local options = getListMemberGroup(pid)
+	local listItem = trad.Return	
+	for _, name in pairs(options) do
+		listItem = listItem..name.."\n"
+	end	
+	playerListOptions[playerName] = {opt = options}
+	tes3mp.ListBox(pid, cfg.listGUI, color.CornflowerBlue..trad.SelectWarp..color.Default, listItem)	
 end
 
-TeamGroup.showChoiceList = function(pid, loc)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local choice = playerListOptions[GetName(pid)].opt[loc]
-		
-		local targetPid
-		
-		if choice ~= nil and choice ~= "" then
-		
-			targetPid = logicHandler.GetPlayerByName(choice).pid
-			
-		end
-		
-		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
-		
-			playerListOptions[GetName(pid)].choice = choice
-			
-			local targetCell = tes3mp.GetCell(targetPid)
-			
-			if targetCell then
-			
-				logicHandler.TeleportToPlayer(pid, pid, targetPid)
-				
-			end
-			
-		end
-		
-	end
-	
+TeamGroup.showChoiceList = function(pid, loc)	
+		local choice = playerListOptions[GetName(pid)].opt[loc]		
+		local targetPid		
+		if choice and choice ~= "" then		
+			targetPid = logicHandler.GetPlayerByName(choice).pid			
+		end		
+		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then		
+			playerListOptions[GetName(pid)].choice = choice			
+			local targetCell = tes3mp.GetCell(targetPid)			
+			if targetCell then			
+				logicHandler.TeleportToPlayer(pid, pid, targetPid)				
+			end			
+		end		
+	end	
 end
 
-TeamGroup.RegisterGroup = function(pid, invitePid)	
-
-	if Players[pid] and Players[pid]:IsLoggedIn() and Players[invitePid] ~= nil and Players[invitePid]:IsLoggedIn() then
-	
-		local playerName = GetName(pid)
-		
-		local targetName = GetName(invitePid)
-		
+TeamGroup.RegisterGroup = function(pid, invitePid)
+	if Players[pid] and Players[pid]:IsLoggedIn()
+	and Players[invitePid] ~= nil and Players[invitePid]:IsLoggedIn() then	
+		local playerName = GetName(pid)		
+		local targetName = GetName(invitePid)		
 		TeamGroup.ExitGroup(invitePid)
-
-		if not playerGroup[playerName] then
-		
-			TeamGroup.CreateGroup(pid)
-		
+		if not playerGroup[playerName] then		
+			TeamGroup.CreateGroup(pid)		
 		end
-
-		playerGroup[playerName][targetName] = true
-		
-		tes3mp.SendMessage(pid, targetName..trad.JoinGroup..playerName.."\n", false)
-		
-		tes3mp.SendMessage(invitePid, trad.JoinGroupYou..playerName.."\n", false)
-		
+		playerGroup[playerName][targetName] = true		
+		tes3mp.SendMessage(pid, targetName..trad.JoinGroup..playerName.."\n", false)		
+		tes3mp.SendMessage(invitePid, trad.JoinGroupYou..playerName.."\n", false)		
 		addAlliedInGroup(invitePid)	
-
-	end		
-	
+	end	
 end
 
-TeamGroup.OnGUIAction = function(pid, idGui, data)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then 
+TeamGroup.OnGUIAction = function(eventStatus, pid, idGui, data)
 	
-		if idGui == cfg.MainGUI then 
-		
-			if tonumber(data) == 0 then 
-			
-				TeamGroup.CheckGroup(pid)
-				
-				return true
-				
-			elseif tonumber(data) == 1 then 
-			
-				TeamGroup.ExitGroup(pid)
-				
-				return TeamGroup.ShowMainGUI(pid)
-				
-			elseif tonumber(data) == 2 then 
-			
-				TeamGroup.CheckPlayer(pid)
-				
-				return true
-				
-			elseif tonumber(data) == 3 then 
-			
-				TeamGroup.CheckPlayerExit(pid)
-				
-				return true	
-				
-			elseif tonumber(data) == 4 then
-			
-				TeamGroup.InputMessage(pid)
-				
-				return true		
-				
-			elseif tonumber(data) == 5 then	
-				
-				return true
-				
-			elseif tonumber(data) == 6 then
-				--Do nothing
-				return true	
-				
-			end
-			
-		elseif idGui == cfg.listGUI then -- Liste
-		
-			if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then 
-			
-				return TeamGroup.ShowMainGUI(pid)
-				
-			else   
-			
-				TeamGroup.showChoiceList(pid, tonumber(data)) 
-				
-				return TeamGroup.ShowMainGUI(pid)
-				
-			end 
-			
-		elseif idGui == cfg.listPlayerGUI then -- Liste
-		
-			if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then    
-			
-				return TeamGroup.ShowMainGUI(pid)
-				
-			else   
-			
-				TeamGroup.showChoiceInvite(pid, tonumber(data)) 
-				
-				return true
-				
-			end 
-
-		elseif idGui == cfg.listPlayerExitGUI then -- Liste
-		
-			if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then   
-			
-				return TeamGroup.ShowMainGUI(pid)
-				
-			else   
-			
-				TeamGroup.showChoiceExit(pid, tonumber(data)) 
-				
-				return true
-				
-			end 	
-			
-		elseif idGui == cfg.MessageInput then -- Liste
-		
-			if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then    
-			
-				return TeamGroup.ShowMainGUI(pid)
-				
-			else   
-			
-				TeamGroup.onChoiceMessage(pid, tostring(data)) 
-				
-				return TeamGroup.ShowMainGUI(pid)
-				
-			end		
-			
-		elseif idGui == cfg.MessageInvitation then 
-		
-			if tonumber(data) == 0 then 
-
-				local targetPid = Players[pid].data.targetPid
-		
-				TeamGroup.ReponseMessage(targetPid, pid)
-				
-				return true
-				
-			elseif tonumber(data) == 1 then
-				--Do nothing
-				return true	
-				
-			end
-		elseif idGui == cfg.MessageReponse then 
-		
-			if tonumber(data) == 0 then 
-
-				local targetPid = Players[pid].data.targetPid
-				
-				TeamGroup.RegisterGroup(targetPid, pid)
-				
-				return true
-				
-			elseif tonumber(data) == 1 then
-				--Do nothing
-				return true	
-				
-			end
+	if idGui == cfg.MainGUI then 		
+		if tonumber(data) == 0 then 			
+			TeamGroup.CheckGroup(pid)				
+		elseif tonumber(data) == 1 then 			
+			TeamGroup.ExitGroup(pid)				
+			TeamGroup.ShowMainGUI(pid)				
+		elseif tonumber(data) == 2 then 			
+			TeamGroup.CheckPlayer(pid)				
+		elseif tonumber(data) == 3 then 			
+			TeamGroup.CheckPlayerExit(pid)					
+		elseif tonumber(data) == 4 then			
+			TeamGroup.InputMessage(pid)						
+		elseif tonumber(data) == 5 then	
+			--Do nothing				
+		elseif tonumber(data) == 6 then
+			--Do nothing					
+		end			
+	elseif idGui == cfg.listGUI then -- Liste		
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then 			
+			TeamGroup.ShowMainGUI(pid)				
+		else   			
+			TeamGroup.showChoiceList(pid, tonumber(data)) 				
+			TeamGroup.ShowMainGUI(pid)				
+		end 			
+	elseif idGui == cfg.listPlayerGUI then -- Liste		
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then    			
+			TeamGroup.ShowMainGUI(pid)				
+		else   			
+			TeamGroup.showChoiceInvite(pid, tonumber(data)) 				
+		end 
+	elseif idGui == cfg.listPlayerExitGUI then -- Liste		
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then   			
+			TeamGroup.ShowMainGUI(pid)				
+		else   			
+			TeamGroup.showChoiceExit(pid, tonumber(data)) 								
+		end 				
+	elseif idGui == cfg.MessageInput then -- Liste		
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then    			
+			TeamGroup.ShowMainGUI(pid)				
+		else   			
+			TeamGroup.onChoiceMessage(pid, tostring(data)) 				
+			TeamGroup.ShowMainGUI(pid)				
+		end					
+	elseif idGui == cfg.MessageInvitation then 		
+		if tonumber(data) == 0 then 
+			local targetPid = Players[pid].data.targetPid		
+			TeamGroup.ReponseMessage(targetPid, pid)
+		elseif tonumber(data) == 1 then
+			--Do nothing				
 		end
-	end
-	
+	elseif idGui == cfg.MessageReponse then 		
+		if tonumber(data) == 0 then 
+			local targetPid = Players[pid].data.targetPid				
+			TeamGroup.RegisterGroup(targetPid, pid)					
+		elseif tonumber(data) == 1 then
+			--Do nothing				
+		end
+	end	
 end
 
-TeamGroup.ActiveMenu = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then 
-	
-		Players[pid].currentCustomMenu = "reponse player"--Invite Menu
-		
-		menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
-		
-	end
-	
+TeamGroup.ActiveMenu = function(pid)	
+	Players[pid].currentCustomMenu = "reponse player"--Invite Menu
+	menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
 end
 
 TeamGroup.OnPlayerDisconnect = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-
-		Players[pid].data.alliedPlayers = {}
-		
-	end
-	
+	Players[pid].data.alliedPlayers = {}
 end
 
-TeamGroup.OnPlayerJournal = function(pid, playerPacket)
-
-	if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-	
-		local playerName = GetName(pid)	
-		
-		local playerGroup = getGroupData(pid)
-		
-		for _, journalItem in ipairs(playerPacket.journal) do
-		
-			for memberName, bool in pairs(playerGroup) do
-		
-				if memberName then	
-					
-					local targetPid = logicHandler.GetPlayerByName(name).pid
-					
-					if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
-					
-						local checkQuest = false
-						
-						local targetPlayerPacket = packetReader.GetPlayerPacketTables(targetPid, "PlayerJournal")
-						
-						for _, targetJournalItem in ipairs(targetPlayerPacket.journal) do
-						
-							if journalItem.quest == targetJournalItem.quest and journalItem.index == targetJournalItem.index then
-							
-								checkQuest = true
-								
-							end
-							
+TeamGroup.OnPlayerJournal = function(pid, playerPacket)	
+	local playerName = GetName(pid)	
+	local playerGroup = getGroupData(pid)
+	for _, journalItem in ipairs(playerPacket.journal) do
+		for memberName, bool in pairs(playerGroup) do
+			if memberName then
+				local targetPid = logicHandler.GetPlayerByName(name).pid
+				if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
+					local checkQuest = false
+					local targetPlayerPacket = packetReader.GetPlayerPacketTables(targetPid, "PlayerJournal")
+					for _, targetJournalItem in ipairs(targetPlayerPacket.journal) do
+						if journalItem.quest == targetJournalItem.quest and journalItem.index == targetJournalItem.index then
+							checkQuest = true
 						end
-						
-						if checkQuest == false then
-						
-							Players[targetPid]:SaveDataByPacketType("PlayerJournal", playerPacket)
-							
-							Players[targetPid]:LoadJournal()
-						end
-						
+					end
+					if checkQuest == false then
+						Players[targetPid]:SaveDataByPacketType("PlayerJournal", playerPacket)
+						Players[targetPid]:LoadJournal()
 					end
 				end
-			end						
-		end
+			end
+		end						
 	end
 end
 
@@ -817,9 +454,7 @@ customEventHooks.registerHandler("OnPlayerDisconnect", function(eventStatus, pid
 	TeamGroup.OnPlayerDisconnect(pid)
 end)
 
-customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
-	if TeamGroup.OnGUIAction(pid, idGui, data) then return end	
-end)
+customEventHooks.registerHandler("OnGUIAction", TeamGroup.OnGUIAction)
 
 customEventHooks.registerHandler("OnPlayerJournal", function(eventStatus, pid, playerPacket)
 	if config.shareJournal == false then
