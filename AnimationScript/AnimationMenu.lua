@@ -78,200 +78,168 @@ AnimationMenu.OnServerPostInitHandler = function()
 end
 
 AnimationMenu.showAnimMenu = function(pid)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
 	
-		local message = color.Orange.. traduction.title
-		
-		optionList = traduction.option
+	local message = color.Orange.. traduction.title
 
-		tes3mp.CustomMessageBox(pid, guiID.animMenu, message, optionList)
-	
-	end
+	optionList = traduction.option
+
+	tes3mp.CustomMessageBox(pid, guiID.animMenu, message, optionList)
 	
 end
 
 AnimationMenu.OnGUIAction = function(eventStatus, pid, idGui, data)
-
-	if Players[pid] and Players[pid]:IsLoggedIn() then
 	
-		if idGui == guiID.animMenu then
-		
-			local PlayerName = GetName(pid)
-			
-			local cellDescription = tes3mp.GetCell(pid)
-			
-			local Model = "base_anim.nif"
-			
-			local Animation = "idle"
-			
-			if tonumber(data) >= 0 and tonumber(data) < 9 then
-			
-				table.insert(Players[pid].data.spellbook, "sittingAnim_paralyze")
-				
-				Players[pid]:LoadSpellbook()
-				
-				Model = "va_sitting.nif"
+	if idGui == guiID.animMenu then
 
-				logicHandler.RunConsoleCommandOnPlayer(pid, "PCForce3rdPerson", false)
+		local PlayerName = GetName(pid)
 
-				logicHandler.RunConsoleCommandOnPlayer(pid, "DisablePlayerViewSwitch", false)	
-				
-			end
-			
-			if tonumber(data) == 0 then
+		local cellDescription = tes3mp.GetCell(pid)
 
-				Animation = "idle2"
-				
-			elseif tonumber(data) == 1 then
+		local Model = "base_anim.nif"
 
-				Animation = "idle9"
-				
-			elseif tonumber(data) == 2 then
+		local Animation = "idle"
 
-				Animation = "idle7"	
-			
-			elseif tonumber(data) == 3 then
+		if tonumber(data) >= 0 and tonumber(data) < 9 then
 
-				Animation = "idle8"					
-				
-			elseif tonumber(data) == 4 then
+			table.insert(Players[pid].data.spellbook, "sittingAnim_paralyze")
 
-				Animation = "idle3"				
-		
-			elseif tonumber(data) == 5 then
+			Players[pid]:LoadSpellbook()
 
-				Animation = "idle4"	
+			Model = "va_sitting.nif"
 
-			elseif tonumber(data) == 6 then
+			logicHandler.RunConsoleCommandOnPlayer(pid, "PCForce3rdPerson", false)
 
-				Animation = "idle5"		
-				
-			elseif tonumber(data) == 7 then
+			logicHandler.RunConsoleCommandOnPlayer(pid, "DisablePlayerViewSwitch", false)	
 
-				Animation = "idle6"			
-
-			elseif tonumber(data) == 8 then
-				
-				Model = "anim_dancinggirl.nif"
-
-				Animation = "idle9"	
-				
-			elseif tonumber(data) == 9 then
-			
-				logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell sittingAnim_paralyze")
-				
-				tableHelper.removeValue(Players[pid].data.spellbook, "sittingAnim_paralyze")				
-
-				logicHandler.RunConsoleCommandOnPlayer(pid, "EnablePlayerViewSwitch", false)
-				
-				Players[pid]:LoadSpellbook()
-				
-			end
-			
-			tes3mp.SetModel(pid, Model)
-
-			tes3mp.SendBaseInfo(pid)	
-			
-			tes3mp.PlayAnimation(pid, Animation, 0, 1, true)
-	
-			PlayerAnimationList[PlayerName] = {
-				animation = Animation,
-				model = Model,
-				cellDescription = cellDescription
-			}
-			
 		end
-	
-	end
-	
+
+		if tonumber(data) == 0 then
+
+			Animation = "idle2"
+
+		elseif tonumber(data) == 1 then
+
+			Animation = "idle9"
+
+		elseif tonumber(data) == 2 then
+
+			Animation = "idle7"	
+
+		elseif tonumber(data) == 3 then
+
+			Animation = "idle8"					
+
+		elseif tonumber(data) == 4 then
+
+			Animation = "idle3"				
+
+		elseif tonumber(data) == 5 then
+
+			Animation = "idle4"	
+
+		elseif tonumber(data) == 6 then
+
+			Animation = "idle5"		
+
+		elseif tonumber(data) == 7 then
+
+			Animation = "idle6"			
+
+		elseif tonumber(data) == 8 then
+
+			Model = "anim_dancinggirl.nif"
+
+			Animation = "idle9"	
+
+		elseif tonumber(data) == 9 then
+
+			logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell sittingAnim_paralyze")
+
+			tableHelper.removeValue(Players[pid].data.spellbook, "sittingAnim_paralyze")				
+
+			logicHandler.RunConsoleCommandOnPlayer(pid, "EnablePlayerViewSwitch", false)
+
+			Players[pid]:LoadSpellbook()
+
+		end
+
+		tes3mp.SetModel(pid, Model)
+
+		tes3mp.SendBaseInfo(pid)	
+
+		tes3mp.PlayAnimation(pid, Animation, 0, 1, true)
+
+		PlayerAnimationList[PlayerName] = {
+			animation = Animation,
+			model = Model,
+			cellDescription = cellDescription
+		}
+
+	end	
 end
 
 AnimationMenu.ChatListener = function(pid, cmd)
+	
+	if cmd[1] == "anim" and cmd[2] == nil then
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		if cmd[1] == "anim" and cmd[2] == nil then
-		
-			AnimationMenu.showAnimMenu(pid)
-			
-		end
-	
-	end
-	
+		AnimationMenu.showAnimMenu(pid)
+
+	end	
 end
 
 AnimationMenu.OnPlayerAuthentified = function(eventStatus, pid)
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then 
+	local PlayerName = GetName(pid)
 
-		local PlayerName = GetName(pid)
-		
-		local Model = "base_anim.nif"
-	
-		tes3mp.SetModel(pid, Model)
-		
-		tes3mp.SendBaseInfo(pid)
+	local Model = "base_anim.nif"
 
-		if tableHelper.containsValue(Players[pid].data.spellbook, "sittingAnim_paralyze") then
-		
-			logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell sittingAnim_paralyze")
-			
-			tableHelper.removeValue(Players[pid].data.spellbook, "sittingAnim_paralyze")
-			
-			Players[pid]:LoadSpellbook()		
-			
-			tes3mp.PlayAnimation(pid, "idle", 0, 1, true)
-			
-		end
-	
+	tes3mp.SetModel(pid, Model)
+
+	tes3mp.SendBaseInfo(pid)
+
+	if tableHelper.containsValue(Players[pid].data.spellbook, "sittingAnim_paralyze") then
+
+		logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell sittingAnim_paralyze")
+
+		tableHelper.removeValue(Players[pid].data.spellbook, "sittingAnim_paralyze")
+
+		Players[pid]:LoadSpellbook()		
+
+		tes3mp.PlayAnimation(pid, "idle", 0, 1, true)
+
 	end
 end
 
 AnimationMenu.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription)
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
+	local PlayerName = GetName(pid)
 
-		local PlayerName = GetName(pid)
-		
-		for targetName, data in pairs(PlayerAnimationList) do
-			
-			if targetName ~= PlayerName and playerPacket.location.cell == data.cellDescription then
-				
-				local targetPid = logicHandler.GetPlayerByName(targetName).pid
-				
-				if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
-				
-					tes3mp.SetModel(targetPid, data.model)
+	for targetName, data in pairs(PlayerAnimationList) do
 
-					tes3mp.SendBaseInfo(targetPid)
-			
-					tes3mp.PlayAnimation(targetPid, data.animation, 0, 1, true)
-					
-				end
-				
-			end
-			
-		end
-		
-	end
-	
+		if targetName ~= PlayerName and playerPacket.location.cell == data.cellDescription then
+
+			local targetPid = logicHandler.GetPlayerByName(targetName).pid
+
+			if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
+
+				tes3mp.SetModel(targetPid, data.model)
+
+				tes3mp.SendBaseInfo(targetPid)
+
+				tes3mp.PlayAnimation(targetPid, data.animation, 0, 1, true)					
+			end				
+		end			
+	end	
 end
 
 AnimationMenu.OnPlayerDisconnect = function(eventStatus, pid)
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
+	local PlayerName = GetName(pid)
 
-		local PlayerName = GetName(pid)
-		
-		if PlayerAnimationList[PlayerName] then
-		
-			PlayerAnimationList[PlayerName] = nil
-			
-		end
-		
-	end
-	
+	if PlayerAnimationList[PlayerName] then
+
+		PlayerAnimationList[PlayerName] = nil
+	end	
 end
 
 ------------
