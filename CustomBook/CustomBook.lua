@@ -1,7 +1,7 @@
 --[[
 CustomBook
 tes3mp 0.8.1
-Version 0.6
+Version 0.7
 Rewrite by Rickoff original script by Jakob
 ---------------------------
 DESCRIPTION :
@@ -198,76 +198,63 @@ CustomBook.showStylePrompt = function(pid)
 	return tes3mp.InputDialog(pid, cfg.StyleGUI, trad.selectStyle, "")
 end
 
-CustomBook.OnGUIAction = function(pid, idGui, data) 
+CustomBook.OnGUIAction = function(eventStatus, pid, idGui, data) 
 	if idGui == cfg.MainGUI then
 		if tonumber(data) == 0 then
 			CustomBook.showEditTitlePrompt(pid)
-			return true
 		elseif tonumber(data) == 1 then
 			CustomBook.showEditTextPrompt(pid)
-			return true
 		elseif tonumber(data) == 2 then
 			CustomBook.showClearTextPrompt(pid)
-			return true
 		elseif tonumber(data) == 3 then
 			message = "/book liststyles"
 			eventHandler.OnPlayerSendMessage(pid, message)
-			return CustomBook.showMainGUI(pid)
+			CustomBook.showMainGUI(pid)
 		elseif tonumber(data) == 4 then
 			CustomBook.showStylePrompt(pid)
-			return true
 		elseif tonumber(data) == 5 then
 			message = "/book clear"
 			eventHandler.OnPlayerSendMessage(pid, message)
-			return CustomBook.showMainGUI(pid)
+			CustomBook.showMainGUI(pid)
 		elseif tonumber(data) == 6 then
 			message = "/book done"
 			eventHandler.OnPlayerSendMessage(pid, message)
-			return true
 		elseif tonumber(data) == 7 then
-			return true
-		elseif tonumber(data) == 8 then
-			return true			
+		elseif tonumber(data) == 8 then		
 		end
 	elseif idGui == cfg.EditTitleGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
-			return true
 		else
 			message = ("/book title " .. data)
 			eventHandler.OnPlayerSendMessage(pid, message)
-			return CustomBook.showMainGUI(pid)
+			CustomBook.showMainGUI(pid)
 		end       
 	elseif idGui == cfg.EditTextGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
-			return true
 		else
 			message = ("/book addtext " .. data)
 			eventHandler.OnPlayerSendMessage(pid, message)
-			return CustomBook.showMainGUI(pid)
+			CustomBook.showMainGUI(pid)
 		end       
 	elseif idGui == cfg.ClearTextGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
-			return true
 		else
 			message = ("/book settext " .. data)
 			eventHandler.OnPlayerSendMessage(pid, message)
-			return CustomBook.showMainGUI(pid)
+			CustomBook.showMainGUI(pid)
 		end
 	elseif idGui == cfg.StyleGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
-			return true
 		else
 			message = ("/book setstyle " .. tonumber(data))
 			eventHandler.OnPlayerSendMessage(pid, message)
-			return CustomBook.showMainGUI(pid)
+			CustomBook.showMainGUI(pid)
 		end 	
 	end
 end
 
 customCommandHooks.registerCommand("book", CustomBook.onCommand)
 customCommandHooks.registerCommand("bookmenu", CustomBook.showMainGUI)
-customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
-	if CustomBook.OnGUIAction(pid, idGui, data) then return end
-end)
+customEventHooks.registerHandler("OnGUIAction", CustomBook.OnGUIAction)
 
 return CustomBook
