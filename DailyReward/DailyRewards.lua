@@ -168,31 +168,26 @@ end
 local DailyRewards = {}
 
 DailyRewards.OnPlayerAuthentified = function(eventStatus, pid)
+	
+	local daysName = os.date("%A")
 
-	if Players[pid] and Players[pid]:IsLoggedIn() then
-	
-		local daysName = os.date("%A")
-		
-		if not Players[pid].data.customVariables.DailyRewards then
-		
-			Players[pid].data.customVariables.DailyRewards = {
-				days = ""
-			}
-			
-		end
-		
-		if Players[pid].data.customVariables.DailyRewards.days ~= daysName then
-		
-			giveDailyLoginItem(pid)
-			
-			Players[pid].data.customVariables.DailyRewards.days = daysName			
-			
-			Players[pid]:QuicksaveToDrive()
-			
-		end
-		
+	if not Players[pid].data.customVariables.DailyRewards then
+
+		Players[pid].data.customVariables.DailyRewards = {
+			days = ""
+		}
+
 	end
-	
+
+	if Players[pid].data.customVariables.DailyRewards.days ~= daysName then
+
+		giveDailyLoginItem(pid)
+
+		Players[pid].data.customVariables.DailyRewards.days = daysName			
+
+		Players[pid]:QuicksaveToDrive()
+
+	end	
 end
 
 customEventHooks.registerHandler("OnPlayerAuthentified", DailyRewards.OnPlayerAuthentified)
