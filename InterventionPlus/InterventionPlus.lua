@@ -1,6 +1,7 @@
 --[[
 InterventionPlus
 tes3mp 0.8.1
+version 0.3
 ---------------------------
 DESCRIPTION :
 select the teleport point of the temple of your choice for Almisivi Intervention and the fort of your choice for Divine Intervention
@@ -15,20 +16,20 @@ cfg :
 Change trad in your language for your server
 Change cfg GUI numbers for a unique numbers 
 ]]
-
 local DataPos = jsonInterface.load("custom/InterventionPos.json")
 
----------------------------
---------CONFIGURATION------
----------------------------
 local trad = {
 	BackList = "* Return *\n",
 	SelectPos = color.Green.."Select a location to teleport to",
 	ChoicePos = color.Yellow.."Select an option",
-	ChoicePosOpt = "Teleport;Cancel"
+	ChoicePosOpt = "Teleport;Cancel",
+	NameAlmi = "Almsivi Intervention",	
+	NameDivi = "Divine Intervention"
 }
 
 local cfg = {
+	CostDivi = 8,
+	CostAlmi = 8,
 	MainGUI = 28022023,
 	ChoiceGUI = 28022024
 }
@@ -47,14 +48,14 @@ local function SelectChoice(pid, index)
 end
 
 local function ListPos(pid, type)
-    local list = trad.BackList 	
+	local list = trad.BackList 	
 	local options = DataPos[type]	
-    for i = 1, #options do	
+	for i = 1, #options do	
 		list = list..options[i].name.." : "..math.floor(options[i].location.posX).." ; "..math.floor(options[i].location.posY).." ; "..math.floor(options[i].location.posZ)	
-        if not(i == #options) then
-            list = list .. "\n"
-        end		
-    end	
+		if not(i == #options) then
+			list = list .. "\n"
+		end
+	end	
 	posTab[GetName(pid)] = options	
 	tes3mp.ListBox(pid, cfg.MainGUI, trad.SelectPos..color.Default, list)	
 end
@@ -78,16 +79,54 @@ end
 
 local InterventionPlus = {}
 
-InterventionPlus.OnPlayerSpellsActiveValidator = function(eventStatus, pid, playerPacket)
+InterventionPlus.OnServerInit = function(eventStatus)
+	local recordStoreSpells = RecordStores["spell"]
+	local recordTable
+	recordTable = {
+	  name = trad.NameAlmi,
+	  cost = cfg.CostAlmi,	  
+	  subtype = 0,
+	  flags = 1,
+	  effects = {{
+		attribute = -1,
+		area = 0,
+		duration = 0,
+		id = 63,
+		rangeType = 0,
+		skill = -1,
+		magnitudeMax = 0,
+		magnitudeMin = 0
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["almsivi intervention"] = recordTable
+	recordTable = {
+	  name = trad.NameDivi,
+	  cost = cfg.CostDivi,	  
+	  subtype = 0,
+	  flags = 1,
+	  effects = {{
+		attribute = -1,
+		area = 0,
+		duration = 0,
+		id = 62,
+		rangeType = 0,
+		skill = -1,
+		magnitudeMax = 0,
+		magnitudeMin = 0
+		}}
+	}
+	recordStoreSpells.data.permanentRecords["divine intervention"] = recordTable
+	recordStoreSpells:Save()
+end
+
+InterventionPlus.OnPlayerSpellsActiveHandler = function(eventStatus, pid, playerPacket)
 	for spellId, spellInstances in pairs(playerPacket.spellsActive) do	
 		for _, spellInstance in ipairs(spellInstances) do	
 			for _, effect in ipairs(spellInstance.effects) do		
 				if effect.id == enumerations.effects.ALMSIVI_INTERVENTION then
-					effect.magnitude = 0
 					ListPos(pid, "Almi")
 					break
-				elseif effect.id == enumerations.effects.DIVINE_INTERVENTION then
-					effect.magnitude = 0			
+				elseif effect.id == enumerations.effects.DIVINE_INTERVENTION then		
 					ListPos(pid, "Divi")
 					break
 				end
@@ -109,8 +148,8 @@ InterventionPlus.OnGUIAction = function(eventStatus, pid, idGui, data)
 	end
 end
 
-customEventHooks.registerValidator("OnPlayerSpellsActive", InterventionPlus.OnPlayerSpellsActiveValidator)
 customEventHooks.registerHandler("OnGUIAction", InterventionPlus.OnGUIAction)
 customEventHooks.registerHandler("OnServerInit", InterventionPlus.OnServerInit)
+customEventHooks.registerHandler("OnPlayerSpellsActive", InterventionPlus.OnPlayerSpellsActiveHandler)
 
 return InterventionPlus
