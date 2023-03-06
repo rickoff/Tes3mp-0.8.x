@@ -152,7 +152,7 @@ MultiMark.OnServerInit = function(eventStatus)
 	recordStoreSpells:Save()
 end
 
-MultiMark.OnPlayerSpellsActiveValidator = function(eventStatus, pid, playerPacket)
+MultiMark.OnPlayerSpellsActiveHandler = function(eventStatus, pid, playerPacket)
 	for spellId, spellInstances in pairs(playerPacket.spellsActive) do	
 		for _, spellInstance in ipairs(spellInstances) do	
 			for _, effect in ipairs(spellInstance.effects) do		
@@ -194,6 +194,6 @@ end
 customEventHooks.registerHandler("OnGUIAction", MultiMark.OnGUIAction)
 customEventHooks.registerHandler("OnServerInit", MultiMark.OnServerInit)
 customEventHooks.registerHandler("OnPlayerAuthentified", MultiMark.OnPlayerAuthentified)
-customEventHooks.registerHandler("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActiveValidator)
+customEventHooks.registerHandler("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActiveHandler)
 
 return MultiMark
