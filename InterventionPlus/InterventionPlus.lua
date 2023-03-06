@@ -80,8 +80,8 @@ end
 local InterventionPlus = {}
 
 InterventionPlus.OnServerInit = function(eventStatus)
-	local recordStoreSpells = RecordStores["spell"]
 	local recordTable
+	local recordStoreSpells = RecordStores["spell"]
 	recordTable = {
 	  name = trad.NameAlmi,
 	  cost = cfg.CostAlmi,	  
@@ -117,6 +117,76 @@ InterventionPlus.OnServerInit = function(eventStatus)
 	}
 	recordStoreSpells.data.permanentRecords["divine intervention"] = recordTable
 	recordStoreSpells:Save()
+	local recordStoreEnchant = RecordStores["enchantment"]
+	recordTable = {
+	  cost = cfg.CostAlmi,	  
+	  subtype = 2,
+	  flags = 40,
+	  charge = 40,  
+	  effects = {{
+		attribute = -1,
+		area = 0,
+		duration = 0,
+		id = 63,
+		rangeType = 0,
+		skill = -1,
+		magnitudeMax = 0,
+		magnitudeMin = 0
+		}}
+	}
+	recordStoreEnchant.data.permanentRecords["almsivi intervention_en"] = recordTable
+	recordTable = {
+	  cost = cfg.CostAlmi,	  
+	  subtype = 0,
+	  flags = 8,
+	  charge = 8,  
+	  effects = {{
+		attribute = -1,
+		area = 0,
+		duration = 0,
+		id = 63,
+		rangeType = 0,
+		skill = -1,
+		magnitudeMax = 0,
+		magnitudeMin = 0
+		}}
+	}
+	recordStoreEnchant.data.permanentRecords["almsivi intervention enchantmen"] = recordTable
+	recordTable = {
+	  cost = cfg.CostAlmi,	  
+	  subtype = 2,
+	  flags = 40,
+	  charge = 40,  
+	  effects = {{
+		attribute = -1,
+		area = 0,
+		duration = 0,
+		id = 63,
+		rangeType = 0,
+		skill = -1,
+		magnitudeMax = 0,
+		magnitudeMin = 0
+		}}
+	}
+	recordStoreEnchant.data.permanentRecords["divine intervention_en"] = recordTable
+	recordTable = {
+	  cost = cfg.CostAlmi,	  
+	  subtype = 0,
+	  flags = 8,
+	  charge = 8,  
+	  effects = {{
+		attribute = -1,
+		area = 0,
+		duration = 0,
+		id = 63,
+		rangeType = 0,
+		skill = -1,
+		magnitudeMax = 0,
+		magnitudeMin = 0
+		}}
+	}
+	recordStoreEnchant.data.permanentRecords["divine intervention enchantmen"] = recordTable	
+	recordStoreEnchant:Save()	
 end
 
 InterventionPlus.OnPlayerSpellsActiveHandler = function(eventStatus, pid, playerPacket)
