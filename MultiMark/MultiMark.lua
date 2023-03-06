@@ -53,7 +53,7 @@ local function ListMark(pid)
     for i = 1, #options do
 		list = list..string.sub(options[i].cell, 1, 25).." : "..math.floor(options[i].posX).." ; "..math.floor(options[i].posY).." ; "..math.floor(options[i].posZ)		
         if not(i == #options) then
-            list = list .. "\n"
+		list = list .. "\n"
         end
     end
 	tes3mp.ListBox(pid, cfg.MainGUI, trad.SelectMark..color.Default, list)	
