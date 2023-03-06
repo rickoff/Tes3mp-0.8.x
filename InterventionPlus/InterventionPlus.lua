@@ -1,7 +1,7 @@
 --[[
 InterventionPlus
 tes3mp 0.8.1
-version 0.3
+version 1.0
 ---------------------------
 DESCRIPTION :
 select the teleport point of the temple of your choice for Almisivi Intervention and the fort of your choice for Divine Intervention
@@ -218,6 +218,23 @@ InterventionPlus.OnGUIAction = function(eventStatus, pid, idGui, data)
 	end
 end
 
+InterventionPlus.OnRecordDynamicValidator = function(eventStatus, pid, recordArray, storeType)
+	if storeType == "enchantment" or storeType == "spell" or storeType == "potion" then	
+		for _, record in ipairs(recordArray) do			
+			for _, effect in ipairs(record.effects) do			
+				if effect.id == enumerations.effects.ALMSIVI_INTERVENTION then
+					effect.magnitudeMin = 0					
+					effect.magnitudeMax = 0			
+				elseif effect.id == enumerations.effects.DIVINE_INTERVENTION then			
+					effect.magnitudeMin = 0					
+					effect.magnitudeMax = 0					
+				end					
+			end	
+		end
+	end
+end	
+
+customEventHooks.registerValidator("OnRecordDynamic", InterventionPlus.OnRecordDynamicValidator)
 customEventHooks.registerHandler("OnGUIAction", InterventionPlus.OnGUIAction)
 customEventHooks.registerHandler("OnServerInit", InterventionPlus.OnServerInit)
 customEventHooks.registerHandler("OnPlayerSpellsActive", InterventionPlus.OnPlayerSpellsActiveHandler)
