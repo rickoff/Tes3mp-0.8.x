@@ -1,7 +1,7 @@
 --[[
 MultiMark
 tes3mp 0.8.1
-script version 0.8
+script version 0.9
 ---------------------------
 DESCRIPTION :
 USE DIRECTLY SPELL MARK AND RECALL
@@ -150,6 +150,86 @@ MultiMark.OnServerInit = function(eventStatus)
 	}
 	recordStoreSpells.data.permanentRecords["recall"] = recordTable
 	recordStoreSpells:Save()
+	local recordStoreEnchant = RecordStores["enchantment"]	
+	recordTable = {
+		cost = cfg.costMark,		
+		subtype = 2,
+		flags = 90,
+		charge = 90,
+		effects = {
+			{
+				attribute = -1,
+				area = 0,
+				duration = 0,
+				id = 60,
+				rangeType = 0,
+				skill = -1,
+				magnitudeMax = 0,
+				magnitudeMin = 0
+			}
+		}
+	}
+	recordStoreEnchant.data.permanentRecords["mark_en"] = recordTable	
+	recordStoreEnchant.data.permanentRecords["markring_en"] = recordTable		
+	recordTable = {
+		cost = cfg.costMark,		
+		subtype = 0,
+		flags = 18,
+		charge = 18,
+		effects = {
+			{
+				attribute = -1,
+				area = 0,
+				duration = 0,
+				id = 60,
+				rangeType = 0,
+				skill = -1,
+				magnitudeMax = 0,
+				magnitudeMin = 0
+			}
+		}
+	}
+	recordStoreEnchant.data.permanentRecords["sc_mark_en"] = recordTable
+	recordTable = {
+		cost = cfg.costRecall,		
+		subtype = 2,
+		flags = 90,
+		charge = 90,
+		effects = {
+			{
+				attribute = -1,
+				area = 0,
+				duration = 0,
+				id = 61,
+				rangeType = 0,
+				skill = -1,
+				magnitudeMax = 0,
+				magnitudeMin = 0
+			}
+		}
+	}
+	recordStoreEnchant.data.permanentRecords["recallring_en"] = recordTable	
+	recordStoreEnchant.data.permanentRecords["recall_en"] = recordTable		
+	recordTable = {
+		cost = cfg.costRecall,		
+		subtype = 0,
+		flags = 18,
+		charge = 18,
+		effects = {
+			{
+				attribute = -1,
+				area = 0,
+				duration = 0,
+				id = 61,
+				rangeType = 0,
+				skill = -1,
+				magnitudeMax = 0,
+				magnitudeMin = 0
+			}
+		}
+	}
+	recordStoreEnchant.data.permanentRecords["sc_leaguestep_en"] = recordTable	
+	recordStoreEnchant:Save()
 end
 
 MultiMark.OnPlayerSpellsActiveHandler = function(eventStatus, pid, playerPacket)
