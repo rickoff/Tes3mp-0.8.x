@@ -1,7 +1,7 @@
 --[[
 MultiMark
 tes3mp 0.8.1
-script version 0.7
+script version 0.8
 ---------------------------
 DESCRIPTION :
 USE DIRECTLY SPELL MARK AND RECALL
@@ -16,20 +16,26 @@ Change trad in your language for your server
 Change cfg MaxMark for config limite mark
 Change cfg GUI numbers for a unique numbers 
 ]]
+---------------------------
+local trad = {
+	BackList = "* Back *\n",
+	LimiteMark = color.Red.."The number of mark is limited to : ",
+	SelectMark = color.Green.."Select a mark to recall or remove",
+	ChoiceMark = color.Yellow.."Select an option",
+	ChoiceMarkOpt = "Recall;Remove",
+	AddNewMark = "New mark at\n",
+	NameMark = "Mark",
+	NameRecall = "Recall"
+}
 
-local trad = {}
-trad.BackList = "* Back *\n"
-trad.LimiteMark = color.Red.."The number of mark is limited to : "
-trad.SelectMark = color.Green.."Select a mark to recall or remove"
-trad.ChoiceMark = color.Yellow.."Select an option"
-trad.ChoiceMarkOpt = "Recall;Remove"
-trad.AddNewMark = "New mark at\n"
-
-local cfg = {}
-cfg.MaxMark = 5
-cfg.MainGUI = 21092022
-cfg.ChoiceGUI = 21092023
-
+local cfg = {
+	MaxMark = 5,
+	costMark = 18,
+	costRecall = 18,
+	MainGUI = 21092022,
+	ChoiceGUI = 21092023
+}
+	
 local playerIndex = {}
 
 local function GetName(pid)
@@ -102,18 +108,60 @@ end
 
 local MultiMark = {}
 
+MultiMark.OnServerInit = function(eventStatus)
+	local recordStoreSpells = RecordStores["spell"]
+	local recordTable
+	recordTable = {
+		name = trad.NameMark,
+		cost = cfg.costMark,	  
+		subtype = 0,
+		flags = 1,
+		effects = {
+			{
+				attribute = -1,
+				area = 0,
+				duration = 0,
+				id = 60,
+				rangeType = 0,
+				skill = -1,
+				magnitudeMax = 0,
+				magnitudeMin = 0
+			}
+		}
+	}
+	recordStoreSpells.data.permanentRecords["mark"] = recordTable
+	recordTable = {
+		name = trad.NameRecall,
+		cost = cfg.costRecall,		
+		subtype = 0,
+		flags = 1,
+		effects = {
+			{
+				attribute = -1,
+				area = 0,
+				duration = 0,
+				id = 61,
+				rangeType = 0,
+				skill = -1,
+				magnitudeMax = 0,
+				magnitudeMin = 0
+			}
+		}
+	}
+	recordStoreSpells.data.permanentRecords["recall"] = recordTable
+	recordStoreSpells:Save()
+end
+
 MultiMark.OnPlayerSpellsActiveValidator = function(eventStatus, pid, playerPacket)
 	for spellId, spellInstances in pairs(playerPacket.spellsActive) do	
 		for _, spellInstance in ipairs(spellInstances) do	
 			for _, effect in ipairs(spellInstance.effects) do		
 				if effect.id == enumerations.effects.MARK then
-					effect.magnitude = 0
 					AddMark(pid)
 					break
-				elseif effect.id == enumerations.effects.RECALL then
-					effect.magnitude = 0			
+				elseif effect.id == enumerations.effects.RECALL then			
 					ListMark(pid)
-					break
+					break					
 				end
 			end	
 		end
@@ -122,7 +170,7 @@ end
 
 MultiMark.OnGUIAction = function(eventStatus, pid, idGui, data)
 	if idGui == cfg.MainGUI then
-		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then --Close/Nothing
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else   
 			SelectChoice(pid, tonumber(data))
 		end
@@ -131,7 +179,7 @@ MultiMark.OnGUIAction = function(eventStatus, pid, idGui, data)
 			RecallPlayer(pid)
 		elseif tonumber(data) == 1 then
 			RemoveMark(pid)
-			return ListMark(pid)		
+			ListMark(pid)		
 		end
 	end
 end
@@ -143,8 +191,9 @@ MultiMark.OnPlayerAuthentified = function(eventStatus, pid)
 	end
 end
 
-customEventHooks.registerValidator("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActiveValidator)
-customEventHooks.registerHandler("OnPlayerAuthentified", MultiMark.OnPlayerAuthentified)
 customEventHooks.registerHandler("OnGUIAction", MultiMark.OnGUIAction)
+customEventHooks.registerHandler("OnServerInit", MultiMark.OnServerInit)
+customEventHooks.registerHandler("OnPlayerAuthentified", MultiMark.OnPlayerAuthentified)
+customEventHooks.registerHandler("OnPlayerSpellsActive", MultiMark.OnPlayerSpellsActiveValidator)
 
 return MultiMark
