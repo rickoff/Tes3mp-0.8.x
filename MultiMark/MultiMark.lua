@@ -1,7 +1,7 @@
 --[[
 MultiMark
 tes3mp 0.8.1
-script version 0.9
+script version 1.0
 ---------------------------
 DESCRIPTION :
 USE DIRECTLY SPELL MARK AND RECALL
@@ -271,6 +271,23 @@ MultiMark.OnPlayerAuthentified = function(eventStatus, pid)
 	end
 end
 
+MultiMark.OnRecordDynamicValidator = function(eventStatus, pid, recordArray, storeType)
+	if storeType == "enchantment" or storeType == "spell" or storeType == "potion" then	
+		for _, record in ipairs(recordArray) do			
+			for _, effect in ipairs(record.effects) do			
+				if effect.id == enumerations.effects.MARK then
+					effect.magnitudeMin = 0					
+					effect.magnitudeMax = 0			
+				elseif effect.id == enumerations.effects.RECALL then			
+					effect.magnitudeMin = 0					
+					effect.magnitudeMax = 0					
+				end					
+			end	
+		end
+	end
+end	
+
+customEventHooks.registerValidator("OnRecordDynamic", MultiMark.OnRecordDynamicValidator)
 customEventHooks.registerHandler("OnGUIAction", MultiMark.OnGUIAction)
 customEventHooks.registerHandler("OnServerInit", MultiMark.OnServerInit)
 customEventHooks.registerHandler("OnPlayerAuthentified", MultiMark.OnPlayerAuthentified)
