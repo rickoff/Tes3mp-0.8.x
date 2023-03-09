@@ -96,8 +96,7 @@ local function getGroupData(pid)
 end
 
 local function getListMemberGroup(pid)
-	local options = {}	
-	local playerName = GetName(pid)	
+	local options = {}
 	local playerGroup = getGroupData(pid)
 	for memberName, name in pairs(playerGroup) do	
 		if memberName then			
@@ -108,8 +107,7 @@ local function getListMemberGroup(pid)
 end
 
 local function getListPlayer(pid) 
-	local options = {}  	
-	local playerName = GetName(pid)	
+	local options = {} 
 	for pid, player in pairs(Players) do	
 		if Players[pid] and Players[pid]:IsLoggedIn() then		
 			table.insert(options, GetName(pid)) 			
