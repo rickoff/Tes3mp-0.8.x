@@ -19,25 +19,23 @@ local cfg = {
 local MovePlease = {}
 
 MovePlease.OnActivatedObject = function(eventStatus, pid, cellDescription, objects)
+	
+	if tes3mp.GetDrawState(pid) ~= 2 then return end
 
 	if cfg.OnlyInterior then
 		if tes3mp.IsInExterior(pid) then return end
 	end
 	
 	local ObjectIndex
-	local ObjectRefid
 
 	for _, object in pairs(objects) do
 		ObjectIndex = object.uniqueIndex
-		ObjectRefid = object.refId
 	end
 
-	if ObjectIndex and ObjectRefid then
-		if tableHelper.containsValue(LoadedCells[cellDescription].data.packets.actorList, ObjectIndex) and tes3mp.GetDrawState(pid) == 2 then
-			logicHandler.RunConsoleCommandOnObject(pid, "PlayGroup, hit2, 1", cellDescription, ObjectIndex, false)	
-			logicHandler.RunConsoleCommandOnObject(pid, "AIWander, 512, 1, 0", cellDescription, ObjectIndex, false)
-			return customEventHooks.makeEventStatus(false,false) 
-		end			
+	if ObjectIndex and tableHelper.containsValue(LoadedCells[cellDescription].data.packets.actorList, ObjectIndex) then
+		logicHandler.RunConsoleCommandOnObject(pid, "PlayGroup, hit2, 1", cellDescription, ObjectIndex, false)	
+		logicHandler.RunConsoleCommandOnObject(pid, "AIWander, 512, 1, 0", cellDescription, ObjectIndex, false)
+		return customEventHooks.makeEventStatus(false,false) 		
 	end
 end
 
