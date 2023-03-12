@@ -420,7 +420,7 @@ TeamGroup.OnPlayerJournal = function(pid, playerPacket)
 	for _, journalItem in ipairs(playerPacket.journal) do
 		for memberName, bool in pairs(playerGroup) do
 			if memberName then
-				local targetPid = logicHandler.GetPlayerByName(name).pid
+				local targetPid = logicHandler.GetPlayerByName(memberName).pid
 				if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
 					local checkQuest = false
 					local targetPlayerPacket = packetReader.GetPlayerPacketTables(targetPid, "PlayerJournal")
