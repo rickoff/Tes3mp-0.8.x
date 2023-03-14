@@ -33,6 +33,8 @@ MovePlease.OnActivatedObject = function(eventStatus, pid, cellDescription, objec
 	end
 
 	if ObjectIndex and tableHelper.containsValue(LoadedCells[cellDescription].data.packets.actorList, ObjectIndex) then
+		table.insert(Players[pid].consoleCommandsQueued, "PlayGroup, hit2, 1")
+		table.insert(Players[pid].consoleCommandsQueued, "AIWander, 512, 1, 0")
 		logicHandler.RunConsoleCommandOnObject(pid, "PlayGroup, hit2, 1", cellDescription, ObjectIndex, false)	
 		logicHandler.RunConsoleCommandOnObject(pid, "AIWander, 512, 1, 0", cellDescription, ObjectIndex, false)
 		return customEventHooks.makeEventStatus(false,false) 		
