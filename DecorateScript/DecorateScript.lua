@@ -91,96 +91,63 @@ local function GetObject(refIndex, cell)
 end
 
 local function ResendPlaceToPlayer(pid, uniqueIndex, cellDescription)
-
 	tes3mp.ClearObjectList()
 	tes3mp.SetObjectListPid(pid)
-	tes3mp.SetObjectListCell(cellDescription)
-	
-	local object = LoadedCells[cellDescription].data.objectData[uniqueIndex]
-	
-	if not object then return end
-	
-	if object and object.location then	
-	
+	tes3mp.SetObjectListCell(cellDescription)	
+	local object = LoadedCells[cellDescription].data.objectData[uniqueIndex]	
+	if not object then return end	
+	if object and object.location then		
 		local splitIndex = uniqueIndex:split("-")
 		tes3mp.SetObjectRefNum(splitIndex[1])
 		tes3mp.SetObjectMpNum(splitIndex[2])
 		tes3mp.SetObjectPosition(object.location.posX, object.location.posY, object.location.posZ)
 		tes3mp.SetObjectRotation(object.location.rotX, object.location.rotY, object.location.rotZ)
-		tes3mp.AddObject()
-		
-	end	
-	
+		tes3mp.AddObject()		
+	end		
 	tes3mp.SendObjectMove(false)
 	tes3mp.SendObjectRotate(false)	
-	
 end
 
 local function ResendPlaceToEveryone(pid, uniqueIndex, cellDescription)
-
 	tes3mp.ClearObjectList()
 	tes3mp.SetObjectListPid(pid)
-	tes3mp.SetObjectListCell(cellDescription)
-	
-	local object = LoadedCells[cellDescription].data.objectData[uniqueIndex]
-	
-	if not object then return end
-	
-	local inventory = LoadedCells[cellDescription].data.objectData[uniqueIndex].inventory
-	
-	local scale = object.scale or 1
-	
-	if object and object.location and object.refId then	
-	
-		local splitIndex = uniqueIndex:split("-")
-		
+	tes3mp.SetObjectListCell(cellDescription)	
+	local object = LoadedCells[cellDescription].data.objectData[uniqueIndex]	
+	if not object then return end	
+	local inventory = LoadedCells[cellDescription].data.objectData[uniqueIndex].inventory	
+	local scale = object.scale or 1	
+	if object and object.location and object.refId then		
+		local splitIndex = uniqueIndex:split("-")		
 		tes3mp.SetObjectRefNum(splitIndex[1])
 		tes3mp.SetObjectMpNum(splitIndex[2])
 		tes3mp.SetObjectPosition(object.location.posX, object.location.posY, object.location.posZ)
 		tes3mp.SetObjectRotation(object.location.rotX, object.location.rotY, object.location.rotZ)
-		tes3mp.SetObjectScale(scale)
-		
-		if inventory then
-		
-			for itemIndex, item in pairs(inventory) do
-			
+		tes3mp.SetObjectScale(scale)		
+		if inventory then		
+			for itemIndex, item in pairs(inventory) do			
 				tes3mp.SetContainerItemRefId(item.refId)
 				tes3mp.SetContainerItemCount(item.count)
 				tes3mp.SetContainerItemCharge(item.charge)
-				tes3mp.AddContainerItem()
-				
-			end
-			
-		end	
-		
-		tes3mp.AddWorldObject()
-		
-	end	
-	
+				tes3mp.AddContainerItem()				
+			end			
+		end			
+		tes3mp.AddWorldObject()		
+	end		
 	tes3mp.SendObjectMove(true)
 	tes3mp.SendObjectRotate(true)
-	tes3mp.SendObjectScale(true)
-	
-	if inventory then
-	
-		tes3mp.SendContainer(true)
-		
+	tes3mp.SendObjectScale(true)	
+	if inventory then	
+		tes3mp.SendContainer(true)		
 	end	
-
-	LoadedCells[cellDescription]:QuicksaveToDrive()
-	
+	LoadedCells[cellDescription]:QuicksaveToDrive()	
 end
 
 local function showPromptGUI(pid)
-
-	local message = "[" .. playerCurrentMode[GetName(pid)] .. trad.prompt
-	
-	tes3mp.InputDialog(pid, cfg.PromptId, message, "")
-	
+	local message = "[" .. playerCurrentMode[GetName(pid)] .. trad.prompt	
+	tes3mp.InputDialog(pid, cfg.PromptId, message, "")	
 end
 
 local function onEnterPrompt(pid, data)
-
 	local cell = tes3mp.GetCell(pid)
 	local pname = GetName(pid)
 	local mode = playerCurrentMode[pname]
@@ -188,17 +155,12 @@ local function onEnterPrompt(pid, data)
 	local object = GetObject(playerSelectedObject[pname], cell)
 	local cellSize = 8192	
 	local checkPosSafe = true	
-
 	if not object then
-
 		tes3mp.MessageBox(pid, -1, trad.noselect)		
 		return false
-
 	else
 		if object.scale == nil then object.scale = 1 end	
-
 		local scaling = object.scale 
-
 		if mode == trad.rotx then
 			local curDegrees = math.deg(object.location.rotX)
 			local newDegrees = (curDegrees + data) % 360
@@ -253,30 +215,19 @@ local function onEnterPrompt(pid, data)
 			object.location.posY = object.location.posY		
 			return
 		end
-
 	end
-
 	if tes3mp.IsInExterior(pid) then
-
 		local correctGridX = math.floor(object.location.posX / cellSize)
 		local correctGridY = math.floor(object.location.posY / cellSize)
-
 		if LoadedCells[cell].gridX ~= correctGridX or LoadedCells[cell].gridY ~= correctGridY then
 			checkPosSafe = false
 		end
-
 	end
-
 	if checkPosSafe == true then	
-
 		ResendPlaceToEveryone(pid, playerSelectedObject[pname], cell)
-
 	else
-
 		tes3mp.MessageBox(pid, -1, trad.warningcell)
-
-	end
-	
+	end	
 end
 
 -------------
@@ -285,19 +236,13 @@ end
 local DecorateScript = {}
 
 DecorateScript.SetSelectedObject = function(pid, refIndex)
-
-	setSelectedObject(pid, refIndex)
-	
+	setSelectedObject(pid, refIndex)	
 end
 
 DecorateScript.OnObjectPlace = function(eventStatus, pid, cellDescription)
-
-	tes3mp.ReadLastEvent()
-	
-	local refIndex = tes3mp.GetObjectRefNumIndex(0) .. "-" .. tes3mp.GetObjectMpNum(0)
-	
-	setSelectedObject(pid, refIndex)
-	
+	tes3mp.ReadLastEvent()	
+	local refIndex = tes3mp.GetObjectRefNumIndex(0) .. "-" .. tes3mp.GetObjectMpNum(0)	
+	setSelectedObject(pid, refIndex)	
 end
 
 DecorateScript.OnGUIAction = function(eventStatus, pid, idGui, data)		
@@ -362,6 +307,7 @@ DecorateScript.OnGUIAction = function(eventStatus, pid, idGui, data)
 		elseif tonumber(data) == 15 then --Close
 		end
 	elseif idGui == cfg.PromptId then
+		local pname = GetName(pid)
 		if data ~= nil and data ~= "" and tonumber(data) then
 			onEnterPrompt(pid, data)
 		end			
@@ -370,118 +316,80 @@ DecorateScript.OnGUIAction = function(eventStatus, pid, idGui, data)
 	end	
 end
 
-DecorateScript.moveObject = function(pid)
-	
+DecorateScript.moveObject = function(pid)	
 	local cellSize = 8192	
-
 	local cell = tes3mp.GetCell(pid)
-
 	local pname = GetName(pid)
-
 	local object = GetObject(playerSelectedObject[pname], cell)	
-
 	local drawState = tes3mp.GetDrawState(pid)
-
 	if not object then
-
 		tes3mp.MessageBox(pid, -1, trad.noselect)	
 		return false
-
 	else
-
 		local playerAngleZ = tes3mp.GetRotZ(pid)
-
 		if playerAngleZ > 3.0 then
 			playerAngleZ = 3.0
 		elseif playerAngleZ < -3.0 then
 			playerAngleZ = -3.0
 		end
-
 		local playerAngleX = tes3mp.GetRotX(pid)
-
 		if playerAngleX > 1.5 then
 			playerAngleX = 1.5
 		elseif playerAngleX < -1.5 then
 			playerAngleX = -1.5
 		end	
-
 		local PosX = (200 * math.sin(playerAngleZ) + tes3mp.GetPosX(pid))
 		local PosY = (200 * math.cos(playerAngleZ) + tes3mp.GetPosY(pid))
 		local PosZ = (200 * math.sin(-playerAngleX) + (tes3mp.GetPosZ(pid) + 100))
-
 		if PosZ < tes3mp.GetPosZ(pid) then
 			PosZ = tes3mp.GetPosZ(pid)
 		end
-
 		if tes3mp.IsInExterior(pid) == true then
-
 			local correctGridX = math.floor(PosX / cellSize)
 			local correctGridY = math.floor(PosY / cellSize)
-
 			if LoadedCells[cell].gridX ~= correctGridX or LoadedCells[cell].gridY ~= correctGridY then
 				PosX = object.location.posX
 				PosY = object.location.posY
 				PosZ = object.location.posZ
 				tes3mp.MessageBox(pid, -1, trad.warningcell)	
 			end
-
 		end
-
 		if drawState == 1 then
-
 			local curDegrees = math.deg(object.location.rotZ)
 			local newDegrees = (curDegrees + 1) % 360
 			object.location.rotZ = math.rad(newDegrees)
-
 		elseif drawState == 2 then
-
 			local curDegrees = math.deg(object.location.rotX)
 			local newDegrees = (curDegrees + 1) % 360
 			object.location.rotX = math.rad(newDegrees)
-
 		end	
-
 		object.location.posX = PosX
 		object.location.posY = PosY
 		object.location.posZ = PosZ				
-
 		ResendPlaceToPlayer(pid, playerSelectedObject[pname], cell)			
 	end
-
 	if tes3mp.GetSneakState(pid) then	
-
 		tes3mp.MessageBox(pid, -1, trad.placeobjet)	
 		ResendPlaceToEveryone(pid, playerSelectedObject[pname], cell)	
 		playersTab[GetName(pid)] = nil
 		logicHandler.RunConsoleCommandOnPlayer(pid, "tb", false)
-
 	else
-
 		local TimerDrop = tes3mp.CreateTimerEx("StartDrop", time.seconds(0.01), "i", pid)
 		tes3mp.StartTimer(TimerDrop)
-
 	end
 end
 
 DecorateScript.OnObjectActivate = function(eventStatus, pid, cellDescription, objects)
-
 	if playersTab[GetName(pid)] and GetObject(playerSelectedObject[GetName(pid)], cellDescription) then
-
 		return customEventHooks.makeEventStatus(false, false)
-
 	end
 end
 
-DecorateScript.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription) 
-	
+DecorateScript.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription) 	
 	playerSelectedObject[GetName(pid)] = nil
-
 	if playersTab[GetName(pid)] then
-
 		logicHandler.RunConsoleCommandOnPlayer(pid, "tb", false)	
-
 		playersTab[GetName(pid)] = nil
-
 	end	
 end
 
@@ -491,10 +399,8 @@ DecorateScript.OnPlayerAuthentified = function(eventStatus, pid)
 	end	
 end
 
-DecorateScript.showMainGUI = function(pid)
-	
+DecorateScript.showMainGUI = function(pid)	
 	if not playersTab[GetName(pid)] then
-
 		local currentItem = "Aucun"
 		local selected = playerSelectedObject[GetName(pid)]
 		local object = GetObject(selected, tes3mp.GetCell(pid))		
@@ -503,19 +409,16 @@ DecorateScript.showMainGUI = function(pid)
 		end		
 		local message = trad.opt1 .. currentItem
 		tes3mp.CustomMessageBox(pid, cfg.MainId, message, trad.opt2)
-
 	end
 end
 ------------
 -- EVENTS --
 ------------
 customEventHooks.registerValidator("OnObjectActivate", DecorateScript.OnObjectActivate)
-
 customEventHooks.registerHandler("OnGUIAction", DecorateScript.OnGUIAction)
 customEventHooks.registerHandler("OnObjectPlace", DecorateScript.OnObjectPlace)
 customEventHooks.registerHandler("OnPlayerCellChange", DecorateScript.OnPlayerCellChange)
 customEventHooks.registerHandler("OnPlayerAuthentified", DecorateScript.OnPlayerAuthentified)
-
 customCommandHooks.registerCommand("dh", DecorateScript.showMainGUI)
 
 return DecorateScript
