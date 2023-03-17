@@ -74,15 +74,7 @@ local function CheckJsonChange()
 
 		end
 		
-		CheckDeletedChannel()	
-		
-		CheckJsonChange()
-		
-	else
-	
-		timer.sleep(100)
-		
-		CheckJsonChange()
+		CheckDeletedChannel()
 		
 	end
 end
@@ -187,18 +179,20 @@ client:on("ready", function()
 	print("Logged in as " .. client.user.username)
 	guild = client:getGuild(config.serverId) 
 	client:setGame("Instancied Vocal")
-	timer.sleep(1000)
 	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")	
-	CheckJsonChange()
+	timer.setInterval(1000, function()
+		coroutine.wrap(CheckJsonChange)()		
+	end)
 end)
 
 client:on("shardResumed", function()
 	print("Logged resumed " .. client.user.username)
 	guild = client:getGuild(config.serverId) 
 	client:setGame("Instancied Vocal")
-	timer.sleep(1000)
-	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")	
-	CheckJsonChange()	
+	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
+	timer.setInterval(1000, function()
+		coroutine.wrap(CheckJsonChange)()		
+	end)	
 end)
 
 client:on("voiceConnect", function(member)
@@ -243,7 +237,6 @@ client:on("voiceDisconnect", function(member)
 		
 	end	
 	
-
 	if DiscordFile[MemberName] then
 	
 		DiscordFile[MemberName] = nil
