@@ -8,7 +8,7 @@ Prevent Merchant Equip
 ---------------------------
 INSTALLATION:
 Save the file as PreventMerchantEquipFix.lua inside your server/scripts/custom folder.
-Edits to customScripts.lua
+Edits to customScripts.lua add :
 PreventMerchantEquipFix = require("custom.PreventMerchantEquipFix")
 ---------------------------
 ]]
@@ -25,15 +25,6 @@ local function SaveData()
 	jsonInterface.save("custom/PreventMerchantEquipList.json", NpcBarterList)	
 end
 
-local function GetIndexBarter(uniqueIndex)
-	for actorIndex, bool in pairs(NpcBarterList) do		
-		if uniqueIndex == actorIndex then		
-			return true			
-		end		
-	end
-	return false	
-end
-
 -------------
 -- METHODS --
 -------------
@@ -46,13 +37,10 @@ PreventMerchantEquipFix.OnObjectDialogueChoice = function(eventStatus, pid, cell
 		ObjectIndex = object.uniqueIndex
 		ObjetDialogueType = tableHelper.getIndexByValue(enumerations.dialogueChoice, object.dialogueChoiceType)
 	end	
-	if ObjectIndex and ObjetDialogueType then
-		if ObjetDialogueType == "BARTER" then
-			if not GetIndexBarter(ObjectIndex) then
-				NpcBarterList[ObjectIndex] = true
-				SaveData()
-			end
-		end
+	if ObjectIndex and ObjetDialogueType
+	and ObjetDialogueType == "BARTER" and not NpcBarterList[ObjectIndex] then
+		NpcBarterList[ObjectIndex] = true
+		SaveData()
 	end
 end
 
@@ -77,7 +65,6 @@ end
 -- EVENTS --
 ------------
 customEventHooks.registerValidator("OnActorEquipment", PreventMerchantEquipFix.OnActorEquipment)
-
 customEventHooks.registerHandler("OnObjectDialogueChoice", PreventMerchantEquipFix.OnObjectDialogueChoice)
 customEventHooks.registerHandler("OnServerPostInit", PreventMerchantEquipFix.OnServerPostInit)
 
