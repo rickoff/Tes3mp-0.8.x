@@ -2,7 +2,7 @@
 * tes3mp 0.8.1
 --------------------------
 * DESCRIPTION :
-* Automatically creates, deletes and moves a player on the discord channel corresponding to the cell being explored ig
+* Automatically creates, deletes and moves a player on the discord channel corresponding to the cell being explored in-game
 * Automatically kicks players not present on a voice channel
 ---------------------------
 * REQUIRE:
