@@ -185,16 +185,6 @@ client:on("ready", function()
 	end)
 end)
 
-client:on("shardResumed", function()
-	print("Logged resumed " .. client.user.username)
-	guild = client:getGuild(config.serverId) 
-	client:setGame("Instancied Vocal")
-	LocationFile = jsonInterface.load(pathCustom.."/VocalDiscord/playerLocations.json")
-	timer.setInterval(1000, function()
-		coroutine.wrap(CheckJsonChange)()		
-	end)	
-end)
-
 client:on("voiceConnect", function(member)
 
 	local MemberName = GetName(member.name)
