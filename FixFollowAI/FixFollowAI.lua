@@ -45,22 +45,37 @@ FixFollowAI.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previo
 
 end
 
-FixFollowAI.OnActorAI = function(eventStatus, pid, cellDescription)
+FixFollowAI.OnActorCellChange = function(eventStatus, pid, cellDescription)
 	
-	local ObjectIndex
-
 	tes3mp.ReadReceivedActorList()
 
 	for actorIndex = 0, tes3mp.GetActorListSize() - 1 do
 
-		ObjectIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)		
-	
-		logicHandler.SetAIForActor(LoadedCells[cellDescription], ObjectIndex, enumerations.ai.FOLLOW, pid)	
+		local ActorIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)
+		local newCellDescription = tes3mp.GetActorCell(actorIndex)
 		
-	end	
+		if cellDescription ~= newCellDescription and ActorIndex then
+
+			local useTemporaryLoad = false	
+			
+			if LoadedCells[newCellDescription] == nil then
+				logicHandler.LoadCell(newCellDescription)
+				useTemporaryLoad = true
+			end		
+			
+			if not LoadedCells[newCellDescription].isExterior then
+				LoadedCells[newCellDescription]:SetAuthority(pid)
+				logicHandler.SetAIForActor(LoadedCells[newCellDescription], ActorIndex, enumerations.ai.FOLLOW, pid)				
+			end
+			
+			if useTemporaryLoad == true then
+				logicHandler.UnloadCell(newCellDescription)
+			end		
+		end
+	end
 end
 
 customEventHooks.registerHandler("OnPlayerCellChange", FixFollowAI.OnPlayerCellChange)
-customEventHooks.registerHandler("OnActorAI", FixFollowAI.OnActorAI)
+customEventHooks.registerHandler("OnActorCellChange", FixFollowAI.OnActorCellChange)
 
 return FixFollowAI
