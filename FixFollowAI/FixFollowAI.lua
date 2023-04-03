@@ -36,7 +36,7 @@ FixFollowAI.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previo
 
 		local npc = LoadedCells[cellDescription].data.objectData[uniqueIndex]
 
-		if npc.ai.action and npc.ai.action == 4 and npc.ai.targetPlayer == playerName then
+		if npc.ai.action and npc.ai.action == 4 and string.lower(npc.ai.targetPlayer) == string.lower(playerName) then
 			SendObjectState(pid, cellDescription, uniqueIndex, false)
 			SendObjectState(pid, cellDescription, uniqueIndex, true)			
 		end
@@ -54,7 +54,7 @@ FixFollowAI.OnActorCellChange = function(eventStatus, pid, cellDescription)
 		local ActorIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)
 		local newCellDescription = tes3mp.GetActorCell(actorIndex)
 		
-		if cellDescription ~= newCellDescription and ActorIndex then
+		if cellDescription ~= newCellDescription then
 
 			local useTemporaryLoad = false	
 			
