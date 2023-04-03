@@ -53,7 +53,7 @@ FixFollowAI.OnActorAI = function(eventStatus, pid, cellDescription)
 
 	for actorIndex = 0, tes3mp.GetActorListSize() - 1 do
 
-		local ObjectIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)		
+		ObjectIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)		
 	
 		logicHandler.SetAIForActor(LoadedCells[cellDescription], ObjectIndex, enumerations.ai.FOLLOW, pid)	
 		
