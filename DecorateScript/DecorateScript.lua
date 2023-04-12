@@ -119,7 +119,7 @@ local function ResendPlaceToPlayer(pid, uniqueIndex, cellDescription)
 		tes3mp.SetObjectEnchantmentCharge(object.enchantmentCharge or -1)
 		tes3mp.SetObjectPosition(object.location.posX, object.location.posY, object.location.posZ)
 		tes3mp.SetObjectRotation(object.location.rotX, object.location.rotY, object.location.rotZ)
-		tes3mp.SetObjectScale(object.scale)
+		tes3mp.SetObjectScale(scale)
 		if inventory then		
 			for itemIndex, item in pairs(inventory) do			
 				tes3mp.SetContainerItemRefId(item.refId)
@@ -155,7 +155,7 @@ local function ResendPlaceToEveryone(pid, uniqueIndex, cellDescription)
 		tes3mp.SetObjectEnchantmentCharge(object.enchantmentCharge or -1)
 		tes3mp.SetObjectPosition(object.location.posX, object.location.posY, object.location.posZ)
 		tes3mp.SetObjectRotation(object.location.rotX, object.location.rotY, object.location.rotZ)
-		tes3mp.SetObjectScale(object.scale)
+		tes3mp.SetObjectScale(scale)
 		if inventory then		
 			for itemIndex, item in pairs(inventory) do			
 				tes3mp.SetContainerItemRefId(item.refId)
