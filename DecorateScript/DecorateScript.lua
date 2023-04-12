@@ -90,7 +90,7 @@ local function GetObject(refIndex, cell)
 	
 end
 
-local function DeleteObject(pid, cellDescription, uniqueIndex, toEveryone)
+local function DeleteObject(pid, cellDescription, uniqueIndex, forEveryone)
 	tes3mp.ClearObjectList()
 	tes3mp.SetObjectListPid(pid)
 	tes3mp.SetObjectListCell(cellDescription)
@@ -98,11 +98,11 @@ local function DeleteObject(pid, cellDescription, uniqueIndex, toEveryone)
 	tes3mp.SetObjectRefNum(splitIndex[1])
 	tes3mp.SetObjectMpNum(splitIndex[2])	
 	tes3mp.AddObject()	
-	tes3mp.SendObjectDelete(toEveryone)
+	tes3mp.SendObjectDelete(forEveryone)
 end
 
-local function ResendPlaceToPlayer(pid, uniqueIndex, cellDescription)
-	DeleteObject(pid, cellDescription, uniqueIndex, false)
+local function ResendPlace(pid, uniqueIndex, cellDescription, forEveryone)
+	DeleteObject(pid, cellDescription, uniqueIndex, forEveryone)
 	tes3mp.ClearObjectList()
 	tes3mp.SetObjectListPid(pid)
 	tes3mp.SetObjectListCell(cellDescription)	
@@ -119,7 +119,7 @@ local function ResendPlaceToPlayer(pid, uniqueIndex, cellDescription)
 		tes3mp.SetObjectEnchantmentCharge(object.enchantmentCharge or -1)
 		tes3mp.SetObjectPosition(object.location.posX, object.location.posY, object.location.posZ)
 		tes3mp.SetObjectRotation(object.location.rotX, object.location.rotY, object.location.rotZ)
-		tes3mp.SetObjectScale(scale)
+		tes3mp.SetObjectScale(object.scale)
 		if inventory then		
 			for itemIndex, item in pairs(inventory) do			
 				tes3mp.SetContainerItemRefId(item.refId)
@@ -130,115 +130,11 @@ local function ResendPlaceToPlayer(pid, uniqueIndex, cellDescription)
 		end			
 		tes3mp.AddObject()
 	end		
-	tes3mp.SendObjectPlace(false)
-	tes3mp.SendObjectScale(false)	
+	tes3mp.SendObjectPlace(forEveryone)
+	tes3mp.SendObjectScale(forEveryone)	
 	if inventory then	
-		tes3mp.SendContainer(false)		
+		tes3mp.SendContainer(forEveryone)		
 	end	
-end
-
-local function ResendPlaceToEveryone(pid, uniqueIndex, cellDescription)
-	DeleteObject(pid, cellDescription, uniqueIndex, true)
-	tes3mp.ClearObjectList()
-	tes3mp.SetObjectListPid(pid)
-	tes3mp.SetObjectListCell(cellDescription)	
-	local object = LoadedCells[cellDescription].data.objectData[uniqueIndex]	
-	if not object then return end	
-	local inventory = LoadedCells[cellDescription].data.objectData[uniqueIndex].inventory	
-	local scale = object.scale or 1	
-	if object and object.location and object.refId then		
-		local splitIndex = uniqueIndex:split("-")
-		tes3mp.SetObjectRefNum(splitIndex[1])
-		tes3mp.SetObjectMpNum(splitIndex[2])
-		tes3mp.SetObjectRefId(object.refId)
-		tes3mp.SetObjectCharge(object.charge or -1)
-		tes3mp.SetObjectEnchantmentCharge(object.enchantmentCharge or -1)
-		tes3mp.SetObjectPosition(object.location.posX, object.location.posY, object.location.posZ)
-		tes3mp.SetObjectRotation(object.location.rotX, object.location.rotY, object.location.rotZ)
-		tes3mp.SetObjectScale(scale)
-		if inventory then		
-			for itemIndex, item in pairs(inventory) do			
-				tes3mp.SetContainerItemRefId(item.refId)
-				tes3mp.SetContainerItemCount(item.count)
-				tes3mp.SetContainerItemCharge(item.charge)
-				tes3mp.AddContainerItem()				
-			end			
-		end			
-		tes3mp.AddObject()
-	end		
-	tes3mp.SendObjectPlace(true)
-	tes3mp.SendObjectScale(true)	
-	if inventory then	
-		tes3mp.SendContainer(true)		
-	end	
-	LoadedCells[cellDescription]:QuicksaveToDrive()	
-end
-
-local function resendPlaceToAll(pid, refIndex, cell)
-	local object = GetObject(refIndex, cell)
-
-	if not object then
-		return false
-	end
-
-	local refId = object.refId
-	local count = object.count or 1
-	local charge = object.charge or -1
-	local posX, posY, posZ = object.location.posX, object.location.posY, object.location.posZ
-	local rotX, rotY, rotZ = object.location.rotX, object.location.rotY, object.location.rotZ
-	local refIndex = refIndex
-	local scale = object.scale or 1
-	-- local move_amount = object.move_amount or 1
-
-	local inventory = object.inventory or nil
-
-	local splitIndex = refIndex:split("-")
-
-	for pid, pdata in pairs(Players) do
-		if Players[pid]:IsLoggedIn() then
-			--First, delete the original
-			tes3mp.InitializeEvent(pid)
-			tes3mp.SetEventCell(cell)
-			tes3mp.SetObjectRefNumIndex(0)
-			tes3mp.SetObjectMpNum(splitIndex[2])
-			tes3mp.AddWorldObject() --?
-			tes3mp.SendObjectDelete()
-
-			--Now remake it
-			tes3mp.InitializeEvent(pid)
-			tes3mp.SetEventCell(cell)
-			tes3mp.SetObjectRefId(refId)
-			tes3mp.SetObjectCount(count)
-			tes3mp.SetObjectCharge(charge)
-			tes3mp.SetObjectPosition(posX, posY, posZ)
-			tes3mp.SetObjectRotation(rotX, rotY, rotZ)
-			tes3mp.SetObjectRefNumIndex(0)
-			tes3mp.SetObjectMpNum(splitIndex[2])
-			tes3mp.SetObjectScale(scale)
-			if inventory then
-				for itemIndex, item in pairs(inventory) do
-					tes3mp.SetContainerItemRefId(item.refId)
-					tes3mp.SetContainerItemCount(item.count)
-					tes3mp.SetContainerItemCharge(item.charge)
-
-					tes3mp.AddContainerItem()
-				end
-			end
-
-			tes3mp.AddWorldObject()
-			tes3mp.SendObjectPlace()
-			tes3mp.SendObjectScale()
-			if inventory then
-				tes3mp.SendContainer()
-			end
-		end
-	end
-
-	-- Make sure to save a scale packet if this object has a non-default scale.
-	if scale ~= 1 then
-		tableHelper.insertValueIfMissing(LoadedCells[cell].data.packets.scale, refIndex)
-	end
-	LoadedCells[cell]:QuicksaveToDrive() --Not needed, but it's nice to do anyways
 end
 
 local function showPromptGUI(pid)
@@ -323,7 +219,7 @@ local function onEnterPrompt(pid, data)
 		end
 	end
 	if checkPosSafe == true then	
-		ResendPlaceToEveryone(pid, playerSelectedObject[pname], cell)
+		ResendPlace(pid, playerSelectedObject[pname], cell, true)
 	else
 		tes3mp.MessageBox(pid, -1, trad.warningcell)
 	end	
@@ -465,11 +361,11 @@ DecorateScript.moveObject = function(pid)
 		object.location.posX = PosX
 		object.location.posY = PosY
 		object.location.posZ = PosZ				
-		ResendPlaceToPlayer(pid, playerSelectedObject[pname], cell)			
+		ResendPlace(pid, playerSelectedObject[pname], cell, false)			
 	end
 	if tes3mp.GetSneakState(pid) then	
 		tes3mp.MessageBox(pid, -1, trad.placeobjet)	
-		ResendPlaceToEveryone(pid, playerSelectedObject[pname], cell)	
+		ResendPlace(pid, playerSelectedObject[pname], cell, true)	
 		playersTab[GetName(pid)] = nil
 		logicHandler.RunConsoleCommandOnPlayer(pid, "tb", false)
 	else
