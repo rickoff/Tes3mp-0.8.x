@@ -407,10 +407,6 @@ TeamGroup.ActiveMenu = function(pid)
 	menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
 end
 
-TeamGroup.OnPlayerDisconnect = function(pid)
-	Players[pid].data.alliedPlayers = {}
-end
-
 TeamGroup.OnPlayerJournal = function(pid, playerPacket)	
 	local playerName = GetName(pid)	
 	local playerGroup = getGroupData(pid)
@@ -441,10 +437,6 @@ end
 ------------
 customEventHooks.registerValidator("OnPlayerDisconnect", function(eventStatus, pid)
 	TeamGroup.ExitGroup(pid)
-end)
-
-customEventHooks.registerHandler("OnPlayerDisconnect", function(eventStatus, pid)
-	TeamGroup.OnPlayerDisconnect(pid)
 end)
 
 customEventHooks.registerHandler("OnGUIAction", TeamGroup.OnGUIAction)
