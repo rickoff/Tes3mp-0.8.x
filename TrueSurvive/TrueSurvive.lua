@@ -7,12 +7,10 @@ Survival script
 /survive for open main menu
 ---------------------------
 INSTALLATION:
-
 Save the file as TrueSurvive.lua inside your server/scripts/custom folder.
 Save the file as DataBaseAlch.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseIngr.json inside your server/data/custom/TrueSurvive folder.
 Save the file as DataBaseBed.json inside your server/data/custom/TrueSurvive folder.
-
 Edits to customScripts.lua add :
 TrueSurvive = require("custom.TrueSurvive")
 ---------------------------
@@ -43,7 +41,7 @@ local cfg = {
 	debuffDrink = 200,
 	debuffWet = 200,
 	debuffFrozen = 200,
-	staff = true
+	staff = false
 }
 
 ---------
@@ -342,7 +340,7 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		customVariable.HungerTime = TimeWorld - customVariable.HungerWorld
 		customVariable.ThirsthTime = TimeWorld - customVariable.ThirstWorld
 		customVariable.SleepTime = TimeWorld - customVariable.SleepWorld
-		
+
 		if tes3mp.IsInExterior(pid) == true then 
 			if WorldInstance.storedRegions[regionName] and WorldInstance.storedRegions[regionName].currentWeather then
 				if WorldInstance.storedRegions[regionName].currentWeather == enumerations.weather.RAIN then	
@@ -364,31 +362,34 @@ TrueSurvive.OnCheckTimePlayers = function(pid)
 		end
 		
 		if customVariable.Cold > customVariable.ColdMax then
-            		customVariable.Cold = customVariable.ColdMax
-        	end
+            customVariable.Cold = customVariable.ColdMax
+		end
 
-        	if customVariable.Cold < 0 then
-            		customVariable.Cold = 0
-        	end
+		if customVariable.Cold < 0 then
+			customVariable.Cold = 0
+		end
 
-        	if customVariable.Rain > customVariable.RainMax then
-            		customVariable.Rain = customVariable.RainMax
-        	end
+		if customVariable.Rain > customVariable.RainMax then
+			customVariable.Rain = customVariable.RainMax
+		end
 
-        	if customVariable.Rain < 0 then
-            		customVariable.Rain = 0
-        	end
+		if customVariable.Rain < 0 then
+			customVariable.Rain = 0
+		end
 		
 		if customVariable.HungerTime > customVariable.HungerTimeMax then
-			customVariable.HungerTime = customVariable.HungerTimeMax		
+			customVariable.HungerTime = customVariable.HungerTimeMax
+			customVariable.HungerWorld = TimeWorld - customVariable.HungerTimeMax			
 		end
 		
 		if customVariable.ThirsthTime > customVariable.ThirsthTimeMax then
-			customVariable.ThirsthTime = customVariable.ThirsthTimeMax		
+			customVariable.ThirsthTime = customVariable.ThirsthTimeMax	
+			customVariable.ThirstWorld = TimeWorld - customVariable.ThirsthTimeMax			
 		end
 
 		if customVariable.SleepTime > customVariable.SleepTimeMax then
-			customVariable.SleepTime = customVariable.SleepTimeMax		
+			customVariable.SleepTime = customVariable.SleepTimeMax
+			customVariable.SleepWorld = TimeWorld - customVariable.SleepTimeMax				
 		end
 	end
 	
@@ -499,6 +500,7 @@ TrueSurvive.OnPlayerEvent = function(eventStatus, pid)
 end
 
 TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
+	TrueSurvive.OnCheckTimePlayers(pid)
 	local countObject = 1
 	if LoadedCells[cellDescription].data.objectData[uniqueIndex] and LoadedCells[cellDescription].data.objectData[uniqueIndex].count then
 		countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count
@@ -516,6 +518,7 @@ TrueSurvive.OnHungerObject = function(pid, cellDescription, uniqueIndex)
 end
 
 TrueSurvive.OnDrinkObject = function(pid, cellDescription, uniqueIndex)
+	TrueSurvive.OnCheckTimePlayers(pid)
 	local countObject = 1
 	if LoadedCells[cellDescription].data.objectData[uniqueIndex] and LoadedCells[cellDescription].data.objectData[uniqueIndex].count then
 		countObject = LoadedCells[cellDescription].data.objectData[uniqueIndex].count
@@ -533,6 +536,7 @@ TrueSurvive.OnDrinkObject = function(pid, cellDescription, uniqueIndex)
 end
 
 TrueSurvive.OnSleepObject = function(pid)
+	TrueSurvive.OnCheckTimePlayers(pid)
 	logicHandler.RunConsoleCommandOnPlayer(pid, "player->removespell true_survive_fatigue", false)	
 	logicHandler.RunConsoleCommandOnPlayer(pid, "player->addspell true_survive_rests", false)
 	logicHandler.RunConsoleCommandOnPlayer(pid, "FadeOut, 2", false)
