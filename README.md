@@ -48,3 +48,5 @@ Rickoff Discord : https://discord.gg/PxZwczN
 - MarketPlace : Hotel for item sale between players with menu, gold is sent to sellers even offline
 
 - MultiProject : Multiple enchantment of arrows, bolts and throwing weapons
+
+- BeastHelmetBoot : Beast races can equip all helmets and boots
