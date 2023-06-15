@@ -245,7 +245,7 @@ end
 UltimateScript.OnObjectHit = function(eventStatus, pid, cellDescription, objects, targetPlayers)
 	if Players[pid].data.customVariables.ultimateSpell == "nothing" then return end
 	local PlayerName = GetName(pid)	
-	if ListPlayer[PlayerName].ready then return false end	
+	if ListPlayer[PlayerName].ready then return end	
 	for uniqueIndex, object in pairs(objects) do
 		if object.hittingPid and object.hit.success then
 			if tableHelper.containsValue(LoadedCells[cellDescription].data.packets.actorList, uniqueIndex) then	
