@@ -20,12 +20,7 @@ local CreaData = jsonInterface.load("custom/DragonDoor/CreaData.json")
 local cfg = {}
 cfg.rad = 1000
 
-local DragonDoorTab = { player = {} }
-
-local listRejectedSpell = {}
-listRejectedSpell["recall"] = true
-listRejectedSpell["divine intervention"] = true
-listRejectedSpell["almsivi intervention"] = true
+local DragonDoorTab = {}
 
 local function GetName(pid)
 	return string.lower(Players[pid].accountName)
@@ -48,15 +43,15 @@ local DragonDoor = {}
 
 DragonDoor.OnPlayerWarp = function(pid)
 	local PlayerName = GetName(pid)	
-	if DragonDoorTab.player[PlayerName] then
-		DragonDoorTab.player[PlayerName] = nil
+	if DragonDoorTab[PlayerName] then
+		DragonDoorTab[PlayerName] = nil
 	end
 end
 
 DragonDoor.OnPlayerDeath = function(eventStatus, pid)
 	local PlayerName = GetName(pid)	
-	if DragonDoorTab.player[PlayerName] then
-		DragonDoorTab.player[PlayerName] = nil
+	if DragonDoorTab[PlayerName] then
+		DragonDoorTab[PlayerName] = nil
 	end
 end
 
@@ -69,7 +64,7 @@ DragonDoor.OnObjectActivate = function(eventStatus, pid, cellDescription, object
 	if ObjectRefid == nil then return end		
 	if DoorData[string.lower(ObjectRefid)] then	
 		local PlayerName = GetName(pid)
-		DragonDoorTab.player[PlayerName] = {object = ObjectRefid, creature = {}, index = {}}
+		DragonDoorTab[PlayerName] = {object = ObjectRefid, creature = {}, index = {}}
 		LoadedCells[cellDescription]:SaveActorPositions()
 		local cell = LoadedCells[cellDescription]		
 		for _, uniqueIndex in pairs(cell.data.packets.actorList) do
@@ -80,15 +75,15 @@ DragonDoor.OnObjectActivate = function(eventStatus, pid, cellDescription, object
 				local creatureRefId = cell.data.objectData[uniqueIndex].refId
 				if NpcData[string.lower(creatureRefId)] or CreaData[string.lower(creatureRefId)] then
 					if not tableHelper.containsValue(cell.data.packets.death, uniqueIndex, true) 
-					and not tableHelper.containsValue(DragonDoorTab.player[PlayerName].index, uniqueIndex, true) then	
+					and not tableHelper.containsValue(DragonDoorTab[PlayerName].index, uniqueIndex, true) then	
 						local playerPosX = tes3mp.GetPosX(pid)
 						local playerPosY = tes3mp.GetPosY(pid)								
 						local creaturePosX = cell.data.objectData[uniqueIndex].location.posX
 						local creaturePosY = cell.data.objectData[uniqueIndex].location.posY							
 						local distance = math.sqrt((playerPosX - creaturePosX)^2 + (playerPosY - creaturePosY)^2) 									
 						if distance < cfg.rad then
-							table.insert(DragonDoorTab.player[PlayerName].creature, creatureRefId)
-							table.insert(DragonDoorTab.player[PlayerName].index, uniqueIndex)	
+							table.insert(DragonDoorTab[PlayerName].creature, creatureRefId)
+							table.insert(DragonDoorTab[PlayerName].index, uniqueIndex)	
 							count = count + 1
 						end	
 					end
@@ -101,17 +96,17 @@ end
 DragonDoor.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription)
 	local PlayerName = GetName(pid)
 	local cellDescription = playerPacket.location.cell
-	if DragonDoorTab.player[PlayerName] 
-	and DragonDoorTab.player[PlayerName].object ~= nil 
-	and DragonDoorTab.player[PlayerName].creature ~= nil 
-	and DragonDoorTab.player[PlayerName].index ~= nil then
+	if DragonDoorTab[PlayerName] 
+	and DragonDoorTab[PlayerName].object 
+	and DragonDoorTab[PlayerName].creature 
+	and DragonDoorTab[PlayerName].index then
 		if cellDescription ~= previousCellDescription then	
 			local playerPosX = tes3mp.GetPosX(pid)
 			local playerPosY = tes3mp.GetPosY(pid)
 			local playerPosZ = tes3mp.GetPosZ(pid)	
 			local position = { posX = playerPosX, posY = playerPosY, posZ = playerPosZ, rotX = 0, rotY = 0, rotZ = 0 }
 			logicHandler.SetCellAuthority(pid, cellDescription)
-			for _, refId in ipairs(DragonDoorTab.player[PlayerName].creature) do	
+			for _, refId in ipairs(DragonDoorTab[PlayerName].creature) do	
 				local creatureIndex = logicHandler.CreateObjectAtLocation(cellDescription, position, dataTableBuilder.BuildObjectData(refId), "spawn")
 				logicHandler.SetAIForActor(LoadedCells[cellDescription], creatureIndex, "2", pid)
 			end
@@ -122,7 +117,7 @@ DragonDoor.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previou
 				useTemporaryLoad = true
 				cell = LoadedCells[previousCellDescription]
 			end
-			for _, uniqueIndex in ipairs(DragonDoorTab.player[PlayerName].index) do
+			for _, uniqueIndex in ipairs(DragonDoorTab[PlayerName].index) do
 				CleanCellObject(pid, previousCellDescription, uniqueIndex, true)
 			end							
 			if useTemporaryLoad == true then
@@ -130,16 +125,24 @@ DragonDoor.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previou
 			end
 		end
 	end
-	DragonDoorTab.player[PlayerName] = nil
+	DragonDoorTab[PlayerName] = nil
 end
 
 DragonDoor.OnPlayerSpellsActive = function(eventStatus, pid, playerPacket)
-	local action = playerPacket.action	
+	local action = playerPacket.action		
 	for spellId, spellInstances in pairs(playerPacket.spellsActive) do
-		if action == enumerations.spellbook.ADD then
-			if listRejectedSpell[string.lower(spellId)] then
-				DragonDoor.OnPlayerWarp(pid)
-				break
+		for _, spellInstance in ipairs(spellInstances) do	
+			for _, effect in ipairs(spellInstance.effects) do		
+				if effect.id == enumerations.effects.ALMSIVI_INTERVENTION then
+					DragonDoor.OnPlayerWarp(pid)
+					break
+				elseif effect.id == enumerations.effects.DIVINE_INTERVENTION then		
+					DragonDoor.OnPlayerWarp(pid)
+					break
+				elseif effect.id == enumerations.effects.RECALL then		
+					DragonDoor.OnPlayerWarp(pid)
+					break
+				end
 			end	
 		end
 	end
