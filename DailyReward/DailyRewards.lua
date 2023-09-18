@@ -10,13 +10,19 @@ Save the file as DailyRewards.lua inside your server/scripts/custom folder.
 Edits to customScripts.lua
 DailyRewards = require("custom.DailyRewards")
 ---------------------------
+CONFIGURATION:
+change cfg.randomizeReward to false gives users the entire table, true randomizes
+change trad.rewardLoginMessageDaily to your langage
+change sound{name, volume, pitch} with the sound of your choice
+change dailyRewardsTable{} with objects of your choice
+---------------------------
 ]]
 local cfg = {
 	randomizeReward = false
 }
 
 local trad = {
-	rewardLoginMessageDaily = color.Green.."Récompenses de connexion journalière :"
+	rewardLoginMessageDaily = color.Green.."Daily Login Rewards :"
 }
 
 local sound = {
@@ -34,25 +40,25 @@ local dailyRewardsTable = {
 	},	
 	{
 		refId = "p_restore_health_s",
-		name = "Potion de santé standard",
+		name = "Health Potion",
 		count = 5,
 		soul = ""
 	},	
 	{
 		refId = "p_restore_magicka_s",
-		name = "Potion magique standard",
+		name = "Magic Potion",
 		count = 5,
 		soul = ""
 	},	
 	{
 		refId = "p_restore_fatigue_s",
-		name = "Potion de fatigue standard",
+		name = "Fatigue Potion",
 		count = 5,
 		soul = ""
 	},
 	{
 		refId = "p_fortify_speed_s",
-		name = "Potion de rapidité standard",
+		name = "Speed Potion",
 		count = 5,
 		soul = ""
 	}
