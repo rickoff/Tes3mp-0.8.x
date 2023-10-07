@@ -79,12 +79,6 @@ AnimationMenu.OnServerPostInit = function()
 end
 
 AnimationMenu.showAnimMenu = function(pid)
-
-	if tes3mp.GetHealthCurrent(pid) <= 0 then
-		Players[pid].currentCustomMenu = "resurrect"		
-		menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
-		return
-	end
 	
 	local message = color.Orange.. traduction.title
 	
