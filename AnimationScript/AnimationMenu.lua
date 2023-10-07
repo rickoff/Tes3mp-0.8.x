@@ -27,7 +27,7 @@ local PlayerAnimationList = {}
 -- CONFIG --
 ------------
 local cfg = {
-	OnServerPostInit = false
+	OnServerPostInit = true
 }
 
 local guiID = {
