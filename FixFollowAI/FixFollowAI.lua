@@ -44,10 +44,10 @@ customEventHooks.registerHandler("OnActorCellChange", function(eventStatus, pid,
 
 	for actorIndex = 0, tes3mp.GetActorListSize() - 1 do
 
-		local ActorIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)
+		local uniqueIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)
 		local newCellDescription = tes3mp.GetActorCell(actorIndex)
 		
-		if ActorIndex and ActorIndex ~= "0-0" and cellDescription ~= newCellDescription then
+		if uniqueIndex and uniqueIndex ~= "0-0" and cellDescription ~= newCellDescription then
 
 			local useTemporaryLoad = false	
 			
@@ -58,7 +58,7 @@ customEventHooks.registerHandler("OnActorCellChange", function(eventStatus, pid,
 			
 			if not LoadedCells[newCellDescription].isExterior then
 				LoadedCells[newCellDescription]:SetAuthority(pid)
-				logicHandler.SetAIForActor(LoadedCells[newCellDescription], ActorIndex, enumerations.ai.FOLLOW, pid)				
+				logicHandler.SetAIForActor(LoadedCells[newCellDescription], uniqueIndex, enumerations.ai.FOLLOW, pid)				
 			end
 			
 			if useTemporaryLoad == true then
@@ -67,5 +67,3 @@ customEventHooks.registerHandler("OnActorCellChange", function(eventStatus, pid,
 		end
 	end
 end)
-
-return FixFollowAI
