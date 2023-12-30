@@ -3,13 +3,8 @@ FixFollowAI
 tes3mp 0.8.1
 ---------------------------
 INSTALLATION :
-Edits to customScripts.lua
-FixFollowAI = require("custom.FixFollowAI")
----------------------------
-INSTRUCTION:
 Save the file as FixFollowAI.lua inside your server/scripts/custom folder
-Edits to customScripts.lua
-FixFollowAI = require("custom.FixFollowAI")
+Edits to customScripts.lua add in : require("custom.FixFollowAI")
 ---------------------------
 ]]		
 local function SendObjectState(pid, cellDescription, uniqueIndex, state)
@@ -24,9 +19,7 @@ local function SendObjectState(pid, cellDescription, uniqueIndex, state)
     tes3mp.SendObjectState(false)
 end
 
-local FixFollowAI = {}
-
-FixFollowAI.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previousCellDescription)
+customEventHooks.registerHandler("OnPlayerCellChange", function(eventStatus, pid, playerPacket, previousCellDescription)
 
 	local cellDescription = playerPacket.location.cell
 	
@@ -43,9 +36,9 @@ FixFollowAI.OnPlayerCellChange = function(eventStatus, pid, playerPacket, previo
 		
 	end
 
-end
+end)
 
-FixFollowAI.OnActorCellChange = function(eventStatus, pid, cellDescription)
+customEventHooks.registerHandler("OnActorCellChange", function(eventStatus, pid, cellDescription)
 	
 	tes3mp.ReadReceivedActorList()
 
@@ -73,9 +66,6 @@ FixFollowAI.OnActorCellChange = function(eventStatus, pid, cellDescription)
 			end		
 		end
 	end
-end
-
-customEventHooks.registerHandler("OnPlayerCellChange", FixFollowAI.OnPlayerCellChange)
-customEventHooks.registerHandler("OnActorCellChange", FixFollowAI.OnActorCellChange)
+end)
 
 return FixFollowAI
