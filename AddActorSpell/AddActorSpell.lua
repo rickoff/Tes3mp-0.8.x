@@ -6,6 +6,9 @@ INSTALLATION :
 Edits to customScripts.lua add in :
 require("custom.AddActorSpell")
 ]]
+local cfg = {
+	allActors = true --add spell for all actors true/false
+}
 
 local actorList = {--add modify the actor identifiers of the list example
 	["refId 01"] = true,--The refId of the actor = true/false
@@ -54,7 +57,7 @@ customEventHooks.registerHandler("OnPlayerCellChange", function(eventStatus, pid
 	for _, uniqueIndex in ipairs(LoadedCells[cellDescription].data.packets.actorList) do
 		if LoadedCells[cellDescription].data.objectData[uniqueIndex] then	
 			local objectData = LoadedCells[cellDescription].data.objectData[uniqueIndex]
-			if actorList[string.lower(objectData.refId)] then
+			if cfg.allActors or actorList[string.lower(objectData.refId)] then
 				for spellId, spellTable in pairs(spellsTable) do			
 					if not objectData.spellsActive then objectData.spellsActive = {} end
 					if not objectData.spellsActive[spellId] then
