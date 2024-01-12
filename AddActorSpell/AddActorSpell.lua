@@ -11,12 +11,12 @@ local cfg = {
 }
 
 local actorList = {--add modify the actor identifiers of the list example
-	["refId 01"] = true,--The refId of the actor = true/false
-	["refId 02"] = false	
+	["refid01"] = true,--The refId(lowercase string) of the actor = true/false
+	["refid02"] = false	
 }
 
 local spellsTable = {--add/modify spells from list example
-	["spellId 01"] = {--The spellId of the spell
+	["spellId01"] = {--The spellId of the spell
 		displayName = "Exemple01",--The displayName of the spell
 		stackingState = false,--Whether the spell should stack with other instances of itself
 		effects = {
@@ -29,7 +29,7 @@ local spellsTable = {--add/modify spells from list example
 			}
 		}
 	},
-	["spellId 02"] = {
+	["spellId02"] = {
 		displayName = "Exemple02",
 		stackingState = true,
 		effects = {
@@ -51,11 +51,40 @@ local spellsTable = {--add/modify spells from list example
 	}	
 }
 
-customEventHooks.registerHandler("OnPlayerCellChange", function(eventStatus, pid, playerPacket, previousCellDescription)
+local function SendActorSpellsActive(pid, cellDescription, uniqueIndexTable)
+    local actorCount = 0
+    tes3mp.ClearActorList()
+    tes3mp.SetActorListPid(pid)
+    tes3mp.SetActorListCell(cellDescription)
+    for _, uniqueIndex in ipairs(uniqueIndexTable) do
+		local splitIndex = uniqueIndex:split("-")
+		tes3mp.SetActorRefNum(splitIndex[1])
+		tes3mp.SetActorMpNum(splitIndex[2])
+		tes3mp.SetActorSpellsActiveAction(enumerations.spellbook.ADD)
+		for spellId, spellInstances in pairs(LoadedCells[cellDescription].data.objectData[uniqueIndex].spellsActive) do
+			for spellInstanceIndex, spellInstanceValues in pairs(spellInstances) do
+				for effectIndex, effectTable in pairs(spellInstanceValues.effects) do
+					tes3mp.AddActorSpellActiveEffect(effectTable.id, effectTable.magnitude,
+						effectTable.duration, effectTable.timeLeft, effectTable.arg)
+				end
+				tes3mp.AddActorSpellActive(spellId, spellInstanceValues.displayName,
+					spellInstanceValues.stackingState)
+			end
+		end
+		tes3mp.AddActor()
+		actorCount = actorCount + 1
+    end
+    if actorCount > 0 then
+        tes3mp.SendActorSpellsActiveChanges()
+    end
+end
+
+customEventHooks.registerHandler("OnCellLoad", function(eventStatus, pid, cellDescription)
 	local AddSpell = false
-	local cellDescription = playerPacket.location.cell
+	local uniqueIndexTable = {}
 	for _, uniqueIndex in ipairs(LoadedCells[cellDescription].data.packets.actorList) do
-		if LoadedCells[cellDescription].data.objectData[uniqueIndex] then	
+		if LoadedCells[cellDescription].data.objectData[uniqueIndex] 
+		and not LoadedCells[cellDescription].data.objectData[uniqueIndex].deathState then	
 			local objectData = LoadedCells[cellDescription].data.objectData[uniqueIndex]
 			if cfg.allActors or actorList[string.lower(objectData.refId)] then
 				for spellId, spellTable in pairs(spellsTable) do			
@@ -69,15 +98,14 @@ customEventHooks.registerHandler("OnPlayerCellChange", function(eventStatus, pid
 							effects = tableHelper.deepCopy(spellTable.effects),
 							startTime = os.time()
 						}
-						AddSpell = true					
+						AddSpell = true	
+						table.insert(uniqueIndexTable, uniqueIndex)
 					end
 				end
 			end
 		end
 	end
-	if AddSpell then	
-		local objectsData = LoadedCells[cellDescription].data.objectData
-		local packetSpell = LoadedCells[cellDescription].data.packets.spellsActive
-		LoadedCells[cellDescription]:LoadActorSpellsActive(pid, objectsData, packetSpell)
+	if AddSpell then
+		SendActorSpellsActive(pid, cellDescription, uniqueIndexTable)
 	end
 end)
