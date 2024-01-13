@@ -51,12 +51,21 @@ local spellsTable = {--add/modify spells from list example
 	}	
 }
 
-local function SendActorSpellsActive(pid, cellDescription, uniqueIndexTable)
+local function CheckValidActor(cellDescription, uniqueIndex)
+	if LoadedCells[cellDescription].data.objectData[uniqueIndex] 
+	and not LoadedCells[cellDescription].data.objectData[uniqueIndex].deathState
+	and not LoadedCells[cellDescription].data.objectData[uniqueIndex].summon then
+		return true
+	end
+	return false
+end
+
+local function SendActorSpellsActive(pid, cellDescription, uniqueIndexList)
     local actorCount = 0
     tes3mp.ClearActorList()
     tes3mp.SetActorListPid(pid)
     tes3mp.SetActorListCell(cellDescription)
-    for _, uniqueIndex in ipairs(uniqueIndexTable) do
+    for _, uniqueIndex in ipairs(uniqueIndexList) do
 		local splitIndex = uniqueIndex:split("-")
 		tes3mp.SetActorRefNum(splitIndex[1])
 		tes3mp.SetActorMpNum(splitIndex[2])
@@ -79,12 +88,11 @@ local function SendActorSpellsActive(pid, cellDescription, uniqueIndexTable)
     end
 end
 
-customEventHooks.registerHandler("OnCellLoad", function(eventStatus, pid, cellDescription)
+local function AddActorSpellsActive(pid, cellDescription, uniqueIndexList)
 	local AddSpell = false
 	local uniqueIndexTable = {}
-	for _, uniqueIndex in ipairs(LoadedCells[cellDescription].data.packets.actorList) do
-		if LoadedCells[cellDescription].data.objectData[uniqueIndex] 
-		and not LoadedCells[cellDescription].data.objectData[uniqueIndex].deathState then	
+	for _, uniqueIndex in ipairs(uniqueIndexList) do
+		if CheckValidActor(cellDescription, uniqueIndex) then		
 			local objectData = LoadedCells[cellDescription].data.objectData[uniqueIndex]
 			if cfg.allActors or actorList[string.lower(objectData.refId)] then
 				for spellId, spellTable in pairs(spellsTable) do			
@@ -107,5 +115,29 @@ customEventHooks.registerHandler("OnCellLoad", function(eventStatus, pid, cellDe
 	end
 	if AddSpell then
 		SendActorSpellsActive(pid, cellDescription, uniqueIndexTable)
+	end
+end
+customEventHooks.registerHandler("OnActorList", function(eventStatus, pid, cellDescription, actors)
+	if LoadedCells[cellDescription] then
+		AddActorSpellsActive(pid, cellDescription, LoadedCells[cellDescription].data.packets.actorList)
+	end
+end)
+
+customEventHooks.registerValidator("OnActorCellChange", function(eventStatus, pid, cellDescription)
+	if LoadedCells[cellDescription] then
+		tes3mp.ReadReceivedActorList()	
+		for actorIndex = 0, tes3mp.GetActorListSize() - 1 do
+			local uniqueIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)	
+			if uniqueIndex and uniqueIndex ~= "0-0" then
+				AddActorSpellsActive(pid, cellDescription, {uniqueIndex})
+			end
+		end
+	end
+end)
+
+customEventHooks.registerHandler("OnPlayerCellChange", function(eventStatus, pid, playerPacket, previousCellDescription)
+	local cellDescription = playerPacket.location.cell
+	if LoadedCells[cellDescription] then
+		AddActorSpellsActive(pid, cellDescription, LoadedCells[cellDescription].data.packets.actorList)
 	end
 end)
