@@ -7,12 +7,29 @@ Edits to customScripts.lua add in :
 require("custom.AddActorSpell")
 ]]
 local cfg = {
-	allActors = true --add spell for all actors true/false
+	allActors = true, --add spell for all actors. true/false
+	refIdActors = false, --add spell for refId actors if allActors is false. true/false	
+	indexActors = false --add spell for uniqueIndex actors if allActors and refIdActors is false. true/false	
 }
 
-local actorList = {--add modify the actor identifiers of the list example
-	["refid01"] = true,--The refId(lowercase string) of the actor = true/false
-	["refid02"] = false	
+local actorRefIdList = { --add/modify the actor identifiers of the list example
+	["refId 01"] = { --refId for the actor
+		spells = {"spell01", "spell02"}, --list on spell activate for the actor
+		findId = true --string.find is used or not. true/false
+	},
+	["refId 02"] = {
+		spells = {"spell01", "spell02"},
+		findId = false
+	}
+}
+
+local actorIndexList = { --add/modify the actor unique index of the list example
+	["01-0"] = { --The unique index of the actor = true/false
+		spells = {"spell01", "spell02"}
+	},
+	["02-0"] = {
+		spells = {"spell01", "spell02"}
+	}
 }
 
 local spellsTable = {--add/modify spells from list example
@@ -60,6 +77,54 @@ local function CheckValidActor(cellDescription, uniqueIndex)
 	return false
 end
 
+local function CheckConfigForActor(refId, uniqueIndex)
+	if cfg.allActors then
+		return true
+	end	
+	if cfg.refIdActors then
+		for actorRefId, data in pairs(actorRefIdList) do
+			if data.findId then
+				if string.find(string.lower(refId), string.lower(actorRefId)) then
+					return true
+				end
+			else
+				if string.lower(actorRefId) == string.lower(refId) then
+					return true
+				end
+			end
+		end
+	end
+	if cfg.indexActors then
+		for actorIndex, data in pairs(actorIndexList) do
+			if uniqueIndex == actorIndex then
+				return true
+			end
+		end
+	end
+	return false
+end
+
+local function CheckSpellForActor(refId, uniqueIndex, spellId)
+	if cfg.allActors then
+		return true
+	end	
+	if cfg.refIdActors then
+		for _, spell in ipairs(actorRefIdList[refId].spells) do
+			if spell == spellId then
+				return true
+			end
+		end
+	end
+	if cfg.indexActors then
+		for _, spell in ipairs(actorIndexList[uniqueIndex].spells) do
+			if spell == spellId then
+				return true
+			end
+		end
+	end
+	return false
+end
+
 local function SendActorSpellsActive(pid, cellDescription, uniqueIndexList)
     local actorCount = 0
     tes3mp.ClearActorList()
@@ -94,20 +159,22 @@ local function AddActorSpellsActive(pid, cellDescription, uniqueIndexList)
 	for _, uniqueIndex in ipairs(uniqueIndexList) do
 		if CheckValidActor(cellDescription, uniqueIndex) then		
 			local objectData = LoadedCells[cellDescription].data.objectData[uniqueIndex]
-			if cfg.allActors or actorList[string.lower(objectData.refId)] then
-				for spellId, spellTable in pairs(spellsTable) do			
-					if not objectData.spellsActive then objectData.spellsActive = {} end
-					if not objectData.spellsActive[spellId] then
-						tableHelper.insertValueIfMissing(LoadedCells[cellDescription].data.packets.spellsActive, uniqueIndex)
-						objectData.spellsActive[spellId] = {}			
-						objectData.spellsActive[spellId][1] = {
-							displayName = spellTable.displayName,
-							stackingState = spellTable.stackingState,
-							effects = tableHelper.deepCopy(spellTable.effects),
-							startTime = os.time()
-						}
-						AddSpell = true	
-						table.insert(uniqueIndexTable, uniqueIndex)
+			if CheckConfigForActor(objectData.refId, uniqueIndex) then
+				for spellId, spellTable in pairs(spellsTable) do
+					if CheckSpellForActor(objectData.refId, uniqueIndex, spellId) then				
+						if not objectData.spellsActive then objectData.spellsActive = {} end
+						if not objectData.spellsActive[spellId] then
+							tableHelper.insertValueIfMissing(LoadedCells[cellDescription].data.packets.spellsActive, uniqueIndex)
+							objectData.spellsActive[spellId] = {}			
+							objectData.spellsActive[spellId][1] = {
+								displayName = spellTable.displayName,
+								stackingState = spellTable.stackingState,
+								effects = tableHelper.deepCopy(spellTable.effects),
+								startTime = os.time()
+							}
+							AddSpell = true	
+							table.insert(uniqueIndexTable, uniqueIndex)
+						end
 					end
 				end
 			end
@@ -117,21 +184,23 @@ local function AddActorSpellsActive(pid, cellDescription, uniqueIndexList)
 		SendActorSpellsActive(pid, cellDescription, uniqueIndexTable)
 	end
 end
-customEventHooks.registerHandler("OnActorList", function(eventStatus, pid, cellDescription, actors)
-	if LoadedCells[cellDescription] then
-		AddActorSpellsActive(pid, cellDescription, LoadedCells[cellDescription].data.packets.actorList)
-	end
-end)
 
-customEventHooks.registerValidator("OnActorCellChange", function(eventStatus, pid, cellDescription)
+customEventHooks.registerHandler("OnActorCellChange", function(eventStatus, pid, cellDescription)
 	if LoadedCells[cellDescription] then
 		tes3mp.ReadReceivedActorList()	
 		for actorIndex = 0, tes3mp.GetActorListSize() - 1 do
-			local uniqueIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)	
-			if uniqueIndex and uniqueIndex ~= "0-0" then
-				AddActorSpellsActive(pid, cellDescription, {uniqueIndex})
+			local uniqueIndex = tes3mp.GetActorRefNum(actorIndex) .. "-" .. tes3mp.GetActorMpNum(actorIndex)
+			local newCellDescription = tes3mp.GetActorCell(actorIndex)			
+			if uniqueIndex and uniqueIndex ~= "0-0" and newCellDescription and LoadedCells[newCellDescription] then
+				AddActorSpellsActive(pid, newCellDescription, {uniqueIndex})
 			end
 		end
+	end
+end)
+
+customEventHooks.registerHandler("OnActorList", function(eventStatus, pid, cellDescription, actors)
+	if LoadedCells[cellDescription] then
+		AddActorSpellsActive(pid, cellDescription, LoadedCells[cellDescription].data.packets.actorList)
 	end
 end)
 
