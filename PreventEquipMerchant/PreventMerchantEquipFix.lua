@@ -10,7 +10,7 @@ Save the file as PreventMerchantEquipFix.lua inside your server/scripts/custom f
 Edits to customScripts.lua add in : require("custom.PreventMerchantEquipFix")
 ---------------------------
 ]]
-local NpcBarterList = jsonInterface.load("custom/PreventMerchantEquipList.json")
+local NpcBarterList
 
 local function LoadData()
 	NpcBarterList = jsonInterface.load("custom/PreventMerchantEquipList.json")		
@@ -30,6 +30,7 @@ local function GetIndexBarter(uniqueIndex)
 end
 
 customEventHooks.registerHandler("OnServerPostInit", function(eventStatus)
+	LoadData()
 	if not NpcBarterList then	
 		NpcBarterList = {}		
 		SaveData()		
