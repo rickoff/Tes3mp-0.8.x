@@ -26,7 +26,7 @@ local trad = {
 }
 
 local cfg = {
-	OnServerInit = false,	
+	OnServerInit = true,	
 	MaxMark = 5,
 	costMark = 18,
 	costRecall = 18,
