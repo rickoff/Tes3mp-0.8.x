@@ -4,7 +4,7 @@ tes3mp 0.8.1
 ---------------------------
 INSTALLATION:
 Save the file as MultiProject.lua inside your server/scripts/custom folder.
-Edits to customScripts.lua add : MultiProject = require("custom.MultiProject")
+Edits to customScripts.lua add : require("custom.MultiProject")
 ---------------------------
 CONFIGURATION:
 change cfg.projectEchantMulti to modify the multiplier of the following quantity calculation
@@ -14,9 +14,7 @@ local cfg = {
 	projectEchantMulti = 0.25
 }
 
-local MultiProject = {}
-
-MultiProject.OnRecordDynamicValidator = function(eventStatus, pid, recordArray, storeType)
+customEventHooks.registerValidator("OnRecordDynamic", function(eventStatus, pid, recordArray, storeType)
 	for _, record in ipairs(recordArray) do
 		if storeType == "weapon" then
 			if string.find(record.baseId, "arrow") or string.find(record.baseId, "bolt") or string.find(record.baseId, "throwing") then		
@@ -33,8 +31,4 @@ MultiProject.OnRecordDynamicValidator = function(eventStatus, pid, recordArray, 
 			end						
 		end
 	end
-end	
-
-customEventHooks.registerValidator("OnRecordDynamic", MultiProject.OnRecordDynamicValidator)
-
-return MultiProject
+end)
