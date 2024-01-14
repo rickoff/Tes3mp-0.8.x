@@ -1,7 +1,6 @@
 --[[
 InterventionPlus
 tes3mp 0.8.1
-version 1.0
 ---------------------------
 DESCRIPTION :
 select the teleport point of the temple of your choice for Almisivi Intervention and the fort of your choice for Divine Intervention
@@ -9,10 +8,9 @@ select the teleport point of the temple of your choice for Almisivi Intervention
 INSTALLATION:
 Save the file as InterventionPos.json inside your server/data/custom folder.
 Save the file as InterventionPlus.lua inside your server/scripts/custom folder.
-Edits to customScripts.lua add :
-InterventionPlus = require("custom.InterventionPlus")
+Edits to customScripts.lua add : require("custom.InterventionPlus")
 ---------------------------
-cfg :
+CONFIGURATION :
 Change trad in your language for your server
 Change cfg GUI numbers for a unique numbers 
 ]]
@@ -28,8 +26,9 @@ local trad = {
 }
 
 local cfg = {
+	OnServerInit = true,
 	CostDivi = 8,
-	CostAlmi = 8,
+	CostAlmi = 8,	
 	MainGUI = 28022023,
 	ChoiceGUI = 28022024
 }
@@ -77,120 +76,118 @@ local function RecallPlayer(pid)
 	playerChoice[GetName(pid)] = nil
 end
 
-local InterventionPlus = {}
+customEventHooks.registerHandler("OnServerInit", function(eventStatus)
+	if cfg.OnServerInit then
+		local recordTable
+		local recordStoreSpells = RecordStores["spell"]
+		recordTable = {
+		  name = trad.NameAlmi,
+		  cost = cfg.CostAlmi,	  
+		  subtype = 0,
+		  flags = 1,
+		  effects = {{
+			attribute = -1,
+			area = 0,
+			duration = 0,
+			id = 63,
+			rangeType = 0,
+			skill = -1,
+			magnitudeMax = 0,
+			magnitudeMin = 0
+			}}
+		}
+		recordStoreSpells.data.permanentRecords["almsivi intervention"] = recordTable
+		recordTable = {
+		  name = trad.NameDivi,
+		  cost = cfg.CostDivi,	  
+		  subtype = 0,
+		  flags = 1,
+		  effects = {{
+			attribute = -1,
+			area = 0,
+			duration = 0,
+			id = 62,
+			rangeType = 0,
+			skill = -1,
+			magnitudeMax = 0,
+			magnitudeMin = 0
+			}}
+		}		
+		local recordStoreEnchant = RecordStores["enchantment"]
+		recordTable = {
+		  cost = cfg.CostAlmi,	  
+		  subtype = 2,
+		  flags = 40,
+		  charge = 40,  
+		  effects = {{
+			attribute = -1,
+			area = 0,
+			duration = 0,
+			id = 63,
+			rangeType = 0,
+			skill = -1,
+			magnitudeMax = 0,
+			magnitudeMin = 0
+			}}
+		}
+		recordStoreEnchant.data.permanentRecords["almsivi intervention_en"] = recordTable
+		recordTable = {
+		  cost = cfg.CostAlmi,	  
+		  subtype = 0,
+		  flags = 8,
+		  charge = 8,  
+		  effects = {{
+			attribute = -1,
+			area = 0,
+			duration = 0,
+			id = 63,
+			rangeType = 0,
+			skill = -1,
+			magnitudeMax = 0,
+			magnitudeMin = 0
+			}}
+		}
+		recordStoreEnchant.data.permanentRecords["almsivi intervention enchantmen"] = recordTable
+		recordTable = {
+		  cost = cfg.CostAlmi,	  
+		  subtype = 2,
+		  flags = 40,
+		  charge = 40,  
+		  effects = {{
+			attribute = -1,
+			area = 0,
+			duration = 0,
+			id = 63,
+			rangeType = 0,
+			skill = -1,
+			magnitudeMax = 0,
+			magnitudeMin = 0
+			}}
+		}
+		recordStoreEnchant.data.permanentRecords["divine intervention_en"] = recordTable
+		recordTable = {
+		  cost = cfg.CostAlmi,	  
+		  subtype = 0,
+		  flags = 8,
+		  charge = 8,  
+		  effects = {{
+			attribute = -1,
+			area = 0,
+			duration = 0,
+			id = 62,
+			rangeType = 0,
+			skill = -1,
+			magnitudeMax = 0,
+			magnitudeMin = 0
+			}}
+		}
+		recordStoreEnchant.data.permanentRecords["divine intervention enchantmen"] = recordTable	
+		recordStoreEnchant:Save()	
+	end
+end)
 
-InterventionPlus.OnServerInit = function(eventStatus)
-	local recordTable
-	local recordStoreSpells = RecordStores["spell"]
-	recordTable = {
-	  name = trad.NameAlmi,
-	  cost = cfg.CostAlmi,	  
-	  subtype = 0,
-	  flags = 1,
-	  effects = {{
-		attribute = -1,
-		area = 0,
-		duration = 0,
-		id = 63,
-		rangeType = 0,
-		skill = -1,
-		magnitudeMax = 0,
-		magnitudeMin = 0
-		}}
-	}
-	recordStoreSpells.data.permanentRecords["almsivi intervention"] = recordTable
-	recordTable = {
-	  name = trad.NameDivi,
-	  cost = cfg.CostDivi,	  
-	  subtype = 0,
-	  flags = 1,
-	  effects = {{
-		attribute = -1,
-		area = 0,
-		duration = 0,
-		id = 62,
-		rangeType = 0,
-		skill = -1,
-		magnitudeMax = 0,
-		magnitudeMin = 0
-		}}
-	}
-	recordStoreSpells.data.permanentRecords["divine intervention"] = recordTable
-	recordStoreSpells:Save()
-	local recordStoreEnchant = RecordStores["enchantment"]
-	recordTable = {
-	  cost = cfg.CostAlmi,	  
-	  subtype = 2,
-	  flags = 40,
-	  charge = 40,  
-	  effects = {{
-		attribute = -1,
-		area = 0,
-		duration = 0,
-		id = 63,
-		rangeType = 0,
-		skill = -1,
-		magnitudeMax = 0,
-		magnitudeMin = 0
-		}}
-	}
-	recordStoreEnchant.data.permanentRecords["almsivi intervention_en"] = recordTable
-	recordTable = {
-	  cost = cfg.CostAlmi,	  
-	  subtype = 0,
-	  flags = 8,
-	  charge = 8,  
-	  effects = {{
-		attribute = -1,
-		area = 0,
-		duration = 0,
-		id = 63,
-		rangeType = 0,
-		skill = -1,
-		magnitudeMax = 0,
-		magnitudeMin = 0
-		}}
-	}
-	recordStoreEnchant.data.permanentRecords["almsivi intervention enchantmen"] = recordTable
-	recordTable = {
-	  cost = cfg.CostAlmi,	  
-	  subtype = 2,
-	  flags = 40,
-	  charge = 40,  
-	  effects = {{
-		attribute = -1,
-		area = 0,
-		duration = 0,
-		id = 63,
-		rangeType = 0,
-		skill = -1,
-		magnitudeMax = 0,
-		magnitudeMin = 0
-		}}
-	}
-	recordStoreEnchant.data.permanentRecords["divine intervention_en"] = recordTable
-	recordTable = {
-	  cost = cfg.CostAlmi,	  
-	  subtype = 0,
-	  flags = 8,
-	  charge = 8,  
-	  effects = {{
-		attribute = -1,
-		area = 0,
-		duration = 0,
-		id = 63,
-		rangeType = 0,
-		skill = -1,
-		magnitudeMax = 0,
-		magnitudeMin = 0
-		}}
-	}
-	recordStoreEnchant.data.permanentRecords["divine intervention enchantmen"] = recordTable	
-	recordStoreEnchant:Save()	
-end
-
-InterventionPlus.OnPlayerSpellsActiveHandler = function(eventStatus, pid, playerPacket)
-	for spellId, spellInstances in pairs(playerPacket.spellsActive) do	
+customEventHooks.registerHandler("OnPlayerSpellsActive", function(eventStatus, pid, playerPacket)
+	for spellId, spellInstances in pairs(playerPacket.spellsActive) do
 		for _, spellInstance in ipairs(spellInstances) do	
 			for _, effect in ipairs(spellInstance.effects) do		
 				if effect.id == enumerations.effects.ALMSIVI_INTERVENTION then
@@ -203,9 +200,9 @@ InterventionPlus.OnPlayerSpellsActiveHandler = function(eventStatus, pid, player
 			end	
 		end
 	end	
-end
+end)
 
-InterventionPlus.OnGUIAction = function(eventStatus, pid, idGui, data)
+customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
 	if idGui == cfg.MainGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else   
@@ -216,27 +213,17 @@ InterventionPlus.OnGUIAction = function(eventStatus, pid, idGui, data)
 			RecallPlayer(pid)
 		end
 	end
-end
+end)
 
-InterventionPlus.OnRecordDynamicValidator = function(eventStatus, pid, recordArray, storeType)
+customEventHooks.registerValidator("OnRecordDynamic", function(eventStatus, pid, recordArray, storeType)
 	if storeType == "enchantment" or storeType == "spell" or storeType == "potion" then	
 		for _, record in ipairs(recordArray) do			
 			for _, effect in ipairs(record.effects) do			
-				if effect.id == enumerations.effects.ALMSIVI_INTERVENTION then
+				if effect.id == enumerations.effects.ALMSIVI_INTERVENTION or effect.id == enumerations.effects.DIVINE_INTERVENTION then
 					effect.magnitudeMin = 0					
-					effect.magnitudeMax = 0			
-				elseif effect.id == enumerations.effects.DIVINE_INTERVENTION then			
-					effect.magnitudeMin = 0					
-					effect.magnitudeMax = 0					
+					effect.magnitudeMax = 0				
 				end					
 			end	
 		end
 	end
-end	
-
-customEventHooks.registerValidator("OnRecordDynamic", InterventionPlus.OnRecordDynamicValidator)
-customEventHooks.registerHandler("OnGUIAction", InterventionPlus.OnGUIAction)
-customEventHooks.registerHandler("OnServerInit", InterventionPlus.OnServerInit)
-customEventHooks.registerHandler("OnPlayerSpellsActive", InterventionPlus.OnPlayerSpellsActiveHandler)
-
-return InterventionPlus
+end)
