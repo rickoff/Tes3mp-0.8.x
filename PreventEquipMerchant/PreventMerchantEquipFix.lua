@@ -1,6 +1,5 @@
 --[[
 PreventMerchantEquipFix
-Rickoff
 tes3mp 0.8.1
 ---------------------------
 DESCRIPTION :
@@ -8,64 +7,53 @@ Prevent Merchant Equip
 ---------------------------
 INSTALLATION:
 Save the file as PreventMerchantEquipFix.lua inside your server/scripts/custom folder.
-Edits to customScripts.lua add :
-PreventMerchantEquipFix = require("custom.PreventMerchantEquipFix")
+Edits to customScripts.lua add in : require("custom.PreventMerchantEquipFix")
 ---------------------------
 ]]
-
---------------
--- VARIABLE --
---------------
 local NpcBarterList = jsonInterface.load("custom/PreventMerchantEquipList.json")
 
---------------
--- FUNCTION --
---------------
+local function LoadData()
+	NpcBarterList = jsonInterface.load("custom/PreventMerchantEquipList.json")		
+end
+
 local function SaveData()
-	jsonInterface.save("custom/PreventMerchantEquipList.json", NpcBarterList)	
+	jsonInterface.quicksave("custom/PreventMerchantEquipList.json", NpcBarterList)	
 end
 
--------------
--- METHODS --
--------------
-local PreventMerchantEquipFix = {}
-
-PreventMerchantEquipFix.OnObjectDialogueChoice = function(eventStatus, pid, cellDescription, objects)	
-	local ObjectIndex
-	local ObjetDialogueType
-	for _, object in pairs(objects) do
-		ObjectIndex = object.uniqueIndex
-		ObjetDialogueType = tableHelper.getIndexByValue(enumerations.dialogueChoice, object.dialogueChoiceType)
-	end	
-	if ObjectIndex and ObjetDialogueType
-	and ObjetDialogueType == "BARTER" and not NpcBarterList[ObjectIndex] then
-		NpcBarterList[ObjectIndex] = true
-		SaveData()
+local function GetIndexBarter(uniqueIndex)
+	for actorRefId, actorIndex in pairs(NpcBarterList) do		
+		if uniqueIndex == actorIndex then		
+			return true		
+		end		
 	end
+	return false	
 end
 
-PreventMerchantEquipFix.OnActorEquipment = function(eventStatus, pid, cellDescription, actors)		
-	for _, actor in pairs(actors) do
-		local ActorIndex = actor.uniqueIndex
-		if ActorIndex and NpcBarterList[ActorIndex] then
-			LoadedCells[cellDescription]:LoadActorEquipment(pid, LoadedCells[cellDescription].data.objectData, {ActorIndex})
-			return customEventHooks.makeEventStatus(false, false)
-		end
-	end	
-end
-
-PreventMerchantEquipFix.OnServerPostInit = function(eventStatus)
-	if NpcBarterList == nil then	
+customEventHooks.registerHandler("OnServerPostInit", function(eventStatus)
+	if not NpcBarterList then	
 		NpcBarterList = {}		
 		SaveData()		
 	end	
-end
+end)
 
-------------
--- EVENTS --
-------------
-customEventHooks.registerValidator("OnActorEquipment", PreventMerchantEquipFix.OnActorEquipment)
-customEventHooks.registerHandler("OnObjectDialogueChoice", PreventMerchantEquipFix.OnObjectDialogueChoice)
-customEventHooks.registerHandler("OnServerPostInit", PreventMerchantEquipFix.OnServerPostInit)
+customEventHooks.registerHandler("OnObjectDialogueChoice", function(eventStatus, pid, cellDescription, objects)	
+	for _, object in pairs(objects) do		
+		local ObjetDialogueType = tableHelper.getIndexByValue(enumerations.dialogueChoice, object.dialogueChoiceType)
+		if object.uniqueIndex and object.refId and ObjetDialogueType and ObjetDialogueType == "BARTER" then					
+			if not NpcBarterList[object.refId] 
+			or NpcBarterList[object.refId] and NpcBarterList[object.refId] ~= object.uniqueIndex then					
+				NpcBarterList[object.refId] = object.uniqueIndex					
+				SaveData()					
+			end			
+		end		
+	end
+end)
 
-return PreventMerchantEquipFix
+customEventHooks.registerValidator("OnActorEquipment", function(eventStatus, pid, cellDescription, actors)
+	for _, actor in pairs(actors) do
+		if actor.uniqueIndex and GetIndexBarter(actor.uniqueIndex) then
+			LoadedCells[cellDescription]:LoadActorEquipment(pid, LoadedCells[cellDescription].data.objectData, {actor.uniqueIndex})			
+			return customEventHooks.makeEventStatus(false, false)			
+		end			
+	end		
+end)
