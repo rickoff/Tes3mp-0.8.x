@@ -234,4 +234,4 @@ customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui
 			end			
 		end		
 	end
-end
+end)
