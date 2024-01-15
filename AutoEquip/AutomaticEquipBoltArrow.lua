@@ -28,10 +28,23 @@ local function GetBoltArrow(refId)
 	return false
 end
 
+local function GetItemCustomRecord(refId)
+	if RecordStores.weapon.data.permanentRecords[refId] 
+	and RecordStores.weapon.data.permanentRecords[refId].baseId then
+		return RecordStores.weapon.data.permanentRecords[refId].baseId
+	elseif RecordStores.weapon.data.generatedRecords[refId]
+	and RecordStores.weapon.data.generatedRecords[refId].baseId then	
+		return RecordStores.weapon.data.generatedRecords[refId].baseId
+	else
+		return refId
+	end
+end
+
 local function GetAmmunitionInventory(pid, typ)
 	for _, item in pairs(Players[pid].data.inventory) do
 		if item.refId and item.refId ~= "" then
-			if string.find(string.lower(item.refId), typ) then
+			local TargetRefId = GetItemCustomRecord(item.refId)		
+			if string.find(string.lower(TargetRefId), typ) then
 				return item
 			end
 		end
@@ -42,7 +55,8 @@ end
 local function GetAmmunitionEquipment(pid, typ)
 	local item = Players[pid].data.equipment[enumerations.equipment.AMMUNITION]
 	if item and item.refId and item.refId ~= "" then
-		if string.find(string.lower(item.refId), typ) then
+		local TargetRefId = GetItemCustomRecord(item.refId)		
+		if string.find(string.lower(TargetRefId), typ) then
 			if item.count > 0 then
 				return true
 			else
@@ -70,7 +84,8 @@ end
 customEventHooks.registerHandler("OnPlayerEquipment", function(eventStatus, pid, playerPacket)
 	if playerPacket.equipment[enumerations.equipment.CARRIED_RIGHT] 
 	and playerPacket.equipment[enumerations.equipment.CARRIED_RIGHT].refId then
-		local WeaponsType = GetBowCrossbow(playerPacket.equipment[enumerations.equipment.CARRIED_RIGHT].refId)
+		local TargetRefId = GetItemCustomRecord(playerPacket.equipment[enumerations.equipment.CARRIED_RIGHT].refId)
+		local WeaponsType = GetBowCrossbow(TargetRefId)
 		if WeaponsType then
 			local AmmunitionType 
 			if WeaponsType == "bow" then 
@@ -88,7 +103,8 @@ customEventHooks.registerHandler("OnPlayerEquipment", function(eventStatus, pid,
 	end	
 	if playerPacket.equipment[enumerations.equipment.AMMUNITION] 
 	and playerPacket.equipment[enumerations.equipment.AMMUNITION].refId then
-		local AmmunitionType = GetBoltArrow(playerPacket.equipment[enumerations.equipment.AMMUNITION].refId)
+		local TargetRefId = GetItemCustomRecord(playerPacket.equipment[enumerations.equipment.AMMUNITION].refId)	
+		local AmmunitionType = GetBoltArrow(TargetRefId)
 		if AmmunitionType then
 			if not GetAmmunitionEquipment(pid, AmmunitionType) then
 				local item = GetAmmunitionInventory(pid, AmmunitionType)
