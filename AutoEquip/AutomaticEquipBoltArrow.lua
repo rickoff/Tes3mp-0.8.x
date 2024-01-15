@@ -40,14 +40,13 @@ local function GetAmmunitionInventory(pid, typ)
 end
 
 local function GetAmmunitionEquipment(pid, typ)
-	for _, item in pairs(Players[pid].data.equipment) do
-		if item.refId and item.refId ~= "" then
-			if string.find(string.lower(item.refId), typ) then
-				if item.count > 0 then
-					return true
-				else
-					return false
-				end
+	local item = Players[pid].data.equipment[enumerations.equipment.AMMUNITION]
+	if item and item.refId and item.refId ~= "" then
+		if string.find(string.lower(item.refId), typ) then
+			if item.count > 0 then
+				return true
+			else
+				return false
 			end
 		end
 	end
