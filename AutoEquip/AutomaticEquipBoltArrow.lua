@@ -54,6 +54,20 @@ local function GetAmmunitionEquipment(pid, typ)
 	return false
 end
 
+local function EquipAmmunition(pid, item)
+	tes3mp.EquipItem(pid, enumerations.equipment.AMMUNITION, item.refId, item.count,
+	item.charge, item.enchantmentCharge)				
+	tes3mp.SendEquipment(pid)
+	local equipItem = {
+		refId = item.refId,
+		count = item.count,						
+		charge = item.charge,
+		enchantmentCharge = item.enchantmentCharge
+	}
+	Players[pid].previousEquipment[enumerations.equipment.AMMUNITION] = Players[pid].data.equipment[enumerations.equipment.AMMUNITION]					
+	Players[pid].data.equipment[enumerations.equipment.AMMUNITION] = equipItem	
+end
+
 customEventHooks.registerHandler("OnPlayerEquipment", function(eventStatus, pid, playerPacket)
 	if playerPacket.equipment[enumerations.equipment.CARRIED_RIGHT] 
 	and playerPacket.equipment[enumerations.equipment.CARRIED_RIGHT].refId then
@@ -68,17 +82,7 @@ customEventHooks.registerHandler("OnPlayerEquipment", function(eventStatus, pid,
 			if not GetAmmunitionEquipment(pid, AmmunitionType) then
 				local item = GetAmmunitionInventory(pid, AmmunitionType)
 				if item then
-					tes3mp.EquipItem(pid, enumerations.equipment.AMMUNITION, item.refId, item.count,
-					item.charge, item.enchantmentCharge)				
-					tes3mp.SendEquipment(pid)
-					local equipItem = {
-						refId = item.refId,
-						count = item.count,						
-						charge = item.charge,
-						enchantmentCharge = item.enchantmentCharge
-					}					
-					Players[pid].previousEquipment[enumerations.equipment.AMMUNITION] = Players[pid].data.equipment[enumerations.equipment.AMMUNITION]					
-					Players[pid].data.equipment[enumerations.equipment.AMMUNITION] = equipItem									
+					EquipAmmunition(pid, item)									
 				end
 			end
 		end			
@@ -90,17 +94,7 @@ customEventHooks.registerHandler("OnPlayerEquipment", function(eventStatus, pid,
 			if not GetAmmunitionEquipment(pid, AmmunitionType) then
 				local item = GetAmmunitionInventory(pid, AmmunitionType)
 				if item then
-					tes3mp.EquipItem(pid, enumerations.equipment.AMMUNITION, item.refId, item.count,
-					item.charge, item.enchantmentCharge)				
-					tes3mp.SendEquipment(pid)
-					local equipItem = {
-						refId = item.refId,
-						count = item.count,						
-						charge = item.charge,
-						enchantmentCharge = item.enchantmentCharge
-					}
-					Players[pid].previousEquipment[enumerations.equipment.AMMUNITION] = Players[pid].data.equipment[enumerations.equipment.AMMUNITION]					
-					Players[pid].data.equipment[enumerations.equipment.AMMUNITION] = equipItem					
+					EquipAmmunition(pid, item)					
 				end
 			end
 		end			
