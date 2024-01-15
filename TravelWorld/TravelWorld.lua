@@ -57,7 +57,11 @@ local function DeleteObjectInventory(pid, refId, price)
 	if indexLoc then	
 		if Players[pid].data.inventory[indexLoc].count >= price then		
 			local itemref = {refId = refId, count = price, charge = -1, enchantmentCharge = -1, soul = ""}				
-			Players[pid].data.inventory[indexLoc].count = Players[pid].data.inventory[indexLoc].count - price			
+			Players[pid].data.inventory[indexLoc].count = Players[pid].data.inventory[indexLoc].count - price
+			if Players[pid].data.inventory[indexLoc].count <= 0 then
+				Players[pid].data.inventory[indexLoc] = nil
+				tableHelper.cleanNils(Players[pid].data.inventory)
+			end
 			Players[pid]:LoadItemChanges({itemref}, enumerations.inventory.REMOVE)			
 			local message = trad.youBuy..price..trad.golds				
 			tes3mp.MessageBox(pid, -1, message)				
