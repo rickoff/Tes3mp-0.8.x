@@ -71,6 +71,14 @@ customEventHooks.registerHandler("OnPlayerEquipment", function(eventStatus, pid,
 					tes3mp.EquipItem(pid, enumerations.equipment.AMMUNITION, item.refId, item.count,
 					item.charge, item.enchantmentCharge)				
 					tes3mp.SendEquipment(pid)
+					local equipItem = {
+						refId = item.refId,
+						count = item.count,						
+						charge = item.charge,
+						enchantmentCharge = item.enchantmentCharge
+					}					
+					Players[pid].previousEquipment[enumerations.equipment.AMMUNITION] = Players[pid].data.equipment[enumerations.equipment.AMMUNITION]					
+					Players[pid].data.equipment[enumerations.equipment.AMMUNITION] = equipItem									
 				end
 			end
 		end			
@@ -85,6 +93,14 @@ customEventHooks.registerHandler("OnPlayerEquipment", function(eventStatus, pid,
 					tes3mp.EquipItem(pid, enumerations.equipment.AMMUNITION, item.refId, item.count,
 					item.charge, item.enchantmentCharge)				
 					tes3mp.SendEquipment(pid)
+					local equipItem = {
+						refId = item.refId,
+						count = item.count,						
+						charge = item.charge,
+						enchantmentCharge = item.enchantmentCharge
+					}
+					Players[pid].previousEquipment[enumerations.equipment.AMMUNITION] = Players[pid].data.equipment[enumerations.equipment.AMMUNITION]					
+					Players[pid].data.equipment[enumerations.equipment.AMMUNITION] = equipItem					
 				end
 			end
 		end			
