@@ -53,10 +53,7 @@ local function RemoveObjectInventoryPlayer(pid, item)
 			Players[pid].data.inventory[indexLoc] = nil				
 			tableHelper.cleanNils(Players[pid].data.inventory)
 		end	
-		Players[pid]:LoadItemChanges({item}, enumerations.inventory.REMOVE)			
-		return true			
-	else		
-		return false			
+		Players[pid]:LoadItemChanges({item}, enumerations.inventory.REMOVE)		
 	end	
 end
 
