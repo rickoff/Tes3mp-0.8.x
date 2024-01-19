@@ -90,8 +90,10 @@ end)
 customEventHooks.registerHandler("OnObjectSound", function(eventStatus, pid, cellDescription, objects, targetPlayers)
 	for targetPid, targetPlayer in pairs(targetPlayers) do
 		local PlayerName = GetName(targetPid)
-		if targetPlayer.soundId == "Repair" and PlayersUseTool[PlayerName] then
-			SaveChargeTool(targetPid, PlayersUseTool[PlayerName])
+		if PlayersUseTool[PlayerName] and targetPlayer.soundId then
+			if string.lower(targetPlayer.soundId) == "repair" or string.lower(targetPlayer.soundId) == "repair fail" then 
+				SaveChargeTool(targetPid, PlayersUseTool[PlayerName])
+			end
 		end
 	end
 end)
