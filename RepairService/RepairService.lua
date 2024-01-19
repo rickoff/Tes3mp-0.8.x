@@ -13,7 +13,8 @@ require("custom.RepairService.DataWeapons")
 require("custom.RepairService.DataArmors")
 
 local cfg = {
-	InvGui = 19012024
+	InvGui = 19012024,
+	PriceMult = 1
 }
 
 local playerInventoryOptions = {}
@@ -58,7 +59,10 @@ local function GetObjectCharge(refId)
 		if RecordStores[nameRecord].data.permanentRecords[string.lower(refId)] then		
 			return RecordStores[nameRecord].data.permanentRecords[string.lower(refId)].health			
 		elseif RecordStores[nameRecord].data.generatedRecords[string.lower(refId)] then		
-			refId = RecordStores[nameRecord].data.generatedRecords[string.lower(refId)].baseId			
+			refId = RecordStores[nameRecord].data.generatedRecords[string.lower(refId)].baseId
+			if RecordStores[nameRecord].data.permanentRecords[string.lower(refId)] then		
+				return RecordStores[nameRecord].data.permanentRecords[string.lower(refId)].health
+			end
 		end	
 	end	
 	if DataWeapons[string.lower(refId)] then
@@ -75,11 +79,8 @@ local function GetListInventoryRepair(pid)
 			local ObjectName = GetObjectName(string.lower(item.refId))		
 			local ObjectCharge = GetObjectCharge(string.lower(item.refId))			
 			if ObjectName and ObjectName ~= "" and ObjectCharge
-			and item.charge and item.charge ~= -1 and ObjectCharge - item.charge > 0 then				
-				local PlayerSkill = Players[pid].data.skills.Armorer.base or 0				
-				local Price = math.ceil(ObjectCharge - item.charge)				
-				local Pourcent = (Price * (PlayerSkill / 10)) / 100				
-				local Total = math.ceil(Price - Pourcent)				
+			and item.charge and item.charge ~= -1 and ObjectCharge - item.charge > 0 then			
+				local Price = math.ceil(ObjectCharge - item.charge) * cfg.PriceMult			
 				local newItem = {
 					refId = item.refId,
 					count = item.count or 1,
@@ -87,7 +88,7 @@ local function GetListInventoryRepair(pid)
 					enchantmentCharge = item.enchantmentCharge or -1,
 					soul = item.soul or "",
 					name = ObjectName,
-					price = Total
+					price = Price
 				}				
 				table.insert(options, newItem)				
 			end
