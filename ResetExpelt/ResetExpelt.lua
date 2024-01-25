@@ -9,7 +9,10 @@ Edits to customScripts.lua add : require("custom.ResetFactionExpelt")
 COMMAND:
 /resetexpelt pid factionName
 ]]
-
+local cfg = {
+	OnlyStaff = true
+}
+	
 local faction = {
 	["mages guild"] = "Set ExpMagesGuild to 0",
 	["fighters guild"] = "Set ExpFightersGuild to 0",
@@ -22,7 +25,7 @@ local faction = {
 }
 
 customCommandHooks.registerCommand("resetexpelt", function(pid, cmd) 
-	if Players[pid]:IsServerStaff() then
+	if cfg.OnlyStaff == false or Players[pid]:IsServerStaff() then
 		if cmd[2] and Players[tonumber(cmd[2])] and Players[tonumber(cmd[2])]:IsLoggedIn() then
 			local targetPid = tonumber(cmd[2])
 			local factionName			
