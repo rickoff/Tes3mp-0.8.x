@@ -1,10 +1,10 @@
 --[[
-ResetFactionExpelt
+ResetExpelt
 tes3mp 0.8.1
 ---------------------------
 INSTALLATION:
-Save the file as ResetFactionExpelt.lua inside your server/scripts/custom folder.
-Edits to customScripts.lua add : require("custom.ResetFactionExpelt")
+Save the file as ResetExpelt.lua inside your server/scripts/custom folder.
+Edits to customScripts.lua add : require("custom.ResetExpelt")
 ---------------------------
 COMMAND:
 /resetexpelt pid factionName
