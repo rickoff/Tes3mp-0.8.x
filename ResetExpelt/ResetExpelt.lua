@@ -7,7 +7,7 @@ Save the file as ResetFactionExpelt.lua inside your server/scripts/custom folder
 Edits to customScripts.lua add : require("custom.ResetFactionExpelt")
 ---------------------------
 COMMAND:
-/resetexpelt for reset expelt
+/resetexpelt pid factionName
 ]]
 
 local faction = {
@@ -38,8 +38,8 @@ customCommandHooks.registerCommand("resetexpelt", function(pid, cmd)
 					Players[targetPid].data.factionExpulsion[factionName] = false
 					logicHandler.RunConsoleCommandOnPlayer(pid, consoleCommand, false)
 					Players[targetPid]:LoadFactionExpulsion() 					
-					tes3mp.SendMessage(pid, "Player expulsion "..Players[targetPid].accountName.." from guild "..factionName.."  has been reset\n", false)					
-					tes3mp.SendMessage(targetPid, "Your expulsion from the guild "..factionName.." has been reset\n", false)				
+					tes3mp.SendMessage(pid, "Player expulsion "..Players[targetPid].accountName.." from faction "..factionName.."  has been reset\n", false)					
+					tes3mp.SendMessage(targetPid, "Your expulsion from the faction "..factionName.." has been reset\n", false)				
 				else
 					tes3mp.SendMessage(pid, "The player is not kicked from the faction or the faction is not referenced\n", false)				
 				end
