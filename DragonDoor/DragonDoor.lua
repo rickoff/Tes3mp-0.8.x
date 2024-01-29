@@ -229,19 +229,21 @@ customEventHooks.registerHandler("OnObjectActivate", function(eventStatus, pid, 
 						valide = true						
 					end	
 					if valide then	
-						local creaturePos = GetActorPositions(cellDescription, uniqueIndex)	
-						local playerPosX = tes3mp.GetPosX(pid)
-						local playerPosY = tes3mp.GetPosY(pid)
-						local playerPosZ = tes3mp.GetPosZ(pid)								
-						local creaturePosX = creaturePos.posX
-						local creaturePosY = creaturePos.posY
-						local creaturePosZ = creaturePos.posZ								
-						local distance = math.sqrt((playerPosX - creaturePosX)^2 + (playerPosY - creaturePosY)^2) 					
-						local height = CalculEcart(playerPosZ, creaturePosZ)						
-						if distance <= cfg.distance and height <= cfg.height then
-							table.insert(DragonDoorTab[PlayerName].uniqueIndex, uniqueIndex)	
-							count = count + 1
-						end							
+						local creaturePos = GetActorPositions(cellDescription, uniqueIndex)
+						if creaturePos then
+							local playerPosX = tes3mp.GetPosX(pid)
+							local playerPosY = tes3mp.GetPosY(pid)
+							local playerPosZ = tes3mp.GetPosZ(pid)								
+							local creaturePosX = creaturePos.posX
+							local creaturePosY = creaturePos.posY
+							local creaturePosZ = creaturePos.posZ								
+							local distance = math.sqrt((playerPosX - creaturePosX)^2 + (playerPosY - creaturePosY)^2) 					
+							local height = CalculEcart(playerPosZ, creaturePosZ)						
+							if distance <= cfg.distance and height <= cfg.height then
+								table.insert(DragonDoorTab[PlayerName].uniqueIndex, uniqueIndex)	
+								count = count + 1
+							end
+						end
 					end
 				end
 			end	
