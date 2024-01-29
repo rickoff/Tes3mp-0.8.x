@@ -182,6 +182,25 @@ local function ActorCellChanges(pid, oldCellDescription, newCellDescription, act
     end
 end
 
+local function GetActorPositions(cellDescription, uniqueIndex)
+    tes3mp.ReadCellActorList(cellDescription)
+    local actorListSize = tes3mp.GetActorListSize()
+    if actorListSize == 0 then
+        return false
+    end
+    for objectIndex = 0, actorListSize - 1 do
+        local targetIndex = tes3mp.GetActorRefNum(objectIndex) .. "-" .. tes3mp.GetActorMpNum(objectIndex)
+        if targetIndex == uniqueIndex then
+            local location = {
+                posX = tes3mp.GetActorPosX(objectIndex),
+                posY = tes3mp.GetActorPosY(objectIndex),
+                posZ = tes3mp.GetActorPosZ(objectIndex)
+            }
+			return location
+        end
+    end
+end
+
 customEventHooks.registerValidator("OnPlayerDeath", function(eventStatus, pid)
 	CleanTab(pid)
 end)
@@ -193,7 +212,6 @@ customEventHooks.registerHandler("OnObjectActivate", function(eventStatus, pid, 
 			local PlayerName = GetName(pid)			
 			DragonDoorTab[PlayerName] = {door = true, uniqueIndex = {}, cellDescription = cellDescription}
 			local cell = LoadedCells[cellDescription]			
-			cell:SaveActorPositions()			
 			for _, uniqueIndex in ipairs(cell.data.packets.actorList) do				
 				local valide = false				
 				if count == cfg.count then break end
@@ -210,13 +228,14 @@ customEventHooks.registerHandler("OnObjectActivate", function(eventStatus, pid, 
 					and cell.data.objectData[uniqueIndex].ai.action == 2 and string.lower(cell.data.objectData[uniqueIndex].ai.targetPlayer) == PlayerName then					
 						valide = true						
 					end	
-					if valide then						
+					if valide then	
+						local creaturePos = GetActorPositions(cellDescription, uniqueIndex)	
 						local playerPosX = tes3mp.GetPosX(pid)
 						local playerPosY = tes3mp.GetPosY(pid)
 						local playerPosZ = tes3mp.GetPosZ(pid)								
-						local creaturePosX = cell.data.objectData[uniqueIndex].location.posX
-						local creaturePosY = cell.data.objectData[uniqueIndex].location.posY
-						local creaturePosZ = cell.data.objectData[uniqueIndex].location.posZ								
+						local creaturePosX = creaturePos.posX
+						local creaturePosY = creaturePos.posY
+						local creaturePosZ = creaturePos.posZ								
 						local distance = math.sqrt((playerPosX - creaturePosX)^2 + (playerPosY - creaturePosY)^2) 					
 						local height = CalculEcart(playerPosZ, creaturePosZ)						
 						if distance <= cfg.distance and height <= cfg.height then
