@@ -15,18 +15,18 @@ local cfg = {
 }
 
 local blackListCellDescription = {
-	"" = true,
-	"" = true
+	[" "] = true,
+	[" "] = true
 }
 
 local blackListRefId = {
-	"" = true,
-	"" = true
+	[" "] = true,
+	[" "] = true
 }
 
 local blackListUniqueIndex = {
-	"" = true,
-	"" = true
+	[" "] = true,
+	[" "] = true
 }
 
 customEventHooks.registerValidator("OnObjectActivate", function(eventStatus, pid, cellDescription, objects)
