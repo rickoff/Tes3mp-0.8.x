@@ -32,7 +32,7 @@ local blackListUniqueIndex = {
 customEventHooks.registerValidator("OnObjectActivate", function(eventStatus, pid, cellDescription, objects)
 	if tes3mp.GetDrawState(pid) ~= 2 then return end
 	if cfg.OnlyInterior and tes3mp.IsInExterior(pid) then return end
-	if blackListCellDescription then return end
+	if blackListCellDescription[cellDescription] then return end
 	for _, object in pairs(objects) do
 		if object.uniqueIndex and object.refId and tableHelper.containsValue(LoadedCells[cellDescription].data.packets.actorList, object.uniqueIndex)
 		and not tableHelper.containsValue(LoadedCells[cellDescription].data.packets.death, object.uniqueIndex) then
