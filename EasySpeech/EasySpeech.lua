@@ -101,10 +101,6 @@ local function GetValidListForPid(pid)
 end
 
 local function ShowMainGUI(pid)
-	if PlayersDeath[GetName(pid)] then
-		EcarlateWar.ShowRessurectWaitGUI(pid)
-		return
-	end
 	local message = (
 		color.Orange..trd.Title.."\n\n"
 	)
