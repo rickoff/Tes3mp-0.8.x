@@ -144,7 +144,7 @@ customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 			ShowMainGUI(pid)
 		else
-			speechHelper.PlaySpeech(pid, playerChoice[GetName(pid)].speechType, tonumber(playerChoice[GetName(pid)].numberList[tonumber(data)]))
+			speechHelper.PlaySpeech(pid, playerChoice[GetName(pid)].speechType, tonumber(playerChoice[GetName(pid)].numberList[tonumber(data)+1]))
 			ShowMainGUI(pid)
 		end	
 	end
