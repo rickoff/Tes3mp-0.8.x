@@ -3,11 +3,12 @@ EasySpeech
 tes3mp 0.8.1
 ------------
 INSTALLATION :
-Edits to customScripts.lua add in :
-require("custom.EasySpeech")
-------------
-/speechmenu for open menu speech
+Save EasySpeech.lua in server/scripts/custom/ folder
+Save TextSpeech.lua in server/scripts/custom/ folder
+Edits to customScripts.lua add in : require("custom.EasySpeech")
 ]]
+require("custom.TextSpeech")
+
 local playerChoice = {}
 
 local cfg = {
@@ -20,13 +21,10 @@ local trd = {
 	Return = "Return",
 	Cancel = "Cancel"
 }
-
-local function GetName(pid)
-	return string.lower(Players[pid].accountName)
-end
 	
 local function GetValidListNumber(pid, speechType)
-    local validList = {}
+    local numberList = {}
+	local speechTextList = {}
 	local prefix = "default"
 	if string.find(speechType, "_") then
 		prefix = string.sub(speechType, 1, string.find(speechType, "_") - 1)
@@ -47,10 +45,17 @@ local function GetValidListNumber(pid, speechType)
 			valid = false
 		end
 		if valid then
-			table.insert(validList, tostring(x))		
+			local stringSpeech = tostring(x)
+			local patch = speechHelper.GetSpeechPath(pid, speechType, x)
+			if patch then print(patch) end
+			if patch and textSpeech[string.lower(patch)] then
+				stringSpeech = textSpeech[string.lower(patch)]
+			end
+			table.insert(speechTextList, stringSpeech)				
+			table.insert(numberList, tostring(x))		
 		end
 	end
-    return validList
+    return numberList, speechTextList
 end
 
 local function GetValidListType(speechCollectionTable, gender, collectionPrefix)
@@ -119,13 +124,13 @@ local function ShowNumberGUI(pid, data)
 	local message = (
 		color.Orange..trd.Title..speechType.."\n"
 	)
-	local listNumber = GetValidListNumber(pid, speechType)
+	local listNumber, listSpeech = GetValidListNumber(pid, speechType)
 	local buttons
-	for index, number in pairs(listNumber) do
+	for _, stringSpeech in pairs(listSpeech) do
 		if not buttons then
-			buttons = number.."\n"
+			buttons = stringSpeech.."\n"
 		else
-			buttons = buttons..number.."\n"
+			buttons = buttons..stringSpeech.."\n"
 		end
 	end	
 	playerChoice[GetName(pid)].numberList = listNumber
@@ -137,11 +142,11 @@ customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui
 	if idGui == cfg.MainGUI then 
 		if tonumber(data) < playerChoice[GetName(pid)].count then
 			ShowNumberGUI(pid, data)
-		elseif tonumber(data) == playerChoice[GetName(pid)].count then
-            --add your return menu
+		elseif tonumber(data) == playerChoice[GetName(pid)].count then	
+		
 		end	
 	elseif idGui == cfg.NumberGUI then 
-		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
+		if tonumber(data) >= 18446744073709551615 then
 			ShowMainGUI(pid)
 		else
 			speechHelper.PlaySpeech(pid, playerChoice[GetName(pid)].speechType, tonumber(playerChoice[GetName(pid)].numberList[tonumber(data)+1]))
