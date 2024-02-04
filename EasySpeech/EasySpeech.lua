@@ -47,7 +47,6 @@ local function GetValidListNumber(pid, speechType)
 		if valid then
 			local stringSpeech = tostring(x)
 			local patch = speechHelper.GetSpeechPath(pid, speechType, x)
-			if patch then print(patch) end
 			if patch and textSpeech[string.lower(patch)] then
 				stringSpeech = textSpeech[string.lower(patch)]
 			end
