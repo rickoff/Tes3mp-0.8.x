@@ -3,25 +3,38 @@ EasySpeech
 tes3mp 0.8.1
 ------------
 INSTALLATION :
-Save EasySpeech.lua in server/scripts/custom/ folder
-Save TextSpeech.lua in server/scripts/custom/ folder
+Save EasySpeech.lua to server/scripts/custom folder
+Save textSpeech.json to server/data/custom/EasySpeech folder
 Edits to customScripts.lua add in : require("custom.EasySpeech")
+Use /speechmenu in chat for open menu
 ]]
-require("custom.TextSpeech")
+local textSpeech = jsonInterface.load("custom/EasySpeech/textSpeech.json")
 
 local playerChoice = {}
 
 local cfg = {
 	MainGUI = 03022024,
-	NumberGUI = 04022024
+	NumberGUI = 04022024,
+	InputDialog = 05022024,
+	Extention = false
 }
 
 local trd = {
 	Title = "MENU SPEECH : ",
 	Return = "Return",
-	Cancel = "Cancel"
+	Cancel = "Cancel",
+	Default = "Speech",
+	Edit = "Edit",
+	Mod = "Mode",
+	StaffWarning = "Changing mode is reserved for staff members.\n",
+	InputMessage = "Write the sentence you hear.",
+	InputReturn = "enter the number 0 for return/cancel"
 }
-	
+
+local function GetName(pid)
+	return string.lower(Players[pid].accountName)
+end
+
 local function GetValidListNumber(pid, speechType)
     local numberList = {}
 	local speechTextList = {}
@@ -47,13 +60,19 @@ local function GetValidListNumber(pid, speechType)
 		if valid then
 			local stringSpeech = tostring(x)
 			local patch = speechHelper.GetSpeechPath(pid, speechType, x)
-			if patch and textSpeech[string.lower(patch)] then
-				stringSpeech = textSpeech[string.lower(patch)]
+			if patch then
+				if textSpeech[string.lower(patch)] then
+					if textSpeech[string.lower(patch)] == "" then
+						stringSpeech = string.lower(patch)
+					else
+						stringSpeech = textSpeech[string.lower(patch)]
+					end
+				end
 			end
 			table.insert(speechTextList, stringSpeech)				
 			table.insert(numberList, tostring(x))		
 		end
-	end
+	end	
     return numberList, speechTextList
 end
 
@@ -85,11 +104,13 @@ local function GetValidListForPid(pid)
     if speechCollections[race].default ~= nil then
         validList = GetValidListType(speechCollections[race].default, gender)
     end
-    for speechCollectionKey, speechCollectionTable in pairs(speechCollections[race]) do
-        if speechCollectionKey ~= "default" then
-            tableHelper.insertValues(validList, GetValidListType(speechCollectionTable, gender, speechCollectionKey .. "_"))
-        end
-    end
+	if Extention then
+		for speechCollectionKey, speechCollectionTable in pairs(speechCollections[race]) do
+			if speechCollectionKey ~= "default" then
+				tableHelper.insertValues(validList, GetValidListType(speechCollectionTable, gender, speechCollectionKey .. "_"))
+			end
+		end
+	end
 	local buttons
 	local count = 0
 	for index, speechName in pairs(validList) do
@@ -100,20 +121,32 @@ local function GetValidListForPid(pid)
 		end
 		count = count + 1
 	end
-	buttons = buttons..trd.Return..";"..trd.Cancel
+	buttons = buttons..trd.Return..";"..trd.Cancel..";"..trd.Mod
 	return buttons, validList, count
 end
 
 local function ShowMainGUI(pid)
+	local PlayerName = GetName(pid)
+	if PlayersDeath[PlayerName] then
+		EcarlateWar.ShowRessurectWaitGUI(pid)
+		return
+	end
+	local mode = trd.Default
+	if playerChoice[PlayerName] and playerChoice[PlayerName].mode then
+		mode = playerChoice[PlayerName].mode
+	end
+	local race = string.lower(Players[pid].data.character.race)	
 	local message = (
-		color.Orange..trd.Title.."\n\n"
+		color.Orange..trd.Title..race.."\n"..
+		color.Yellow..trd.Mod.." : "..mode.."\n"
 	)
 	local buttons, validList, count = GetValidListForPid(pid)
-	playerChoice[GetName(pid)] = {
+	playerChoice[PlayerName] = {
 		count = count,
 		validList = validList,
 		numberList = {},
-		speechType = ""
+		speechType = "",
+		mode = mode
 	}
 	tes3mp.CustomMessageBox(pid, cfg.MainGUI, message, buttons)
 end
@@ -137,20 +170,54 @@ local function ShowNumberGUI(pid, data)
 	tes3mp.ListBox(pid, cfg.NumberGUI, message, buttons)
 end
 
+local function InputDialog(pid)
+	local message = trd.InputMessage
+	tes3mp.InputDialog(pid, cfg.InputDialog, message, trd.InputReturn)
+end
+
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
 	if idGui == cfg.MainGUI then 
 		if tonumber(data) < playerChoice[GetName(pid)].count then
 			ShowNumberGUI(pid, data)
-		elseif tonumber(data) == playerChoice[GetName(pid)].count then	
-		
-		end	
+		elseif tonumber(data) == playerChoice[GetName(pid)].count then
+			Players[pid].currentCustomMenu = "MenuPlayer"	
+			menuHelper.DisplayMenu(pid, Players[pid].currentCustomMenu)	
+		elseif tonumber(data) == playerChoice[GetName(pid)].count + 1 then	
+			--add your return menu here		
+		elseif tonumber(data) == playerChoice[GetName(pid)].count + 2 then
+			if Players[pid]:IsServerStaff() then
+				if playerChoice[GetName(pid)].mode == trd.Default then
+					playerChoice[GetName(pid)].mode	= trd.Edit
+				else
+					playerChoice[GetName(pid)].mode	= trd.Default
+				end
+			else
+				tes3mp.SendMessage(pid, trd.StaffWarning, false)
+			end
+			ShowMainGUI(pid)
+		end		
 	elseif idGui == cfg.NumberGUI then 
 		if tonumber(data) >= 18446744073709551615 then
 			ShowMainGUI(pid)
 		else
 			speechHelper.PlaySpeech(pid, playerChoice[GetName(pid)].speechType, tonumber(playerChoice[GetName(pid)].numberList[tonumber(data)+1]))
-			ShowMainGUI(pid)
+			if playerChoice[GetName(pid)].mode == trd.Edit then
+				local path = speechHelper.GetSpeechPath(pid, playerChoice[GetName(pid)].speechType, tonumber(playerChoice[GetName(pid)].numberList[tonumber(data)+1]))
+				playerChoice[GetName(pid)].path = string.lower(path)
+				InputDialog(pid)
+			else
+				ShowMainGUI(pid)
+			end
 		end	
+	elseif idGui == cfg.InputDialog then
+		if tonumber(data) == 0 then
+			ShowMainGUI(pid)
+		else
+			local path = playerChoice[GetName(pid)].path
+			textSpeech[path] = data
+			jsonInterface.save("custom/EasySpeech/textSpeech.json", textSpeech)
+			ShowMainGUI(pid)	
+		end
 	end
 end)
 
