@@ -126,11 +126,6 @@ local function GetValidListForPid(pid)
 end
 
 local function ShowMainGUI(pid)
-	local PlayerName = GetName(pid)
-	if PlayersDeath[PlayerName] then
-		EcarlateWar.ShowRessurectWaitGUI(pid)
-		return
-	end
 	local mode = trd.Default
 	if playerChoice[PlayerName] and playerChoice[PlayerName].mode then
 		mode = playerChoice[PlayerName].mode
