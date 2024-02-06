@@ -126,6 +126,7 @@ local function GetValidListForPid(pid)
 end
 
 local function ShowMainGUI(pid)
+	local PlayerName = GetName(pid)	
 	local mode = trd.Default
 	if playerChoice[PlayerName] and playerChoice[PlayerName].mode then
 		mode = playerChoice[PlayerName].mode
