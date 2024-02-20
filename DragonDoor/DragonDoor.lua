@@ -171,7 +171,7 @@ local function ActorCellChanges(pid, oldCellDescription, newCellDescription, act
     end
 
     if actorCount > 0 then
-        tes3mp.SendActorCellChange()
+        tes3mp.SendActorCellChange(true)
     end
 
     LoadedCells[oldCellDescription]:QuicksaveToDrive()
