@@ -24,15 +24,17 @@ local function CheckInventoryActorItem(pid, uniqueIndex, inventory)
 	if tempBarter[uniqueIndex] then
 		local inventoryActor = tempBarter[uniqueIndex]
 		for _, item in pairs(inventory) do
-			local itemIndex = inventoryHelper.getItemIndex(inventoryActor, item.refId, item.charge, item.enchantmentCharge, item.soul)
-			if inventoryActor[itemIndex] and inventoryActor[itemIndex].count >= item.count then
-				inventoryActor[itemIndex].count = inventoryActor[itemIndex].count - item.count
-				if inventoryActor[itemIndex].count == 0 then
-					inventoryActor[itemIndex] = nil
+			if item.refId ~= "gold_001" then
+				local itemIndex = inventoryHelper.getItemIndex(inventoryActor, item.refId, item.charge, item.enchantmentCharge, item.soul)
+				if inventoryActor[itemIndex] and inventoryActor[itemIndex].count >= item.count then
+					inventoryActor[itemIndex].count = inventoryActor[itemIndex].count - item.count
+					if inventoryActor[itemIndex].count == 0 then
+						inventoryActor[itemIndex] = nil
+					end
+				else
+					rejected = true
+					table.insert(rejectedItems, item)
 				end
-			else
-				rejected = true
-				table.insert(rejectedItems, item)
 			end
 		end
 	end	
