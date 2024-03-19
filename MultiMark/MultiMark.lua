@@ -1,5 +1,4 @@
 --[[
---[[
 MultiMark
 tes3mp 0.8.1
 script version 1.0
