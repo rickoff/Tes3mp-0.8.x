@@ -113,7 +113,7 @@ customEventHooks.registerValidator("OnContainer", function(eventStatus, pid, cel
 							and inv.enchantmentCharge == item.enchantmentCharge
 							and inv.soul == item.soul then
 								inventoryHelper.addItem(Players[pid].data.inventory, item.refId, item.count, item.charge, item.enchantmentCharge, item.soul)
-								Players[pid]:LoadItemChanges({item}, enumerations.inventory.ADD)								
+								Players[pid]:LoadItemChanges({inv}, enumerations.inventory.ADD)								
 							end
 						end
 					end
