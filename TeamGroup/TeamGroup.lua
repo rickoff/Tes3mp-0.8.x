@@ -115,20 +115,22 @@ end
 
 local function addAlliedInGroup(pid)
 	local GroupList = getListMemberGroup(pid)	
-	for _, playerName in ipairs(GroupList) do	
+	for _, playerName in ipairs(GroupList) do
+		if not tableHelper.containsValue(Players[pid].data.alliedPlayers, playerName) then
+			table.insert(Players[pid].data.alliedPlayers, playerName)
+		end
 		local targetPid = logicHandler.GetPlayerByName(playerName).pid		
-		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then		
-			for _, targetName in ipairs(GroupList) do			
-				if not tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then				
-					if playerName ~= targetName then						
-						table.insert(Players[targetPid].data.alliedPlayers, targetName)						
-					end					
+		if targetPid and Players[targetPid] ~= nil and Players[targetPid]:IsLoggedIn() then
+			local targetGroupList = getListMemberGroup(targetPid)
+			for _, targetName in ipairs(targetGroupList) do			
+				if not tableHelper.containsValue(Players[targetPid].data.alliedPlayers, targetName) then											
+					table.insert(Players[targetPid].data.alliedPlayers, targetName)											
 				end				
-			end			
-			Players[targetPid]:QuicksaveToDrive()			
+			end		
 			Players[targetPid]:LoadAllies()				
 		end		
 	end	
+	Players[pid]:LoadAllies()		
 end
 
 local function removeAlliedInGroup(pid)
@@ -161,8 +163,7 @@ local function removeAlliedGroupDeleted(pid)
 						tableHelper.cleanNils(Players[targetPid].data.alliedPlayers)						
 					end					
 				end				
-			end			
-			Players[targetPid]:QuicksaveToDrive()			
+			end		
 			Players[targetPid]:LoadAllies()				
 		end
 	end
@@ -336,7 +337,8 @@ TeamGroup.RegisterGroup = function(pid, invitePid)
 		end
 		playerGroup[playerName][targetName] = true		
 		tes3mp.SendMessage(pid, targetName..trad.JoinGroup..playerName.."\n", false)		
-		tes3mp.SendMessage(invitePid, trad.JoinGroupYou..playerName.."\n", false)		
+		tes3mp.SendMessage(invitePid, trad.JoinGroupYou..playerName.."\n", false)
+		addAlliedInGroup(pid)		
 		addAlliedInGroup(invitePid)	
 	end	
 end
