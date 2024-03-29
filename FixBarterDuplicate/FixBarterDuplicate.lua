@@ -71,32 +71,35 @@ end)
 
 customEventHooks.registerValidator("OnContainer", function(eventStatus, pid, cellDescription, objects)
 	local playerName = GetName(pid)	
-	for _, object in pairs(objects) do
-		if tempPlayers[playerName] then			
-			local action = tes3mp.GetObjectListAction()				
-			if action == enumerations.container.REMOVE then			
-				for containerIndex = 0, tes3mp.GetObjectListSize() - 1 do
-					for itemIndex = 0, tes3mp.GetContainerChangesSize(containerIndex) - 1 do
-						local item = {
-							refId = tes3mp.GetContainerItemRefId(containerIndex, itemIndex),
-							count = tes3mp.GetContainerItemCount(containerIndex, itemIndex),
-							charge = tes3mp.GetContainerItemCharge(containerIndex, itemIndex),
-							enchantmentCharge = tes3mp.GetContainerItemEnchantmentCharge(containerIndex, itemIndex),
-							soul = tes3mp.GetContainerItemSoul(containerIndex, itemIndex)
-						}
-						for _, inv in pairs(tempPlayers[playerName]) do
-							if inv.refId == item.refId
-							and inv.count <= item.count
-							and inv.charge == item.charge
-							and inv.enchantmentCharge == item.enchantmentCharge
-							and inv.soul == item.soul then					
-								inventoryHelper.addItem(Players[pid].data.inventory, inv.refId, inv.count, inv.charge, inv.enchantmentCharge, inv.soul)
-								Players[pid]:LoadItemChanges({inv}, enumerations.inventory.ADD)								
-							end
-						end
-					end
+	if not tempPlayers[playerName] then return end
+	local authorizedItem
+	for _, object in pairs(objects) do	
+		local action = tes3mp.GetObjectListAction()				
+		if action ~= enumerations.container.REMOVE then	return end		
+		for containerIndex = 0, tes3mp.GetObjectListSize() - 1 do
+			for itemIndex = 0, tes3mp.GetContainerChangesSize(containerIndex) - 1 do
+				local item = {
+					refId = tes3mp.GetContainerItemRefId(containerIndex, itemIndex),
+					count = tes3mp.GetContainerItemCount(containerIndex, itemIndex),
+					charge = tes3mp.GetContainerItemCharge(containerIndex, itemIndex),
+					enchantmentCharge = tes3mp.GetContainerItemEnchantmentCharge(containerIndex, itemIndex),
+					soul = tes3mp.GetContainerItemSoul(containerIndex, itemIndex)
+				}
+				for _, inv in pairs(tempPlayers[playerName]) do
+					if inv.refId == item.refId
+					and inv.count <= item.count
+					and inv.charge == item.charge
+					and inv.enchantmentCharge == item.enchantmentCharge
+					and inv.soul == item.soul then					
+						inventoryHelper.addItem(Players[pid].data.inventory, inv.refId, inv.count, inv.charge, inv.enchantmentCharge, inv.soul)
+						if not authorizedItem then authorizedItem = {} end
+						table.insert(authorizedItem, inv)
+					end							
 				end
 			end
 		end
+	end
+	if authorizedItem then
+		Players[pid]:LoadItemChanges(authorizedItem, enumerations.inventory.ADD)	
 	end
 end)
