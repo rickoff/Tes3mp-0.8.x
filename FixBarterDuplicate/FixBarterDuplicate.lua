@@ -40,7 +40,6 @@ end)
 customEventHooks.registerHandler("OnObjectActivate", function(eventStatus, pid, cellDescription, objects)
 	for _, object in pairs(objects) do
 		if object.activatingPid and object.uniqueIndex and tempPlayers[GetName(object.activatingPid)] then
-			tempBarters[tempPlayers[GetName(object.activatingPid)].uniqueIndex] = nil
 			tempPlayers[GetName(object.activatingPid)] = nil
 		end
 	end
@@ -54,7 +53,6 @@ customEventHooks.registerHandler("OnObjectDialogueChoice", function(eventStatus,
 				uniqueIndex = object.uniqueIndex,
 				inventory = {}
 			}
-			tempBarters[object.uniqueIndex] = true
 		end
 	end	
 end)
