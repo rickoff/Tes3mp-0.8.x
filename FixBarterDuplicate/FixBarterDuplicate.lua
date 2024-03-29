@@ -49,10 +49,7 @@ customEventHooks.registerHandler("OnObjectDialogueChoice", function(eventStatus,
 	local playerName = GetName(pid)
 	for _, object in pairs(objects) do
 		if object.refId and object.uniqueIndex and object.dialogueChoiceType == enumerations.dialogueChoice.BARTER then
-			tempPlayers[playerName] = {
-				uniqueIndex = object.uniqueIndex,
-				inventory = {}
-			}
+			tempPlayers[playerName] = {}
 		end
 	end	
 end)
@@ -66,7 +63,7 @@ customEventHooks.registerValidator("OnPlayerInventory", function(eventStatus, pi
 				table.insert(rejectedItem, item)
 			end
 		end
-		tempPlayers[playerName].inventory = rejectedItem				
+		tempPlayers[playerName] = rejectedItem				
 		Players[pid]:LoadItemChanges(rejectedItem, enumerations.inventory.REMOVE)
 		return customEventHooks.makeEventStatus(false, false)			
 	end
@@ -87,7 +84,7 @@ customEventHooks.registerValidator("OnContainer", function(eventStatus, pid, cel
 							enchantmentCharge = tes3mp.GetContainerItemEnchantmentCharge(containerIndex, itemIndex),
 							soul = tes3mp.GetContainerItemSoul(containerIndex, itemIndex)
 						}
-						for _, inv in pairs(tempPlayers[playerName].inventory) do
+						for _, inv in pairs(tempPlayers[playerName]) do
 							if inv.refId == item.refId
 							and inv.count <= item.count
 							and inv.charge == item.charge
