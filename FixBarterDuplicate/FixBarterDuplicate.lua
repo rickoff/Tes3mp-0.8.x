@@ -25,7 +25,10 @@ end
 
 customEventHooks.registerValidator("OnObjectActivate", function(eventStatus, pid, cellDescription, objects) 
 	for _, object in pairs(objects) do
-		if object.uniqueIndex then   
+		if object.uniqueIndex then 
+			if object.activatingPid and tempPlayers[GetName(object.activatingPid)] then
+				tempPlayers[GetName(object.activatingPid)] = nil
+			end
 			if tempActivate[object.uniqueIndex] then
 				return customEventHooks.makeEventStatus(false, false)
 			else
@@ -37,11 +40,10 @@ customEventHooks.registerValidator("OnObjectActivate", function(eventStatus, pid
     end
 end)
 
-customEventHooks.registerHandler("OnObjectActivate", function(eventStatus, pid, cellDescription, objects)
-	for _, object in pairs(objects) do
-		if object.activatingPid and object.uniqueIndex and tempPlayers[GetName(object.activatingPid)] then
-			tempPlayers[GetName(object.activatingPid)] = nil
-		end
+customEventHooks.registerValidator("OnPlayerItemUse", function(eventStatus, pid, refId)
+	local playerName = GetName(pid)	
+	if tempPlayers[playerName] then
+		tempPlayers[playerName] = nil
 	end
 end)
 
