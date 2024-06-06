@@ -98,7 +98,7 @@ end
 
 local function giveDailyLoginItem(pid)
 	local addedItems = {}	
-	local rewardMsg = trad.rewardLoginMessageHeader	
+	local rewardMsg = trad.rewardLoginMessageDaily	
 	if cfg.randomizeDailyReward == true then
 		local item = randomPull(pid, dailyRewardsTable)		
 		if item then		
