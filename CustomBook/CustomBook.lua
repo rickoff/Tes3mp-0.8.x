@@ -210,47 +210,40 @@ customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui
 		elseif tonumber(data) == 2 then
 			showClearTextPrompt(pid)
 		elseif tonumber(data) == 3 then
-			message = "/book liststyles"
-			eventHandler.OnPlayerSendMessage(pid, message)
+			onCommand(pid, "liststyles")
 			showMainGUI(pid)
 		elseif tonumber(data) == 4 then
 			showStylePrompt(pid)
 		elseif tonumber(data) == 5 then
-			message = "/book clear"
-			eventHandler.OnPlayerSendMessage(pid, message)
+			onCommand(pid, "clear")
 			showMainGUI(pid)
 		elseif tonumber(data) == 6 then
-			message = "/book done"
-			eventHandler.OnPlayerSendMessage(pid, message)
+			onCommand(pid, "done")
 		elseif tonumber(data) == 7 then
 		elseif tonumber(data) == 8 then		
 		end
 	elseif idGui == cfg.EditTitleGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else
-			message = ("/book title " .. data)
-			eventHandler.OnPlayerSendMessage(pid, message)
+			onCommand(pid, "title "..data)
 			showMainGUI(pid)
 		end       
 	elseif idGui == cfg.EditTextGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else
-			message = ("/book addtext " .. data)
-			eventHandler.OnPlayerSendMessage(pid, message)
+			onCommand(pid, "addtext "..data)
 			showMainGUI(pid)
 		end       
 	elseif idGui == cfg.ClearTextGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else
-			message = ("/book settext " .. data)
-			eventHandler.OnPlayerSendMessage(pid, message)
+			onCommand(pid, "settext "..data)
 			showMainGUI(pid)
 		end
 	elseif idGui == cfg.StyleGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else
-			message = ("/book setstyle " .. tonumber(data))
-			eventHandler.OnPlayerSendMessage(pid, message)
+			onCommand(pid, "setstyle "..data)
 			showMainGUI(pid)
 		end 	
 	end
