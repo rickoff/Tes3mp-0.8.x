@@ -1,267 +1,261 @@
 --[[
-MailScript
+CustomBook
 tes3mp 0.8.1
+Version 0.9
+---------------------------
+DESCRIPTION :
+/book : Help menu
+/bookmenu : Edit menu
+/book title <text> : Set the Name of the book
+/book addtext <text> : Add text to the book
+/book settext <text> : Set the text in the book (will remove all previus text)
+/book listsyles : lists all the styles
+/book setstyle : sets the style the book is going to use
+/book done : Creates the book
+/book clear : Deletes the book
+You can use "/book done" several times as long at you dont use "/book clear" to make several copies of your book
 ---------------------------
 INSTALLATION:
-Save the file as MailScript.lua inside your server/scripts/custom folder.
+Save the file as CustomBook.lua inside your server/scripts/custom folder.
 Edits to customScripts.lua
-require("custom.MailScript")
-Create folder server/data/custom/MailScript/
+require("custom.CustomBook")
 ---------------------------
 ]]
+
 local cfg = {
-	MainMenu = 08092024,
-	PlayerSentList = 09092024,
-	MessageInput = 10092024,
-	MessageList = 11092024,
-	PlayerReceiveList = 12092024,
-	MessageReceiveList = 13092024,
-	MessageReceive = 14092024,
-	OnlyStaffCommand = true
+	MainGUI = 999363,
+	EditTitleGUI = 999364,
+	EditTextGUI = 99965,
+	ClearTextGUI = 999366,
+	StyleGUI = 999367
 }
 
 local trd = {
-	MainTitle = "MESSAGING\n\nNew Message: ",
-	TotalMessage = "\nTotal messages: ",
-	MainOption = "New;Inbox;Back;Quit",
-	NewMsgTitle = "NEW MESSAGE",
-	ReceiveMsgTitle = "INBOX",
-	ListReturn = "*Back*\n",
-	Connected = " connected\n",
-	Disconnected = " disconnected\n",
-	InputTitle = "Write the message for the recipient",
-	ChoiceMessage = "Delete;Back;Quit",
-	DeleteMsg = color.Red.."[MESSAGING] - You have deleted a message from: ",
-	SentMsg = color.Green.."[MESSAGING] - You have sent a message to: ",
-	ReceiveMsg = color.Green.."[MESSAGING] - You have received a message from: ",
-	NewMsgAuth = color.Green.."[MESSAGING] - You have ",
-	NewMsg = " new messages\n",
-	NeedPaper = "You lack the paper to write a letter."
+	mainMenu = color.Orange .. "PRINTING MENU\n" .. color.Yellow .. "\nTitle : " .. color.White ..  "to create a book by giving it a title.\n\n"  .. color.Yellow .. "Text : " .. color.White ..  "to add a line to your current book.\n\n" .. color.Yellow .. "New Text : " .. color.White .. "to erase and rewrite all lines.\n" .. color.Default,
+	optionMenu = "Title;Text;New Text;Style List;Style Selection;Clear;Print;Back;Close",
+	editTitle = "Enter a title for your book",
+	editText = "Enter text to add a line to your book.",
+	clearText = "Enter text to replace lines in your book.",
+	selectStyle = "Enter a number for your book style.",
+	clear = "Clear",
+	title = "Title created",
+	addText = "Text added",
+	setText = "Modified text",
+	noName = "You haven't created a book yet",
+	optionStyle = "Paper type",
+	style = "Type selected",
+	help = "Use: /bookmenu : open the edit menu\n/book <commande>\ntitle <texte>: sets the title of the book (use it to create a new one).\naddtext <text>: Add text to the book.\nsettext <text>: sets the text in the book (will remove any other text).\nliststyles: lists all styles.\nsetstyle <nombre>: sets the style.\ndone: print the document\nclear: Clears all data from the book so you can create a new one.",
+	wrote = "You have written a book!",
+	needPaper = "You lack the paper to write a book.",
+	copyBook = "You have a copy of your book."
 }
 
-local MailData = jsonInterface.load("custom/MailScript/MailData.json")
-if MailData == nil then
-	MailData = {}
+local EditBook = {
+	nameSymbol = "~",
+	currentBooks = {},
+	bookStyles = {
+		{model = "m\\Text_Octavo_03.nif", icon = "m\\tx_octavo_03.tga", scroll = false, name = "Red Book"},
+		{model = "m\\Text_Octavo_06.nif", icon = "m\\Tx_book_03.tga", scroll = false, name = "Green Book"},
+		{model = "m\\Text_Octavo_08.nif", icon = "m\\Tx_book_02.tga", scroll = false, name = "Blue Book"},
+		{model = "m\\Text_Octavo_04.nif", icon = "m\\Tx_octavo_04.tga", scroll = false, name = "Brown Book"},
+		{model = "m\\Text_Parchment_02.nif", icon = "m\\Tx_parchment_02.tga", scroll = true, name = "Letter"},
+		{model = "m\\Text_Note_02.nif", icon = "m\\Tx_note_02.tga", scroll = true, name = "Note"},
+		{model = "m\\Text_Scroll_01.nif", icon = "m\\Tx_scroll_open_01.tga", scroll = true, name = "Open Scroll"},
+		{model = "m\\Text_Scroll_02.nif", icon = "m\\Tx_scroll_02.tga", scroll = true, name = "Closed Scroll"},
+		{model = "m\\Text_paper_roll_01.nif", icon = "m\\Tx_paper_roll_01.tga", scroll = true, name = "Writ"}			
+	}
+}
+
+local function msg(pid, text)
+	tes3mp.SendMessage(pid, color.GreenYellow .. "[Style] " .. color.Default .. text .. "\n" .. color.Default)
 end
 
-local SelectedPlayer = {}
-
-local function SaveData()
-	jsonInterface.save("custom/MailScript/MailData.json", MailData)
+local function startBook(name)
+	if EditBook.currentBooks[name] == nil then
+		EditBook.currentBooks[name] = {}
+		EditBook.currentBooks[name].title = "Empty Title"
+		EditBook.currentBooks[name].text = ""
+		EditBook.currentBooks[name].type = 1
+	end
 end
 
-function ConvertOsTime()
-    local t = os.date("*t", os.time())
-    local formatted_time = string.format("%02d:%02d:%02d:%02d:%02d:%04d", t.hour, t.min, t.sec, t.day, t.month, t.year)
-    return formatted_time
-end
-
-local function ShowMainGUI(pid)
-	local countMessageNotReading = 0
-	local countMessageReading = 0	
-	local playerName = GetName(pid)	
-	for targetName, slot in pairs(MailData[playerName]) do
-		for timer, data in pairs(slot) do
-			if data.reading then
-				countMessageReading = countMessageReading + 1
-			else
-				countMessageNotReading = countMessageNotReading + 1
-			end
+local function nuCreateBookRecord(pid, recordTable)
+	local recordStore = RecordStores["book"]
+	local id = recordStore:GenerateRecordId()
+	local savedTable = recordTable
+	recordStore.data.generatedRecords[id] = savedTable
+	for _, player in pairs(Players) do
+		if not tableHelper.containsValue(player.generatedRecordsReceived, id) then
+		    table.insert(player.generatedRecordsReceived, id)
 		end
 	end
-	local title = trd.MainTitle..countMessageNotReading..trd.TotalMessage..countMessageReading + countMessageNotReading
-	tes3mp.CustomMessageBox(pid, cfg.MainMenu, title, trd.MainOption)	
+	recordStore:Save()
+	tes3mp.ClearRecords()
+	tes3mp.SetRecordType(enumerations.recordType[string.upper("book")])
+	packetBuilder.AddBookRecord(id, savedTable)
+	tes3mp.SendRecordDynamic(pid, true, false)
+	return id
 end
 
-local function ShowPlayerSentListGUI(pid)
-	local playerName = GetName(pid)
-	local list = trd.ListReturn
-	local nameList = {}
-	SelectedPlayer[playerName] = {}
-	SelectedPlayer[playerName] = {
-		targetName = {},
-		timer = {},
-		message = {}
-	}	
-	for targetPid, player in pairs(Players) do
-		local targetName = GetName(targetPid)
-		list = list..GetName(targetPid)..trd.Connected
-		nameList[targetName] = true		
-		table.insert(SelectedPlayer[playerName].targetName, targetName)
-	end
-	for targetName, data in pairs(MailData) do
-		if not nameList[targetName] then
-			list = list..targetName..trd.Disconnected
-			table.insert(SelectedPlayer[playerName].targetName, targetName)			
-		end
-	end
-	tes3mp.ListBox(pid, cfg.PlayerSentList, trd.NewMsgTitle, list)
-end
-
-local function InputMessage(pid)
-	tes3mp.InputDialog(pid, cfg.MessageInput, trd.InputTitle, "")
-end
-
-local function SaveMessageInput(pid, message)
+local function createBook(pid)
+	local name = Players[pid].name:lower()
 	if inventoryHelper.containsItem(Players[pid].data.inventory,"sc_paper plain") then
 		inventoryHelper.removeItem(Players[pid].data.inventory,"sc_paper plain",1)
+		msg(pid, color.Green .. trd.wrote)
 	elseif inventoryHelper.containsItem(Players[pid].data.inventory,"sc_paper_plain_01_canodia") then
 		inventoryHelper.removeItem(Players[pid].data.inventory,"sc_paper_plain_01_canodia",1)
+		msg(pid, color.Green .. trd.wrote)
 	else
-		tes3mp.SendMessage(pid, color.Red..trd.NeedPaper)
+		msg(pid, color.Red .. trd.needPaper)
 		return
 	end
-	local playerName = GetName(pid)
-	local targetName = SelectedPlayer[playerName].targetName
-	local messageTime = ConvertOsTime()
-	if not MailData[targetName] then
-		MailData[targetName] = {}
-	end
-	if not MailData[targetName][playerName] then
-		MailData[targetName][playerName] = {}
-	end
-	if not MailData[targetName][playerName][messageTime] then
-		MailData[targetName][playerName][messageTime] = {}
-	end
-	MailData[targetName][playerName][messageTime] = {
-		message = tostring(message),
-		reading = false
-	}
-	if logicHandler.GetPlayerByName(targetName) then
-		local targetPid = logicHandler.GetPlayerByName(targetName).pid
-		tes3mp.SendMessage(targetPid, trd.ReceiveMsg..playerName.."\n", false)
-		PlaySound(targetPid, "book open")		
-	end
-	tes3mp.SendMessage(pid, trd.SentMsg..targetName.."\n", false)	
-	PlaySound(pid, "mysticism area")
-	SaveData()
-end
-
-local function ShowPlayerReceiveListGUI(pid)
-	local playerName = GetName(pid)
-	local list = trd.ListReturn
-	SelectedPlayer[playerName] = {}
-	SelectedPlayer[playerName] = {
-		targetName = {},
-		timer = {},		
-		message = {}
-	}	
-	for targetName, data in pairs(MailData[playerName]) do
-		list = list..targetName
-		table.insert(SelectedPlayer[playerName].targetName, targetName)
-	end
-	tes3mp.ListBox(pid, cfg.PlayerReceiveList, trd.ReceiveMsgTitle, list)
-end
-
-local function ShowMessageReceiveList(pid)
-	local playerName = GetName(pid)
-	local targetName = SelectedPlayer[playerName].targetName
-	local list = trd.ListReturn
-	local count = 0
-	for timer, data in pairs(MailData[playerName][targetName]) do
-		if data.reading then
-			list = list..color.Green..timer.." | "..data.message.."\n"
-		else
-			list = list..color.Red..timer.." | "..data.message.."\n"
+	local model = EditBook.bookStyles[EditBook.currentBooks[name].type].model
+	local icon = EditBook.bookStyles[EditBook.currentBooks[name].type].icon
+	local scroll = EditBook.bookStyles[EditBook.currentBooks[name].type].scroll
+	local book = {}
+	book["weight"] = 1
+	book["icon"] = icon
+	book["skillId"] = "-1"
+	book["model"] = model
+	book["text"] = EditBook.currentBooks[name].text
+	book["value"] = 1
+	book["scrollState"] = scroll
+	book["name"] = EditBook.nameSymbol .. EditBook.currentBooks[name].title .. EditBook.nameSymbol
+	for id,n in pairs(RecordStores["book"].data.generatedRecords) do
+		if n.name == book["name"] and n.text == book["text"] then
+			msg(pid, trd.copyBook)
+			inventoryHelper.addItem(Players[pid].data.inventory, id, 1)
+			Players[pid]:QuicksaveToDrive()
+			local itemRef = {refId = id, count = 1, charge = -1, soul = ""}
+			Players[pid]:LoadItemChanges({itemRef}, enumerations.inventory.ADD)
+			return
 		end
-		table.insert(SelectedPlayer[playerName].timer, timer)
-		table.insert(SelectedPlayer[playerName].message, data.message)
-		count = count + 1
-	end	
-	tes3mp.ListBox(pid, cfg.MessageReceiveList, targetName.."\n"..color.Green..count, list)
+	end
+	local bookId = nuCreateBookRecord(pid, book)
+	Players[pid]:AddLinkToRecord("book", bookId)
+	inventoryHelper.addItem(Players[pid].data.inventory, bookId, 1)
+	Players[pid]:QuicksaveToDrive()
+	local itemRef = {refId = bookId, count = 1, charge = -1, soul = ""}
+	Players[pid]:LoadItemChanges({itemRef}, enumerations.inventory.ADD)
 end
 
-local function ShowMessageReceive(pid)
-	local playerName = GetName(pid)
-	local targetName = SelectedPlayer[playerName].targetName	
-	local timer = SelectedPlayer[playerName].timer
-	MailData[playerName][targetName][timer].reading = true
-	tes3mp.CustomMessageBox(pid, cfg.MessageReceive, targetName.."\n"..timer.."\n\n"..SelectedPlayer[playerName].message, trd.ChoiceMessage)
+local function onCommand(pid, cmd)
+	local name = Players[pid].name:lower()
+	if cmd[2] == "clear" then
+		EditBook.currentBooks[name] = nil
+		msg(pid, trd.clear)
+	elseif cmd[2] == "title" then
+		startBook(name)
+		EditBook.currentBooks[name].title = table.concat(cmd, " ", 3)
+		msg(pid, trd.title)
+	elseif cmd[2] == "addtext" then
+		startBook(name)
+		message = (table.concat(cmd, " ", 3) .. "<p>")
+		EditBook.currentBooks[name].text = EditBook.currentBooks[name].text .. message
+		msg(pid, trd.addText)
+	elseif cmd[2] == "settext" then
+		startBook(name)
+		message = (table.concat(cmd, " ", 3) .. "<p>")
+		EditBook.currentBooks[name].text = message
+		msg(pid, trd.setText)
+	elseif cmd[2] == "done" then
+		if EditBook.currentBooks[name] == nil then
+		    msg(pid, trd.noName)
+		else
+		    createBook(pid)
+		end
+	elseif cmd[2] == "liststyle" or cmd[2] == "liststyles" then
+		msg(pid, trd.optionStyle)
+		for i, bookType in pairs(EditBook.bookStyles) do
+		    msg(pid, tostring(i) .. ": " .. bookType.name)
+		end
+	elseif cmd[2] == "setstyle" then
+		startBook(name)
+		if tonumber(cmd[3]) == nil then return end
+		if tonumber(cmd[3]) < 1 then return end
+		if tonumber(cmd[3]) > #EditBook.bookStyles then return end
+		EditBook.currentBooks[name].type = tonumber(cmd[3])
+		msg(pid, trd.style)
+	else
+		msg(pid, trd.help)
+	end
+end
+ 
+local function showMainGUI(pid)
+	tes3mp.CustomMessageBox(pid, cfg.MainGUI, trd.mainMenu, trd.optionMenu)
 end
 
-local function DeleteMessage(pid)
-	local playerName = GetName(pid)
-	local targetName = SelectedPlayer[playerName].targetName
-	local timer = SelectedPlayer[playerName].timer
-	MailData[playerName][targetName][timer] = nil
-	tes3mp.SendMessage(pid, trd.DeleteMsg..targetName.."\n", false)	
-	PlaySound(pid, "book close")	
-	SaveData()
+local function showEditTitlePrompt(pid)
+	tes3mp.InputDialog(pid, cfg.EditTitleGUI, trd.editTitle, "")
+end
+
+local function showEditTextPrompt(pid)
+	tes3mp.InputDialog(pid, cfg.EditTextGUI, trd.editText, "")
+end
+
+local function showClearTextPrompt(pid)
+	tes3mp.InputDialog(pid, cfg.ClearTextGUI, trd.clearText, "")
+end
+
+local function showStylePrompt(pid)
+	tes3mp.InputDialog(pid, cfg.StyleGUI, trd.selectStyle, "")
 end
 
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
-	if idGui == cfg.MainMenu then 
+	if idGui == cfg.MainGUI then
 		if tonumber(data) == 0 then
-			ShowPlayerSentListGUI(pid)		
+			showEditTitlePrompt(pid)
 		elseif tonumber(data) == 1 then
-			ShowPlayerReceiveListGUI(pid)
+			showEditTextPrompt(pid)
 		elseif tonumber(data) == 2 then
-		elseif tonumber(data) == 3 then		
+			showClearTextPrompt(pid)
+		elseif tonumber(data) == 3 then
+			message = "/book liststyles"
+			eventHandler.OnPlayerSendMessage(pid, message)
+			showMainGUI(pid)
+		elseif tonumber(data) == 4 then
+			showStylePrompt(pid)
+		elseif tonumber(data) == 5 then
+			message = "/book clear"
+			eventHandler.OnPlayerSendMessage(pid, message)
+			showMainGUI(pid)
+		elseif tonumber(data) == 6 then
+			message = "/book done"
+			eventHandler.OnPlayerSendMessage(pid, message)
+		elseif tonumber(data) == 7 then
+		elseif tonumber(data) == 8 then		
 		end
-	elseif idGui == cfg.PlayerSentList then 
-		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then   		
-			ShowMainGUI(pid)			
-		else   	
-			SelectedPlayer[GetName(pid)].targetName = SelectedPlayer[GetName(pid)].targetName[tonumber(data)]
-			InputMessage(pid)
-		end 	
-	elseif idGui == cfg.MessageInput then
-		if data and data ~= "" then
-			SaveMessageInput(pid, data)
-			ShowMainGUI(pid)
-		end
-	elseif idGui == cfg.PlayerReceiveList then 
-		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then   		
-			ShowMainGUI(pid)			
-		else   	
-			SelectedPlayer[GetName(pid)].targetName = SelectedPlayer[GetName(pid)].targetName[tonumber(data)]
-			ShowMessageReceiveList(pid)
-		end 
-	elseif idGui == cfg.MessageReceiveList then 
-		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then   		
-			ShowMainGUI(pid)			
+	elseif idGui == cfg.EditTitleGUI then
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else
-			SelectedPlayer[GetName(pid)].timer = SelectedPlayer[GetName(pid)].timer[tonumber(data)]
-			SelectedPlayer[GetName(pid)].message = SelectedPlayer[GetName(pid)].message[tonumber(data)]
-			ShowMessageReceive(pid)
-		end 
-	elseif idGui == cfg.MessageReceive then 
-		if tonumber(data) == 0 then
-			DeleteMessage(pid)
-			ShowMainGUI(pid)			
-		elseif tonumber(data) == 1 then
-			ShowMainGUI(pid)		
-		elseif tonumber(data) == 2 then		
+			message = ("/book title " .. data)
+			eventHandler.OnPlayerSendMessage(pid, message)
+			showMainGUI(pid)
+		end       
+	elseif idGui == cfg.EditTextGUI then
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
+		else
+			message = ("/book addtext " .. data)
+			eventHandler.OnPlayerSendMessage(pid, message)
+			showMainGUI(pid)
+		end       
+	elseif idGui == cfg.ClearTextGUI then
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
+		else
+			message = ("/book settext " .. data)
+			eventHandler.OnPlayerSendMessage(pid, message)
+			showMainGUI(pid)
 		end
+	elseif idGui == cfg.StyleGUI then
+		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
+		else
+			message = ("/book setstyle " .. tonumber(data))
+			eventHandler.OnPlayerSendMessage(pid, message)
+			showMainGUI(pid)
+		end 	
 	end
 end)
 
-customEventHooks.registerHandler("OnPlayerAuthentified", function(eventStatus, pid)
-	local playerName = GetName(pid)
-	if not MailData[playerName] then
-		MailData[playerName] = {}
-	end
-	local countMessageNotReading = 0	
-	local playerName = GetName(pid)	
-	for targetName, slot in pairs(MailData[playerName]) do
-		for timer, data in pairs(slot) do
-			if not data.reading then
-				countMessageNotReading = countMessageNotReading + 1
-			end
-		end
-	end	
-	tes3mp.SendMessage(pid, trd.NewMsgAuth..countMessageNotReading..trd.NewMsg, false)
-end)
+customCommandHooks.registerCommand("book", onCommand)
 
-customEventHooks.registerHandler("OnPlayerItemUse", function(eventStatus, pid, refId)
-	if refId == "misc_dwrv_artifact50" then
-		ShowMainGUI(pid)
-	end
-end)
-
-customCommandHooks.registerCommand("mail", function(pid,cmd)
-	if cfg.OnlyStaffCommand and not Players[pid]:IsServerStaff() then
-		return
-	end
-	ShowMainGUI(pid)
-end)
+customCommandHooks.registerCommand("bookmenu", showMainGUI)
