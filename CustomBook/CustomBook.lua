@@ -202,60 +202,60 @@ local function showStylePrompt(pid)
 end
 
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)  
-    if idGui == cfg.MainGUI then
-        if tonumber(data) == 0 then
-            showEditTitlePrompt(pid)
-        elseif tonumber(data) == 1 then
-            showEditTextPrompt(pid)
-        elseif tonumber(data) == 2 then
-            showClearTextPrompt(pid)
-        elseif tonumber(data) == 3 then
+	if idGui == cfg.MainGUI then
+		if tonumber(data) == 0 then
+			showEditTitlePrompt(pid)
+		elseif tonumber(data) == 1 then
+			showEditTextPrompt(pid)
+		elseif tonumber(data) == 2 then
+			showClearTextPrompt(pid)
+		elseif tonumber(data) == 3 then
 			local command = {"book","liststyles"}
 			onCommand(pid, command)
-            ShowMainGUI(pid)
-        elseif tonumber(data) == 4 then
-            showStylePrompt(pid)
-        elseif tonumber(data) == 5 then
+			ShowMainGUI(pid)
+		elseif tonumber(data) == 4 then
+			showStylePrompt(pid)
+		elseif tonumber(data) == 5 then
 			local command = {"book","clear"}
 			onCommand(pid, command)		
-            ShowMainGUI(pid)
-        elseif tonumber(data) == 6 then
+			ShowMainGUI(pid)
+		elseif tonumber(data) == 6 then
 			local command = {"book","done"}
 			onCommand(pid, command)				
-        elseif tonumber(data) == 7 then
+		elseif tonumber(data) == 7 then
 			MainMenu.ShowServerGUI(pid)		
-        end
-    elseif idGui == cfg.EditTitleGUI then
-        if data and tostring(data) then
+		end
+	elseif idGui == cfg.EditTitleGUI then
+		if data and tostring(data) then
 			local command = {"book","title",tostring(data)}
 			onCommand(pid, command)				
-            ShowMainGUI(pid)
-        else
-            ShowMainGUI(pid)
+			ShowMainGUI(pid)
+		else
+			ShowMainGUI(pid)
 		end
-    elseif idGui == cfg.EditTextGUI then
-        if data and tostring(data) then
+	elseif idGui == cfg.EditTextGUI then
+		if data and tostring(data) then
 			local command = {"book","addtext",tostring(data)}
 			onCommand(pid, command)
-            ShowMainGUI(pid)
-        else
-            ShowMainGUI(pid)
+			ShowMainGUI(pid)
+		else
+			ShowMainGUI(pid)
 		end      
-    elseif idGui == cfg.ClearTextGUI then
-        if data and tostring(data) then
+	elseif idGui == cfg.ClearTextGUI then
+		if data and tostring(data) then
 			local command = {"book","settext",tostring(data)}
 			onCommand(pid, command)	
-            ShowMainGUI(pid)
-        else
-            ShowMainGUI(pid)
+			ShowMainGUI(pid)
+		else
+			ShowMainGUI(pid)
 		end
-    elseif idGui == cfg.StyleGUI then
-        if data and tonumber(data) then
+	elseif idGui == cfg.StyleGUI then
+		if data and tonumber(data) then
 			local command = {"book","setstyle",tonumber(data)}
 			onCommand(pid, command)
-            ShowMainGUI(pid)
-        else
-            ShowMainGUI(pid)
+			ShowMainGUI(pid)
+		else
+			ShowMainGUI(pid)
 		end	
 	end
 end)
