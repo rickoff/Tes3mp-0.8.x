@@ -1,0 +1,131 @@
+{
+  "star-cursed":{
+    "baseId":"Star-Cursed",
+    "spells":[{
+        "refId":"star-curse"
+      }],
+    "description":"Constellation of The Serpent.",
+    "name":"The Serpent",
+    "texture":"Birthsigns\\Tx_birth_serpent.tga"
+  },
+  "fay":{
+    "baseId":"Fay",
+    "spells":[{
+        "refId":"fay ability"
+      }],
+    "description":"Constellation of The Mage with a Prime Aspect of Masser.",
+    "name":"The Mage",
+    "texture":"Birthsigns\\Tx_birth_mage.tga"
+  },
+  "moonshadow sign":{
+    "baseId":"Moonshadow Sign",
+    "spells":[{
+        "refId":"moonshadow"
+      }],
+    "description":"Constellation of The Shadow with a Prime Aspect of Secunda.",
+    "name":"The Shadow",
+    "texture":"Birthsigns\\Tx_birth_shadow.tga"
+  },
+  "blessed touch sign":{
+    "baseId":"Blessed Touch Sign",
+    "spells":[{
+        "refId":"blessed word"
+      },{
+        "refId":"blessed touch"
+      },{
+        "refId":"mara's gift"
+      }],
+    "description":"Constellation of The Ritual with a Prime Aspect of Masser.",
+    "name":"The Ritual",
+    "texture":"Birthsigns\\Tx_birth_ritual.tga"
+  },
+  "trollkin":{
+    "baseId":"Trollkin",
+    "spells":[{
+        "refId":"blood of the north"
+      },{
+        "refId":"trollkin ability"
+      }],
+    "description":"Constellation of The Lord with a Prime Aspect of Masser.",
+    "name":"The Lord",
+    "texture":"Birthsigns\\Tx_birth_lord.tga"
+  },
+  "wombburned":{
+    "baseId":"Wombburned",
+    "spells":[{
+        "refId":"wombburn"
+      }],
+    "description":"Constellation of The Atronach with a Prime Aspect of Masser.",
+    "name":"The Atronach",
+    "texture":"Birthsigns\\Tx_birth_atron.tga"
+  },
+  "beggar's nose":{
+    "baseId":"Beggar's Nose",
+    "spells":[{
+        "refId":"beggar's nose spell"
+      },{
+        "refId":"tower key"
+      }],
+    "description":"Constellation of The Tower with a Prime Aspect of Secunda.",
+    "name":"The Tower",
+    "texture":"Birthsigns\\Tx_birth_tower.tga"
+  },
+  "warwyrd":{
+    "baseId":"Warwyrd",
+    "spells":[{
+        "refId":"warywrd ability"
+      }],
+    "description":"Constellation of The Warrior with a Prime Aspect of Masser.",
+    "name":"The Warrior",
+    "texture":"Birthsigns\\Tx_birth_warrior.tga"
+  },
+  "elfborn":{
+    "baseId":"Elfborn",
+    "spells":[{
+        "refId":"elfborn ability"
+      }],
+    "description":"Constellation of The Apprentice with a Prime Aspect of Masser.",
+    "name":"The Apprentice",
+    "texture":"Birthsigns\\Tx_birth_apprent.tga"
+  },
+  "charioteer":{
+    "baseId":"Charioteer",
+    "spells":[{
+        "refId":"charioteer ability"
+      }],
+    "description":"Constellation of The Steed with a Prime Aspect of Masser.",
+    "name":"The Steed",
+    "texture":"Birthsigns\\Tx_birth_steed.tga"
+  },
+  "lady's favor":{
+    "baseId":"Lady's Favor",
+    "spells":[{
+        "refId":"lady's favor"
+      },{
+        "refId":"lady's grace"
+      }],
+    "description":"Constellation of The Lady with a Prime Aspect of Masser.",
+    "name":"The Lady",
+    "texture":"Birthsigns\\Tx_birth_lady.tga"
+  },
+  "mooncalf":{
+    "baseId":"Mooncalf",
+    "spells":[{
+        "refId":"mooncalf ability"
+      },{
+        "refId":"lover's kiss"
+      }],
+    "description":"Constellation of The Lover with a Prime Aspect of Secunda.",
+    "name":"The Lover",
+    "texture":"Birthsigns\\Tx_birth_lover.tga"
+  },
+  "hara":{
+    "baseId":"Hara",
+    "spells":[{
+        "refId":"akaviri danger-sense"
+      }],
+    "description":"Constellation of The Thief with a Prime Aspect of Secunda.",
+    "name":"The Thief",
+    "texture":"Birthsigns\\Tx_birth_thief.tga"
+  }
+}
