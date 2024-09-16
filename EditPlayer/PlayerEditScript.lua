@@ -278,15 +278,17 @@ customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui
 		elseif tonumber(data) == 4 then -- SIGN
 			ShowChangeGUIEdit(pid, "SIGN")	
 		elseif tonumber(data) == 5 then -- SIZE+
-			if Players[pid].data.shapeshift.scale < cfg.ScaleMax then
-				Players[pid].data.shapeshift.scale = Players[pid].data.shapeshift.scale + 0.01
+			local scale = Players[pid].data.shapeshift.scale or 1			
+			if scale < cfg.ScaleMax then
+				Players[pid].data.shapeshift.scale = scale + 0.01
 				tes3mp.SetScale(pid, Players[pid].data.shapeshift.scale)
 				tes3mp.SendShapeshift(pid)
 			end
 			ShowMainGuiEdit(pid)			
 		elseif tonumber(data) == 6 then -- SIZE-
-			if Players[pid].data.shapeshift.scale > cfg.ScaleMin then
-				Players[pid].data.shapeshift.scale = Players[pid].data.shapeshift.scale - 0.01
+			local scale = Players[pid].data.shapeshift.scale or 1					
+			if scale > cfg.ScaleMin then
+				Players[pid].data.shapeshift.scale = scale - 0.01
 				tes3mp.SetScale(pid, Players[pid].data.shapeshift.scale)
 				tes3mp.SendShapeshift(pid)
 			end	
