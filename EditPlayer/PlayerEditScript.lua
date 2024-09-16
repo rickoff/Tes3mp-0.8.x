@@ -89,7 +89,7 @@ local function ShowMainGuiEdit(pid)
 			head = Players[pid].data.character.head,
 			hair = Players[pid].data.character.hair,
 			birthsign = Players[pid].data.character.birthsign,
-			size = Players[pid].data.shapeshift.scale
+			size = Players[pid].data.shapeshift.scale or 1
 		}	
 	end
 	if PlayerCustomData[PlayerName].gender == 0 then
@@ -110,7 +110,7 @@ local function ShowMainGuiEdit(pid)
 		sign = DataBsgn[PlayerCustomData[PlayerName].birthsign].name.."\n\n"
 	end
 	if PlayerCustomData[PlayerName].size then
-		size = Players[pid].data.shapeshift.scale.."\n\n"
+		size = Players[pid].data.shapeshift.scale or 1 .."\n\n"
 	end		
 	local message = (
 		color.Green .. trd.Title
