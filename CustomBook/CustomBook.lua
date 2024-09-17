@@ -60,7 +60,7 @@ local EditBook = {
 		{model = "m\\Text_Octavo_04.nif", icon = "m\\Tx_octavo_04.tga", scroll = false, name = "Brown Book"},
 		{model = "m\\Text_Parchment_02.nif", icon = "m\\Tx_parchment_02.tga", scroll = true, name = "Letter"},
 		{model = "m\\Text_Note_02.nif", icon = "m\\Tx_note_02.tga", scroll = true, name = "Note"},
-		{model = "m\\Text_Scroll_01.nif", icon = "m\\Tx_scroll_open_01.tga", scroll = true, name = "Open Scroll"},
+		{model = "m\\Text_Scroll_open_02.nif", icon = "m\\Tx_scroll_open_02.tga", scroll = true, name = "Open Scroll"},
 		{model = "m\\Text_Scroll_02.nif", icon = "m\\Tx_scroll_02.tga", scroll = true, name = "Closed Scroll"},
 		{model = "m\\Text_paper_roll_01.nif", icon = "m\\Tx_paper_roll_01.tga", scroll = true, name = "Writ"}			
 	}
