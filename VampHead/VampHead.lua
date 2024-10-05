@@ -9,20 +9,19 @@ require("custom.VampHead")
 ---------------------------
 ]]
 local function GetPlayerVamp(pid)
-	local hashList = {}
-	for i = 1, #Players[pid].data.spellbook do
-		local spellId = Players[pid].data.spellbook[i]
-		if spellId then
-			hashList[spellId] = true
-		end
-	end
-	local spellList = {"vampire blood quarra", "vampire blood berne", "vampire blood aundae", "vampire attributes"}
-	for _, spellId in ipairs(spellList) do
-		if hashList[spellId] then
-			return true	
-		end
-	end	
-	return false
+    local spellList = {
+        ["vampire blood quarra"] = true,
+        ["vampire blood berne"] = true,
+        ["vampire blood aundae"] = true,
+        ["vampire attributes"] = true
+    }
+    for i = 1, #Players[pid].data.spellbook do
+        local spellId = Players[pid].data.spellbook[i]
+        if spellId and spellList[spellId] then
+            return true
+        end
+    end
+    return false
 end
 
 local function GetVampHeadRefId(pid)
