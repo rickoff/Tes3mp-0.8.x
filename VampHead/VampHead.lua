@@ -9,11 +9,18 @@ require("custom.VampHead")
 ---------------------------
 ]]
 local function GetPlayerVamp(pid)
-	if tableHelper.containsValue(Players[pid].data.spellbook, "vampire blood quarra")
-	or tableHelper.containsValue(Players[pid].data.spellbook, "vampire blood berne")
-	or tableHelper.containsValue(Players[pid].data.spellbook, "vampire blood aundae")
-	or tableHelper.containsValue(Players[pid].data.spellbook, "vampire attributes") then
-		return true		
+	local hashList = {}
+	for i = 1, #Players[pid].data.spellbook do
+		local spellId = Players[pid].data.spellbook[i]
+		if spellId then
+			hashList[spellId] = true
+		end
+	end
+	local spellList = {"vampire blood quarra", "vampire blood berne", "vampire blood aundae", "vampire attributes"}
+	for _, spellId in ipairs(spellList) do
+		if hashList[spellId] then
+			return true	
+		end
 	end	
 	return false
 end
