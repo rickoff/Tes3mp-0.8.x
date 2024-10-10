@@ -1,36 +1,41 @@
 --[[
 MultiMark
 tes3mp 0.8.1
-script version 1.0
+script version 1.1
 ---------------------------
 INSTALLATION:
 Save the file as MultiMark.lua inside your server/scripts/custom folder.
 Edits to customScripts.lua add : require("custom.MultiMark")
 ---------------------------
 CONFIGURATION :
-Change trad in your language for your server
+Change trd in your language for your server
 Change cfg MaxMark for config limite mark
-Change cfg GUI numbers for a unique numbers 
+Change gui numbers for a unique numbers 
 ]]
 ---------------------------
-local trad = {
+local trd = {
 	BackList = "* Back *\n",
 	LimiteMark = color.Red.."The number of mark is limited to : ",
 	SelectMark = color.Green.."Select a mark to recall or remove",
 	ChoiceMark = color.Yellow.."Select an option",
-	ChoiceMarkOpt = "Recall;Remove",
+	ChoiceMarkOpt = "Teleport;Edit;Delete",
 	AddNewMark = "New mark at\n",
 	NameMark = "Mark",
-	NameRecall = "Recall"
+	NameRecall = "Recall",
+	InputMsg = "Enter a custom name for your mark"
 }
 
 local cfg = {
 	OnServerInit = true,	
 	MaxMark = 5,
 	costMark = 18,
-	costRecall = 18,
+	costRecall = 18
+}
+
+local gui = {
 	MainGUI = 21092022,
-	ChoiceGUI = 21092023
+	ChoiceGUI = 21092023,
+	MessageInput = 21092024
 }
 	
 local playerIndex = {}
@@ -41,19 +46,25 @@ end
 
 local function SelectChoice(pid, index)
 	playerIndex[GetName(pid)] = index
-	tes3mp.CustomMessageBox(pid, cfg.ChoiceGUI, trad.ChoiceMark, trad.ChoiceMarkOpt)	
+	tes3mp.CustomMessageBox(pid, gui.ChoiceGUI, trd.ChoiceMark, trd.ChoiceMarkOpt)	
 end
 
 local function ListMark(pid)
     local options = Players[pid].data.customVariables.markLocation
-    local list = trad.BackList	
+    local list = trd.BackList	
     for i = 1, #options do
-		list = list..string.sub(options[i].cell, 1, 25).." : "..math.floor(options[i].posX).." ; "..math.floor(options[i].posY).." ; "..math.floor(options[i].posZ)		
+		local name = ""
+		if options[i].name and options[i].name ~= "" then
+			name = options[i].name
+		else
+			name = string.sub(options[i].cell, 1, 25).." : "..math.floor(options[i].posX).." ; "..math.floor(options[i].posY).." ; "..math.floor(options[i].posZ)
+		end
+		list = list..name		
         if not(i == #options) then
             list = list .. "\n"
         end
     end
-	tes3mp.ListBox(pid, cfg.MainGUI, trad.SelectMark..color.Default, list)	
+	tes3mp.ListBox(pid, gui.MainGUI, trd.SelectMark..color.Default, list)	
 end
 
 local function CountMark(pid)
@@ -66,17 +77,18 @@ end
 
 local function AddMark(pid)
 	if CountMark(pid) < cfg.MaxMark then
-		local tablePos = {}
-		tablePos.cell = tes3mp.GetCell(pid)
-		tablePos.posX = tes3mp.GetPosX(pid)
-		tablePos.posY = tes3mp.GetPosY(pid)
-		tablePos.posZ = tes3mp.GetPosZ(pid)
-		tablePos.rotX = tes3mp.GetRotX(pid)
-		tablePos.rotZ = tes3mp.GetRotZ(pid) 			
+		local tablePos = {
+			cell = tes3mp.GetCell(pid),
+			posX = tes3mp.GetPosX(pid),
+			posY = tes3mp.GetPosY(pid),
+			posZ = tes3mp.GetPosZ(pid),
+			rotX = tes3mp.GetRotX(pid),
+			rotZ = tes3mp.GetRotZ(pid) 
+		}
 		table.insert(Players[pid].data.customVariables.markLocation, tablePos)
-		tes3mp.MessageBox(pid, -1, trad.AddNewMark..color.Green..tablePos.cell.."\n"..color.White..math.floor(tablePos.posX).." ; "..math.floor(tablePos.posY).." ; "..math.floor(tablePos.posZ))
+		tes3mp.MessageBox(pid, -1, trd.AddNewMark..color.Green..tablePos.cell.."\n"..color.White..math.floor(tablePos.posX).." ; "..math.floor(tablePos.posY).." ; "..math.floor(tablePos.posZ))
 	else
-		tes3mp.MessageBox(pid, -1, trad.LimiteMark..color.Green..cfg.MaxMark)
+		tes3mp.MessageBox(pid, -1, trd.LimiteMark..color.Green..cfg.MaxMark)
 	end
 end
 
@@ -84,6 +96,15 @@ local function RemoveMark(pid)
 	local index = playerIndex[GetName(pid)]
 	Players[pid].data.customVariables.markLocation[index] = nil	
 	tableHelper.cleanNils(Players[pid].data.customVariables.markLocation)
+end
+
+local function InputMessage(pid)
+	tes3mp.InputDialog(pid, gui.MessageInput, trd.InputMsg, "")
+end
+
+local function NamedMark(pid, data)
+	local index = playerIndex[GetName(pid)]
+	Players[pid].data.customVariables.markLocation[index].name = data
 end
 
 local function RecallPlayer(pid)
@@ -106,7 +127,7 @@ customEventHooks.registerHandler("OnServerInit", function(eventStatus)
 		local recordStoreSpells = RecordStores["spell"]
 		local recordTable
 		recordTable = {
-			name = trad.NameMark,
+			name = trd.NameMark,
 			cost = cfg.costMark,	  
 			subtype = 0,
 			flags = 1,
@@ -125,7 +146,7 @@ customEventHooks.registerHandler("OnServerInit", function(eventStatus)
 		}
 		recordStoreSpells.data.permanentRecords["mark"] = recordTable
 		recordTable = {
-			name = trad.NameRecall,
+			name = trd.NameRecall,
 			cost = cfg.costRecall,		
 			subtype = 0,
 			flags = 1,
@@ -244,17 +265,28 @@ customEventHooks.registerHandler("OnPlayerSpellsActive", function(eventStatus, p
 end)
 
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
-	if idGui == cfg.MainGUI then
+	if idGui == gui.MainGUI then
 		if tonumber(data) == 0 or tonumber(data) == 18446744073709551615 then
 		else   
 			SelectChoice(pid, tonumber(data))
 		end
-	elseif idGui == cfg.ChoiceGUI then
+	elseif idGui == gui.ChoiceGUI then
 		if tonumber(data) == 0 then
 			RecallPlayer(pid)
 		elseif tonumber(data) == 1 then
+			InputMessage(pid)
+		elseif tonumber(data) == 2 then
 			RemoveMark(pid)
 			ListMark(pid)		
+		end
+	elseif idGui == gui.MessageInput then
+		if data and tonumber(data) and tonumber(data) <= 0 or tonumber(data) == 18446744073709551615 then    		
+			ListMark(pid)			
+		elseif data and tostring(data) then		
+			NamedMark(pid, tostring(data)) 			
+			ListMark(pid)			
+		else
+			ListMark(pid)
 		end
 	end
 end)
