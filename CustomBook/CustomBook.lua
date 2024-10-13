@@ -99,11 +99,15 @@ end
 
 local function createBook(pid)
 	local name = Players[pid].name:lower()
-	if inventoryHelper.containsItem(Players[pid].data.inventory,"sc_paper plain") then
-		inventoryHelper.removeItem(Players[pid].data.inventory,"sc_paper plain",1)
+	if inventoryHelper.containsItem(Players[pid].data.inventory, "sc_paper plain") then
+		inventoryHelper.removeItem(Players[pid].data.inventory, "sc_paper plain", 1, -1, -1, "")
+		local itemRef = {refId = "sc_paper plain", count = 1, charge = -1, enchantmentCharge = -1, soul = ""}
+		Players[pid]:LoadItemChanges({itemRef}, enumerations.inventory.REMOVE)		
 		msg(pid, color.Green .. trd.wrote)
 	elseif inventoryHelper.containsItem(Players[pid].data.inventory,"sc_paper_plain_01_canodia") then
-		inventoryHelper.removeItem(Players[pid].data.inventory,"sc_paper_plain_01_canodia",1)
+		inventoryHelper.removeItem(Players[pid].data.inventory,"sc_paper_plain_01_canodia", 1, -1, -1, "")
+		local itemRef = {refId = "sc_paper_plain_01_canodia", count = 1, charge = -1, enchantmentCharge = -1, soul = ""}
+		Players[pid]:LoadItemChanges({itemRef}, enumerations.inventory.REMOVE)				
 		msg(pid, color.Green .. trd.wrote)
 	else
 		msg(pid, color.Red .. trd.needPaper)
@@ -124,18 +128,16 @@ local function createBook(pid)
 	for id,n in pairs(RecordStores["book"].data.generatedRecords) do
 		if n.name == book["name"] and n.text == book["text"] then
 			msg(pid, trd.copyBook)
-			inventoryHelper.addItem(Players[pid].data.inventory, id, 1)
-			Players[pid]:QuicksaveToDrive()
-			local itemRef = {refId = id, count = 1, charge = -1, soul = ""}
+			inventoryHelper.addItem(Players[pid].data.inventory, id, 1, -1, -1, "")
+			local itemRef = {refId = id, count = 1, charge = -1, enchantmentCharge = -1, soul = ""}
 			Players[pid]:LoadItemChanges({itemRef}, enumerations.inventory.ADD)
 			return
 		end
 	end
 	local bookId = nuCreateBookRecord(pid, book)
 	Players[pid]:AddLinkToRecord("book", bookId)
-	inventoryHelper.addItem(Players[pid].data.inventory, bookId, 1)
-	Players[pid]:QuicksaveToDrive()
-	local itemRef = {refId = bookId, count = 1, charge = -1, soul = ""}
+	inventoryHelper.addItem(Players[pid].data.inventory, bookId, 1, -1, -1, "")
+	local itemRef = {refId = bookId, count = 1, charge = -1, enchantmentCharge = -1, soul = ""}
 	Players[pid]:LoadItemChanges({itemRef}, enumerations.inventory.ADD)
 end
 
