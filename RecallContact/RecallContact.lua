@@ -11,6 +11,7 @@ require("custom.RecallContact")
 local cfg = {
 	onServerInit = true,
 	addSpellsOnAuth = true,
+	removeSpellsOnAuth = false,	
 	players = true,
 	actors = true,
 	costMark = 18,
@@ -309,7 +310,8 @@ customEventHooks.registerHandler("OnPlayerAuthentified", function(eventStatus, p
 		if #spellsId > 0 then
 			AddSpell(pid, spellsId)
 		end
-	else
+	end	
+	if cfg.removeSpellsOnAuth then
 		if tableHelper.containsValue(Players[pid].data.spellbook, "mark_contact") then
 			table.insert(spellsId, "mark_contact")
 		end
