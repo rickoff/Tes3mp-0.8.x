@@ -26,6 +26,40 @@ local protectActor = {
 	["player"] = true
 }
 
+local function AddSpell(pid, tabSpell)
+	local Change = false	
+	tes3mp.ClearSpellbookChanges(pid)	
+	tes3mp.SetSpellbookChangesAction(pid, enumerations.spellbook.ADD)
+	for _, spellId in ipairs(tabSpell) do	
+		if not tableHelper.containsValue(Players[pid].data.spellbook, spellId) then				
+			tes3mp.AddSpell(pid, spellId)			
+			table.insert(Players[pid].data.spellbook, spellId)					
+			Change = true			
+		end		
+	end	
+	if Change then
+		tes3mp.SendSpellbookChanges(pid)		
+	end
+end
+
+local function RemoveSpell(pid, tabSpell)
+	local Change = false	
+	tes3mp.ClearSpellbookChanges(pid)
+	tes3mp.SetSpellbookChangesAction(pid, enumerations.spellbook.REMOVE)
+	for _, spellId in ipairs(tabSpell) do	
+		if tableHelper.containsValue(Players[pid].data.spellbook, spellId) == true then		
+			tes3mp.AddSpell(pid, spellId)			
+			local foundIndex = tableHelper.getIndexByValue(Players[pid].data.spellbook, spellId)			
+			Players[pid].data.spellbook[foundIndex] = nil			
+			Change = true			
+		end		
+	end	
+	if Change then
+		tes3mp.SendSpellbookChanges(pid)	
+		tableHelper.cleanNils(Players[pid].data.spellbook)			
+	end	
+end
+
 local function RecallPlayer(pid, pos)   
 	tes3mp.SetCell(pid, pos.cellDescription)
 	tes3mp.SendCell(pid)
@@ -264,8 +298,8 @@ customEventHooks.registerHandler("OnActorSpellsActive", function(eventStatus, pi
 end)
 
 customEventHooks.registerHandler("OnPlayerAuthentified", function(eventStatus, pid)
+	local spellsId = {}
 	if cfg.addSpellsOnAuth then
-		local spellsId = {}
 		if not tableHelper.containsValue(Players[pid].data.spellbook, "mark_contact") then
 			table.insert(spellsId, "mark_contact")
 		end
@@ -275,5 +309,15 @@ customEventHooks.registerHandler("OnPlayerAuthentified", function(eventStatus, p
 		if #spellsId > 0 then
 			AddSpell(pid, spellsId)
 		end
+	else
+		if tableHelper.containsValue(Players[pid].data.spellbook, "mark_contact") then
+			table.insert(spellsId, "mark_contact")
+		end
+		if tableHelper.containsValue(Players[pid].data.spellbook, "recall_contact") then
+			table.insert(spellsId, "recall_contact")
+		end	
+		if #spellsId > 0 then
+			RemoveSpell(pid, spellsId)
+		end	
 	end
 end)
