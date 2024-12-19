@@ -14,8 +14,12 @@ require("custom.PlayerEditScript")
 local PlayerCustomData = {}
 
 local cfg = {
-	MainGUIEdit = 325491,
-	SelectGUIEdit = 325492,
+	Gender = true,
+	Race = true,
+	Head = true,
+	Hair = true,
+	Sign = true,
+	Size = true,
 	ScaleMax = 1.1,
 	ScaleMin = 0.9
 }
@@ -29,15 +33,74 @@ local trd = {
     Hair = "Hair: ",
     Birth = "Sign: ",
     Scale = "Size: ",
-    OptMenu = "Gender;Race;Head;Hair;Sign;Size+;Size-;Confirm",
-    Need = "You must choose a gender, a race, a face, and a hairstyle before confirming.",
     Return = "*back\n",
     Man = "Man",
     Woman = "Woman"
 }
 
+local gui = {
+	MainGUIEdit = 325491,
+	SelectGUIEdit = 325492
+}
+
 local DataHead = jsonInterface.load("custom/DataBase/DataHead.json")
 local DataBsgn = jsonInterface.load("custom/DataBase/DataBsgn.json")
+
+local function OptionEdit()
+	local option = "Confirm"
+	if cfg.Size then
+		option = "Size+;Size-;" .. option
+	end
+	if cfg.Sign then
+		option = "Sign;" .. option	
+	end
+	if cfg.Hair then
+		option = "Hair;" .. option
+	end
+	if cfg.Head then
+		option = "Head;" .. option
+	end
+	if cfg.Race then
+		option = "Race;" .. option
+	end	
+	if cfg.Gender then
+		option = "Gender;" .. option
+	end
+	return option
+end
+
+local function GuiEditNumber()
+	local optionString = OptionEdit()
+	local list = {}
+	for option in string.gmatch(optionString, "([^;]+)") do
+		table.insert(list, option)
+	end
+	return list
+end
+
+local function NeedEdit()
+	local need = "You must choose a "
+	if cfg.Size then
+		need = need.."Size, "
+	end
+	if cfg.Sign then
+		need = need.."Sign, "
+	end		
+	if cfg.Hair then
+		need = need.."Hair, "
+	end
+	if cfg.Head then
+		need = need.."Head, "
+	end
+	if cfg.Race then
+		need = need.."Race, "
+	end	
+	if cfg.Gender then
+		need = need.."Gender, "
+	end
+	need = need.."before confirming."
+	return need
+end
 
 local function AddSpell(pid, tabSpell)
 	local Change = false	
@@ -110,7 +173,7 @@ local function ShowMainGuiEdit(pid)
 		sign = DataBsgn[PlayerCustomData[PlayerName].birthsign].name.."\n\n"
 	end
 	if PlayerCustomData[PlayerName].size then
-		size = Players[pid].data.shapeshift.scale or 1 .."\n\n"
+		size = PlayerCustomData[PlayerName].size .."\n\n"
 	end		
 	local message = (
 		color.Green .. trd.Title
@@ -127,7 +190,7 @@ local function ShowMainGuiEdit(pid)
 		..color.Yellow .. trd.Scale
 		..color.White .. size			
 	)		
-	tes3mp.CustomMessageBox(pid, cfg.MainGUIEdit, message, trd.OptMenu)
+	tes3mp.CustomMessageBox(pid, gui.MainGUIEdit, message, OptionEdit())
 end
 
 local function ShowChangeGUIEdit(pid, cat)
@@ -180,7 +243,7 @@ local function ShowChangeGUIEdit(pid, cat)
 		list = list..options[i].."\n"	
 	end		
 	PlayerCustomData[PlayerName].cat = cat	
-	tes3mp.ListBox(pid, cfg.SelectGUIEdit, color.CornflowerBlue..title..color.Default, list)
+	tes3mp.ListBox(pid, gui.SelectGUIEdit, color.CornflowerBlue..title..color.Default, list)
 end
 
 local function ValidateSettingsEdit(pid)
@@ -203,12 +266,12 @@ local function ValidateSettingsEdit(pid)
 			tes3mp.SendBaseInfo(pid)
 			logicHandler.RunConsoleCommandOnPlayer(pid, "ToggleVanityMode", false)	
 		else
-			local message = (color.Red..trd.Need)	
+			local message = (color.Red..NeedEdit())	
 			tes3mp.MessageBox(pid, -1, message)		
 			ShowMainGuiEdit(pid)
 		end
 	else
-		local message = (color.Red..trd.Need)	
+		local message = (color.Red..NeedEdit())	
 		tes3mp.MessageBox(pid, -1, message)		
 		ShowMainGuiEdit(pid)
 	end		
@@ -266,18 +329,20 @@ local function OnPlayerEdit(pid)
 end
 
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
-	if idGui == cfg.MainGUIEdit then -- Main
-		if tonumber(data) == 0 then --GENDER
+	if idGui == gui.MainGUIEdit then
+		local list = GuiEditNumber()
+		local action = list[tonumber(data) + 1]		
+		if action == "Gender" then
 			ShowChangeGUIEdit(pid, "GENDER")
-		elseif tonumber(data) == 1 then --RACE
+		elseif action == "Race" then
 			ShowChangeGUIEdit(pid, "RACE")
-		elseif tonumber(data) == 2 then -- HEAD
+		elseif action == "Head" then
 			ShowChangeGUIEdit(pid, "HEAD")
-		elseif tonumber(data) == 3 then -- HAIR
+		elseif action == "Hair" then
 			ShowChangeGUIEdit(pid, "HAIR")
-		elseif tonumber(data) == 4 then -- SIGN
+		elseif action == "Sign" then
 			ShowChangeGUIEdit(pid, "SIGN")	
-		elseif tonumber(data) == 5 then -- SIZE+
+		elseif action == "Scale+" then
 			local scale = Players[pid].data.shapeshift.scale or 1			
 			if scale < cfg.ScaleMax then
 				Players[pid].data.shapeshift.scale = scale + 0.01
@@ -285,7 +350,7 @@ customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui
 				tes3mp.SendShapeshift(pid)
 			end
 			ShowMainGuiEdit(pid)			
-		elseif tonumber(data) == 6 then -- SIZE-
+		elseif action == "Scale-" then
 			local scale = Players[pid].data.shapeshift.scale or 1					
 			if scale > cfg.ScaleMin then
 				Players[pid].data.shapeshift.scale = scale - 0.01
@@ -293,10 +358,10 @@ customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui
 				tes3mp.SendShapeshift(pid)
 			end	
 			ShowMainGuiEdit(pid)				
-		elseif tonumber(data) == 7 then -- VALIDATE
+		elseif action == "Confirm" then
 			ValidateSettingsEdit(pid)			
 		end	
-	elseif idGui == cfg.SelectGUIEdit then	
+	elseif idGui == gui.SelectGUIEdit then	
 		local PlayerName = string.lower(Players[pid].accountName)			
 		if data == nil or tonumber(data) == 18446744073709551615 then	
 			ShowMainGuiEdit(pid)
