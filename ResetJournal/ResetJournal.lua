@@ -216,21 +216,20 @@ local function Exclusion(pid, guild)
 	tes3mp.SendMessage(pid, trd.expulsion, config.shareFactionExpulsion)	
 end
 
-local function Kills(pid)	
+local function Kills(pid)
+	local target
 	if config.shareKills then
-		for refId, killCount in pairs(WorldInstance.data.kills) do
-			WorldInstance.data.kills[refId] = 0
-		end
-		WorldInstance:LoadKills(pid, true)
+		target = WorldInstance
 	else
-		if Players[pid].data.kills == nil then	
-			Players[pid].data.kills = {}		
-		end
-		for refId, killCount in pairs(Players[pid].data.kills) do	
-			Players[pid].data.kills[refId] = 0		
-		end	
-		Players[pid]:LoadKills(pid, false)	
+		target = Players[pid]	
+	end		
+	if target.data.kills == nil then	
+		target.data.kills = {}		
 	end
+	for refId, killCount in pairs(target.data.kills) do	
+		target.data.kills[refId] = 0		
+	end	
+	target:LoadKills(pid, config.shareKills)	
 	tes3mp.SendMessage(pid, trd.resetKill, config.shareKills)	
 end
 
