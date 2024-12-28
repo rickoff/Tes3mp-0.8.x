@@ -274,201 +274,201 @@ end
 
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)	
 	if idGui == gui.MainGUI then
-		if tonumber(data) == 0 then --QUETES
+		if tonumber(data) == 0 then
 			ShowQuestChoice1(pid)
-		elseif tonumber(data) == 1 then --REPUTATION
+		elseif tonumber(data) == 1 then
 			ShowGuildReputationChoice(pid)
-		elseif tonumber(data) == 2 then -- INTEGRATION
+		elseif tonumber(data) == 2 then
 			ShowGuildIntegrationChoice(pid)
-		elseif tonumber(data) == 3 then -- EXCLUSION
+		elseif tonumber(data) == 3 then
 			ShowGuildExclusionChoice(pid)
-		elseif tonumber(data) == 4 then -- RANG
+		elseif tonumber(data) == 4 then
 			ShowGuildRangChoice(pid)
-		elseif tonumber(data) == 5 then -- KILLS
+		elseif tonumber(data) == 5 then
 			Kills(pid)			
-		elseif tonumber(data) == 6 then -- RETOUR
+		elseif tonumber(data) == 6 then
 			return
 		end
-	elseif idGui == gui.MainGUIQuest1 then -- QUEST1
-		if tonumber(data) == 0 then --BLADES
+	elseif idGui == gui.MainGUIQuest1 then
+		if tonumber(data) == 0 then
 			Quest(pid, "blades")
-		elseif tonumber(data) == 1 then --FIGHTERS GUILD
+		elseif tonumber(data) == 1 then
 			Quest(pid, "fighters guild")
-		elseif tonumber(data) == 2 then -- MAGES GUILD
+		elseif tonumber(data) == 2 then
 			Quest(pid, "mages guild")
-		elseif tonumber(data) == 3 then -- THIEVES GUILD
+		elseif tonumber(data) == 3 then
 			Quest(pid, "thieves guild")
-		elseif tonumber(data) == 4 then -- HLAALU
+		elseif tonumber(data) == 4 then
 			Quest(pid, "hlaalu")
-		elseif tonumber(data) == 5 then -- REDORAN
+		elseif tonumber(data) == 5 then
 			Quest(pid, "redoran")					
-		elseif tonumber(data) == 6 then --TELVANNI
+		elseif tonumber(data) == 6 then
 			Quest(pid, "telvanni")
-		elseif tonumber(data) == 7 then -- TEMPLE
+		elseif tonumber(data) == 7 then
 			Quest(pid, "temple")
-		elseif tonumber(data) == 8 then -- IMPERIAL CULTE
+		elseif tonumber(data) == 8 then
 			Quest(pid, "imperial cult")
-		elseif tonumber(data) == 9 then -- IMPERIAL LEGION
+		elseif tonumber(data) == 9 then
 			Quest(pid, "imperial legion")
-		elseif tonumber(data) == 10 then -- PAGE 2
+		elseif tonumber(data) == 10 then
 			ShowQuestChoice2(pid)		
-		elseif tonumber(data) == 11 then -- RETOUR	
+		elseif tonumber(data) == 11 then	
 			ShowMainGui(pid)
 		end
-	elseif idGui == gui.MainGUIQuest2 then -- QUEST2
-		if tonumber(data) == 0 then --MORAG TONG
+	elseif idGui == gui.MainGUIQuest2 then
+		if tonumber(data) == 0 then
 			Quest(pid, "morag tong")
-		elseif tonumber(data) == 1 then --TRIBUNAL
+		elseif tonumber(data) == 1 then
 			Quest(pid, "tribunal")
-		elseif tonumber(data) == 2 then -- NERAVARINE
+		elseif tonumber(data) == 2 then
 			Quest(pid, "nerevarine")
-		elseif tonumber(data) == 3 then -- DAEDRAS
+		elseif tonumber(data) == 3 then
 			Quest(pid, "daedras")
-		elseif tonumber(data) == 4 then -- VIVEC
+		elseif tonumber(data) == 4 then
 			Quest(pid, "vivec")
-		elseif tonumber(data) == 5 then -- ANNEXE
+		elseif tonumber(data) == 5 then
 			Quest(pid, "annex")					
-		elseif tonumber(data) == 6 then --VAMPIRE
+		elseif tonumber(data) == 6 then
 			Quest(pid, "vampire")
-		elseif tonumber(data) == 7 then -- VAMPIRE CURE
+		elseif tonumber(data) == 7 then
 			Quest(pid, "vampcure")
-		elseif tonumber(data) == 8 then -- BLOODMOON
+		elseif tonumber(data) == 8 then
 			Quest(pid, "bloodmoon")
-		elseif tonumber(data) == 9 then -- EAST EMPIRE COMPANY
+		elseif tonumber(data) == 9 then
 			Quest(pid, "east empire company")
-		elseif tonumber(data) == 10 then -- ALL
+		elseif tonumber(data) == 10 then
 			Quest(pid, "all")			
-		elseif tonumber(data) == 11 then -- PAGE 1
+		elseif tonumber(data) == 11 then
 			ShowQuestChoice1(pid)		
-		elseif tonumber(data) == 12 then -- RETOUR	
+		elseif tonumber(data) == 12 then	
 			ShowMainGui(pid)				
 		end
-	elseif idGui == gui.MainGUIReputation then -- REPUTATION
-		if tonumber(data) == 0 then --
+	elseif idGui == gui.MainGUIReputation then
+		if tonumber(data) == 0 then 
 			Reputation(pid, "blades")
-		elseif tonumber(data) == 1 then --
+		elseif tonumber(data) == 1 then 
 			Reputation(pid, "fighters guild")
-		elseif tonumber(data) == 2 then -- 
+		elseif tonumber(data) == 2 then  
 			Reputation(pid, "mages guild")
-		elseif tonumber(data) == 3 then -- 
+		elseif tonumber(data) == 3 then  
 			Reputation(pid, "thieves guild")
-		elseif tonumber(data) == 4 then -- 
+		elseif tonumber(data) == 4 then  
 			Reputation(pid, "hlaalu")
-		elseif tonumber(data) == 5 then -- 
+		elseif tonumber(data) == 5 then  
 			Reputation(pid, "redoran")					
-		elseif tonumber(data) == 6 then --
+		elseif tonumber(data) == 6 then 
 			Reputation(pid, "telvanni")
-		elseif tonumber(data) == 7 then --
+		elseif tonumber(data) == 7 then 
 			Reputation(pid, "temple")
-		elseif tonumber(data) == 8 then -- 
+		elseif tonumber(data) == 8 then  
 			Reputation(pid, "imperial cult")
-		elseif tonumber(data) == 9 then -- 
+		elseif tonumber(data) == 9 then  
 			Reputation(pid, "imperial legion")
-		elseif tonumber(data) == 10 then -- 
+		elseif tonumber(data) == 10 then  
 			Reputation(pid, "morag tong")			
-		elseif tonumber(data) == 11 then --
+		elseif tonumber(data) == 11 then 
 			Reputation(pid, "ashlanders")	
-		elseif tonumber(data) == 12 then -- 	
+		elseif tonumber(data) == 12 then  	
 			Reputation(pid, "twin lamps")			
-		elseif tonumber(data) == 13 then -- 	
+		elseif tonumber(data) == 13 then  	
 			Reputation(pid, "east empire company")			
-		elseif tonumber(data) == 14 then -- 	
+		elseif tonumber(data) == 14 then  	
 			ShowMainGui(pid)		
 		end
-	elseif idGui == gui.MainGUIIntegration then -- INTEGRATION
-		if tonumber(data) == 0 then --
+	elseif idGui == gui.MainGUIIntegration then
+		if tonumber(data) == 0 then 
 			Integration(pid, "blades")
-		elseif tonumber(data) == 1 then --
+		elseif tonumber(data) == 1 then 
 			Integration(pid, "fighters guild")
-		elseif tonumber(data) == 2 then -- 
+		elseif tonumber(data) == 2 then  
 			Integration(pid, "mages guild")
-		elseif tonumber(data) == 3 then -- 
+		elseif tonumber(data) == 3 then  
 			Integration(pid, "thieves guild")
-		elseif tonumber(data) == 4 then -- 
+		elseif tonumber(data) == 4 then  
 			Integration(pid, "hlaalu")
-		elseif tonumber(data) == 5 then -- 
+		elseif tonumber(data) == 5 then  
 			Integration(pid, "redoran")				
-		elseif tonumber(data) == 6 then --
+		elseif tonumber(data) == 6 then 
 			Integration(pid, "telvanni")
-		elseif tonumber(data) == 7 then --
+		elseif tonumber(data) == 7 then 
 			Integration(pid, "temple")
-		elseif tonumber(data) == 8 then -- 
+		elseif tonumber(data) == 8 then  
 			Integration(pid, "imperial cult")
-		elseif tonumber(data) == 9 then -- 
+		elseif tonumber(data) == 9 then  
 			Integration(pid, "imperial legion")
-		elseif tonumber(data) == 10 then -- 
+		elseif tonumber(data) == 10 then  
 			Integration(pid, "morag tong")		
-		elseif tonumber(data) == 11 then --
+		elseif tonumber(data) == 11 then 
 			Integration(pid, "ashlanders")
-		elseif tonumber(data) == 12 then -- 	
+		elseif tonumber(data) == 12 then  	
 			Integration(pid, "twin lamps")
-		elseif tonumber(data) == 13 then -- 	
+		elseif tonumber(data) == 13 then  	
 			Integration(pid, "east empire company")
-		elseif tonumber(data) == 14 then -- 	
+		elseif tonumber(data) == 14 then  	
 			ShowMainGui(pid)	
 		end
-	elseif idGui == gui.MainGUIExclusion then -- EXCLUSION
-		if tonumber(data) == 0 then --
+	elseif idGui == gui.MainGUIExclusion then
+		if tonumber(data) == 0 then 
 			Exclusion(pid, "blades")
-		elseif tonumber(data) == 1 then --
+		elseif tonumber(data) == 1 then 
 			Exclusion(pid, "fighters guild")
-		elseif tonumber(data) == 2 then -- 
+		elseif tonumber(data) == 2 then  
 			Exclusion(pid, "mages guild")
-		elseif tonumber(data) == 3 then -- 
+		elseif tonumber(data) == 3 then  
 			Exclusion(pid, "thieves guild")
-		elseif tonumber(data) == 4 then -- 
+		elseif tonumber(data) == 4 then  
 			Exclusion(pid, "hlaalu")
-		elseif tonumber(data) == 5 then -- 
+		elseif tonumber(data) == 5 then  
 			Exclusion(pid, "redoran")		
-		elseif tonumber(data) == 6 then --
+		elseif tonumber(data) == 6 then 
 			Exclusion(pid, "telvanni")
-		elseif tonumber(data) == 7 then --
+		elseif tonumber(data) == 7 then 
 			Exclusion(pid, "temple")
-		elseif tonumber(data) == 8 then -- 
+		elseif tonumber(data) == 8 then  
 			Exclusion(pid, "imperial cult")
-		elseif tonumber(data) == 9 then -- 
+		elseif tonumber(data) == 9 then  
 			Exclusion(pid, "imperial legion")
-		elseif tonumber(data) == 10 then -- 
+		elseif tonumber(data) == 10 then  
 			Exclusion(pid, "morag tong")			
-		elseif tonumber(data) == 11 then --
+		elseif tonumber(data) == 11 then 
 			Exclusion(pid, "ashlanders")	
-		elseif tonumber(data) == 12 then -- 	
+		elseif tonumber(data) == 12 then  	
 			Exclusion(pid, "twin lamps")			
-		elseif tonumber(data) == 13 then -- 	
+		elseif tonumber(data) == 13 then  	
 			Exclusion(pid, "east empire company")			
-		elseif tonumber(data) == 14 then -- 	
+		elseif tonumber(data) == 14 then  	
 			ShowMainGui(pid)		
 		end
-	elseif idGui == gui.MainGUIRang then -- RANG
-		if tonumber(data) == 0 then --
+	elseif idGui == gui.MainGUIRang then
+		if tonumber(data) == 0 then 
 			Ranks(pid, "blades")
-		elseif tonumber(data) == 1 then --
+		elseif tonumber(data) == 1 then 
 			Ranks(pid, "fighters guild")
-		elseif tonumber(data) == 2 then -- 
+		elseif tonumber(data) == 2 then  
 			Ranks(pid, "mages guild")
-		elseif tonumber(data) == 3 then -- 
+		elseif tonumber(data) == 3 then  
 			Ranks(pid, "thieves guild")
-		elseif tonumber(data) == 4 then -- 
+		elseif tonumber(data) == 4 then  
 			Ranks(pid, "hlaalu")
-		elseif tonumber(data) == 5 then -- 
+		elseif tonumber(data) == 5 then  
 			Ranks(pid, "redoran")					
-		elseif tonumber(data) == 6 then --
+		elseif tonumber(data) == 6 then 
 			Ranks(pid, "telvanni")
-		elseif tonumber(data) == 7 then --
+		elseif tonumber(data) == 7 then 
 			Ranks(pid, "temple")
-		elseif tonumber(data) == 8 then -- 
+		elseif tonumber(data) == 8 then  
 			Ranks(pid, "imperial cult")
-		elseif tonumber(data) == 9 then -- 
+		elseif tonumber(data) == 9 then  
 			Ranks(pid, "imperial legion")
-		elseif tonumber(data) == 10 then -- 
+		elseif tonumber(data) == 10 then  
 			Ranks(pid, "morag tong")			
-		elseif tonumber(data) == 11 then --
+		elseif tonumber(data) == 11 then
 			Ranks(pid, "ashlanders")	
-		elseif tonumber(data) == 12 then -- 	
+		elseif tonumber(data) == 12 then 	
 			Ranks(pid, "twin lamps")	
-		elseif tonumber(data) == 13 then -- 	
+		elseif tonumber(data) == 13 then	
 			Ranks(pid, "east empire company")	
-		elseif tonumber(data) == 14 then -- 	
+		elseif tonumber(data) == 14 then	
 			ShowMainGui(pid)		
 		end
 	end
