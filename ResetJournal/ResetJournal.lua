@@ -54,114 +54,61 @@ local listTribunalVariables = {"rent_mh_guar", "contractcalvusday", "contractcal
 
 local listMorrowindVariables = {"hortatorvotes", "heartdestroyed", "destroyblight", "redoranmurdered", "telvannidead"}
 
-local function GetName(pid)
-	return string.lower(Players[pid].accountName)
-end
-
 local function ConsoleCommandToExpulsion(pid, guild, typ)
-
-	local value = 0
-	
-	local consoleCommand
-	
+	local value = 0	
+	local consoleCommand	
 	if typ then
 		value = 1
-	end
-	
-	if guild == "mages guild" then
-	
-		consoleCommand = "Set ExpMagesGuild to "..value
-		
-	elseif guild == "fighters guild" then
-	
-		consoleCommand = "Set ExpFightersGuild to "..value	
-		
-	elseif guild == "thieves guild" then
-	
-		consoleCommand = "Set ExpThievesGuild to "..value
-	
+	end	
+	if guild == "mages guild" then	
+		consoleCommand = "Set ExpMagesGuild to "..value		
+	elseif guild == "fighters guild" then	
+		consoleCommand = "Set ExpFightersGuild to "..value			
+	elseif guild == "thieves guild" then	
+		consoleCommand = "Set ExpThievesGuild to "..value	
 	elseif guild == "imperial cult" then		
-
 		consoleCommand = "Set ExpImperialCult to "..value		
-
 	elseif guild == "imperial legion" then		
-
 		consoleCommand = "Set ExpImperialLegion to "..value
-
 	elseif guild == "morag tong" then		
-
 		consoleCommand = "Set ExpMoragTong to "..value			
-
 	elseif guild == "redoran" then		
-
 		consoleCommand = "Set ExpRedoran to "..value	
-
 	elseif guild == "temple" then		
-
 		consoleCommand = "Set ExpTemple to "..value
-
 	end
-
 	if consoleCommand then
 		logicHandler.RunConsoleCommandOnPlayer(pid, consoleCommand, false)
 	end
-	
 end
 
 local function ResetGlobalVariable(pid, guild)
-
-	if guild == "annex" then
-	
-		for index, variable in ipairs(listAnnexeVariables) do
-		
-			if Players[pid].data.clientVariables.globals[variable] then
-			
-				Players[pid].data.clientVariables.globals[variable].intValue = 0
-				
-			end
-			
+	if guild == "annex" then	
+		for index, variable in ipairs(listAnnexeVariables) do		
+			if Players[pid].data.clientVariables.globals[variable] then			
+				Players[pid].data.clientVariables.globals[variable].intValue = 0				
+			end			
 		end
-
-	elseif guild == "bloodmoon" then
-	
-		for index, variable in ipairs(listBloodmoonVariables) do
-		
-			if Players[pid].data.clientVariables.globals[variable] then
-			
-				Players[pid].data.clientVariables.globals[variable].intValue = 0
-				
-			end
-			
-		end
-		
-	elseif guild == "nerevarine" then
-	
-		for index, variable in ipairs(listMorrowindVariables) do
-		
-			if Players[pid].data.clientVariables.globals[variable] then
-			
-				Players[pid].data.clientVariables.globals[variable].intValue = 0
-				
-			end
-			
-		end
-		
-	elseif guild == "tribunal" then
-	
-		for index, variable in ipairs(listTribunalVariables) do
-		
-			if Players[pid].data.clientVariables.globals[variable] then
-			
-				Players[pid].data.clientVariables.globals[variable].intValue = 0
-				
-			end
-			
-		end
-		
+	elseif guild == "bloodmoon" then	
+		for index, variable in ipairs(listBloodmoonVariables) do		
+			if Players[pid].data.clientVariables.globals[variable] then			
+				Players[pid].data.clientVariables.globals[variable].intValue = 0				
+			end			
+		end		
+	elseif guild == "nerevarine" then	
+		for index, variable in ipairs(listMorrowindVariables) do		
+			if Players[pid].data.clientVariables.globals[variable] then			
+				Players[pid].data.clientVariables.globals[variable].intValue = 0				
+			end			
+		end		
+	elseif guild == "tribunal" then	
+		for index, variable in ipairs(listTribunalVariables) do		
+			if Players[pid].data.clientVariables.globals[variable] then			
+				Players[pid].data.clientVariables.globals[variable].intValue = 0			
+			end		
+		end	
 	end
-	
 	tes3mp.SendClientScriptGlobal(pid, false, false)
-	
 end
 
 local function Quest(pid, guild)
