@@ -217,8 +217,9 @@ local function Exclusion(pid, guild)
 end
 
 local function Kills(pid)
+	--https://github.com/TES3MP/CoreScripts/pull/124/commits
 	local target
-	if config.shareKills then
+	if config.shareKill then
 		target = WorldInstance
 	else
 		target = Players[pid]	
@@ -229,8 +230,8 @@ local function Kills(pid)
 	for refId, killCount in pairs(target.data.kills) do	
 		target.data.kills[refId] = 0		
 	end	
-	target:LoadKills(pid, config.shareKills)	
-	tes3mp.SendMessage(pid, trd.resetKill, config.shareKills)	
+	target:LoadKills(pid, config.shareKill)	
+	tes3mp.SendMessage(pid, trd.resetKill, config.shareKill)	
 end
 
 local function Ranks(pid, guild)
