@@ -12,8 +12,6 @@ local trd = {
 	resetJournal = "Your journal has been reset!\nPlease log out/log back in to apply the changes.",
 	resetReputation = "Your guild reputation has been reset!\n",
 	resetExpulsion = "Your guild expulsion has been reset!\n",
-	needGold = "You need 1000 golds to rejoin the guild!\n",
-	noGold = "You need gold to rejoin the guild!\n",
 	resetKill = "All kill counts for creatures and NPCs have been reset.\n",
 	expulsion = "Your guild expulsion has been validated!\n",
 	resetRank = "Your guild rank has been reset!\n",
@@ -54,7 +52,7 @@ local listTribunalVariables = {"rent_mh_guar", "contractcalvusday", "contractcal
 
 local listMorrowindVariables = {"hortatorvotes", "heartdestroyed", "destroyblight", "redoranmurdered", "telvannidead"}
 
-local function ConsoleCommandToExpulsion(pid, guild, typ)
+local function ConsoleCommandToExpulsion(pid, guild, typ, forEveryone)
 	local value = 0	
 	local consoleCommand	
 	if typ then
@@ -78,148 +76,174 @@ local function ConsoleCommandToExpulsion(pid, guild, typ)
 		consoleCommand = "Set ExpTemple to "..value
 	end
 	if consoleCommand then
-		logicHandler.RunConsoleCommandOnPlayer(pid, consoleCommand, false)
+		logicHandler.RunConsoleCommandOnPlayer(pid, consoleCommand, forEveryone)
 	end
 end
 
-local function ResetGlobalVariable(pid, guild)
+local function ResetGlobalVariable(pid, guild, forEveryone)
+	local target
+	if config.shareJournal then
+		target = WorldInstance
+	else
+		target = Players[pid]
+	end
 	if guild == "annex" then	
 		for index, variable in ipairs(listAnnexeVariables) do		
-			if Players[pid].data.clientVariables.globals[variable] then			
-				Players[pid].data.clientVariables.globals[variable].intValue = 0				
+			if target.data.clientVariables.globals[variable] then			
+				target.data.clientVariables.globals[variable].intValue = 0				
 			end			
 		end
 	elseif guild == "bloodmoon" then	
 		for index, variable in ipairs(listBloodmoonVariables) do		
-			if Players[pid].data.clientVariables.globals[variable] then			
-				Players[pid].data.clientVariables.globals[variable].intValue = 0				
+			if target.data.clientVariables.globals[variable] then			
+				target.data.clientVariables.globals[variable].intValue = 0				
 			end			
 		end		
 	elseif guild == "nerevarine" then	
 		for index, variable in ipairs(listMorrowindVariables) do		
-			if Players[pid].data.clientVariables.globals[variable] then			
-				Players[pid].data.clientVariables.globals[variable].intValue = 0				
+			if target.data.clientVariables.globals[variable] then			
+				target.data.clientVariables.globals[variable].intValue = 0				
 			end			
 		end		
 	elseif guild == "tribunal" then	
 		for index, variable in ipairs(listTribunalVariables) do		
-			if Players[pid].data.clientVariables.globals[variable] then			
-				Players[pid].data.clientVariables.globals[variable].intValue = 0			
+			if target.data.clientVariables.globals[variable] then			
+				target.data.clientVariables.globals[variable].intValue = 0			
 			end		
 		end	
 	end
-	tes3mp.SendClientScriptGlobal(pid, false, false)
+	tes3mp.SendClientScriptGlobal(pid, forEveryone, forEveryone)
 end
 
 local function Quest(pid, guild)
+	local target
+	if config.shareJournal then
+		target = WorldInstance
+	else
+		target = Players[pid]	
+	end
 	local list = {}
 	list.mainquest = {"a1", "a2", "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "c0", "c2", "c3", "cx"}		
-	for index, slot in pairs(Players[pid].data.journal) do	
+	for index, slot in pairs(target.data.journal) do	
 		local quest = slot["quest"]
 		local questsub = string.sub(quest, 1, 2)
 		local lowerSub = string.lower(questsub)		
 		if guild == "blades" and lowerSub == "bl" then
-			Players[pid].data.journal[index] = nil
+			target.data.journal[index] = nil
 		elseif guild == "fighters guild" and lowerSub == "fg" then
-			Players[pid].data.journal[index] = nil
+			target.data.journal[index] = nil
 		elseif guild == "mages guild" and lowerSub == "mg" then
-			Players[pid].data.journal[index] = nil	
+			target.data.journal[index] = nil	
 		elseif guild == "thieves guild" and lowerSub == "tg" then
-			Players[pid].data.journal[index] = nil				
+			target.data.journal[index] = nil				
 		elseif guild == "hlaalu" and lowerSub == "hh" then
-			Players[pid].data.journal[index] = nil
+			target.data.journal[index] = nil
 		elseif guild == "redoran" and lowerSub == "hr" then
-			Players[pid].data.journal[index] = nil
+			target.data.journal[index] = nil
 		elseif guild == "telvanni" and lowerSub == "ht" then
-			Players[pid].data.journal[index] = nil
+			target.data.journal[index] = nil
 		elseif guild == "temple" and lowerSub == "tt" then
-			Players[pid].data.journal[index] = nil
+			target.data.journal[index] = nil
 		elseif guild == "imperial cult" and lowerSub == "ic" then
-			Players[pid].data.journal[index] = nil
+			target.data.journal[index] = nil
 		elseif guild == "imperial legion" and lowerSub == "il" then
-			Players[pid].data.journal[index] = nil	
+			target.data.journal[index] = nil	
 		elseif guild == "morag tong" and lowerSub == "mt" then
-			Players[pid].data.journal[index] = nil	
+			target.data.journal[index] = nil	
 		elseif guild == "tribunal" and lowerSub == "tr" and quest ~= "tr_dbattack" then
-			Players[pid].data.journal[index] = nil	
+			target.data.journal[index] = nil	
 		elseif guild == "nerevarine" and tableHelper.containsValue(list.mainquest, lowerSub) then
-			Players[pid].data.journal[index] = nil	
+			target.data.journal[index] = nil	
 		elseif guild == "daedras" and lowerSub == "da" then
-			Players[pid].data.journal[index] = nil				
+			target.data.journal[index] = nil				
 		elseif guild == "vivec" and lowerSub == "eb" then
-			Players[pid].data.journal[index] = nil	
+			target.data.journal[index] = nil	
 		elseif guild == "annex" and lowerSub == "ms" then
-			Players[pid].data.journal[index] = nil							
+			target.data.journal[index] = nil							
 		elseif guild == "vampire" and lowerSub == "va" then
-			Players[pid].data.journal[index] = nil	
+			target.data.journal[index] = nil	
 		elseif guild == "vampcure" and quest == "ms_vampirecure" then
-			Players[pid].data.journal[index] = nil	
+			target.data.journal[index] = nil	
 		elseif guild == "bloodmoon" and lowerSub == "bm" then
-			Players[pid].data.journal[index] = nil					
+			target.data.journal[index] = nil					
 		elseif guild == "east empire company" and lowerSub == "co" then
-			Players[pid].data.journal[index] = nil					
+			target.data.journal[index] = nil					
 		elseif guild == "all" and lowerSub ~= nil and quest ~= "tr_dbattack" then
-			Players[pid].data.journal[index] = nil
+			target.data.journal[index] = nil
 		end
 	end		
-	ResetGlobalVariable(pid, guild)
-	tableHelper.cleanNils(Players[pid].data.journal)
-	Players[pid]:LoadJournal()		
-	tes3mp.SendMessage(pid, trd.resetJournal, false)	
+	ResetGlobalVariable(pid, guild, config.shareJournal)
+	tableHelper.cleanNils(target.data.journal)
+	target:LoadJournal(pid)		
+	tes3mp.SendMessage(pid, trd.resetJournal, config.shareJournal)	
 end
 
 local function Reputation(pid, guild)
-	Players[pid].data.factionReputation[guild] = 0
-	Players[pid]:LoadFactionReputation()	
-	tes3mp.SendMessage(pid, trd.resetReputation, false)	
+	local target
+	if config.shareFactionReputation then
+		target = WorldInstance
+	else
+		target = Players[pid]	
+	end	
+	target.data.factionReputation[guild] = 0
+	target:LoadFactionReputation(pid)	
+	tes3mp.SendMessage(pid, trd.resetReputation, config.shareFactionReputation)	
 end
 
 local function Integration(pid, guild)
-	local player = Players[pid]
-	local goldL = inventoryHelper.getItemIndex(player.data.inventory, "gold_001", -1)	
-	if goldL then	
-		local item = player.data.inventory[goldL]
-		local refId = item.refId
-		local count = item.count
-		local reste = (item.count - 1000)		
-		if count >= 1000 then		
-			local itemref = {refId = "gold_001", count = 1000, charge = -1, enchantmentCharge = -1, soul = ""}			
-			player.data.inventory[goldL].count = player.data.inventory[goldL].count - 1000
-			Players[pid]:LoadItemChanges({itemref}, enumerations.inventory.REMOVE)	
-			Players[pid].data.factionExpulsion[guild] = false
-			ConsoleCommandToExpulsion(pid, guild, false)
-			Players[pid]:LoadFactionExpulsion()
-			tes3mp.SendMessage(pid, trd.resetExpulsion, false)			
-		else		
-			tes3mp.SendMessage(pid, trd.needGold, false)				
-		end		
-	else	
-		tes3mp.SendMessage(pid, trd.noGold, false)			
-	end		
-end
-
-local function Kills(pid)	
-	if Players[pid].data.kills == nil then	
-		Players[pid].data.kills = {}		
-	end
-	for refId, killCount in pairs(Players[pid].data.kills) do	
-		Players[pid].data.kills[refId] = 0		
+	local target
+	if config.shareFactionExpulsion then
+		target = WorldInstance
+	else
+		target = Players[pid]	
 	end	
-	Players[pid]:LoadKills(pid, false)	
-	tes3mp.SendMessage(pid, trd.resetKill, false)	
+	target.data.factionExpulsion[guild] = false
+	ConsoleCommandToExpulsion(pid, guild, false, config.shareFactionExpulsion)
+	target:LoadFactionExpulsion(pid)
+	tes3mp.SendMessage(pid, trd.resetExpulsion, config.shareFactionExpulsion)	
 end
 
 local function Exclusion(pid, guild)
-	Players[pid].data.factionExpulsion[guild] = true	
-	ConsoleCommandToExpulsion(pid, guild, true)	
-	Players[pid]:LoadFactionExpulsion()		
-	tes3mp.SendMessage(pid, trd.expulsion, false)	
+	local target
+	if config.shareFactionExpulsion then
+		target = WorldInstance
+	else
+		target = Players[pid]	
+	end	
+	target.data.factionExpulsion[guild] = true	
+	ConsoleCommandToExpulsion(pid, guild, true, config.shareFactionExpulsion)	
+	target:LoadFactionExpulsion(pid)		
+	tes3mp.SendMessage(pid, trd.expulsion, config.shareFactionExpulsion)	
 end
 
-local function Ranks(pid, guild)	
-	Players[pid].data.factionRanks[guild] = 0	
-	Players[pid]:LoadFactionRanks()			
-	tes3mp.SendMessage(pid, trd.resetRank, false)	
+local function Kills(pid)	
+	if config.shareKills then
+		for refId, killCount in pairs(WorldInstance.data.kills) do
+			WorldInstance.data.kills[refId] = 0
+		end
+		WorldInstance:LoadKills(pid, true)
+	else
+		if Players[pid].data.kills == nil then	
+			Players[pid].data.kills = {}		
+		end
+		for refId, killCount in pairs(Players[pid].data.kills) do	
+			Players[pid].data.kills[refId] = 0		
+		end	
+		Players[pid]:LoadKills(pid, false)	
+	end
+	tes3mp.SendMessage(pid, trd.resetKill, config.shareKills)	
+end
+
+local function Ranks(pid, guild)
+	local target
+	if config.shareFactionRanks then
+		target = WorldInstance
+	else
+		target = Players[pid]	
+	end	
+	target.data.factionRanks[guild] = 0	
+	target:LoadFactionRanks(pid)			
+	tes3mp.SendMessage(pid, trd.resetRank, config.shareFactionRanks)	
 end
 
 local function ShowMainGui(pid)
@@ -256,20 +280,6 @@ end
 local function ShowGuildRangChoice(pid)	
 	local message = (color.Orange .. trd.titleRank)		
 	tes3mp.CustomMessageBox(pid, gui.MainGUIRang, message, trd.choiceReset)
-end
-
-ResetQuest = {}
-
-ResetQuest.Quest = function(pid, guild)
-	Quest(pid, guild)
-end
-
-ResetQuest.Ranks = function(pid, guild)	
-	Ranks(pid, guild)	
-end
-
-ResetQuest.ShowMainGui = function(pid)
-	ShowMainGui(pid)
 end
 
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)	
