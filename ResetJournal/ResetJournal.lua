@@ -80,7 +80,7 @@ local function ConsoleCommandToExpulsion(pid, guild, typ, forEveryone)
 	end
 end
 
-local function ResetGlobalVariable(pid, guild, forEveryone)
+local function ResetGlobalVariable(pid, guild)
 	local target
 	if config.shareJournal then
 		target = WorldInstance
@@ -112,7 +112,7 @@ local function ResetGlobalVariable(pid, guild, forEveryone)
 			end		
 		end	
 	end
-	tes3mp.SendClientScriptGlobal(pid, forEveryone, forEveryone)
+	target:LoadClientScriptVariables(pid)
 end
 
 local function Quest(pid, guild)
@@ -172,7 +172,7 @@ local function Quest(pid, guild)
 			target.data.journal[index] = nil
 		end
 	end		
-	ResetGlobalVariable(pid, guild, config.shareJournal)
+	ResetGlobalVariable(pid, guild)
 	tableHelper.cleanNils(target.data.journal)
 	target:LoadJournal(pid)		
 	tes3mp.SendMessage(pid, trd.resetJournal, config.shareJournal)	
