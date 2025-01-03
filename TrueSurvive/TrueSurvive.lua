@@ -646,7 +646,7 @@ TrueSurvive.OnGUIAction = function(eventStatus, pid, idGui, data)
 	if idGui == refGui.eatMenu then 
 		if tonumber(data) == 0 then
 			TrueSurvive.OnHungerObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
-			TrueSurvive.CleanCellObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
+			TrueSurvive.CleanCellObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex, true)
 			TrueSurvive.PlaySound(pid, "swallow")
 		elseif tonumber(data) == 1 then
 			logicHandler.ActivateObjectForPlayer(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex) 
@@ -654,7 +654,7 @@ TrueSurvive.OnGUIAction = function(eventStatus, pid, idGui, data)
 	elseif idGui == refGui.drinkMenu then
 		if tonumber(data) == 0 then
 			TrueSurvive.OnDrinkObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
-			TrueSurvive.CleanCellObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex)
+			TrueSurvive.CleanCellObject(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex, true)
 			TrueSurvive.PlaySound(pid, "drink")
 		elseif tonumber(data) == 1 then
 			logicHandler.ActivateObjectForPlayer(pid, Players[pid].data.targetCellDescription, Players[pid].data.targetUniqueIndex) 
