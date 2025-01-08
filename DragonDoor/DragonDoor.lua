@@ -171,7 +171,7 @@ local function ActorCellChanges(pid, oldCellDescription, newCellDescription, act
     end
 
     if actorCount > 0 then
-        tes3mp.SendActorCellChange(true)
+        tes3mp.SendActorCellChange()
 		for _, visitorPid in pairs(LoadedCells[newCellDescription].visitors) do
 			if pid ~= visitorPid then
 				tes3mp.ClearActorList()
