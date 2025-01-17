@@ -172,21 +172,23 @@ local function ActorCellChanges(pid, oldCellDescription, newCellDescription, act
 
     if actorCount > 0 then
         tes3mp.SendActorCellChange()
-		for _, visitorPid in pairs(LoadedCells[newCellDescription].visitors) do
-			if pid ~= visitorPid then
-				tes3mp.ClearActorList()
-				tes3mp.SetActorListPid(visitorPid)
-				tes3mp.SetActorListCell(oldCellDescription)	
-				tes3mp.SetActorCell(newCellDescription)		
-				local splitIndex = uniqueIndex:split("-")
-				tes3mp.SetActorRefNum(splitIndex[1])
-				tes3mp.SetActorMpNum(splitIndex[2])
-				tes3mp.SetActorPosition(location.posX, location.posY, location.posZ)
-				tes3mp.SetActorRotation(location.rotX, location.rotY, location.rotZ)		
-				tes3mp.AddActor()	
-				tes3mp.SendActorCellChange()
-			end
-		end	
+		for _, uniqueIndex in ipairs(actorList) do
+			for _, visitorPid in pairs(LoadedCells[newCellDescription].visitors) do
+				if pid ~= visitorPid then
+					tes3mp.ClearActorList()
+					tes3mp.SetActorListPid(visitorPid)
+					tes3mp.SetActorListCell(oldCellDescription)	
+					tes3mp.SetActorCell(newCellDescription)		
+					local splitIndex = uniqueIndex:split("-")
+					tes3mp.SetActorRefNum(splitIndex[1])
+					tes3mp.SetActorMpNum(splitIndex[2])
+					tes3mp.SetActorPosition(location.posX, location.posY, location.posZ)
+					tes3mp.SetActorRotation(location.rotX, location.rotY, location.rotZ)		
+					tes3mp.AddActor()	
+					tes3mp.SendActorCellChange()
+				end
+			end	
+		end
     end
 
     LoadedCells[oldCellDescription]:QuicksaveToDrive()
