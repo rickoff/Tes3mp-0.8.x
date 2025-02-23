@@ -330,6 +330,7 @@ end
 
 customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui, data)
 	if idGui == gui.MainGUIEdit then
+		local PlayerName = string.lower(Players[pid].accountName)
 		local list = GuiEditNumber()
 		local action = list[tonumber(data) + 1]		
 		if action == "Gender" then
@@ -342,20 +343,22 @@ customEventHooks.registerHandler("OnGUIAction", function(eventStatus, pid, idGui
 			ShowChangeGUIEdit(pid, "HAIR")
 		elseif action == "Sign" then
 			ShowChangeGUIEdit(pid, "SIGN")	
-		elseif action == "Scale+" then
+		elseif action == "Size+" then
 			local scale = Players[pid].data.shapeshift.scale or 1			
 			if scale < cfg.ScaleMax then
 				Players[pid].data.shapeshift.scale = scale + 0.01
 				tes3mp.SetScale(pid, Players[pid].data.shapeshift.scale)
 				tes3mp.SendShapeshift(pid)
+				PlayerCustomData[PlayerName].size = Players[pid].data.shapeshift.scale
 			end
 			ShowMainGuiEdit(pid)			
-		elseif action == "Scale-" then
+		elseif action == "Size-" then
 			local scale = Players[pid].data.shapeshift.scale or 1					
 			if scale > cfg.ScaleMin then
 				Players[pid].data.shapeshift.scale = scale - 0.01
 				tes3mp.SetScale(pid, Players[pid].data.shapeshift.scale)
 				tes3mp.SendShapeshift(pid)
+				PlayerCustomData[PlayerName].size = Players[pid].data.shapeshift.scale
 			end	
 			ShowMainGuiEdit(pid)				
 		elseif action == "Confirm" then
